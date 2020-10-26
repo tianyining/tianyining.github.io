@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Brave New World</title>
+    <link>https://tianyining.github.io/categories/Windows/</link>
+    <description>Recent content in Windows on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 24 Apr 2020 17:49:02 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows10安装Ubuntu双系统（msiGL62）</title>
+      <link>https://tianyining.github.io/post/ubuntu_install_win/</link>
+      <pubDate>Fri, 24 Apr 2020 17:49:02 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_install_win/</guid>
+      <description>写在最前面： 本篇博客记录了本人使用微星电脑GL62安装Windows10+Ubuntu双系统的过程，供我个人在未来重装系统时参考。对于其他有</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Windows10安装Ubuntu双系统（msiGL62） - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="写在最前面： 本篇博客记录了本人使用微星电脑GL62安装Windows10&#43;Ubuntu双系统的过程，供我个人在未来重装系统时参考。对于其他有" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.75.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/ubuntu_install_win/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.c7bc1becf36bcf6a9ebd25d2947e43a2eb745ddb0c9a32b43126fd7fa460c351.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="Windows10安装Ubuntu双系统（msiGL62）" />
+<meta property="og:description" content="写在最前面： 本篇博客记录了本人使用微星电脑GL62安装Windows10&#43;Ubuntu双系统的过程，供我个人在未来重装系统时参考。对于其他有" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/ubuntu_install_win/" />
+<meta property="article:published_time" content="2020-04-24T17:49:02+08:00" />
+<meta property="article:modified_time" content="2020-04-24T17:49:02+08:00" />
+<meta itemprop="name" content="Windows10安装Ubuntu双系统（msiGL62）">
+<meta itemprop="description" content="写在最前面： 本篇博客记录了本人使用微星电脑GL62安装Windows10&#43;Ubuntu双系统的过程，供我个人在未来重装系统时参考。对于其他有">
+<meta itemprop="datePublished" content="2020-04-24T17:49:02+08:00" />
+<meta itemprop="dateModified" content="2020-04-24T17:49:02+08:00" />
+<meta itemprop="wordCount" content="2593">
+
+
+
+<meta itemprop="keywords" content="Ubuntu安装," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Windows10安装Ubuntu双系统（msiGL62）"/>
+<meta name="twitter:description" content="写在最前面： 本篇博客记录了本人使用微星电脑GL62安装Windows10&#43;Ubuntu双系统的过程，供我个人在未来重装系统时参考。对于其他有"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Windows10安装Ubuntu双系统（msiGL62）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-24 17:49 </span>
+        <div class="post-category">
+            <a href="/categories/Windows/"> Windows </a>
+            </div>
+          <span class="more-meta"> 约 2593 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#准备工作"><strong>准备工作</strong></a></li>
+    <li><a href="#正式安装"><strong>正式安装</strong></a></li>
+    <li><a href="#具体安装过程"><strong>具体安装过程</strong></a></li>
+    <li><a href="#ubuntu双系统启动时卡死解决办法"><strong>ubuntu双系统启动时卡死解决办法</strong></a>
+      <ul>
+        <li><a href="#解决方法">解决方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#改变分辨率"><strong>改变分辨率</strong></a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>写在最前面：</strong>
+本篇博客记录了本人使用微星电脑GL62安装Windows10+Ubuntu双系统的过程，供我个人在未来重装系统时参考。对于其他有装双系统的人员，也许有借鉴意义。</p>
+<p><strong>阅读须知：</strong></p>
+<ol>
+<li><strong>先搞清楚自己的电脑类型</strong>：本篇博客仅限于UEFI新式bios+双硬盘（SSD固态硬盘+机械硬盘）+独立显卡（Linux安装过程中或重启过程中存在卡死现象） ；</li>
+<li>本文适用于个人电脑，不适用于服务器；</li>
+<li>推荐刚接触Linux的人使用Ubuntu发行版</li>
+<li><strong>注意下载Ubuntu 18.04 LTS版本</strong>，意味着该版本将提供长期免费的安全更新维护支持至2023年4月</li>
+</ol>
+<hr>
+<hr>
+<h2 id="准备工作"><strong>准备工作</strong></h2>
+<p><strong>1.准备材料</strong></p>
+<ul>
+<li>
+<p>U 盘：容量 2GB 以上，用于制作 U 盘启动盘，因为在制作启动盘时会格式化 U 盘，所以 U 盘内不要包含重要资料。</p>
+</li>
+<li>
+<p>ubuntu 系统安装镜像（本次使用Ubuntu18.04 LTS版本）</p>
+</li>
+<li>
+<p>刻录软件，推荐软碟通，会提示注册，选择继续试用就好，不过网络上很多人建议选择rufus或其他，这里不做评价（因为我也不懂(⊙_⊙)?</p>
+</li>
+<li>
+<p>一个已安装 Windows 的电脑：用于制作 U 盘启动盘</p>
+</li>
+</ul>
+<p><strong>2.配置自己的电脑</strong></p>
+<ul>
+<li>首先检查自己的电脑是什么引导（BIOS分为legacy引导和uefi引导）；</li>
+</ul>
+<p>怎么看自己电脑是MBR还是UEFI：win+r输入msinfo32回车确认，出现以下信息：</p>
+<ul>
+<li>
+<p><strong>在 WIN10系统下创建空白磁盘分区</strong>
+这一步就是为即将安装的Ubuntu系统划分磁盘空间，本人选择将F盘所有空间压缩卷（F盘本身为空，331G），压缩后会发现多出一块 未分区磁盘（黑色分区），如果选择的压缩大小是 ×××G， 则黑色的的应该是×××G 可用空间。</p>
+</li>
+<li>
+<p><strong>制作启动盘</strong>
+不再赘述</p>
+</li>
+<li>
+<p><strong>win10关闭secure boot</strong>
+（1）按下开机键后同时按住F11（MSI电脑是F11进入BIOS，不同电脑自行更改）
+（2）电脑重启或开机，也就是在出现微星Logo的时候，连续按F11进入Bios，然后按键盘的上下方向键来选择选项，切换到Security选项卡，然后移动方向键到安全启动菜单并回车进入，找到Secure Boot(安全启动)设置项，将原来开启的状态，<strong>设置成关闭(Disabled)状态即可</strong>；</p>
+</li>
+</ul>
+<p>记忆中好像还有<strong>fast boot（同样需要关掉）</strong></p>
+<hr>
+<hr>
+<h2 id="正式安装"><strong>正式安装</strong></h2>
+<p><strong>写在正式安装前：</strong>
+准备工作完成后，到这一步，理论上我们就可以开始按住Ubuntu双系统了！
+但是别高兴太早，因为我们是独立显卡GTX1060，Ubuntu对NVIDIA的显卡支持存在bug（据说Ubuntu19修复了这个漏洞，安装时不会出现卡顿），所以在本次安装过程中，卡在了选择语言界面（也可能有部分用户卡在install黑色界面）。</p>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>安装时，进入到install黑色界面时，解决办法就是在Install Ubuntu的时候先别急着回车，在选中Install Ubuntu的时候按键盘的e键进入到下面的引导界面</li>
+</ul>
+<p>在这里按“e”，进入编辑，修改倒数第二行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">  quite  splash ---（修改前）
+ ** quite  splash  nomodeset**（修改后）
+</code></pre></td></tr></table>
+</div>
+</div><p>修改过后即可开始顺利安装（虽然安装完成后重启过程仍会遇到卡住问题，但是在这里，我们先开始得以开始安装(⊙o⊙)…）</p>
+<hr>
+<hr>
+<h2 id="具体安装过程"><strong>具体安装过程</strong></h2>
+<ul>
+<li><strong>安装过程中语言应使用英语，不要使用汉语。若安装界面使用汉语，最终安装的系统中会出现两个比较麻烦的问题：</strong></li>
+</ul>
+<ol>
+<li>家目录下的系统文件夹如 Downloads、Desktop 等会以中文表示，这使得在命令行<code>cd</code>变得很麻烦；</li>
+<li>端中某些字符用英文字体，某些字符用中文字体，效果非常差，需要自己修改终端字体方可；</li>
+</ol>
+<ul>
+<li><strong>安装过程中尽量不选择连接WiFi，如果网络畅通的话可能也可以考虑，不过会比较慢；</strong></li>
+</ul>
+<p>*** 这一步很重要！！！！！**
+**！！！！！！！一定要选择something else安装！！！！！！！！**
+**切记，因为我们要手动分区**</p>
+<ul>
+<li><strong>具体分区如下：</strong>
+点击事先压缩卷生成的空闲区域（free space），点“+”进行手动分配；</li>
+</ul>
+<ol>
+<li><strong>efi</strong> :<strong>（主分区+空间起始）</strong> 这个就是实现你双系统的原因了，这个就是用启动 ubuntu 的目录，里面会有系统的引导，这个文件其实只有几十兆，但是我们建议将其划分为 512M 以上文件格式为efi，这个分区必不可少，否则后果你懂得！（<strong>本次设置1024M</strong>）</li>
+<li><strong>swap</strong> : <strong>（逻辑分区+空间起始）</strong> 分了<strong>16G</strong>（一般情况分8G也是够的）</li>
+<li><strong>/</strong> :（<strong>逻辑+空间起始位置；Ext4</strong>）这是 linux 也就是 ubuntu 的根目录就一个反斜杠表示,相当于windows的C盘，本次分了<strong>100G；</strong></li>
+<li><strong>/opt</strong> ：（<strong>逻辑+空间起始位置；Ext4</strong>）个人习惯是将第三方软件都安装在/opt下，所以分了 <strong>100G</strong>；</li>
+<li><strong>/home</strong> :（<strong>逻辑+空间起始位置；Ext4</strong>）这是 ubuntu的其他盘，相当于windows的其他盘，所以为了让我们自己的目录大一点，剩下的全分给它，文件格式为 ext4，<strong>剩余全部空间（137G）</strong>。</li>
+</ol>
+<p><strong>安装完成后系统会提示重新启动，如果没有卡顿问题，重新启动即代表安装成功</strong></p>
+<hr>
+<hr>
+<h2 id="ubuntu双系统启动时卡死解决办法"><strong>ubuntu双系统启动时卡死解决办法</strong></h2>
+<p><strong>写在前面：</strong></p>
+<p>在安装完ubuntu双系统后，第一次启动ubuntu系统时，卡死在启动界面（或者黑屏），这大概都是由于显卡驱动的原因，具体不在这里阐述，通过以下方法能成功解决，据我个人经验，这可能是诸多方法中最简单最容易理解的方法。</p>
+<h3 id="解决方法">解决方法</h3>
+<ol>
+<li>（如果已经卡死了，则强制关机），然后<strong>重新开机</strong>；</li>
+<li>（在选择系统的黑色界面）<strong>选择ubuntu高级选项，回车</strong>；</li>
+<li>（在出现的两个模式中）<strong>选择恢复（recovery）模式，回车</strong>；</li>
+<li>（在出现的众多选项中）<strong>选择grub，回车</strong>（你能看到貌似很牛逼的一行行代码跑过）；</li>
+<li>（上面的代码跑完之后应该能重新回到众多选项的界面）<strong>选择resume，回车</strong>进入系统。
+<h6 id="heading"></h6>
+<p><strong>其实每次开机这样都可以进入系统，但是很麻烦，所以下面我们进行永久修改（前提是你已经通过上面的方式进入了系统）</strong>：</p>
+</li>
+</ol>
+<p><strong>1.</strong> <strong>修改/etc/default/grub文件：</strong>
+终端输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo gedit /etc/default/grub
+</code></pre></td></tr></table>
+</div>
+</div><p>在打开的文件中，将其中的<strong>quiet splash</strong>修改为<strong>quiet splash nomodeset</strong>并保存;</p>
+<p><strong>2.  更新修改完的grub</strong>
+终端输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo update-grub
+</code></pre></td></tr></table>
+</div>
+</div><p>回车即可，以上，问题完美解决，以后进系统正常进就行。</p>
+<hr>
+<hr>
+<h2 id="改变分辨率"><strong>改变分辨率</strong></h2>
+<p><strong>写在前面：</strong>
+电脑成功重启后，发现Ubuntu系统显示变形了，是分辨率的问题</p>
+<h4 id="解决方法-1"><strong>解决方法</strong></h4>
+<p><strong>1.</strong> 打开终端，修改开机引导文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo gedit /etc/default/grub
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>2.</strong> 找到文件中的<code>GRUB\_GFXMODE</code>，并将其改为<code>GRUB\_GFXMODE=1920x1080</code>（你想要的分辨率），并去掉<code>GRUB\_GFXMODE=1920x1080</code> 前面的<code>‘#’</code>注释号</p>
+<p><strong>3.</strong> 执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo update-grub   
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>4.</strong> reboot（重启）</p>
+<hr>
+<hr>
+<h2 id="参考链接">参考链接</h2>
+<ol>
+<li><a href="https://www.cnblogs.com/masbay/p/10745170.html">https://www.cnblogs.com/masbay/p/10745170.html</a></li>
+<li><a href="https://blog.csdn.net/sinat_29957455/article/details/89047947">https://blog.csdn.net/sinat_29957455/article/details/89047947</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/36654175">https://zhuanlan.zhihu.com/p/36654175</a></li>
+<li><a href="https://www.lagou.com/lgeduarticle/25204.html">https://www.lagou.com/lgeduarticle/25204.html</a></li>
+<li><a href="https://blog.csdn.net/Beyond_2016/article/details/101560832">https://blog.csdn.net/Beyond_2016/article/details/101560832</a></li>
+<li><a href="https://www.cnblogs.com/masbay/p/10718514.html">https://www.cnblogs.com/masbay/p/10718514.html</a></li>
+<li><a href="https://blog.seisman.info/">https://blog.seisman.info/</a></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-24 17:49
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Ubuntu%E5%AE%89%E8%A3%85/">Ubuntu安装</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/jmac_install_homebrew/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Mac安装homebrew</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/hello_world/">
+            <span class="next-text nav-default">建站日志</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

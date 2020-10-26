@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu安装 on Brave New World</title>
+    <link>https://tianyining.github.io/tags/Ubuntu%E5%AE%89%E8%A3%85/</link>
+    <description>Recent content in Ubuntu安装 on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 17 Sep 2020 10:12:11 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Ubuntu%E5%AE%89%E8%A3%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu18.04-从源代码安装坚果云</title>
+      <link>https://tianyining.github.io/post/jianguoyun_install/</link>
+      <pubDate>Thu, 17 Sep 2020 10:12:11 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/jianguoyun_install/</guid>
+      <description>写在最前面 坚果云客户端使用的是python2，但是事先在工作台式机上已经安装了Anaconda，系统默认python为3.8的版本，因此需要</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04搜狗拼音安装</title>
+      <link>https://tianyining.github.io/post/ubuntu_sougou/</link>
+      <pubDate>Wed, 09 Sep 2020 20:35:40 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_sougou/</guid>
+      <description>参考链接： https://blog.csdn.net/lupengCSDN/article/details/80279177 https://www.jianshu.com/p/cafe12618293 安装步骤简述 安装fcitx 1 2 3 sudo apt-get install fcitx-bin sudo apt-get install fcitx-table 下载搜狗拼音输入法 for linux 在搜狗输入法的网站下载安装包：https://pinyi</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04中文输入法安装</title>
+      <link>https://tianyining.github.io/post/ubuntu_pinyin/</link>
+      <pubDate>Wed, 09 Sep 2020 14:43:14 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_pinyin/</guid>
+      <description>**参考链接：**https://blog.csdn.net/github_39533414/article/details/8521101</description>
+    </item>
+    
+    <item>
+      <title>MacBook Air安装Ubuntu双系统</title>
+      <link>https://tianyining.github.io/post/mac_install_ubuntu/</link>
+      <pubDate>Fri, 24 Apr 2020 18:24:12 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/mac_install_ubuntu/</guid>
+      <description>准备工作 制作启动盘，使用unetbootin-mac-677； 下载链接 使用mac的磁盘管理工具，整理出一块空余的逻辑磁盘； 安装mac的引导工</description>
+    </item>
+    
+    <item>
+      <title>Windows10安装Ubuntu双系统（msiGL62）</title>
+      <link>https://tianyining.github.io/post/ubuntu_install_win/</link>
+      <pubDate>Fri, 24 Apr 2020 17:49:02 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_install_win/</guid>
+      <description>写在最前面： 本篇博客记录了本人使用微星电脑GL62安装Windows10+Ubuntu双系统的过程，供我个人在未来重装系统时参考。对于其他有</description>
+    </item>
+    
+  </channel>
+</rss>

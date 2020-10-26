@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>建站日志 on Brave New World</title>
+    <link>https://tianyining.github.io/tags/%E5%BB%BA%E7%AB%99%E6%97%A5%E5%BF%97/</link>
+    <description>Recent content in 建站日志 on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 22 Apr 2020 12:23:39 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/%E5%BB%BA%E7%AB%99%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>建站日志</title>
+      <link>https://tianyining.github.io/post/hello_world/</link>
+      <pubDate>Wed, 22 Apr 2020 12:23:39 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/hello_world/</guid>
+      <description>Hello World！欢迎来到 Eden_Tian 的个人独立博客。 本博客成立于 2020 年，主要关注地震学的基础知识、相关软件以及一些编程语言与工具。同时记录科研生活（至少这</description>
+    </item>
+    
+  </channel>
+</rss>

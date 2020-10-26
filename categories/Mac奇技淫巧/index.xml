@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mac奇技淫巧 on Brave New World</title>
+    <link>https://tianyining.github.io/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/</link>
+    <description>Recent content in Mac奇技淫巧 on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 24 Apr 2020 18:24:12 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MacBook Air安装Ubuntu双系统</title>
+      <link>https://tianyining.github.io/post/mac_install_ubuntu/</link>
+      <pubDate>Fri, 24 Apr 2020 18:24:12 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/mac_install_ubuntu/</guid>
+      <description>准备工作 制作启动盘，使用unetbootin-mac-677； 下载链接 使用mac的磁盘管理工具，整理出一块空余的逻辑磁盘； 安装mac的引导工</description>
+    </item>
+    
+    <item>
+      <title>Mac安装homebrew</title>
+      <link>https://tianyining.github.io/post/jmac_install_homebrew/</link>
+      <pubDate>Fri, 24 Apr 2020 18:15:20 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/jmac_install_homebrew/</guid>
+      <description>在终端中运行以下自动脚本（已替换为国内地址） 1 $ /bin/zsh -c &amp;#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&amp;#34; 测试安装成功，终端输入： 1 $ brew -V 安装参考：知乎网址</description>
+    </item>
+    
+    <item>
+      <title>Mac上显示实时网速小工具</title>
+      <link>https://tianyining.github.io/post/mac_itool/</link>
+      <pubDate>Sun, 05 Apr 2020 13:51:22 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/mac_itool/</guid>
+      <description>前情 这是一款在APP Store里60大洋的软件，而今存在破解版，我们不生产软件，我们只是大神们的搬运工～ iStat Menus 6 下载地址：here 激活： Email: 982092332@qq.com SN:</description>
+    </item>
+    
+  </channel>
+</rss>

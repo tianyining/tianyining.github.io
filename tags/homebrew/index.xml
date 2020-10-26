@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>homebrew on Brave New World</title>
+    <link>https://tianyining.github.io/tags/homebrew/</link>
+    <description>Recent content in homebrew on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 24 Apr 2020 18:15:20 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/homebrew/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mac安装homebrew</title>
+      <link>https://tianyining.github.io/post/jmac_install_homebrew/</link>
+      <pubDate>Fri, 24 Apr 2020 18:15:20 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/jmac_install_homebrew/</guid>
+      <description>在终端中运行以下自动脚本（已替换为国内地址） 1 $ /bin/zsh -c &amp;#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&amp;#34; 测试安装成功，终端输入： 1 $ brew -V 安装参考：知乎网址</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>奇技淫巧 on Brave New World</title>
+    <link>https://tianyining.github.io/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/</link>
+    <description>Recent content in 奇技淫巧 on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 16 Aug 2020 15:59:35 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu18_Qv2ray的配置</title>
+      <link>https://tianyining.github.io/post/ubuntu_Qv2ray/</link>
+      <pubDate>Sun, 16 Aug 2020 15:59:35 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_Qv2ray/</guid>
+      <description>概述 v2ray是一个基于Go语言开发的工具集，旨在帮助用户打造专属的基础通信网络； Qv2ray是一个基于C++和Qt编写的V2ray图形化客</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Brave New World</title>
+    <link>https://tianyining.github.io/post/</link>
+    <description>Recent content in Posts on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 21 Oct 2020 21:47:39 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Theme preview</title>
+      <link>https://tianyining.github.io/post/even-preview/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/even-preview/</guid>
+      <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04北大VPN客户端安装</title>
+      <link>https://tianyining.github.io/post/ubuntu_pku_vpn/</link>
+      <pubDate>Wed, 21 Oct 2020 21:47:39 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_pku_vpn/</guid>
+      <description>1. 官网下载客户端 客户端下载：https://its.pku.edu.cn/service_1_vpn_client.jsp 注意：在安装客户端</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu显卡驱动</title>
+      <link>https://tianyining.github.io/post/ubuntu_Graphics_card/</link>
+      <pubDate>Tue, 22 Sep 2020 13:24:07 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_Graphics_card/</guid>
+      <description>写在最前面 在Ubuntu终端手贱安装了Nvidia显卡驱动，重新开机后发现无法进入图形可视化界面，通过以下操作拯救了Ubuntu系统。 解决步</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04挂载exFAT格式移动硬盘</title>
+      <link>https://tianyining.github.io/post/ubuntu_exFAT/</link>
+      <pubDate>Fri, 18 Sep 2020 20:15:49 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_exFAT/</guid>
+      <description>1. 安装expat-fuse 1 sudo apt-get install exfat-fuse 2. 重新拔掉移动硬盘，在插入，即可识别 查看挂载命令： 1 lsblk</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04-从源代码安装坚果云</title>
+      <link>https://tianyining.github.io/post/jianguoyun_install/</link>
+      <pubDate>Thu, 17 Sep 2020 10:12:11 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/jianguoyun_install/</guid>
+      <description>写在最前面 坚果云客户端使用的是python2，但是事先在工作台式机上已经安装了Anaconda，系统默认python为3.8的版本，因此需要</description>
+    </item>
+    
+    <item>
+      <title>Iggcas新生入学指南</title>
+      <link>https://tianyining.github.io/post/iggcas/</link>
+      <pubDate>Tue, 15 Sep 2020 20:20:08 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/iggcas/</guid>
+      <description>办网 ​ 每年新生入学第一件事，都应该是去办理一个属于自己的上网帐号。不完全流程图如下： 前往地三楼219办公室，找相关人员开设网络账户，并拍下自</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04 sudo apt update遇到问题</title>
+      <link>https://tianyining.github.io/post/ubuntu_update/</link>
+      <pubDate>Tue, 15 Sep 2020 19:34:57 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_update/</guid>
+      <description>人间迷惑之事常有八九 使用Ubuntu18.04 去更新源，遇到错误。 检查/etc/resolv.conf,发现之前修改的nameserver总</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04_python科学计算发行版Anaconda安装</title>
+      <link>https://tianyining.github.io/post/ubuntu_anaconda/</link>
+      <pubDate>Sat, 12 Sep 2020 20:02:01 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_anaconda/</guid>
+      <description>一切参照seisman博客安装。 下载Anaconda发行版 安装 参照seismic 设置国内镜像 参照seismic 添加pip镜像 新建文件夹和pi</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04无法解析域名</title>
+      <link>https://tianyining.github.io/post/ubuntu_DNS/</link>
+      <pubDate>Sat, 12 Sep 2020 14:43:14 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_DNS/</guid>
+      <description>人间迷惑之事常有八九 使用ubuntu18.04上网，配置好梯子，可以自由浏览绝大多数网页，但是总是有些网页打不开（比如我是无法打开知乎），非</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04搜狗拼音安装</title>
+      <link>https://tianyining.github.io/post/ubuntu_sougou/</link>
+      <pubDate>Wed, 09 Sep 2020 20:35:40 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_sougou/</guid>
+      <description>参考链接： https://blog.csdn.net/lupengCSDN/article/details/80279177 https://www.jianshu.com/p/cafe12618293 安装步骤简述 安装fcitx 1 2 3 sudo apt-get install fcitx-bin sudo apt-get install fcitx-table 下载搜狗拼音输入法 for linux 在搜狗输入法的网站下载安装包：https://pinyi</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04中文输入法安装</title>
+      <link>https://tianyining.github.io/post/ubuntu_pinyin/</link>
+      <pubDate>Wed, 09 Sep 2020 14:43:14 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_pinyin/</guid>
+      <description>**参考链接：**https://blog.csdn.net/github_39533414/article/details/8521101</description>
+    </item>
+    
+    <item>
+      <title>Windows下Anaconda的安装及配置</title>
+      <link>https://tianyining.github.io/post/Anaconda_install_win/</link>
+      <pubDate>Wed, 19 Aug 2020 17:37:28 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Anaconda_install_win/</guid>
+      <description>官网下载安装Anaconda。 Jupyter-Notebook的使用及配置 修改默认配置 Jupiter-Notebook打开后默认路径是根目录</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18_Qv2ray的配置</title>
+      <link>https://tianyining.github.io/post/ubuntu_Qv2ray/</link>
+      <pubDate>Sun, 16 Aug 2020 15:59:35 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_Qv2ray/</guid>
+      <description>概述 v2ray是一个基于Go语言开发的工具集，旨在帮助用户打造专属的基础通信网络； Qv2ray是一个基于C++和Qt编写的V2ray图形化客</description>
+    </item>
+    
+    <item>
+      <title>MacBook Air安装Ubuntu双系统</title>
+      <link>https://tianyining.github.io/post/mac_install_ubuntu/</link>
+      <pubDate>Fri, 24 Apr 2020 18:24:12 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/mac_install_ubuntu/</guid>
+      <description>准备工作 制作启动盘，使用unetbootin-mac-677； 下载链接 使用mac的磁盘管理工具，整理出一块空余的逻辑磁盘； 安装mac的引导工</description>
+    </item>
+    
+    <item>
+      <title>Mac安装homebrew</title>
+      <link>https://tianyining.github.io/post/jmac_install_homebrew/</link>
+      <pubDate>Fri, 24 Apr 2020 18:15:20 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/jmac_install_homebrew/</guid>
+      <description>在终端中运行以下自动脚本（已替换为国内地址） 1 $ /bin/zsh -c &amp;#34;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&amp;#34; 测试安装成功，终端输入： 1 $ brew -V 安装参考：知乎网址</description>
+    </item>
+    
+    <item>
+      <title>Windows10安装Ubuntu双系统（msiGL62）</title>
+      <link>https://tianyining.github.io/post/ubuntu_install_win/</link>
+      <pubDate>Fri, 24 Apr 2020 17:49:02 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_install_win/</guid>
+      <description>写在最前面： 本篇博客记录了本人使用微星电脑GL62安装Windows10+Ubuntu双系统的过程，供我个人在未来重装系统时参考。对于其他有</description>
+    </item>
+    
+    <item>
+      <title>建站日志</title>
+      <link>https://tianyining.github.io/post/hello_world/</link>
+      <pubDate>Wed, 22 Apr 2020 12:23:39 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/hello_world/</guid>
+      <description>Hello World！欢迎来到 Eden_Tian 的个人独立博客。 本博客成立于 2020 年，主要关注地震学的基础知识、相关软件以及一些编程语言与工具。同时记录科研生活（至少这</description>
+    </item>
+    
+    <item>
+      <title>Mac上显示实时网速小工具</title>
+      <link>https://tianyining.github.io/post/mac_itool/</link>
+      <pubDate>Sun, 05 Apr 2020 13:51:22 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/mac_itool/</guid>
+      <description>前情 这是一款在APP Store里60大洋的软件，而今存在破解版，我们不生产软件，我们只是大神们的搬运工～ iStat Menus 6 下载地址：here 激活： Email: 982092332@qq.com SN:</description>
+    </item>
+    
+    <item>
+      <title>This is a hidden post.</title>
+      <link>https://tianyining.github.io/post/hidden-post/</link>
+      <pubDate>Thu, 08 Mar 2018 17:40:19 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/hidden-post/</guid>
+      <description>&lt;p&gt;This post is hidden from the home page.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[English] Creating a New Theme</title>
+      <link>https://tianyining.github.io/post/english-preview/</link>
+      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/english-preview/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>[日本語] 敬語体系</title>
+      <link>https://tianyining.github.io/post/japanese-preview/</link>
+      <pubDate>Wed, 30 Aug 2017 01:53:34 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/japanese-preview/</guid>
+      <description>日本語の敬語体系は、一般に、大きく尊敬語・謙譲語・丁寧語に分類される。文化審議会国語分科会は、2007年2月に「敬語の指針」を答申し、これに</description>
+    </item>
+    
+    <item>
+      <title>[中文] 《长恨歌》</title>
+      <link>https://tianyining.github.io/post/chinese-preview/</link>
+      <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/chinese-preview/</guid>
+      <description>《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难</description>
+    </item>
+    
+    <item>
+      <title>Shortcodes</title>
+      <link>https://tianyining.github.io/post/shortcodes/</link>
+      <pubDate>Tue, 30 Aug 2016 16:01:23 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/shortcodes/</guid>
+      <description>&lt;h1 id=&#34;admonition&#34;&gt;Admonition&lt;/h1&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;biu biu biu.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;{{% admonition note &amp;#34;I&amp;#39;m title!&amp;#34; false %}}
+biu biu biu.
+
+{{% admonition type=&amp;#34;note&amp;#34; title=&amp;#34;note&amp;#34; details=&amp;#34;true&amp;#34; %}}
+biu biu biu.
+{{% /admonition %}}
+
+{{% admonition example %}}
+Without title.
+{{% /admonition %}}
+
+{{% /admonition %}}
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>JS Flowchart Diagrams</title>
+      <link>https://tianyining.github.io/post/js-flowchart-diagrams/</link>
+      <pubDate>Wed, 04 Mar 2015 21:57:50 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/js-flowchart-diagrams/</guid>
+      <description>&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;st=&amp;gt;start: Start|past:&amp;gt;http://www.google.com[blank]
+e=&amp;gt;end: End:&amp;gt;http://www.google.com
+op1=&amp;gt;operation: My Operation|past
+op2=&amp;gt;operation: Stuff|current
+sub1=&amp;gt;subroutine: My Subroutine|invalid
+cond=&amp;gt;condition: Yes
+or No?|approved:&amp;gt;http://www.google.com
+c2=&amp;gt;condition: Good idea|rejected
+io=&amp;gt;inputoutput: catch something...|request
+
+st-&amp;gt;op1(right)-&amp;gt;cond
+cond(yes, right)-&amp;gt;c2
+cond(no)-&amp;gt;sub1(left)-&amp;gt;op1
+c2(yes)-&amp;gt;io-&amp;gt;e
+c2(no)-&amp;gt;op2-&amp;gt;e
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>JS Sequence Diagrams</title>
+      <link>https://tianyining.github.io/post/js-sequence-diagrams/</link>
+      <pubDate>Wed, 04 Mar 2015 21:57:45 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/js-sequence-diagrams/</guid>
+      <description>&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;Andrew-&amp;gt;China: Says Hello
+Note right of China: China thinks\nabout it
+China--&amp;gt;Andrew: How are you?
+Andrew-&amp;gt;&amp;gt;China: I am good thanks!
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Syntax Highlighting</title>
+      <link>https://tianyining.github.io/post/syntax-highlighting/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/syntax-highlighting/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;helloWorld&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Hello, World!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

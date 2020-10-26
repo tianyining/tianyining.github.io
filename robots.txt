@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://tianyining.github.io/sitemap.xml
