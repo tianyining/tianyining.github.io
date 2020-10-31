@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 21 Oct 2020 21:47:39 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 31 Oct 2020 12:56:24 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,24 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu_代理网页无法访问</title>
+      <link>https://tianyining.github.io/post/ubuntu_%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/</link>
+      <pubDate>Sat, 31 Oct 2020 12:56:24 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/</guid>
+      <description>​ 当有一天，在 FQ 状态下，Ubuntu内某些网页无法打开（比如知乎），检查网络发现，可以ping通，而且在同一个网络下，其他设备可以正常浏览该</description>
+    </item>
+    
+    <item>
+      <title>2020-10-28组会</title>
+      <link>https://tianyining.github.io/post/2020-10-28%E7%BB%84%E4%BC%9A/</link>
+      <pubDate>Wed, 28 Oct 2020 20:00:04 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/2020-10-28%E7%BB%84%E4%BC%9A/</guid>
+      <description>第一次组会</description>
     </item>
     
     <item>

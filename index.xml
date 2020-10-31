@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 21 Oct 2020 21:47:39 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 31 Oct 2020 12:56:24 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,24 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu_代理网页无法访问</title>
+      <link>https://tianyining.github.io/post/ubuntu_%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/</link>
+      <pubDate>Sat, 31 Oct 2020 12:56:24 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/ubuntu_%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/</guid>
+      <description>​ 当有一天，在 FQ 状态下，Ubuntu内某些网页无法打开（比如知乎），检查网络发现，可以ping通，而且在同一个网络下，其他设备可以正常浏览该</description>
+    </item>
+    
+    <item>
+      <title>2020-10-28组会</title>
+      <link>https://tianyining.github.io/post/2020-10-28%E7%BB%84%E4%BC%9A/</link>
+      <pubDate>Wed, 28 Oct 2020 20:00:04 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/2020-10-28%E7%BB%84%E4%BC%9A/</guid>
+      <description>第一次组会</description>
     </item>
     
     <item>
