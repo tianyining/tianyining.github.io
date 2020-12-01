@@ -6,7 +6,16 @@
     <description>Recent content in Mac奇技淫巧 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 24 Apr 2020 18:24:12 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Dec 2020 22:33:25 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mac_DNS</title>
+      <link>https://tianyining.github.io/post/Mac_DNS/</link>
+      <pubDate>Tue, 01 Dec 2020 22:33:25 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Mac_DNS/</guid>
+      <description>​ Mac在设置系统代理的情况下，某些网页无法打开，比如我遇到的就是知乎无法访问。通过测试，发现如果不把 Bywave 设置为系统代理，Safari 是可以正</description>
+    </item>
+    
     <item>
       <title>MacBook Air安装Ubuntu双系统</title>
       <link>https://tianyining.github.io/post/mac_install_ubuntu/</link>
