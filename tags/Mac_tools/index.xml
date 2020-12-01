@@ -6,7 +6,16 @@
     <description>Recent content in Mac_tools on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 05 Apr 2020 13:51:22 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Mac_tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Dec 2020 22:59:03 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Mac_tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mac_xcode</title>
+      <link>https://tianyining.github.io/post/Mac_xcode/</link>
+      <pubDate>Tue, 01 Dec 2020 22:59:03 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Mac_xcode/</guid>
+      <description>Git is not working after macOS Update 出现以下错误🙅： 1 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun 出现错误的原因 The problem is that Xcode Command-line Tools needs to be updated. Solution Go back to your terminal and enter: 1 xcode-select --install After that restart your terminal</description>
+    </item>
+    
     <item>
       <title>Mac上显示实时网速小工具</title>
       <link>https://tianyining.github.io/post/mac_itool/</link>
