@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 01 Dec 2020 22:59:03 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 16:39:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04中安装Shutter截图工具</title>
+      <link>https://tianyining.github.io/post/shutter_install/</link>
+      <pubDate>Fri, 04 Dec 2020 16:39:19 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/shutter_install/</guid>
+      <description>下面提供两种安装方式 方式一：直接在Ubuntu Software 里 install 方式二：终端命令行安装（推荐） sudo add-apt-respository ppa:linuxuprising/shutter 显示报错，原因是Ubuntu软件未完全安装，解决方式</description>
     </item>
     
     <item>

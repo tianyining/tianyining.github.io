@@ -6,7 +6,16 @@
     <description>Recent content in 奇技淫巧 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 31 Oct 2020 12:56:24 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 16:39:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu18.04中安装Shutter截图工具</title>
+      <link>https://tianyining.github.io/post/shutter_install/</link>
+      <pubDate>Fri, 04 Dec 2020 16:39:19 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/shutter_install/</guid>
+      <description>下面提供两种安装方式 方式一：直接在Ubuntu Software 里 install 方式二：终端命令行安装（推荐） sudo add-apt-respository ppa:linuxuprising/shutter 显示报错，原因是Ubuntu软件未完全安装，解决方式</description>
+    </item>
+    
     <item>
       <title>Ubuntu_代理网页无法访问</title>
       <link>https://tianyining.github.io/post/ubuntu_%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/</link>

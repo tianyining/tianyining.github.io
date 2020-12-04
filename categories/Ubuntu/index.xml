@@ -6,7 +6,16 @@
     <description>Recent content in Ubuntu on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 17 Sep 2020 10:12:11 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 16:39:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu18.04中安装Shutter截图工具</title>
+      <link>https://tianyining.github.io/post/shutter_install/</link>
+      <pubDate>Fri, 04 Dec 2020 16:39:19 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/shutter_install/</guid>
+      <description>下面提供两种安装方式 方式一：直接在Ubuntu Software 里 install 方式二：终端命令行安装（推荐） sudo add-apt-respository ppa:linuxuprising/shutter 显示报错，原因是Ubuntu软件未完全安装，解决方式</description>
+    </item>
+    
     <item>
       <title>Ubuntu18.04-从源代码安装坚果云</title>
       <link>https://tianyining.github.io/post/jianguoyun_install/</link>
