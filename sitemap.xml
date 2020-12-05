@@ -17,28 +17,56 @@
   
   <url>
     <loc>https://tianyining.github.io/</loc>
-    <lastmod>2020-12-04T16:39:19+08:00</lastmod>
+    <lastmod>2020-12-05T13:17:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/categories/</loc>
-    <lastmod>2020-12-04T16:39:19+08:00</lastmod>
+    <lastmod>2020-12-05T13:17:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/post/</loc>
-    <lastmod>2020-12-04T16:39:19+08:00</lastmod>
+    <lastmod>2020-12-05T13:17:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/tags/</loc>
-    <lastmod>2020-12-04T16:39:19+08:00</lastmod>
+    <lastmod>2020-12-05T13:17:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/TOFEL/</loc>
+    <lastmod>2020-12-05T13:17:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/TOFEL/</loc>
+    <lastmod>2020-12-05T13:17:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/TOFEL/</loc>
+    <lastmod>2020-12-05T13:17:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/</loc>
+    <lastmod>2020-12-05T13:17:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
