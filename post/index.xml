@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 05 Dec 2020 13:17:21 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Dec 2020 21:52:07 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu异常关机后无法重新启动图形界面（emergency mode）</title>
+      <link>https://tianyining.github.io/post/Ubuntu_emergency-mode/</link>
+      <pubDate>Sat, 12 Dec 2020 21:52:07 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Ubuntu_emergency-mode/</guid>
+      <description>电脑型号：ThinkCentre-M8600t-D065 ​ 安装 Ubuntu 系统，在打开很多网页的情况下，直接 power off，本打算重新启动，可是启动后发现进</description>
     </item>
     
     <item>

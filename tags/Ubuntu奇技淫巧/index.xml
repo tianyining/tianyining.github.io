@@ -6,7 +6,16 @@
     <description>Recent content in Ubuntu奇技淫巧 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 04 Dec 2020 16:39:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Ubuntu%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Dec 2020 21:52:07 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Ubuntu%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu异常关机后无法重新启动图形界面（emergency mode）</title>
+      <link>https://tianyining.github.io/post/Ubuntu_emergency-mode/</link>
+      <pubDate>Sat, 12 Dec 2020 21:52:07 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Ubuntu_emergency-mode/</guid>
+      <description>电脑型号：ThinkCentre-M8600t-D065 ​ 安装 Ubuntu 系统，在打开很多网页的情况下，直接 power off，本打算重新启动，可是启动后发现进</description>
+    </item>
+    
     <item>
       <title>Ubuntu18.04中安装Shutter截图工具</title>
       <link>https://tianyining.github.io/post/shutter_install/</link>
