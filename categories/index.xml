@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 16 Jan 2021 12:28:14 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Jan 2021 23:38:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu</title>
+      <link>https://tianyining.github.io/categories/Ubuntu/</link>
+      <pubDate>Sun, 31 Jan 2021 23:38:41 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/categories/Ubuntu/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>扯闲篇儿</title>
       <link>https://tianyining.github.io/categories/%E6%89%AF%E9%97%B2%E7%AF%87%E5%84%BF/</link>
@@ -22,15 +31,6 @@
       <pubDate>Sun, 13 Dec 2020 17:34:56 +0800</pubDate>
       
       <guid>https://tianyining.github.io/categories/Ubuntu%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ubuntu</title>
-      <link>https://tianyining.github.io/categories/Ubuntu/</link>
-      <pubDate>Sat, 12 Dec 2020 21:52:07 +0800</pubDate>
-      
-      <guid>https://tianyining.github.io/categories/Ubuntu/</guid>
       <description></description>
     </item>
     

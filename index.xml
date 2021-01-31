@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 16 Jan 2021 12:28:14 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Jan 2021 23:38:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu安装WPS</title>
+      <link>https://tianyining.github.io/post/Ubuntu-WPS/</link>
+      <pubDate>Sun, 31 Jan 2021 23:38:41 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Ubuntu-WPS/</guid>
+      <description>Ubuntu 自带的 LibreOffice 具有简单的文档查看和编辑功能，但其兼容性一般。兼容性更好的是 WPS Office。 下载64位deb格式的安装包：WPS Office for Linux 官网 安装WP</description>
     </item>
     
     <item>
