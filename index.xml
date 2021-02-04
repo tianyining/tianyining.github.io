@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 04 Feb 2021 18:17:07 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Feb 2021 20:13:02 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu GMT6.1.1 安装</title>
+      <link>https://tianyining.github.io/post/GMT6.1.1/</link>
+      <pubDate>Thu, 04 Feb 2021 20:13:02 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT6.1.1/</guid>
+      <description>​ 尽管大多数Linux发行版都提供了GMT二进制包，可以直接通过软件包管理器 apt 或 yum 安装，但发行版提供的GMT版本都很老，不建议使用。 ​ 本文介</description>
     </item>
     
     <item>

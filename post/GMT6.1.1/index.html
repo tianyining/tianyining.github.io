@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Ubuntu GMT6.1.1 安装 - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="​ 尽管大多数Linux发行版都提供了GMT二进制包，可以直接通过软件包管理器 apt 或 yum 安装，但发行版提供的GMT版本都很老，不建议使用。 ​ 本文介" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/GMT6.1.1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.c7bc1becf36bcf6a9ebd25d2947e43a2eb745ddb0c9a32b43126fd7fa460c351.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="Ubuntu GMT6.1.1 安装" />
+<meta property="og:description" content="​ 尽管大多数Linux发行版都提供了GMT二进制包，可以直接通过软件包管理器 apt 或 yum 安装，但发行版提供的GMT版本都很老，不建议使用。 ​ 本文介" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/GMT6.1.1/" />
+<meta property="article:published_time" content="2021-02-04T20:13:02+08:00" />
+<meta property="article:modified_time" content="2021-02-04T20:13:02+08:00" />
+<meta itemprop="name" content="Ubuntu GMT6.1.1 安装">
+<meta itemprop="description" content="​ 尽管大多数Linux发行版都提供了GMT二进制包，可以直接通过软件包管理器 apt 或 yum 安装，但发行版提供的GMT版本都很老，不建议使用。 ​ 本文介">
+<meta itemprop="datePublished" content="2021-02-04T20:13:02+08:00" />
+<meta itemprop="dateModified" content="2021-02-04T20:13:02+08:00" />
+<meta itemprop="wordCount" content="1941">
+
+
+
+<meta itemprop="keywords" content="GMT," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ubuntu GMT6.1.1 安装"/>
+<meta name="twitter:description" content="​ 尽管大多数Linux发行版都提供了GMT二进制包，可以直接通过软件包管理器 apt 或 yum 安装，但发行版提供的GMT版本都很老，不建议使用。 ​ 本文介"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Ubuntu GMT6.1.1 安装</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-02-04 20:13 </span>
+        <div class="post-category">
+            <a href="/categories/GMT/"> GMT </a>
+            </div>
+          <span class="more-meta"> 约 1941 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#编译及运行依赖">编译及运行依赖</a></li>
+    <li><a href="#安装依赖软件">安装依赖软件</a></li>
+    <li><a href="#下载源码及数据">下载源码及数据</a></li>
+    <li><a href="#安装-gmt">安装 GMT</a></li>
+    <li><a href="#修改环境变量">修改环境变量</a></li>
+    <li><a href="#测试是否安装成功">测试是否安装成功</a></li>
+    <li><a href="#升级卸载-gmt">升级/卸载 GMT</a></li>
+    <li><a href="#备注">备注</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>​		尽管大多数Linux发行版都提供了GMT二进制包，可以直接通过软件包管理器 <strong>apt</strong> 或 <strong>yum</strong> 安装，但发行版提供的GMT版本都很老，不建议使用。</p>
+<p>​	<strong>本文介绍如何在 Ubuntu 下编译 GMT 源代码。</strong></p>
+<h2 id="编译及运行依赖">编译及运行依赖</h2>
+<p>GMT的编译及运行需要如下软件：</p>
+<ul>
+<li>CMake：&gt;=2.8.12</li>
+<li>netCDF（&gt;=4.0且支持netCDF-4/HDF5）</li>
+<li>curl</li>
+</ul>
+<p>除此之外，还可以安装如下软件库以增强GMT的更多功能：</p>
+<ul>
+<li><a href="https://www.ghostscript.com/">Ghostscript</a>: 生成PDF或者其他位图格式的图片</li>
+<li><a href="https://www.gdal.org/">GDAL</a>: 读写其它地学常用的网格和图片格式</li>
+<li><a href="https://www.pcre.org/">PCRE</a>: 正则表达式支持</li>
+<li><a href="http://www.fftw.org/">FFTW</a>: 快速傅里叶变换库（&gt;=3.3，macOS下不需要）</li>
+<li><a href="https://developer.gnome.org/glib/">GLib</a>: GTHREAD多线程支持</li>
+<li>LAPACK: 快速矩阵反演库 （macOS下不需要）</li>
+<li>BLAS：快速矩阵运算库 （macOS下不需要）</li>
+<li><a href="http://www.graphicsmagick.org/">GraphicsMagick</a>: 生成GIF格式的动画</li>
+<li><a href="http://www.ffmpeg.org/">FFmpeg</a>: 生成MP4格式的动画</li>
+</ul>
+<h2 id="安装依赖软件">安装依赖软件</h2>
+<p>对于 Ubuntu/Debian：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo apt update
+# 安装编译所需软件包
+$ sudo apt install build-essential cmake libcurl4-gnutls-dev libnetcdf-dev
+# 安装可选软件包
+$ sudo apt install ghostscript gdal-bin libgdal-dev libglib2.0-dev libpcre3-dev libfftw3-dev liblapack-dev
+# 安装制作动画所需的软件包
+$ sudo apt install graphicsmagick ffmpeg
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="下载源码及数据">下载源码及数据</h2>
+<p>编译GMT需要下载如下三个文件：</p>
+<ol>
+<li>GMT 6.1.1 源码：<a href="http://mirrors.ustc.edu.cn/gmt/gmt-6.1.1-src.tar.gz">gmt-6.1.1-src.tar.gz</a></li>
+<li>全球海岸线数据GSHHG：<a href="http://mirrors.ustc.edu.cn/gmt/gshhg-gmt-2.3.7.tar.gz">gshhg-gmt-2.3.7.tar.gz</a></li>
+<li>全球数字图表DCW：<a href="http://mirrors.ustc.edu.cn/gmt/dcw-gmt-1.1.4.tar.gz">dcw-gmt-1.1.4.tar.gz</a></li>
+</ol>
+<h2 id="安装-gmt">安装 GMT</h2>
+<p>将下载的三个压缩文件放在同一个目录下，按照如下步骤进行安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 解压三个压缩文件
+$ tar -xvf gmt-6.1.1-src.tar.gz
+$ tar -xvf gshhg-gmt-2.3.7.tar.gz
+$ tar -xvf dcw-gmt-1.1.4.tar.gz
+
+# 将gshhg和dcw数据复制到gmt的share目录下
+$ mv gshhg-gmt-2.3.7 gmt-6.1.1/share/gshhg-gmt
+$ mv dcw-gmt-1.1.4 gmt-6.1.1/share/dcw-gmt
+
+# 切换到gmt源码目录下
+$ cd gmt-6.1.1
+
+# 用文本编辑器新建并打开CMake用户配置文件
+# Linux用户
+$ code cmake/ConfigUser.cmake
+# macOS用户
+$ touch cmake/ConfigUser.cmake
+$ open -a TextEdit cmake/ConfigUser.cmake
+</code></pre></td></tr></table>
+</div>
+</div><p>向 <code>cmake/ConfigUser.cmake</code> 文件中加入如下语句:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">set (CMAKE_INSTALL_PREFIX &#34;/opt/GMT-6.1.1&#34;)
+
+set (GMT_USE_THREADS TRUE)
+set (GMT_ENABLE_OPENMP TRUE)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>CMAKE_INSTALL_PREFIX</strong> 用于设置GMT的安装路径，上面的语句会将GMT安装在 <code>/opt/GMT-6.1.1</code> 目录下，用户可以自行修改为其他路径。没有 root 权限的一般用户，可以将安装路径设置为 <code>/home/xxx/software/GMT-6.1.1</code> 等有可读写权限的路径；</li>
+<li><strong>GMT_USE_THREADS</strong> 和 <strong>GMT_ENABLE_OPENMP</strong> 设置为 <strong>TRUE</strong> 会为GMT的某些模块增加多线程并行功能以加速计算，也可以不设置。</li>
+</ul>
+<p>继续执行如下命令以检查GMT的依赖是否满足：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 注意，此处新建的 build 文件夹位于 gmt-6.1.1 目录下，不是 gmt-6.1.1/cmake 目录下
+$ mkdir build
+$ cd build/
+$ cmake ..
+</code></pre></td></tr></table>
+</div>
+</div><p><code>cmake ..</code> 会检查系统软件是否满足GMT的依赖关系，过程中会输出大量信息，并在最后汇总输出检查结果。<strong>我们只需要关注检查结果是否正确即可。正常情况下结果结果如下，若存在一些差异也没有问题。只要过程中不出现报错，即可。</strong></p>
+<p><strong>如果出现报错，则需要检查之前的步骤是否有误，检查完成后删除原build目录再新建build，继续执行 <code>cmake ..</code>，直到出现类似的检查结果:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">*
+*  GMT Version:               : 6.1.1
+*
+*  Options:
+*  Found GSHHG database       : /home/user/GMT/gmt-6.1.1/share/gshhg (2.3.7)
+*  Found DCW-GMT database     : /home/user/GMT/gmt-6.1.1/share/dcw-gmt (1.1.4)
+*  Found GMT data server      : https://oceania.generic-mapping-tools.org
+*  NetCDF library             : /usr/lib64/libnetcdf.so
+*  NetCDF include dir         : /usr/include
+*  GDAL library               : /usr/lib64/libgdal.so
+*  GDAL include dir           : /usr/include/gdal
+*  FFTW library               : /usr/lib64/libfftw3f.so
+*  FFTW include dir           : /usr/include
+*  Accelerate Framework       :
+*  Regex support              : PCRE (/usr/lib64/libpcre.so)
+*  ZLIB library               : /usr/lib64/libz.so
+*  ZLIB include dir           : /usr/include
+*  LAPACK library             : yes
+*  BLAS library               : yes
+*  License restriction        : no
+*  Triangulation method       : Shewchuk
+*  OpenMP support             : enabled
+*  GLIB GTHREAD support       : enabled
+*  Build mode                 : shared
+*  Build GMT core             : always [libgmt.so]
+*  Build PSL library          : always [libpostscriptlight.so]
+*  Build GMT supplements      : yes [supplements.so]
+*  Build GMT Developer        : yes
+*  Build proto supplements    : none
+*  Found Ghostscript (gs)     : yes (9.50)
+*  Found GraphicsMagick (gm)  : yes (1.3.33)
+*  Found ffmpeg               : yes (4.2.1)
+*  Found open                 : yes
+*  Found ogr2ogr              : yes (2.4.2)
+*  Found gdal_translate       : yes (2.4.2)
+*
+*  Locations:
+*  Installing GMT in          : /opt/GMT-6.1.1
+*  GMT_DATADIR                : /opt/GMT-6.1.1/share
+*  GMT_DOCDIR                 : /opt/GMT-6.1.1/share/doc
+*  GMT_MANDIR                 : /opt/GMT-6.1.1/share/man
+-- Configuring done
+-- Generating done
+</code></pre></td></tr></table>
+</div>
+</div><p>检查完毕后，开始编译和安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ make
+$ sudo make install
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="修改环境变量">修改环境变量</h2>
+<p>打开终端，使用如下命令用文件编辑器打开 Zsh 配置文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># Linux 用户
+$ code ~/.zshrc
+</code></pre></td></tr></table>
+</div>
+</div><p>然后向文件末尾加入如下语句以修改环境变量。修改完成后保存文件并退出，然后重启终端使其生效。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">export GMT6HOME=/opt/GMT-6.1.1
+export PATH=${GMT6HOME}/bin:$PATH
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GMT6HOME}/lib64
+</code></pre></td></tr></table>
+</div>
+</div><p>说明：</p>
+<ul>
+<li>第一个命令添加了环境变量 <strong>GMT6HOME</strong></li>
+<li>第二个命令修改 GMT6 的 bin 目录加入到 <strong>PATH</strong> 中，使得终端可以找到GMT命令</li>
+<li>第三个命令将 GMT6 的 lib 目录加入到动态链接库路径中。通常，32位系统的路径为 <strong>lib</strong>，64位系统的路径为 <strong>lib64</strong></li>
+</ul>
+<h2 id="测试是否安装成功">测试是否安装成功</h2>
+<p>**重新打开一个终端，**键入如下命令，如正确显示GMT版本号，则表示安装成功：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ gmt --version
+6.1.1
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="升级卸载-gmt">升级/卸载 GMT</h2>
+<p>按照上面的配置，GMT 会被安装到 <code>/opt/GMT-6.1.1</code> 目录下，若想要卸载 GMT，可以直接删除整个 <code>/opt/GMT-6.1.1</code> 即可。</p>
+<p>GMT不支持自动更新，因而若想要升级GMT，通常建议先卸载GMT，然后再下载新版源码并按照上面的步骤重新编译安装。</p>
+<p>当然，高级用户也可以同时安装多个版本的GMT，但需要注意环境变量 <strong>PATH</strong> 的设置。</p>
+<h2 id="备注">备注</h2>
+<p>⚠️</p>
+<p>Anaconda用户请注意！由于Anaconda中也安装了FFTW、GDAL、netCDF等库文件，GMT在配置过程中可能会找到Anaconda提供的库文件，进而导致配置、编译或执行过程中出错。</p>
+<p>解决办法是，在 <code>~/.zshrc</code> 中将 Anaconda 相关的环境变量注释掉，以保证GMT 在配置和编译过程中找到的不是 Anaconda 提供的库文件。待GMT安装完成后，再将 Anaconda 相关环境变量改回即可。</p>
+<p><strong>如果先安装 GMT 再安装 Anaconda 不会出现这种问题😊</strong></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-02-04 20:13
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/GMT/">GMT</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/SAC-install/">
+            <span class="next-text nav-default">SAC安装</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

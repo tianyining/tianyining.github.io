@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GMT on Brave New World</title>
+    <link>https://tianyining.github.io/categories/GMT/</link>
+    <description>Recent content in GMT on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 04 Feb 2021 20:13:02 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/GMT/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu GMT6.1.1 安装</title>
+      <link>https://tianyining.github.io/post/GMT6.1.1/</link>
+      <pubDate>Thu, 04 Feb 2021 20:13:02 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT6.1.1/</guid>
+      <description>​ 尽管大多数Linux发行版都提供了GMT二进制包，可以直接通过软件包管理器 apt 或 yum 安装，但发行版提供的GMT版本都很老，不建议使用。 ​ 本文介</description>
+    </item>
+    
+  </channel>
+</rss>
