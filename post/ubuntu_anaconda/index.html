@@ -50,7 +50,7 @@
 <meta itemprop="description" content="安装 Anaconda 1. 下载 Anaconda ​ 进入 Anaconda 官方下载页面，会看到类似下图的下载页面。根据自己的系统选择对应的安装包（通常选择下图中红框圈出的安装包）。 2. 安装 Anaconda $ bash">
 <meta itemprop="datePublished" content="2020-09-12T20:02:01+08:00" />
 <meta itemprop="dateModified" content="2021-02-17T01:37:56+08:00" />
-<meta itemprop="wordCount" content="605">
+<meta itemprop="wordCount" content="948">
 
 
 
@@ -139,7 +139,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 605 字 </span>
+          <span class="more-meta"> 约 948 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -151,11 +151,13 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#安装-anaconda">安装 Anaconda</a></li>
+    <li><a href="#常用命令">常用命令</a></li>
     <li><a href="#修改环境变量">修改环境变量</a></li>
     <li><a href="#取消每次启动前的自动激活base">取消每次启动前的自动激活base</a></li>
     <li><a href="#升级">升级</a></li>
     <li><a href="#在ubuntu中打开anaconda">在Ubuntu中打开Anaconda</a></li>
-    <li><a href="#jupyter-notebook-插件安装">Jupyter notebook 插件安装</a></li>
+    <li><a href="#jupyter-notebook-扩展插件">Jupyter notebook 扩展插件</a></li>
+    <li><a href="#jupyter-notebook-主题配置">Jupyter notebook 主题配置</a></li>
     <li><a href="#mac终端下出现base怎么解决">Mac终端下出现base怎么解决</a></li>
   </ul>
 </nav>
@@ -199,6 +201,59 @@ Type &#34;help&#34;, &#34;copyright&#34;, &#34;credits&#34; or &#34;license&#34;
 &gt;&gt;&gt;
 </code></pre></td></tr></table>
 </div>
+</div><h2 id="常用命令">常用命令</h2>
+<p>​		Anaconda 中提供的 <code>conda</code> 命令可以用于安装 Python 包、管理虚拟环境，其详细用法见 <a href="https://docs.conda.io/projects/conda/en/latest/index.html">conda 官方文档</a>。此外，也可以使用 Python 自带的工具 <code>pip</code> 来安装 Python 包，其详细用法见 <a href="https://pip.pypa.io/en/stable/">pip 官方文档</a>。我们建议尽可能使用 <code>conda</code> 来安装 Python 包，仅在 Anaconda 没有提供需要的程序包时才使用 <code>pip</code> 来安装。以下仅介绍常用的命令。</p>
+<p>更新 conda 和 Anaconda:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ conda update conda
+$ conda update anaconda
+</code></pre></td></tr></table>
+</div>
+</div><p>添加 conda 的第三方软件包源 conda-forge:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ conda config --add channels conda-forge
+</code></pre></td></tr></table>
+</div>
+</div><p>创建虚拟环境:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 虚拟环境名为 seismo-learn，初始 Python 版本与 base 环境相同
+$ conda create --name seismo-learn
+</code></pre></td></tr></table>
+</div>
+</div><p>激活虚拟环境:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 激活名为 seismo-learn 的虚拟环境
+$ conda activate seismo-learn
+</code></pre></td></tr></table>
+</div>
+</div><p>取消激活当前虚拟环境:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ conda deactivate
+</code></pre></td></tr></table>
+</div>
 </div><h2 id="修改环境变量">修改环境变量</h2>
 <p>当 Anaconda 安装完成时，终端输入python，并没有显示，因此需要手动修改环境变量。</p>
 <p><code>sudo gedit ~/.bashrc</code></p>
@@ -215,7 +270,7 @@ Type &#34;help&#34;, &#34;copyright&#34;, &#34;credits&#34; or &#34;license&#34;
 <p><code>$ conda update anaconda</code></p>
 <h2 id="在ubuntu中打开anaconda">在Ubuntu中打开Anaconda</h2>
 <p>终端输入：<code>$ anaconda-navigator</code></p>
-<h2 id="jupyter-notebook-插件安装">Jupyter notebook 插件安装</h2>
+<h2 id="jupyter-notebook-扩展插件">Jupyter notebook 扩展插件</h2>
 <p>Jupiter Notebook 是一个算法工程师友好工具，但仍有很多扩展空间，比如当你的文件中包含大量代码和markdown混排的时候，需要一个目录来帮助我们更好地对文件结构进行可视化，nbextensions可以帮我们实现。</p>
 <ul>
 <li>安装</li>
@@ -226,8 +281,67 @@ Type &#34;help&#34;, &#34;copyright&#34;, &#34;credits&#34; or &#34;license&#34;
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">conda install -c conda-forge jupyter_contrib_nbextensions
-jupyter contrib nbextension install --user
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ conda install -c conda-forge jupyter_contrib_nbextensions
+$ conda install -c conda-forge jupyter_nbextensions_configurator
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>启动 Jupiter notebook：</li>
+</ul>
+<p><strong>建议勾选的插件：</strong></p>
+<ul>
+<li>Table of Contents</li>
+<li>Variable Inspector</li>
+<li>ExcecuteTime</li>
+<li>Codefolding</li>
+<li>Autopep8</li>
+<li>AutoSave Time</li>
+<li>Hide Input All</li>
+<li>Spellchecker</li>
+</ul>
+<h2 id="jupyter-notebook-主题配置">Jupyter notebook 主题配置</h2>
+<ul>
+<li><strong>安装jupyter主题</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ pip install jupyterthemes
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>加载可用主题列表</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ jt -l
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>选择你想要的主题</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ jt -t &lt;name of theme&gt; # 例如 jt -t monokai
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>回到原来的主题</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ jt -r
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="mac终端下出现base怎么解决">Mac终端下出现base怎么解决</h2>
