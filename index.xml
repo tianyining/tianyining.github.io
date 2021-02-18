@@ -60,7 +60,7 @@ It makes use of a variety of open source projects including:
       <pubDate>Sat, 16 Jan 2021 12:28:14 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/2020final/</guid>
-      <description></description>
+      <description>时间线：2020-09～2021-01 ​ 很多东西最开始看，觉得这些没什么了不起，好像看起来很简单，实际是你太 low ，也没有静下心来细细看，看不出</description>
     </item>
     
     <item>
@@ -195,7 +195,7 @@ It makes use of a variety of open source projects including:
       <pubDate>Sat, 12 Sep 2020 20:02:01 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/ubuntu_anaconda/</guid>
-      <description>一切参照seisman博客安装。 下载Anaconda发行版 安装 参照seismic 设置国内镜像 参照seismic 添加pip镜像 新建文件夹和pi</description>
+      <description>安装 Anaconda 1. 下载 Anaconda ​ 进入 Anaconda 官方下载页面，会看到类似下图的下载页面。根据自己的系统选择对应的安装包（通常选择下图中红框圈出的安装包）。 2. 安装 Anaconda bash Anaconda3-2020.11-Linux-x86_64.sh</description>
     </item>
     
     <item>

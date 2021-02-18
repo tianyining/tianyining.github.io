@@ -22,7 +22,7 @@
       <pubDate>Sat, 12 Sep 2020 20:02:01 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/ubuntu_anaconda/</guid>
-      <description>一切参照seisman博客安装。 下载Anaconda发行版 安装 参照seismic 设置国内镜像 参照seismic 添加pip镜像 新建文件夹和pi</description>
+      <description>安装 Anaconda 1. 下载 Anaconda ​ 进入 Anaconda 官方下载页面，会看到类似下图的下载页面。根据自己的系统选择对应的安装包（通常选择下图中红框圈出的安装包）。 2. 安装 Anaconda bash Anaconda3-2020.11-Linux-x86_64.sh</description>
     </item>
     
   </channel>
