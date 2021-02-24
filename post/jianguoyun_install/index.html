@@ -45,12 +45,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/jianguoyun_install/" />
 <meta property="article:published_time" content="2020-09-17T10:12:11+08:00" />
-<meta property="article:modified_time" content="2020-09-17T10:12:11+08:00" />
+<meta property="article:modified_time" content="2021-03-24T01:37:56+08:00" />
 <meta itemprop="name" content="Ubuntu18.04-从源代码安装坚果云">
 <meta itemprop="description" content="写在最前面 坚果云客户端使用的是python2，但是事先在工作台式机上已经安装了Anaconda，系统默认python为3.8的版本，因此需要">
 <meta itemprop="datePublished" content="2020-09-17T10:12:11+08:00" />
-<meta itemprop="dateModified" content="2020-09-17T10:12:11+08:00" />
-<meta itemprop="wordCount" content="264">
+<meta itemprop="dateModified" content="2021-03-24T01:37:56+08:00" />
+<meta itemprop="wordCount" content="406">
 
 
 
@@ -139,7 +139,7 @@
         <div class="post-category">
             <a href="/categories/Ubuntu/"> Ubuntu </a>
             </div>
-          <span class="more-meta"> 约 264 字 </span>
+          <span class="more-meta"> 约 406 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -163,7 +163,7 @@
 </div>
     <div class="post-content">
       <h3 id="写在最前面"><strong>写在最前面</strong></h3>
-<p>坚果云客户端使用的是python2，但是事先在工作台式机上已经安装了Anaconda，系统默认python为3.8的版本，因此需要手动从源代码安装坚果云客户端。</p>
+<p>坚果云客户端使用的是python2，但是事先在工作台式机上已经安装了Anaconda，系统默认python为3.8的版本，因此需要手动从源代码安装坚果云客户端。安装过程中可能会遇到报错情况，依照不同情况解决方案如下。</p>
 <h2 id="具体步骤"><strong>具体步骤</strong></h2>
 <ol>
 <li>
@@ -195,9 +195,59 @@
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">tar zxf nutstore_linux_src_installer.tar.gz
+cd nutstore_linux_src_installer &amp;&amp; ./configure &amp;&amp; make
+## 提示报错，报错内容如下图
+sudo make install
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">configure</span><span class="p">:</span> <span class="kt">error</span><span class="p">:</span> <span class="nx">Package</span> <span class="nf">requirements</span> <span class="p">(</span><span class="nx">libnautilus</span><span class="o">-</span><span class="nx">extension</span> <span class="o">&gt;=</span> <span class="mf">2.16.0</span><span class="p">)</span> <span class="nx">were</span> <span class="nx">not</span> <span class="nx">met</span><span class="p">:</span>
+   
+<span class="nx">No</span> <span class="kn">package</span> <span class="err">&#39;</span><span class="nx">libnautilus</span><span class="o">-</span><span class="nx">extension</span><span class="err">&#39;</span> <span class="nx">found</span>
+   
+<span class="nx">Consider</span> <span class="nx">adjusting</span> <span class="nx">the</span> <span class="nx">PKG_CONFIG_PATH</span> <span class="nx">environment</span> <span class="nx">variable</span> <span class="k">if</span> <span class="nx">you</span>
+<span class="nx">installed</span> <span class="nx">software</span> <span class="nx">in</span> <span class="nx">a</span> <span class="nx">non</span><span class="o">-</span><span class="nx">standard</span> <span class="nx">prefix</span><span class="p">.</span>
+   
+<span class="nx">Alternatively</span><span class="p">,</span> <span class="nx">you</span> <span class="nx">may</span> <span class="nx">set</span> <span class="nx">the</span> <span class="nx">environment</span> <span class="nx">variables</span> <span class="nx">NAUTILUS_CFLAGS</span>
+<span class="nx">and</span> <span class="nx">NAUTILUS_LIBS</span> <span class="nx">to</span> <span class="nx">avoid</span> <span class="nx">the</span> <span class="nx">need</span> <span class="nx">to</span> <span class="nx">call</span> <span class="nx">pkg</span><span class="o">-</span><span class="nx">config</span><span class="p">.</span>
+<span class="nx">See</span> <span class="nx">the</span> <span class="nx">pkg</span><span class="o">-</span><span class="nx">config</span> <span class="nx">man</span> <span class="nx">page</span> <span class="k">for</span> <span class="nx">more</span> <span class="nx">details</span><span class="p">.</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>解决方案：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo apt-get install libnautilus-extension-dev
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>解决后继续安装:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd ..
 cd nutstore_linux_src_installer &amp;&amp; ./configure &amp;&amp; make
 sudo make install
 </code></pre></td></tr></table>
@@ -230,6 +280,7 @@ sudo make install
 <ul>
 <li><a href="https://www.jianguoyun.com/s/downloads/linux">https://www.jianguoyun.com/s/downloads/linux</a>（参考 How to install from source code部分）</li>
 <li><a href="https://segmentfault.com/a/1190000022425432">https://segmentfault.com/a/1190000022425432</a></li>
+<li><a href="https://unix.stackexchange.com/questions/167802/dropbox-install-problems-on-scientific-linux">https://unix.stackexchange.com/questions/167802/dropbox-install-problems-on-scientific-linux</a> (trying to install nautilus-dropbox-1.6.2.tar.bz2.)</li>
 </ul>
 
     </div>
@@ -242,7 +293,7 @@ sudo make install
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2020-09-17 10:12
+        2021-03-24 01:37
         
     </span>
   </p>
