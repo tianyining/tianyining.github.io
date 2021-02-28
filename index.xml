@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 28 Feb 2021 15:37:20 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 16:50:21 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Zsh及其配置</title>
+      <link>https://tianyining.github.io/post/Zsh/</link>
+      <pubDate>Sun, 28 Feb 2021 16:50:21 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Zsh/</guid>
+      <description>说明 Linux 下有很多 Shell，最常见的是 Bash，此外还有 Zsh、csh、ksh，推荐使用 Zsh。 Zsh 有如下特点： 语法基本完全兼容于 Bash，一般</description>
     </item>
     
     <item>
