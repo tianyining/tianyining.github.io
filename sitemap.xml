@@ -30,20 +30,6 @@
   </url>
   
   <url>
-    <loc>https://tianyining.github.io/tags/GMT/</loc>
-    <lastmod>2021-02-04T20:13:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/GMT/</loc>
-    <lastmod>2021-02-04T20:13:02+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://tianyining.github.io/post/</loc>
     <lastmod>2021-03-24T01:37:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -53,6 +39,41 @@
   <url>
     <loc>https://tianyining.github.io/tags/</loc>
     <lastmod>2021-03-24T01:37:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/OpenJDK/</loc>
+    <lastmod>2021-02-28T15:37:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/Ubuntu%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2021-02-28T15:37:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/Ubuntu%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2021-02-28T15:37:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/GMT/</loc>
+    <lastmod>2021-02-04T20:13:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/GMT/</loc>
+    <lastmod>2021-02-04T20:13:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

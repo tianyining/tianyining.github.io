@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 04 Feb 2021 20:13:02 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 15:37:20 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18.04安装OpenJDK报错</title>
+      <link>https://tianyining.github.io/post/OpenJDK/</link>
+      <pubDate>Sun, 28 Feb 2021 15:37:20 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/OpenJDK/</guid>
+      <description>说明 Ubuntu系统下运行 Java 程序需要安装 Java 运行环境，即 OpenJDK： 1 $ sudo apt install default-jdk 报错显示： 1 $ E:Unable to locate package default-jdk 解决方法 I used another repository for oracle java, and it works. 1 2 3</description>
     </item>
     
     <item>
