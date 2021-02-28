@@ -50,7 +50,7 @@
 <meta itemprop="description" content="说明 Linux 下有很多 Shell，最常见的是 Bash，此外还有 Zsh、csh、ksh，推荐使用 Zsh。 Zsh 有如下特点： 语法基本完全兼容于 Bash，一般">
 <meta itemprop="datePublished" content="2021-02-28T16:50:21+08:00" />
 <meta itemprop="dateModified" content="2021-02-28T16:50:21+08:00" />
-<meta itemprop="wordCount" content="371">
+<meta itemprop="wordCount" content="1219">
 
 
 
@@ -139,8 +139,8 @@
         <div class="post-category">
             <a href="/categories/Ubuntu%E9%85%8D%E7%BD%AE/"> Ubuntu配置 </a>
             </div>
-          <span class="more-meta"> 约 371 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 1219 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -152,6 +152,13 @@
   <ul>
     <li><a href="#说明">说明</a></li>
     <li><a href="#安装-zsh">安装 Zsh</a></li>
+    <li><a href="#oh-my-zsh">Oh My Zsh</a>
+      <ul>
+        <li><a href="#注解">注解</a></li>
+        <li><a href="#设置主题">设置主题</a></li>
+        <li><a href="#启用插件以zsh-autosuggestions插件为例">启用插件（以zsh-autosuggestions插件为例）</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -169,9 +176,6 @@
 <p>在终端键入 <code>zsh --version</code>，若显示 Zsh 版本号，则表示 Zsh 已安装。否则需要安装 Zsh。</p>
 <p>自 macOS Catalina（10.15）开始，macOS 系统默认的 Shell 已由 Bash 变为 Zsh。</p>
 <p>Linux 用户可以使用如下命令安装 Zsh：</p>
-<p>Fedora</p>
-<p>CentOS</p>
-<p>Ubuntu/Debian</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -180,8 +184,7 @@
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo apt install zsh
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="https://seismo-learn.org/seismology101/_static/copy-button.svg" alt="Copy to clipboard"></p>
-<p>通过如下命令设置默认 Shell 为 Zsh:</p>
+</div><p>通过如下命令设置默认 Shell 为 Zsh:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -190,9 +193,136 @@
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">$ chsh -s $(which zsh)
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="https://seismo-learn.org/seismology101/_static/copy-button.svg" alt="Copy to clipboard"></p>
+</div><p><strong>需要 Log Out 并重新登陆才能成功切换成 Zsh。</strong></p>
 <p><code>chsh</code> 命令修改的是登陆 Shell，因而需要退出当前用户并重新登陆，用户的默认 Shell 就从 Bash 变成 Zsh 了。打开新的终端并键入 <code>echo $SHELL</code>，查看当前 Shell，会显示 <code>/bin/zsh</code>。</p>
-<p>Zsh 的配置文件为 <code>~/.zshrc</code>。因而切换到 Zsh 后，所有的 Shell 配置都不用写到 <code>~/.bashrc</code>，而要写到 <code>~/.zshrc</code> 中。</p>
+<p><strong>查看当前 Shell 命令：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ echo $SHELL
+</code></pre></td></tr></table>
+</div>
+</div><p>Zsh 的配置文件为 <code>~/.zshrc</code>。因而切换到 Zsh 后，所有的 Shell 配置都不用写到 <code>~/.bashrc</code>，而要写到 <code>~/.zshrc</code> 中。</p>
+<h2 id="oh-my-zsh">Oh My Zsh</h2>
+<p>Zsh 稍作配置会更加方便好用。<a href="https://ohmyz.sh/">Oh My Zsh</a> 是由 Oh My Zsh 社区维护的一套 Zsh 配置文件，使用起来非常方便。一般用户直接使用该配置即可。</p>
+<p>安装 Oh My Zsh:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sh -c &#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>该命令会创建 <code>~/.oh-my-zsh</code> 目录，下载 Oh My Zsh 到该目录下，生成默认的 Zsh 配置文件 <code>~/.zshrc</code>，并备份老的配置到类似 <code>~/.zshrc.pre-oh-my-zsh</code> 的文件中。</p>
+<h3 id="注解">注解</h3>
+<p>GitHub 在国内访问不畅，以上安装命令可能会由于网络问题而失败。若以上命令失败，可直接打开脚本链接 <a href="https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh">https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh</a>，复制脚本内容到文本编辑器中（如 Visual Studio Code），保存到本地某目录下（如 <code>~/Downloads</code> 目录）。然后进入该目录，运行脚本即可:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cd ~/Downloads
+$ sh install.sh
+</code></pre></td></tr></table>
+</div>
+</div><p>之后可以根据个人习惯修改配置文件 <code>~/.zshrc</code>，如<a href="https://github.com/ohmyzsh/ohmyzsh#themes">设置主题</a>、<a href="https://github.com/ohmyzsh/ohmyzsh#plugins">启用插件</a>等。</p>
+<h3 id="设置主题">设置主题</h3>
+<p>修改配置文件 <code>~/.zshrc</code> 便可以使用不同的主题:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ZSH_THEME=&#34;bira&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>打开新的终端，查看主题效果。</p>
+<p>Oh My Zsh 自带了很多主题，位于 <code>~/.oh-my-zsh/themes</code>目录下，可以在线<a href="https://github.com/ohmyzsh/ohmyzsh/wiki/Themes">预览主题效果</a>。用户也可以使用<a href="https://github.com/ohmyzsh/ohmyzsh/wiki/External-themes">外部主题</a>。</p>
+<h3 id="启用插件以zsh-autosuggestions插件为例">启用插件（以zsh-autosuggestions插件为例）</h3>
+<p><strong>Step1: Clone 插件</strong></p>
+<p>这一步会把插件需要的文件 clone 到 zsh 默认的插件目录<code>~/.oh-my-zsh/custom/plugins</code>，如果使用 <code>dotfiles</code> 来管理配置文件，这里也可以为 <code>oh-my-zsh</code> 创建一个软链接。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Step2: 把插件名称加入 <code>oh-my-zsh</code>插件列表中</strong></p>
+<p>打开 <code>zsh</code>配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ code ~/.zshrc
+</code></pre></td></tr></table>
+</div>
+</div><p>一般直接修改配置文件 <code>~/.zshrc</code> 便可启用插件:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">plugins=(
+  sudo
+  extract
+  autojump
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Step3: 重新加载<code>zsh</code>的配置</strong></p>
+<p>这一步可以关掉 Terminal 重新打开，也可以使用 <code>source ~/.zshrc</code> 或 <code>. ~/.zshrc</code> 来重新加载 zsh 的配置，让刚刚的配置生效。</p>
+<p><strong>其他第三方插件提前安装方法</strong></p>
+<p>除了 Oh My Zsh 自带的插件，还可以使用第三方插件，只需提前安装即可。这里推荐几个常用的。</p>
+<ul>
+<li>
+<p><a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting 插件</a>：高亮 Zsh 可用命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><a href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/autojump">autojump 插件</a>：非常智能的目录快速切换工具，启动<code>autojump</code>插件前，需提前安装 <a href="https://github.com/wting/autojump">autojump</a>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git clone git://github.com/joelthelion/autojump.git
+$ sudo apt install autojump
+</code></pre></td></tr></table>
+</div>
+</div><p>安装完成后，使用查看autojump版本。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ autojump --version
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
 
     </div>
 
