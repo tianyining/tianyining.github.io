@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pycharm on Brave New World</title>
+    <link>https://tianyining.github.io/tags/pycharm/</link>
+    <description>Recent content in pycharm on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 14 Mar 2021 13:00:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/pycharm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pycharm安装及使用指南_18.04</title>
+      <link>https://tianyining.github.io/post/pycharm/</link>
+      <pubDate>Sun, 14 Mar 2021 13:00:41 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/pycharm/</guid>
+      <description>引言 Pycharm 是一款功能十分强大的 IDE，Ubuntu18.04 在安装 Pycharm 过程中遇到了一些问题，特此记录。 Ubuntu18.04 安装 pycharm 解决安装界面卡死问题 最初 Ubuntu18.04 安装 pycharm 时，</description>
+    </item>
+    
+  </channel>
+</rss>
