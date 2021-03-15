@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 14 Mar 2021 16:11:38 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Mar 2021 15:32:20 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Anaconda创建自己的虚拟环境</title>
+      <link>https://tianyining.github.io/post/anaconda-env/</link>
+      <pubDate>Mon, 15 Mar 2021 15:32:20 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/anaconda-env/</guid>
+      <description>什么是 Jupyter Notebook? 详细内容请参考：geting started with conda Jupyter Notebook 之前被叫做 IPython Notebook，是基于 Python 环境下的一套集成了代码执行，富文本编辑，数学符号，以及</description>
     </item>
     
     <item>
@@ -87,7 +96,7 @@ It makes use of a variety of open source projects including:
       <pubDate>Sat, 16 Jan 2021 12:28:14 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/2020final/</guid>
-      <description>时间线：2020-09～2021-01 写在最开始 ​ 很多东西最开始看，觉得这些没什么了不起，好像看起来很简单，实际是你太 low ，也没有静下心来细细</description>
+      <description>时间线：2020-09～2021-01 写在最开始🌾 ​ 很多东西最开始看，觉得这些没什么了不起，好像看起来很简单，实际是你太 low ，也没有静下心来细</description>
     </item>
     
     <item>
