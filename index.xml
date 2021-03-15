@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Mar 2021 17:17:09 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Mar 2021 18:02:22 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Github clone 超时解决办法</title>
+      <link>https://tianyining.github.io/post/github_config/</link>
+      <pubDate>Mon, 15 Mar 2021 18:02:22 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/github_config/</guid>
+      <description>问题 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &amp;#39;https://github.com/tianyining/tianyining.github.io.git/&amp;#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是http</description>
     </item>
     
     <item>

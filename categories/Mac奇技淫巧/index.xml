@@ -6,7 +6,16 @@
     <description>Recent content in Mac奇技淫巧 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Mar 2021 17:17:09 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Mar 2021 18:02:22 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github clone 超时解决办法</title>
+      <link>https://tianyining.github.io/post/github_config/</link>
+      <pubDate>Mon, 15 Mar 2021 18:02:22 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/github_config/</guid>
+      <description>问题 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &amp;#39;https://github.com/tianyining/tianyining.github.io.git/&amp;#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是http</description>
+    </item>
+    
     <item>
       <title>Mac安装并配置 oh-My-Zsh</title>
       <link>https://tianyining.github.io/post/Mac_oh-my-zsh/</link>
