@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Mar 2021 15:32:20 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Mar 2021 17:17:09 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Mac安装并配置 oh-My-Zsh</title>
+      <link>https://tianyining.github.io/post/Mac_oh-my-zsh/</link>
+      <pubDate>Mon, 15 Mar 2021 17:17:09 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Mac_oh-my-zsh/</guid>
+      <description>第一步，安装 Homebrew 作为 macOS 必备的包管理工具，相信大家肯定已经很熟悉了，没安装的朋友可以执行下面命令装一下，安装过的可以执行下面命令可以进行更新。 1</description>
     </item>
     
     <item>
