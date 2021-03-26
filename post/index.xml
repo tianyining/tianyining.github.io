@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Mar 2021 18:02:22 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Mar 2021 15:53:17 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Fftw3_isntall</title>
+      <link>https://tianyining.github.io/post/fftw3_isntall/</link>
+      <pubDate>Fri, 26 Mar 2021 15:53:17 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/fftw3_isntall/</guid>
+      <description>前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g++ $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd</description>
     </item>
     
     <item>

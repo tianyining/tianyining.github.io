@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Brave New World</title>
+  <title>Fftw3_isntall - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Steve Xu" /><meta name="description" content="Steve Xu&#39;s Blog" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/" />
-  <link href="https://tianyining.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Brave New World" />
-  <link href="https://tianyining.github.io/index.xml" rel="feed" type="application/rss+xml" title="Brave New World" />
+<link rel="canonical" href="https://tianyining.github.io/post/fftw3_isntall/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -42,16 +40,24 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="Brave New World" />
-<meta property="og:description" content="Steve Xu&#39;s Blog" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tianyining.github.io/" />
-<meta property="og:updated_time" content="2021-03-26T15:53:17+08:00" />
-<meta itemprop="name" content="Brave New World">
-<meta itemprop="description" content="Steve Xu&#39;s Blog">
+<meta property="og:title" content="Fftw3_isntall" />
+<meta property="og:description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/fftw3_isntall/" />
+<meta property="article:published_time" content="2021-03-26T15:53:17+08:00" />
+<meta property="article:modified_time" content="2021-03-26T15:53:17+08:00" />
+<meta itemprop="name" content="Fftw3_isntall">
+<meta itemprop="description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd">
+<meta itemprop="datePublished" content="2021-03-26T15:53:17+08:00" />
+<meta itemprop="dateModified" content="2021-03-26T15:53:17+08:00" />
+<meta itemprop="wordCount" content="119">
+
+
+
+<meta itemprop="keywords" content="fftw-3.3.8&#34;," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Brave New World"/>
-<meta name="twitter:description" content="Steve Xu&#39;s Blog"/>
+<meta name="twitter:title" content="Fftw3_isntall"/>
+<meta name="twitter:description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -123,138 +129,139 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/shutter_install/">Ubuntu18.04中安装Shutter截图工具</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-12-04 16:39 </span>
-      <div class="post-category">
-          <a href="/categories/Ubuntu/"> Ubuntu </a>
-          <a href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> 奇技淫巧 </a>
-          </div>
-        <span class="more-meta"> 约 266 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      下面提供两种安装方式 方式一：直接在Ubuntu Software 里 install （不推荐） 方式二：终端命令行安装（推荐） 命令行安装截图工具 Shutter 1. 添加安装包软件源 1 sudo add-apt-respository ppa:shutter/ppa 2.
-    </div>
-    <div class="read-more">
-      <a href="/post/shutter_install/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Fftw3_isntall</h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/Mac_xcode/">Mac_xcode</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-12-01 22:59 </span>
-      <div class="post-category">
-          <a href="/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> Mac奇技淫巧 </a>
-          </div>
-        <span class="more-meta"> 约 61 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Git is not working after macOS Update 出现以下错误🙅： 1 xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun 出现错误的原因 The problem is that Xcode Command-line Tools needs to be updated. Solution Go back to your terminal and enter: 1 xcode-select --install After that restart your terminal
-    </div>
-    <div class="read-more">
-      <a href="/post/Mac_xcode/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+      <div class="post-meta">
+        <span class="post-time"> 2021-03-26 15:53 </span>
+        <div class="post-category">
+            <a href="/categories/fftw-3.3.8/"> fftw-3.3.8 </a>
+            </div>
+          <span class="more-meta"> 约 119 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/Mac_DNS/">Mac_DNS</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-12-01 22:33 </span>
-      <div class="post-category">
-          <a href="/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> Mac奇技淫巧 </a>
-          </div>
-        <span class="more-meta"> 约 165 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      ​ Mac在设置系统代理的情况下，某些网页无法打开，比如我遇到的就是知乎无法访问。通过测试，发现如果不把 Bywave 设置为系统代理，Safari 是可以正
-    </div>
-    <div class="read-more">
-      <a href="/post/Mac_DNS/" class="read-more-link">阅读更多</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前提条件">前提条件</a></li>
+    <li><a href="#安装fftw">安装fftw</a></li>
+    <li><a href="#配置环境变量">配置环境变量</a></li>
+  </ul>
+</nav>
   </div>
-</article>
+</div>
+    <div class="post-content">
+      <h2 id="前提条件">前提条件</h2>
+<p>所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo apt-get install gcc
+$ sudo apt-get install g++
+$ sudo apt-get install gfortran
+$ sudo apt-get install make
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="安装fftw">安装fftw</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cd install_temp
+$ cd fftw-3.3.8
+$ sudo ./configure --prefix=/home/tianyining/fftw
+$ sudo make
+$ make install
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="配置环境变量">配置环境变量</h2>
+<p><strong>特别注意：安装好 fftw 后，需要将 FFTW 加入环境变量。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">export LD_LIBRARY_PATH=/home/tianyining/fftw/lib:$LD_LIBRARY_PATH
+export LDLIBS=&#34;-L/home/tianyining/fftw/lib -lfftw3&#34;
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ubuntu_%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/">Ubuntu_代理网页无法访问</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-10-31 12:56 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%A7%91%E7%A0%94-Ubuntu_%E7%96%91%E6%83%91/"> 科研-Ubuntu_疑惑 </a>
-          <a href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> 奇技淫巧 </a>
-          </div>
-        <span class="more-meta"> 约 225 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-03-26 15:53
+        
+    </span>
+  </p>
   
-  <div class="post-content">
-    <div class="post-summary">
-      ​ 当有一天，在 FQ 状态下，Ubuntu内某些网页无法打开（比如知乎），检查网络发现，可以ping通，而且在同一个网络下，其他设备可以正常浏览该
-    </div>
-    <div class="read-more">
-      <a href="/post/ubuntu_%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/" class="read-more-link">阅读更多</a>
-    </div>
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
   </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2020-10-28%E7%BB%84%E4%BC%9A/">2020-10-28组会</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-10-28 20:00 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%BB%84%E4%BC%9A/"> 组会 </a>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/fftw-3.3.8/">fftw-3.3.8&#34;</a>
           </div>
-        <span class="more-meta"> 约 356 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      第一次组会 ​ 第一次组会，给我的身心都造成了极大刺激💨💨 此处省略 1W 字尴尬描述。 感冒流程 组会结束后当天晚上开始：喉咙痛&mdash;&mdash
-    </div>
-    <div class="read-more">
-      <a href="/post/2020-10-28%E7%BB%84%E4%BC%9A/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/3/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
-    <a class="next" href="/page/5/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/github_config/">
+            <span class="next-text nav-default">Github clone 超时解决办法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
 
       </div>
     </main>

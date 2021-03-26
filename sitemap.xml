@@ -17,14 +17,49 @@
   
   <url>
     <loc>https://tianyining.github.io/</loc>
-    <lastmod>2021-03-24T01:37:56+08:00</lastmod>
+    <lastmod>2021-03-26T15:53:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/categories/</loc>
-    <lastmod>2021-03-24T01:37:56+08:00</lastmod>
+    <lastmod>2021-03-26T15:53:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/fftw-3.3.8/</loc>
+    <lastmod>2021-03-26T15:53:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/fftw-3.3.8/</loc>
+    <lastmod>2021-03-26T15:53:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/fftw3_isntall/</loc>
+    <lastmod>2021-03-26T15:53:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/</loc>
+    <lastmod>2021-03-26T15:53:17+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/</loc>
+    <lastmod>2021-03-26T15:53:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -46,20 +81,6 @@
   <url>
     <loc>https://tianyining.github.io/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/</loc>
     <lastmod>2021-03-15T18:02:22+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/post/</loc>
-    <lastmod>2021-03-24T01:37:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/</loc>
-    <lastmod>2021-03-24T01:37:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
