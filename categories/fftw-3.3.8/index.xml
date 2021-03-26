@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 26 Mar 2021 15:53:17 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/fftw-3.3.8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ubuntu18.04 fftw3.8.3 安装</title>
-      <link>https://tianyining.github.io/post/fftw3_isntall/</link>
+      <link>https://tianyining.github.io/post/Ubuntu18.04-fftw3.8.3-%E5%AE%89%E8%A3%85/</link>
       <pubDate>Fri, 26 Mar 2021 15:53:17 +0800</pubDate>
       
-      <guid>https://tianyining.github.io/post/fftw3_isntall/</guid>
+      <guid>https://tianyining.github.io/post/Ubuntu18.04-fftw3.8.3-%E5%AE%89%E8%A3%85/</guid>
       <description>前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g++ $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd</description>
     </item>
     
