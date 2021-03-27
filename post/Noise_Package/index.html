@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Ubuntu18.04 fftw3.8.3 安装 - Brave New World</title>
+  <title>Noise_Package - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="前期准备 安装 SAC 安装 FFTW 修改参数和路径 所有参数设置均在 NOISE_CODE/bin/Config 中，运行前需要将 Config 中的 main_dir 修改为自己的 NoiseCC 的路径，修改 code_dir 为自己的 NOISE_CODE/CODE 。其他参数视情况修改，主要" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/Ubuntu18.04-fftw3.8.3-%E5%AE%89%E8%A3%85/" />
+<link rel="canonical" href="https://tianyining.github.io/post/Noise_Package/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,24 +40,24 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="Ubuntu18.04 fftw3.8.3 安装" />
-<meta property="og:description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd" />
+<meta property="og:title" content="Noise_Package" />
+<meta property="og:description" content="前期准备 安装 SAC 安装 FFTW 修改参数和路径 所有参数设置均在 NOISE_CODE/bin/Config 中，运行前需要将 Config 中的 main_dir 修改为自己的 NoiseCC 的路径，修改 code_dir 为自己的 NOISE_CODE/CODE 。其他参数视情况修改，主要" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/Ubuntu18.04-fftw3.8.3-%E5%AE%89%E8%A3%85/" />
-<meta property="article:published_time" content="2021-03-26T15:53:17+08:00" />
-<meta property="article:modified_time" content="2021-03-26T15:53:17+08:00" />
-<meta itemprop="name" content="Ubuntu18.04 fftw3.8.3 安装">
-<meta itemprop="description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd">
-<meta itemprop="datePublished" content="2021-03-26T15:53:17+08:00" />
-<meta itemprop="dateModified" content="2021-03-26T15:53:17+08:00" />
-<meta itemprop="wordCount" content="162">
+<meta property="og:url" content="https://tianyining.github.io/post/Noise_Package/" />
+<meta property="article:published_time" content="2021-03-27T12:56:23+08:00" />
+<meta property="article:modified_time" content="2021-03-27T12:56:23+08:00" />
+<meta itemprop="name" content="Noise_Package">
+<meta itemprop="description" content="前期准备 安装 SAC 安装 FFTW 修改参数和路径 所有参数设置均在 NOISE_CODE/bin/Config 中，运行前需要将 Config 中的 main_dir 修改为自己的 NoiseCC 的路径，修改 code_dir 为自己的 NOISE_CODE/CODE 。其他参数视情况修改，主要">
+<meta itemprop="datePublished" content="2021-03-27T12:56:23+08:00" />
+<meta itemprop="dateModified" content="2021-03-27T12:56:23+08:00" />
+<meta itemprop="wordCount" content="355">
 
 
 
-<meta itemprop="keywords" content="fftw-3.3.8&#34;," />
+<meta itemprop="keywords" content="Noise_Package&#34;," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ubuntu18.04 fftw3.8.3 安装"/>
-<meta name="twitter:description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd"/>
+<meta name="twitter:title" content="Noise_Package"/>
+<meta name="twitter:description" content="前期准备 安装 SAC 安装 FFTW 修改参数和路径 所有参数设置均在 NOISE_CODE/bin/Config 中，运行前需要将 Config 中的 main_dir 修改为自己的 NoiseCC 的路径，修改 code_dir 为自己的 NOISE_CODE/CODE 。其他参数视情况修改，主要"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -132,14 +132,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Ubuntu18.04 fftw3.8.3 安装</h1>
+      <h1 class="post-title">Noise_Package</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-03-26 15:53 </span>
+        <span class="post-time"> 2021-03-27 12:56 </span>
         <div class="post-category">
-            <a href="/categories/fftw-3.3.8/"> fftw-3.3.8 </a>
+            <a href="/categories/Noise_Package/"> Noise_Package </a>
             </div>
-          <span class="more-meta"> 约 162 字 </span>
+          <span class="more-meta"> 约 355 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -150,31 +150,30 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#前提条件">前提条件</a></li>
-    <li><a href="#安装fftw">安装fftw</a></li>
-    <li><a href="#配置环境变量">配置环境变量</a></li>
+    <li><a href="#前期准备">前期准备</a></li>
+    <li><a href="#运行程序">运行程序</a></li>
+    <li><a href="#运行程序中存在的问题及解决方案">运行程序中存在的问题及解决方案</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="前提条件">前提条件</h2>
-<p>所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo apt-get install gcc
-$ sudo apt-get install g++
-$ sudo apt-get install gfortran
-$ sudo apt-get install make
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="安装fftw">安装fftw</h2>
+      <h2 id="前期准备">前期准备</h2>
+<ol>
+<li>
+<p>安装 SAC</p>
+</li>
+<li>
+<p>安装 FFTW</p>
+</li>
+<li>
+<p>修改参数和路径</p>
+<ul>
+<li>
+<p>所有参数设置均在 NOISE_CODE/bin/Config 中，运行前需要将 Config 中的 main_dir 修改为自己的 NoiseCC 的路径，修改 code_dir 为自己的 NOISE_CODE/CODE 。其他参数视情况修改，主要是滤波范围和想计算的周期。</p>
+</li>
+<li>
+<p>源代码 NOISE_CODE/CODE/FTA/aftani_c_pgl/driver_c.c 中，将三处路径修改为自己对应的文件夹路径：（NoiseCC 之前的）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -184,44 +183,91 @@ $ sudo apt-get install make
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cd install_temp
-$ cd fftw-3.3.8
-$ sudo ./configure --prefix=/home/tianyining/opt/fftw3
-$ make
-$ make install
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">sprintf(phvelname,&#34;/home/tianyining/code/workspace/Noise_Package/NoiseCC/GLOBAL_DISP01/china_phvel_ini.dat&#34;);
+     
+sprintf(name1,&#34;/home/tianyining/code/workspace/Noise_Package/NoiseCC/GLOBAL_DISP01/COR_%s_%s.SAC_PRED&#34;,sta1,sta2);
+     
+sprintf(name1,&#34;/home/tianyining/code/workspace/Noise_Package/NoiseCC/GLOBAL_DISP01/COR_%s_%s.SAC_PRED&#34;,sta1,sta2);
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="配置环境变量">配置环境变量</h2>
-<p><strong>特别注意：安装好 fftw 后，需要将 FFTW 加入环境变量。</strong></p>
+</div><p>然后在 aftani_c_pgl 下重新编译：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">export LD_LIBRARY_PATH=/home/tianyining/opt/fftw3/lib:$LD_LIBRARY_PATH
-export LDLIBS=&#34;-L/home/tianyining/opt/fftw3/lib -lfftw3&#34;
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ make clean
+$ make 
 </code></pre></td></tr></table>
 </div>
-</div><p>修改完成后：</p>
+</div></li>
+</ul>
+</li>
+<li>
+<p>编译所有程序，将第 3 步的 Config 文件配置好后，在 /NOISE_CODE/CODE/ 下运行 makeall.csh 即可，如果报错，需要进入到 CODE 下的每个文件夹，依次 make clean，make。</p>
+</li>
+<li>
+<p>安装 GMT 和 pssac2</p>
+</li>
+</ol>
+<h2 id="运行程序">运行程序</h2>
+<p>在 /NOISE_CODE/bin/ 下运行 python 程序：</p>
+<ol start="0">
+<li>检查参数设置</li>
+<li>提取 SAC 相关信息</li>
+<li>去仪器响应，截取相同时窗</li>
+<li>滤波和谱白化</li>
+<li>互相关</li>
+<li>叠加</li>
+<li>获得因果和非因果信号对称叠加结果</li>
+<li>计算信噪比</li>
+<li>计算频散曲线</li>
+</ol>
+<h2 id="运行程序中存在的问题及解决方案">运行程序中存在的问题及解决方案</h2>
+<ol>
+<li>
+<p>编译所有程序时：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ source ~/.zshrc
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ chmod +x ./makeall.csh
 </code></pre></td></tr></table>
 </div>
-</div><p>检查是否成功安装 fftw3.3.8，我们可以使用如下命令：</p>
+</div></li>
+<li>
+<p>运行程序时</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ apt-cache show fftw*
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ python 3filterWhiten.py
 </code></pre></td></tr></table>
 </div>
+</div><p>报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ error while loading shared libraries:libgfortran.so.3: cannot open shared object file:no such file or directory
+</code></pre></td></tr></table>
 </div>
+</div><p>解决方案：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo apt-get install libgfortran3
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+
     </div>
 
     <div class="post-copyright">
@@ -232,7 +278,7 @@ export LDLIBS=&#34;-L/home/tianyining/opt/fftw3/lib -lfftw3&#34;
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-03-26 15:53
+        2021-03-27 12:56
         
     </span>
   </p>
@@ -258,16 +304,16 @@ export LDLIBS=&#34;-L/home/tianyining/opt/fftw3/lib -lfftw3&#34;
   </div>
 </div><footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/fftw-3.3.8/">fftw-3.3.8&#34;</a>
+          <a href="/tags/Noise_Package/">Noise_Package&#34;</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/Noise_Package/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Noise_Package</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/github_config/">
-            <span class="next-text nav-default">Github clone 超时解决办法</span>
+        <a class="next" href="/post/Ubuntu18.04-fftw3.8.3-%E5%AE%89%E8%A3%85/">
+            <span class="next-text nav-default">Ubuntu18.04 fftw3.8.3 安装</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

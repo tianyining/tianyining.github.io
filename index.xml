@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 26 Mar 2021 15:53:17 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Mar 2021 12:56:23 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Noise_Package</title>
+      <link>https://tianyining.github.io/post/Noise_Package/</link>
+      <pubDate>Sat, 27 Mar 2021 12:56:23 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Noise_Package/</guid>
+      <description>前期准备 安装 SAC 安装 FFTW 修改参数和路径 所有参数设置均在 NOISE_CODE/bin/Config 中，运行前需要将 Config 中的 main_dir 修改为自己的 NoiseCC 的路径，修改 code_dir 为自己的 NOISE_CODE/CODE 。其他参数视情况修改，主要</description>
     </item>
     
     <item>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Noise_Package&#34; on Brave New World</title>
+    <link>https://tianyining.github.io/tags/Noise_Package/</link>
+    <description>Recent content in Noise_Package&#34; on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 27 Mar 2021 12:56:23 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Noise_Package/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Noise_Package</title>
+      <link>https://tianyining.github.io/post/Noise_Package/</link>
+      <pubDate>Sat, 27 Mar 2021 12:56:23 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Noise_Package/</guid>
+      <description>前期准备 安装 SAC 安装 FFTW 修改参数和路径 所有参数设置均在 NOISE_CODE/bin/Config 中，运行前需要将 Config 中的 main_dir 修改为自己的 NoiseCC 的路径，修改 code_dir 为自己的 NOISE_CODE/CODE 。其他参数视情况修改，主要</description>
+    </item>
+    
+  </channel>
+</rss>
