@@ -50,7 +50,7 @@
 <meta itemprop="description" content="前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g&#43;&#43; $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd">
 <meta itemprop="datePublished" content="2021-03-26T15:53:17+08:00" />
 <meta itemprop="dateModified" content="2021-03-26T15:53:17+08:00" />
-<meta itemprop="wordCount" content="119">
+<meta itemprop="wordCount" content="162">
 
 
 
@@ -139,7 +139,7 @@
         <div class="post-category">
             <a href="/categories/fftw-3.3.8/"> fftw-3.3.8 </a>
             </div>
-          <span class="more-meta"> 约 119 字 </span>
+          <span class="more-meta"> 约 162 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -186,8 +186,8 @@ $ sudo apt-get install make
 <td class="lntd">
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cd install_temp
 $ cd fftw-3.3.8
-$ sudo ./configure --prefix=/home/tianyining/fftw
-$ sudo make
+$ sudo ./configure --prefix=/home/tianyining/opt/fftw3
+$ make
 $ make install
 </code></pre></td></tr></table>
 </div>
@@ -199,8 +199,26 @@ $ make install
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">export LD_LIBRARY_PATH=/home/tianyining/fftw/lib:$LD_LIBRARY_PATH
-export LDLIBS=&#34;-L/home/tianyining/fftw/lib -lfftw3&#34;
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">export LD_LIBRARY_PATH=/home/tianyining/opt/fftw3/lib:$LD_LIBRARY_PATH
+export LDLIBS=&#34;-L/home/tianyining/opt/fftw3/lib -lfftw3&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>修改完成后：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ source ~/.zshrc
+</code></pre></td></tr></table>
+</div>
+</div><p>检查是否成功安装 fftw3.3.8，我们可以使用如下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ apt-cache show fftw*
 </code></pre></td></tr></table>
 </div>
 </div>
