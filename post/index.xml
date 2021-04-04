@@ -22,7 +22,7 @@
       <pubDate>Sun, 04 Apr 2021 20:53:57 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/Mac_problems/</guid>
-      <description>Mac zsh: command not found zsh 所有命令在终端失效 出现的问题: 1 2 3 &amp;gt;&amp;gt; ls zsh: command not found: ls 解决方案: 方法一： 1 2 $ PATH=/bin:/usr/bin:/usr/local/bin:${PATH} $ export PATH</description>
+      <description>Mac zsh: command not found zsh 所有命令在终端失效 出现的问题: 1 2 3 &amp;gt;&amp;gt; ls zsh: command not found: ls 解决方案: 方法一： 首先使用命令让我们可以在终端中进行下面的操作，但是这种方法治</description>
     </item>
     
     <item>
