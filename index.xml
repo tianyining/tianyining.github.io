@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 27 Mar 2021 12:56:23 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Apr 2021 20:53:57 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Mac_problems</title>
+      <link>https://tianyining.github.io/post/Mac_problems/</link>
+      <pubDate>Sun, 04 Apr 2021 20:53:57 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Mac_problems/</guid>
+      <description>Mac zsh: command not found zsh 所有命令在终端失效 出现的问题: 1 2 3 &amp;gt;&amp;gt; ls zsh: command not found: ls 解决方案: 方法一： 1 2 $ PATH=/bin:/usr/bin:/usr/local/bin:${PATH} $ export PATH</description>
     </item>
     
     <item>
