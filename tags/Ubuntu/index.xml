@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on Brave New World</title>
+    <link>https://tianyining.github.io/tags/Ubuntu/</link>
+    <description>Recent content in Ubuntu on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 07 Apr 2021 15:30:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VScode_Ubuntu18.04</title>
+      <link>https://tianyining.github.io/post/VS-code_Ubuntu/</link>
+      <pubDate>Wed, 07 Apr 2021 15:30:19 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/VS-code_Ubuntu/</guid>
+      <description>Ubuntu 安装 VScode 官方安装说明 为 VScode 安装插件 VScode 的安装插件可以在 Extensions 中搜索然后进行安装，快捷键：Ctrl+Shift 推荐的安装插件有： shellman ：提供智能提示和自动</description>
+    </item>
+    
+  </channel>
+</rss>

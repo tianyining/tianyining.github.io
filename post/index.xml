@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 04 Apr 2021 20:53:57 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Apr 2021 15:30:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>VScode_Ubuntu18.04</title>
+      <link>https://tianyining.github.io/post/VS-code_Ubuntu/</link>
+      <pubDate>Wed, 07 Apr 2021 15:30:19 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/VS-code_Ubuntu/</guid>
+      <description>Ubuntu 安装 VScode 官方安装说明 为 VScode 安装插件 VScode 的安装插件可以在 Extensions 中搜索然后进行安装，快捷键：Ctrl+Shift 推荐的安装插件有： shellman ：提供智能提示和自动</description>
     </item>
     
     <item>
