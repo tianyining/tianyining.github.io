@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>VScode_Ubuntu18.04 - Brave New World</title>
+  <title>GMT4_GMT6 - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="Ubuntu 安装 VScode 官方安装说明 为 VScode 安装插件 VScode 的安装插件可以在 Extensions 中搜索然后进行安装，快捷键：Ctrl&#43;Shift 推荐的安装插件有： shellman ：提供智能提示和自动" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="原本 Ubuntu18.04 只安装了 GMT6.1.1 ，但是由于绘图需要，许多现有GMT的脚本是GMT4写的，为不重复造轮子，GMT4和GMT6版本共存十分重要。 GMT6.1.1 安装 参照 seismology-101 也可" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.82.0 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/VS-code_Ubuntu/" />
+<link rel="canonical" href="https://tianyining.github.io/post/GMT4_GMT6/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="VScode_Ubuntu18.04" />
-<meta property="og:description" content="Ubuntu 安装 VScode 官方安装说明 为 VScode 安装插件 VScode 的安装插件可以在 Extensions 中搜索然后进行安装，快捷键：Ctrl&#43;Shift 推荐的安装插件有： shellman ：提供智能提示和自动" />
+<meta property="og:title" content="GMT4_GMT6" />
+<meta property="og:description" content="原本 Ubuntu18.04 只安装了 GMT6.1.1 ，但是由于绘图需要，许多现有GMT的脚本是GMT4写的，为不重复造轮子，GMT4和GMT6版本共存十分重要。 GMT6.1.1 安装 参照 seismology-101 也可" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/VS-code_Ubuntu/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-04-07T15:30:19&#43;08:00" />
-<meta property="article:modified_time" content="2021-04-07T15:30:19&#43;08:00" />
+<meta property="og:url" content="https://tianyining.github.io/post/GMT4_GMT6/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-13T11:50:46&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-13T11:50:46&#43;08:00" />
 
-<meta itemprop="name" content="VScode_Ubuntu18.04">
-<meta itemprop="description" content="Ubuntu 安装 VScode 官方安装说明 为 VScode 安装插件 VScode 的安装插件可以在 Extensions 中搜索然后进行安装，快捷键：Ctrl&#43;Shift 推荐的安装插件有： shellman ：提供智能提示和自动"><meta itemprop="datePublished" content="2021-04-07T15:30:19&#43;08:00" />
-<meta itemprop="dateModified" content="2021-04-07T15:30:19&#43;08:00" />
-<meta itemprop="wordCount" content="158">
-<meta itemprop="keywords" content="Ubuntu,VScode," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="VScode_Ubuntu18.04"/>
-<meta name="twitter:description" content="Ubuntu 安装 VScode 官方安装说明 为 VScode 安装插件 VScode 的安装插件可以在 Extensions 中搜索然后进行安装，快捷键：Ctrl&#43;Shift 推荐的安装插件有： shellman ：提供智能提示和自动"/>
+<meta itemprop="name" content="GMT4_GMT6">
+<meta itemprop="description" content="原本 Ubuntu18.04 只安装了 GMT6.1.1 ，但是由于绘图需要，许多现有GMT的脚本是GMT4写的，为不重复造轮子，GMT4和GMT6版本共存十分重要。 GMT6.1.1 安装 参照 seismology-101 也可"><meta itemprop="datePublished" content="2021-04-13T11:50:46&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-13T11:50:46&#43;08:00" />
+<meta itemprop="wordCount" content="489">
+<meta itemprop="keywords" content="GMT,GMT4&amp;6&#34;," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GMT4_GMT6"/>
+<meta name="twitter:description" content="原本 Ubuntu18.04 只安装了 GMT6.1.1 ，但是由于绘图需要，许多现有GMT的脚本是GMT4写的，为不重复造轮子，GMT4和GMT6版本共存十分重要。 GMT6.1.1 安装 参照 seismology-101 也可"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,14 +128,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">VScode_Ubuntu18.04</h1>
+      <h1 class="post-title">GMT4_GMT6</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-04-07 15:30 </span>
+        <span class="post-time"> 2021-04-13 11:50 </span>
         <div class="post-category">
-            <a href="/categories/Ubuntu%E5%AE%89%E8%A3%85/"> Ubuntu安装 </a>
+            <a href="/categories/GMT/"> GMT </a>
             </div>
-          <span class="more-meta"> 约 158 字 </span>
+          <span class="more-meta"> 约 489 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -146,25 +146,105 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#ubuntu-安装-vscode">Ubuntu 安装 VScode</a></li>
-    <li><a href="#为-vscode-安装插件">为 VScode 安装插件</a></li>
+    <li><a href="#gmt611-安装">GMT6.1.1 安装</a></li>
+    <li><a href="#gmt4518-安装">GMT4.5.18 安装</a></li>
+    <li><a href="#gmt4--gmt6-共存">GMT4 &amp; GMT6 共存</a></li>
+    <li><a href="#测试是否安装成功-gmt4--gmt6">测试是否安装成功 GMT4 &amp; GMT6</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="ubuntu-安装-vscode">Ubuntu 安装 VScode</h2>
-<p><a href="https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions">官方安装说明</a></p>
-<h2 id="为-vscode-安装插件">为 VScode 安装插件</h2>
-<p>VScode 的安装插件可以在 Extensions 中搜索然后进行安装，快捷键：Ctrl+Shift</p>
-<p>推荐的安装插件有：</p>
-<ul>
-<li>shellman ：提供智能提示和自动补全功能；</li>
-<li>shellcheck：提供语法检查的功能；</li>
-<li>Shell-format：提供代码格式化功能，快捷键：Alt + Shift + f ;</li>
-<li>Code Runner ：提供运行代码的功能；</li>
-</ul>
-<p>安装完插件后，需要重新启动 VScode</p>
+      <p>原本 Ubuntu18.04 只安装了 GMT6.1.1 ，但是由于绘图需要，许多现有GMT的脚本是GMT4写的，为不重复造轮子，GMT4和GMT6版本共存十分重要。</p>
+<h2 id="gmt611-安装">GMT6.1.1 安装</h2>
+<p>参照 <a href="https://docs.gmt-china.org/6.1/install/linux/">seismology-101</a></p>
+<p>也可以通过编译安装，<a href="https://tianyining.github.io/post/GMT6.1.1/">参考这里：by myself</a></p>
+<p><strong>注：编译安装解决了 conda 与 GMT 在配置过程中可能会找到Anaconda提供的库文件，进而导致配置、编译或执行过程中出错。</strong></p>
+<h2 id="gmt4518-安装">GMT4.5.18 安装</h2>
+<p>参照 <a href="https://blog.seisman.info/install-gmt4-under-linux/">Seisman-GMT 4.5.18</a></p>
+<p><strong>注：即使已经安装了 GMT6.1.1，也要从头开始一步一步执行命令：</strong></p>
+<p><strong>安装步骤：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">* 下载完成后，用`md5sum` 检查压缩文件的 md5 值，确保该文件是完整且未被篡改的；
+* 解决依赖关系（基础依赖包、netCDF 库、X 相关库）
+* 安装 GMT（编译 GMT 源码、安装海岸线数据、修改环境变量）
+* 命令测试（ psxy - ; gmt --version）
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="gmt4--gmt6-共存">GMT4 &amp; GMT6 共存</h2>
+<p>打开 <code>~/.bashrc</code>，<strong>在 GMT4 环境配置命令前</strong>加入 <strong>GNT6的环境配置命令</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">########    GMT6.1.1       ##########
+export GMT6HOME=/opt/GMT-6.1.1
+export PATH=${GMT6HOME}/bin:$PATH
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GMT6HOME}/lib64
+########    GMT4.5.18       ##########
+export GMT4HOME=/opt/GMT-4.5.18
+export PATH=${GMT4HOME}/bin:$PATH
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GMT4HOME}/lib64
+</code></pre></td></tr></table>
+</div>
+</div><p>环境变量配置结束后：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ source ~/.zshrc
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="测试是否安装成功-gmt4--gmt6">测试是否安装成功 GMT4 &amp; GMT6</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ psxy -
+$ gmt --version
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">提示！
+查看主目录下面是否有 .gmt 文件存在，如果存在，
+则需要删除该文件之后新建一个名为 .gmt 的文件夹，来存放 gmt6 运行时的中间文件。
+$ sudo rm -rf ~/.gmt
+$ sudo mkdir ~/.gmt
+$ sudo chmod 777 ~/.gmt
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="参考链接">参考链接</h2>
+<ol>
+<li><a href="https://qiangyao.blog/post/GMT426/">https://qiangyao.blog/post/GMT426/</a></li>
+</ol>
 
     </div>
 
@@ -176,7 +256,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-04-07 15:30
+        2021-04-13 11:50
         
     </span>
   </p>
@@ -202,17 +282,17 @@
   </div>
 </div><footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/Ubuntu/">Ubuntu</a>
-          <a href="/tags/VScode/">VScode</a>
+          <a href="/tags/GMT/">GMT</a>
+          <a href="/tags/GMT46/">GMT4&amp;6&#34;</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/GMT4_GMT6/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">GMT4_GMT6</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/Mac_problems/">
-            <span class="next-text nav-default">Mac_problems</span>
+        <a class="next" href="/post/VS-code_Ubuntu/">
+            <span class="next-text nav-default">VScode_Ubuntu18.04</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

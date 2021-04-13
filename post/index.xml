@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 07 Apr 2021 15:30:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Apr 2021 11:50:46 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>GMT4_GMT6</title>
+      <link>https://tianyining.github.io/post/GMT4_GMT6/</link>
+      <pubDate>Tue, 13 Apr 2021 11:50:46 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT4_GMT6/</guid>
+      <description>原本 Ubuntu18.04 只安装了 GMT6.1.1 ，但是由于绘图需要，许多现有GMT的脚本是GMT4写的，为不重复造轮子，GMT4和GMT6版本共存十分重要。 GMT6.1.1 安装 参照 seismology-101 也可</description>
     </item>
     
     <item>

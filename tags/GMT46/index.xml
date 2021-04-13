@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GMT4&amp;6&#34; on Brave New World</title>
+    <link>https://tianyining.github.io/tags/GMT46/</link>
+    <description>Recent content in GMT4&amp;6&#34; on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 13 Apr 2021 11:50:46 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/GMT46/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GMT4_GMT6</title>
+      <link>https://tianyining.github.io/post/GMT4_GMT6/</link>
+      <pubDate>Tue, 13 Apr 2021 11:50:46 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT4_GMT6/</guid>
+      <description>原本 Ubuntu18.04 只安装了 GMT6.1.1 ，但是由于绘图需要，许多现有GMT的脚本是GMT4写的，为不重复造轮子，GMT4和GMT6版本共存十分重要。 GMT6.1.1 安装 参照 seismology-101 也可</description>
+    </item>
+    
+  </channel>
+</rss>
