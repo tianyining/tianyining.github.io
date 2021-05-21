@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.82.0 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="https://tianyining.github.io/post/ubuntu_anaconda/" />
@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Ubuntu18.04_python科学计算发行版Anaconda安装">
 <meta itemprop="description" content="安装 Anaconda 1. 下载 Anaconda ​ 进入 Anaconda 官方下载页面，会看到类似下图的下载页面。根据自己的系统选择对应的安装包（通常选择下图中红框圈出的安装包）。 2. 安装 Anaconda $ bash"><meta itemprop="datePublished" content="2020-09-12T20:02:01&#43;08:00" />
 <meta itemprop="dateModified" content="2021-04-03T01:37:56&#43;08:00" />
-<meta itemprop="wordCount" content="1137">
+<meta itemprop="wordCount" content="1272">
 <meta itemprop="keywords" content="Anaconda," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ubuntu18.04_python科学计算发行版Anaconda安装"/>
 <meta name="twitter:description" content="安装 Anaconda 1. 下载 Anaconda ​ 进入 Anaconda 官方下载页面，会看到类似下图的下载页面。根据自己的系统选择对应的安装包（通常选择下图中红框圈出的安装包）。 2. 安装 Anaconda $ bash"/>
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 1137 字 </span>
+          <span class="more-meta"> 约 1272 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -159,6 +159,7 @@
   <ul>
     <li><a href="#mac终端下出现base怎么解决">Mac终端下出现base怎么解决</a></li>
     <li><a href="#error-loading-jupyter-notebook-extensions">Error loading Jupyter Notebook Extensions</a></li>
+    <li><a href="#anaconda-切换主题后网页打开后没有运行按钮">Anaconda 切换主题后网页打开后没有运行按钮</a></li>
   </ul>
 </nav>
   </div>
@@ -377,6 +378,36 @@ $ conda install -c conda-forge jupyter_nbextensions_configurator
 </div>
 </div><p><strong>参考链接：</strong></p>
 <p><a href="https://stackoverflow.com/questions/43916440/error-loading-jupyter-notebook-extensions">https://stackoverflow.com/questions/43916440/error-loading-jupyter-notebook-extensions</a></p>
+<h2 id="anaconda-切换主题后网页打开后没有运行按钮">Anaconda 切换主题后网页打开后没有运行按钮</h2>
+<p>当切换回默认主题后：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ jt -r
+</code></pre></td></tr></table>
+</div>
+</div><p>默认主题一切正常，但是当从默认主题切换回 monokai 主题时，jupyter notebook 显示有问题，比如没有运行按钮一栏等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ jt -t monokai
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>解决方案:</strong></p>
+<p>存在这个问题的描述方法：工具栏缺失以及 Notebook 名称与标识是否可见？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ jt -t monokai -T -N
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>参考链接：</strong> <a href="https://www.jianshu.com/p/296efe23c60a">https://www.jianshu.com/p/296efe23c60a</a></p>
 
     </div>
 
