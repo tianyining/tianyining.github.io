@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 13 Apr 2021 11:50:46 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Jun 2021 15:14:09 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu文件夹左侧的导航栏不见了~</title>
+      <link>https://tianyining.github.io/post/Ubuntu_trick/</link>
+      <pubDate>Thu, 03 Jun 2021 15:14:09 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Ubuntu_trick/</guid>
+      <description>问题描述 Ubuntu 在使用过程中，不知道发生了什么，文件夹左侧的导航栏 (sidebar) 不见了。 解决方案 网上推荐方案，均不奏效：❌s F9 shift + F9 **实际解决方案：**✅ 点</description>
     </item>
     
     <item>

@@ -6,7 +6,16 @@
     <description>Recent content in Ubuntu on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 31 Jan 2021 23:38:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Jun 2021 15:14:09 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu文件夹左侧的导航栏不见了~</title>
+      <link>https://tianyining.github.io/post/Ubuntu_trick/</link>
+      <pubDate>Thu, 03 Jun 2021 15:14:09 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Ubuntu_trick/</guid>
+      <description>问题描述 Ubuntu 在使用过程中，不知道发生了什么，文件夹左侧的导航栏 (sidebar) 不见了。 解决方案 网上推荐方案，均不奏效：❌s F9 shift + F9 **实际解决方案：**✅ 点</description>
+    </item>
+    
     <item>
       <title>Ubuntu安装WPS</title>
       <link>https://tianyining.github.io/post/Ubuntu-WPS/</link>
