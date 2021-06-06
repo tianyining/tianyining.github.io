@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Sublime Test3 Mac配置编程环境 - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="安装 Sublime Text 3 下载地址：https://www.sublimetext.com/3 安装 Package Control 为什么要安装 Package Control ? Package Control是一个管理Subli" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/Sublime_Test3_Mac/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="Sublime Test3 Mac配置编程环境" />
+<meta property="og:description" content="安装 Sublime Text 3 下载地址：https://www.sublimetext.com/3 安装 Package Control 为什么要安装 Package Control ? Package Control是一个管理Subli" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/Sublime_Test3_Mac/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-06T12:33:57&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-06T12:33:57&#43;08:00" />
+
+<meta itemprop="name" content="Sublime Test3 Mac配置编程环境">
+<meta itemprop="description" content="安装 Sublime Text 3 下载地址：https://www.sublimetext.com/3 安装 Package Control 为什么要安装 Package Control ? Package Control是一个管理Subli"><meta itemprop="datePublished" content="2021-06-06T12:33:57&#43;08:00" />
+<meta itemprop="dateModified" content="2021-06-06T12:33:57&#43;08:00" />
+<meta itemprop="wordCount" content="1697">
+<meta itemprop="keywords" content="python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sublime Test3 Mac配置编程环境"/>
+<meta name="twitter:description" content="安装 Sublime Text 3 下载地址：https://www.sublimetext.com/3 安装 Package Control 为什么要安装 Package Control ? Package Control是一个管理Subli"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Sublime Test3 Mac配置编程环境</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-06 12:33 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 1697 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装-sublime-text-3">安装 Sublime Text 3</a></li>
+    <li><a href="#安装-package-control">安装 Package Control</a>
+      <ul>
+        <li><a href="#为什么要安装-package-control-">为什么要安装 Package Control ?</a></li>
+        <li><a href="#package-control-安装方法">Package Control 安装方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#sublime-text-3-插件安装">Sublime Text 3 插件安装</a>
+      <ul>
+        <li><a href="#如何安装插件">如何安装插件？</a></li>
+        <li><a href="#常用插件介绍及安装">常用插件介绍及安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#sublime-text-3-快捷键">Sublime Text 3 快捷键</a></li>
+    <li><a href="#sublime-text-3-配置">Sublime Text 3 配置</a>
+      <ul>
+        <li><a href="#sublime-text-3-运行环境配置">Sublime Text 3 运行环境配置</a></li>
+        <li><a href="#sublime-text-3-个人偏好配置">Sublime Text 3 个人偏好配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="安装-sublime-text-3">安装 Sublime Text 3</h2>
+<p>下载地址：https://www.sublimetext.com/3</p>
+<h2 id="安装-package-control">安装 Package Control</h2>
+<h3 id="为什么要安装-package-control-">为什么要安装 Package Control ?</h3>
+<p><a href="https://link.jianshu.com/?t=https://packagecontrol.io/installation">Package Control</a>是一个管理Sublime Text插件的插件，通过Package Control我们可以直接使用Sublime Text控制台来安装其他插件，快捷简单。</p>
+<h3 id="package-control-安装方法">Package Control 安装方法</h3>
+<p>理论上有两种方式可以安装 Package Control ，一种方式是打开控制台，复制粘贴代码回车即可，但是可能是由于网络连接不畅，这种方法 fail，本次我们选择从源码安装。</p>
+<p><strong>1. Package Control 源文件下载</strong></p>
+<p>下载地址：<a href="https://link.jianshu.com/?t=https://github.com/wbond/package_control">https://github.com/wbond/package_control</a></p>
+<p>点击右上角的Clone or download按钮，然后选择Download ZIP</p>
+<p><strong>2. 将下载的ZIP文件解压，并重命名为<code>Package Control</code>，未重命名或重命名错误则会出现如下错误提示。</strong></p>
+<p><strong>3. 在菜单栏中点击<code>Preferences &gt; Browe Packages...</code>，打开一个文件夹，复制刚才的<code>Package Control</code>文件至此目录下。</strong></p>
+<p><strong>4. 在菜单中点击<code>Preferences</code>，若出现Package Settings和package control选项，就说明安装Package Control成功了。</strong></p>
+<h2 id="sublime-text-3-插件安装">Sublime Text 3 插件安装</h2>
+<h3 id="如何安装插件">如何安装插件？</h3>
+<p>通过快捷键<code>Command + Shift + P</code>打开 Package Control 来安装插件。在打开的输入框中输入<code>install</code>，会根据输入状态自动提示，用鼠标点击或键盘回车选择 Install Package 进入查找安装界面：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr8iq91zq7j30hp0dzdhf.jpg" alt="image-20210606141405714"></p>
+<p>输入你想要安装的插件名称：</p>
+<p>用鼠标点击或键盘回车选择后，等待一段时间即可安装成功。所有的插件都存放在下面这个文件目录里，每个插件都有独立的文件夹：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/Users/edn-tian/Library/Application Support/Sublime Text 3/Packages
+
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr8jjptuc9j30l80bzab9.jpg" alt="image-20210606141642286"></p>
+<h3 id="常用插件介绍及安装">常用插件介绍及安装</h3>
+<h4 id="sublimecodeintel代码自动补全">SublimeCodeIntel：代码自动补全</h4>
+<p><strong>安装流程：</strong></p>
+<p>Control+Shift+P打开Package Control控制台；</p>
+<p>输入install，选择关联出来的install package；</p>
+<p>输入sublimecodeintel，然后点击列表提示的sublimecodeintel安装；</p>
+<p>安装完成之后，文本框会出现如下显示，或者可以通过【Preferences&gt;Package Settings】中查看到已安装的sublimecodeintel插件；</p>
+<p>打开preferences-&gt;packages settings -&gt;Package Control -&gt;Settings-User,检查是否有如下红框代码，如果没有得手动添加；</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr8l9y3q9mj30hr0dugou.jpg" alt="image-20210606154215116"></p>
+<h2 id="sublime-text-3-快捷键">Sublime Text 3 快捷键</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Command + Shift + P
+</code></pre></td></tr></table>
+</div>
+</div><p>打开 Package Control 命令面板，支持模糊搜索。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Command + F
+</code></pre></td></tr></table>
+</div>
+</div><p>查找搜索。</p>
+<h2 id="sublime-text-3-配置">Sublime Text 3 配置</h2>
+<p>Sublime Text 3 的配置分为：运行环境配置、个人偏好配置。</p>
+<h3 id="sublime-text-3-运行环境配置">Sublime Text 3 运行环境配置</h3>
+<p><strong>目标：决定利用Sublime Text 3 + Anaconda插件搭建一个Python的IDE。</strong></p>
+<ol>
+<li>
+<p>找到需要的 Anaconda 环境路径：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr8jy7r4zsj30ai02tjrq.jpg" alt="image-20210606145622859"></p>
+</li>
+<li>
+<p>在Sublime新建build system，编辑<code>.sublime-build</code>文件 ：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gr8k0ohtkgj30sv0kdnbn.jpg" alt="image-20210606145845092"></p>
+</li>
+<li>
+<p>点击New Build System后，会生成一个空配置文件，在这个配置文件内覆盖配置信息，本文python安装路径为 &ldquo;/opt/anaconda3/envs/PKU_Summer/bin/python3&rdquo;，（注意区分正反斜杠，请将路径换成python实际安装路径），然后按ctrl+s，将文件保存在默认路径，文件名命名为&quot;PKU_Python&quot;</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+    &#34;cmd&#34;: [&#34;opt/anaconda3/envs/PKU_Summer/bin/python3&#34;,&#34;-u&#34;,&#34;$file&#34;],
+    &#34;file_regex&#34;: &#34;^[ ]*File \&#34;(...*?)\&#34;, line ([0-9]*)&#34;,
+    &#34;selector&#34;: &#34;source.python&#34;,
+}
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>
+<p>打开Tools &gt; Build System，选择新建好的 PKU_Python 即可</p>
+</li>
+<li>
+<p>测试：新建test.py文件，输入简单python语句，按Ctrl+B运行</p>
+</li>
+</ol>
+<h3 id="sublime-text-3-个人偏好配置">Sublime Text 3 个人偏好配置</h3>
+<p>1、打开Preferences –&raquo;Settings(Settings User),在右侧添加如下代码（font_face及font_size可根据个人喜好更改）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+	&#34;color_scheme&#34;: &#34;Packages/Color Scheme - Default/Monokai.sublime-color-scheme&#34;,
+	&#34;font_face&#34;: &#34;Monaco&#34;,
+	&#34;font_size&#34;: 14,
+	&#34;highlight_line&#34;: true,
+	&#34;ignored_packages&#34;:
+	[
+		&#34;Vintage&#34;,
+	],
+	&#34;update_check&#34;: false,
+	//The number of spaces a tab is considered equal to
+	&#34;tab_size&#34;: 4,
+	&#34;theme&#34;: &#34;auto&#34;,
+	//&#34;theme&#34;: &#34;Agila Monokai.sublime-theme&#34;,
+	// Set to true to insert spaces when tab is pressed
+	&#34;translate_tabs_to_spaces&#34;: true,
+	//设置保存时自动转换
+	&#34;expand_tabs_on_save&#34;: true,
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Python 代码有白色框框，很不爽，想要去掉：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">修改 Sublime &gt; Preferences &gt; Package Settings &gt; Anaconda &gt; Settings User 中设置关闭：
+{&#34;anaconda_linting&#34;: false}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/honkly/p/6599642.html">https://www.cnblogs.com/honkly/p/6599642.html</a> （参考 Sublime Text 3 配置：运行环境 + 个人偏好）</li>
+<li><a href="https://www.zhihu.com/question/27290549">https://www.zhihu.com/question/27290549</a> （参考 Sublime Text 3 Anaconda 环境配置）</li>
+<li><a href="https://www.jianshu.com/p/7465afd9857f">https://www.jianshu.com/p/7465afd9857f</a> （参考 Sublime Text 3 安装 Package Control 插件）</li>
+<li><a href="https://blog.csdn.net/qq_33304418/article/details/63337602">https://blog.csdn.net/qq_33304418/article/details/63337602</a>  （修改Python代码有白色框框）</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-06-06 12:33
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">python</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Ubuntu_trick/">
+            <span class="next-text nav-default">Ubuntu文件夹左侧的导航栏不见了~</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

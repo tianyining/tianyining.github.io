@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 15 Mar 2021 15:32:20 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Jun 2021 12:33:57 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sublime Test3 Mac配置编程环境</title>
+      <link>https://tianyining.github.io/post/Sublime_Test3_Mac/</link>
+      <pubDate>Sun, 06 Jun 2021 12:33:57 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Sublime_Test3_Mac/</guid>
+      <description>安装 Sublime Text 3 下载地址：https://www.sublimetext.com/3 安装 Package Control 为什么要安装 Package Control ? Package Control是一个管理Subli</description>
+    </item>
+    
     <item>
       <title>Anaconda创建自己的虚拟环境</title>
       <link>https://tianyining.github.io/post/anaconda-env/</link>
