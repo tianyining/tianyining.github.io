@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>联想拯救者Y7000P安装双系统win10&#43;ubuntu20.04 - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="前言 2021-06-12 线下入手联想拯救者 Y7000p 2020款新机，官方标配以及升级配置如下： **官方标配：**i7-10875H，8 核 16 线程，32G 内存，512G 固" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/Y7000p_Ubuntu20.04_install/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="联想拯救者Y7000P安装双系统win10&#43;ubuntu20.04" />
+<meta property="og:description" content="前言 2021-06-12 线下入手联想拯救者 Y7000p 2020款新机，官方标配以及升级配置如下： **官方标配：**i7-10875H，8 核 16 线程，32G 内存，512G 固" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/Y7000p_Ubuntu20.04_install/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-14T10:37:25&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-14T10:37:25&#43;08:00" />
+
+<meta itemprop="name" content="联想拯救者Y7000P安装双系统win10&#43;ubuntu20.04">
+<meta itemprop="description" content="前言 2021-06-12 线下入手联想拯救者 Y7000p 2020款新机，官方标配以及升级配置如下： **官方标配：**i7-10875H，8 核 16 线程，32G 内存，512G 固"><meta itemprop="datePublished" content="2021-06-14T10:37:25&#43;08:00" />
+<meta itemprop="dateModified" content="2021-06-14T10:37:25&#43;08:00" />
+<meta itemprop="wordCount" content="2691">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="联想拯救者Y7000P安装双系统win10&#43;ubuntu20.04"/>
+<meta name="twitter:description" content="前言 2021-06-12 线下入手联想拯救者 Y7000p 2020款新机，官方标配以及升级配置如下： **官方标配：**i7-10875H，8 核 16 线程，32G 内存，512G 固"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">联想拯救者Y7000P安装双系统win10&#43;ubuntu20.04</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-14 10:37 </span>
+        <div class="post-category">
+            <a href="/categories/Windows/"> Windows </a>
+            <a href="/categories/Ubuntu/"> Ubuntu </a>
+            </div>
+          <span class="more-meta"> 约 2691 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言"><strong>前言</strong></a></li>
+    <li><a href="#y7000p-基本信息"><strong>Y7000p 基本信息</strong></a>
+      <ul>
+        <li><a href="#查看bios模式"><strong>查看BIOS模式</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#安装前准备工作"><strong>安装前准备工作</strong></a>
+      <ul>
+        <li><a href="#一制作系统盘"><strong>一、制作系统盘</strong></a></li>
+        <li><a href="#二为-ubuntu-分配空间"><strong>二、为 Ubuntu 分配空间⭐️</strong></a></li>
+        <li><a href="#三设置bios"><strong>三、设置BIOS</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#正式安装双系统"><strong>正式安装双系统</strong></a>
+      <ul>
+        <li><a href="#安装过程中需要注意的细节">安装过程中需要注意的细节</a></li>
+        <li><a href="#分区设置"><strong>分区设置⭐️⭐️</strong></a></li>
+        <li><a href="#安装成功后重启电脑"><strong>安装成功后，重启电脑</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#选择系统">选择系统</a></li>
+    <li><a href="#踩过的坑"><strong>踩过的坑</strong></a>
+      <ul>
+        <li><a href="#问题分析"><strong>问题分析</strong></a></li>
+        <li><a href="#解决方案"><strong>解决方案</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#选择系统-1"><strong>选择系统</strong></a></li>
+    <li><a href="#参考链接"><strong>参考链接</strong></a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="前言"><strong>前言</strong></h2>
+<p>2021-06-12 线下入手联想拯救者 Y7000p 2020款新机，官方标配以及升级配置如下：</p>
+<ul>
+<li>**官方标配：**i7-10875H，8 核 16 线程，32G 内存，512G 固态，显存 6G；</li>
+<li>**升级内存：**原装机拆箱后发现 16G 内存条是由 2 个 8G 内存条组成，为升级内存至 32G，购买两个 16 G 的内存条（原装对称：内存条的频率必须对应，且内存条容量最好对称）；</li>
+<li><strong>升级固态硬盘：<strong>2020款的拯救者 Y700p 官方标配是 512G 固态，原装固态是 samsung 512G 固态，预留了一个</strong>M.2 SSD</strong>的插槽，由于标配的 samsung 1T 固态暂时缺货，最终配置的是 1T SanDisk 固态；</li>
+</ul>
+<h2 id="y7000p-基本信息"><strong>Y7000p 基本信息</strong></h2>
+<h3 id="查看bios模式"><strong>查看BIOS模式</strong></h3>
+<p><code> win+r</code>快捷键进入<code>cmd </code>，输入 <code>msinfo32</code> 回车，出现以下界面，可查看BIOS模式：</p>
+<ol>
+<li><strong>UEFI模式：</strong></li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhtjnbwmuj30ko0a9dgu.jpg" alt="image-20210614151812611"></p>
+<p>BIOS模式有传统的MBR模式和新式UEFI模式，这将对安装双系统的方法产生直接影响。目前来看，大部分电脑都属于新式UEFI模式，不过也存在一些老机子仍然属于传统MBR模式。本次只介绍新式UEFI模式下的双系统安装方法，如果你的电脑属于传统MBR模式，强烈建议你重装windows系统来更新BIOS模式到UEFI。</p>
+<ol start="2">
+<li><strong>电脑的硬盘数（双硬盘）</strong></li>
+</ol>
+<p>Y7000p 官方标配是只有一块 512G 的 SSD，升级之后整机变为 1.5T，512G 是原本的 Windows 系统（磁盘1），升级的 1T 磁盘（磁盘0）用来安装 Ubuntu 系统。</p>
+<h2 id="安装前准备工作"><strong>安装前准备工作</strong></h2>
+<h3 id="一制作系统盘"><strong>一、制作系统盘</strong></h3>
+<p>使用 <a href="https://cn.ultraiso.net/">UltraISO</a> 制作 Ubuntu 系统安装盘。</p>
+<h3 id="二为-ubuntu-分配空间"><strong>二、为 Ubuntu 分配空间⭐️</strong></h3>
+<p>首先确定电脑是双硬盘。分空间的方法：<strong>右键，选择压缩卷。</strong></p>
+<p><strong>1. 在Windows系统所在的磁盘，分出525M的空白分区用来安装ubuntu的启动项；</strong></p>
+<p><strong>2. 在另外的 1T 空磁盘，在该盘点击右键，选择压缩卷，如下，输入压缩空间量，单位为M；</strong></p>
+<h3 id="三设置bios"><strong>三、设置BIOS</strong></h3>
+<p>联想电脑进入 BIOS 的方式是按住开机键后，F2 进入BIOS。</p>
+<p><strong>1. 在 Security 页面，关掉 secure boot</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhu46nvokj31400u0x72.jpg" alt="image-20210614153758675"></p>
+<p><strong>2. 进入Boot 页面，将Boot mode [UEFI] 修改为 legacy support</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhu6cekgmj31400u0x71.jpg" alt="image-20210614154009259"></p>
+<p><strong>3. Security页面下不仅有Secure Boot选项，看下是否有&quot;clear intel PTT Key&quot;选项，如果有进入回车选选择“yes”清除ppt key,否则无法安装系统后无法引导启动，如下图所示。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhua9tas7j31400u0npq.jpg" alt="image-20210614154357520"></p>
+<p><strong>4. 保存并退出</strong></p>
+<p>保存退出，应该是F10键。</p>
+<h2 id="正式安装双系统"><strong>正式安装双系统</strong></h2>
+<p>设置完 BIOS 后，重启电脑的同时，按住<code>F12</code>，进入 <code>boot manager</code>，选择 U盘 启动，<strong>这里选择的是Linpus Lite（TOSHIBA TransMemory）</strong>。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhuja1dlej30u0140e8m.jpg" alt="image-20210614155204986"></p>
+<h3 id="安装过程中需要注意的细节">安装过程中需要注意的细节</h3>
+<p><strong>1. 安装过程中使用的语言</strong></p>
+<p>一定要选择英文安装；</p>
+<p><strong>2. Wireless</strong></p>
+<p>为提高安装速度，选择暂时不连接 WiFi；</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhv6n7812j31400u0npr.jpg" alt="image-20210614161438412"></p>
+<p><strong>3. installation type⭐️</strong></p>
+<p>一定要选择手动安装，这样才能进行手动分区，否则很有可能删掉原本的 Windows 系统。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhv8vdhz4j31400u07wz.jpg" alt="image-20210614161704450"></p>
+<h3 id="分区设置"><strong>分区设置⭐️⭐️</strong></h3>
+<p><strong>首先让我们回忆在安装前的准备工作中，我们是如何为 Ubuntu 分配空间的：</strong></p>
+<p>双硬盘电脑，为安装 Ubuntu 双系统，我们事先分了两块空间：</p>
+<p><strong>1. Windows系统所在的磁盘，分了 525M ，计划作为Ubuntu系统的安装启动项的空间；</strong></p>
+<p><strong>2. 另一块 1T 磁盘，全部压缩卷，计划作为Ubuntu的分区；</strong></p>
+<p><strong>这里我们手动设置分区，先进行Ubuntu系统的安装启动项设置，然后再对Ubuntu系统的分区进行设置：</strong></p>
+<p><strong>1）/boot : 找到事先分好的 525M free space，点击 &ldquo;+&rdquo; 添加引导分区：</strong></p>
+<p>大小：525M</p>
+<p>新分区的类型：主分区</p>
+<p>新分区的位置：空间起始位置</p>
+<p>用于：efi</p>
+<p>挂载点：/boot</p>
+<p><strong>2）/swap：选择另一块 1T 空闲磁盘 free space，点击 &ldquo;+&rdquo; 添加交换分区：</strong></p>
+<p>大小：32768M（32G）</p>
+<p>新分区的类型：；逻辑分区</p>
+<p>新分区的位置：空间起始位置</p>
+<p>用于：交换空间</p>
+<p><strong>3）/：继续选择空闲磁盘的 free space，点击&quot;+&ldquo;添加 root 分区：</strong></p>
+<p>大小：153600M（150G）</p>
+<p>新分区的类型：逻辑分区</p>
+<p>新分区的位置：空间起始位置</p>
+<p>用于：Ext4日志文件系统</p>
+<p>挂载点：/</p>
+<p><strong>4）/home：继续选择空闲磁盘的 free space，点击“+”号添加 home 分区：</strong></p>
+<p>大小：余下所有空间 813837M（795G）</p>
+<p>新分区的类型：逻辑分区</p>
+<p>新分区的位置：空间起始位置</p>
+<p>用于：Ext4日志文件系统</p>
+<p>挂载点：/home</p>
+<h4 id="选择安装启动器引导的设备"><strong>选择安装启动器引导的设备</strong></h4>
+<p><strong>下面的这一步很重要</strong>：在分区界面的下方，选择安装启动项的位置，我们刚刚不是创建了525M的efi分区吗，现在你看看这个区前面的编号是多少，比如是/dev/nvme1n1p7,不同的机子会有不同的编号，下拉列表选择这个efi分区编号（<strong>这里一定要注意，windows的启动项也是efi文件，大小大概是500M，而我们创建的ubuntu的efi大小是525M，一定要选对</strong>），之后点击&quot;Install Now&rdquo;</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhw0e2aq2j30u0140qvq.jpg" alt="image-20210614164315809"></p>
+<p><strong>图片中的 Device for boot loader installation 的设备选择是正确的，但是该分区设置有问题，应该是用于 efi ，而不是如图所示的 ext4。</strong></p>
+<h3 id="安装成功后重启电脑"><strong>安装成功后，重启电脑</strong></h3>
+<p>安装成功后，点击重启 restart</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhw6bnl0ij30q50fx4hh.jpg" alt="image-20210614164925300"></p>
+<p>按照提示拔掉 U盘，然后 Enter 即可进入 Ubuntu 系统。</p>
+<h2 id="选择系统">选择系统</h2>
+<p>由于我们把 Windows 和 Ubuntu 的启动项也就是 efi 都安装在了同一块磁盘（磁盘1 512G），因此电脑在开机的时候，会自动在 Windows 系统所在的磁盘中搜索启动项以启动系统；我们当然希望 Ubuntu 的启动项也能够被搜索到，所以将 Ubuntu 的启动项和 Windows 的启动项安装在同一块磁盘中，这样开机时会搜索到 Windows 和 Ubuntu 两个启动项，我们可以手动选择进入哪个系统。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhwd16sbbj31400u01l7.jpg" alt="image-20210614165533589"></p>
+<p>当然这里的&quot;启动项需要安装在 Windows 所在的磁盘&quot;并不是绝对的，只是为了开机能够自动搜索到启动项，安装在其他硬盘也可以，只是每次开机都需要进boot manager（F12）才能找到ubuntu启动项，比较麻烦，所以建议按照我的方法来分区。</p>
+<h2 id="踩过的坑"><strong>踩过的坑</strong></h2>
+<p>本次安装总体较为顺利，但是第一次尝试安装的过程中，显示安装完毕，需要重新启动，重启后直接进入 Windows 系统，按 F12 进入 <code>boot manager</code> 也没有 Ubuntu 系统的选项，无奈只能重新安装。</p>
+<h3 id="问题分析"><strong>问题分析</strong></h3>
+<p>在 U盘 启动安装 Ubuntu 环节，第一次尝试安装选择的是 <code>USB HHD TOSHIBA Transmemory</code></p>
+<p>这一选择带来的后续问题是，在手动设置分区时，无法将事先分出的 525M 分区用于 efi（因为没有这个选项），导致即使Ubuntu成功安装后，重启电脑，无法找到Ubuntu的启动项，即使 F12 进入 boot manager 也无法找到 Ubuntu 的启动项，因为我们在为Ubuntu系统手动配置分区的时候，就没有设置 efi 项。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhxaoc9eij30u014011r.jpg" alt="image-20210614172757621"></p>
+<h3 id="解决方案"><strong>解决方案</strong></h3>
+<p>正式安装 Ubuntu 的时候，插入 U盘 ，重启电脑，F12 进入 boot manager，进入 U盘启动界面，选择 Linpus lite(TOSHIBA TransMemory)，这样在后续的手动分区中，就可以将事先分出的 525M free space 选择用于 efi ，为 Ubuntu 系统设置启动项，安装完毕后重启，拔掉 U盘，Enter 后成功进入 Ubuntu 系统。</p>
+<h2 id="选择系统-1"><strong>选择系统</strong></h2>
+<p><strong>1）直接按开机键，进入系统选择界面，即 boot manager</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grhxnndaezj31400u0td8.jpg" alt="image-20210614165533589"></p>
+<p><strong>2）按开机键，出现 LEGION logo 之前按住 F12 同样会进入到 boot manager。</strong></p>
+<h2 id="参考链接"><strong>参考链接</strong></h2>
+<ul>
+<li>
+<p><a href="https://www.cnblogs.com/masbay/p/10844857.html">https://www.cnblogs.com/masbay/p/10844857.html</a> （双硬盘安装双系统，参考主要流程）</p>
+</li>
+<li>
+<p><a href="https://www.codenong.com/cs106989571/">https://www.codenong.com/cs106989571/</a> （双系统安装，参考主要流程）</p>
+</li>
+<li>
+<p><a href="http://www.dafanshu.com/biosjc/8012.html">http://www.dafanshu.com/biosjc/8012.html</a> （联想笔记本Y7000p设置BIOS模式）</p>
+</li>
+<li>
+<p><a href="https://www.jianshu.com/p/70da2204e24d">https://www.jianshu.com/p/70da2204e24d</a> （Ubuntu 系统分区设置）</p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/makeoneway/article/details/103351885">https://blog.csdn.net/makeoneway/article/details/103351885</a> （删除之前装好的Ubuntu系统）</p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-06-14 10:37
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Sublime_Test3_Mac/">
+            <span class="next-text nav-default">Sublime Test3 Mac配置编程环境</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

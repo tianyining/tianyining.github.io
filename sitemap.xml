@@ -17,21 +17,42 @@
   
   <url>
     <loc>https://tianyining.github.io/</loc>
-    <lastmod>2021-06-06T12:33:57+08:00</lastmod>
+    <lastmod>2021-06-14T10:37:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/categories/</loc>
-    <lastmod>2021-06-06T12:33:57+08:00</lastmod>
+    <lastmod>2021-06-14T10:37:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/post/</loc>
-    <lastmod>2021-06-06T12:33:57+08:00</lastmod>
+    <lastmod>2021-06-14T10:37:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/Ubuntu/</loc>
+    <lastmod>2021-06-14T10:37:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/Windows/</loc>
+    <lastmod>2021-06-14T10:37:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/Y7000p_Ubuntu20.04_install/</loc>
+    <lastmod>2021-06-14T10:37:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -60,13 +81,6 @@
   <url>
     <loc>https://tianyining.github.io/tags/</loc>
     <lastmod>2021-06-06T12:33:57+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/Ubuntu/</loc>
-    <lastmod>2021-06-03T15:14:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -662,13 +676,6 @@
   <url>
     <loc>https://tianyining.github.io/post/jmac_install_homebrew/</loc>
     <lastmod>2020-04-24T18:15:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/Windows/</loc>
-    <lastmod>2020-04-24T17:49:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

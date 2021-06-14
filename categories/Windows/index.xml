@@ -6,7 +6,16 @@
     <description>Recent content in Windows on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 24 Apr 2020 17:49:02 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Windows/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Jun 2021 10:37:25 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>联想拯救者Y7000P安装双系统win10&#43;ubuntu20.04</title>
+      <link>https://tianyining.github.io/post/Y7000p_Ubuntu20.04_install/</link>
+      <pubDate>Mon, 14 Jun 2021 10:37:25 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Y7000p_Ubuntu20.04_install/</guid>
+      <description>前言 2021-06-12 线下入手联想拯救者 Y7000p 2020款新机，官方标配以及升级配置如下： **官方标配：**i7-10875H，8 核 16 线程，32G 内存，512G 固</description>
+    </item>
+    
     <item>
       <title>Windows10安装Ubuntu双系统（msiGL62）</title>
       <link>https://tianyining.github.io/post/ubuntu_install_win/</link>
