@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Ubuntu18.04_python科学计算发行版Anaconda安装">
 <meta itemprop="description" content="安装 Anaconda 1. 下载 Anaconda ​ 进入 Anaconda 官方下载页面，会看到类似下图的下载页面。根据自己的系统选择对应的安装包（通常选择下图中红框圈出的安装包）。 2. 安装 Anaconda $ bash"><meta itemprop="datePublished" content="2020-09-12T20:02:01&#43;08:00" />
 <meta itemprop="dateModified" content="2021-04-03T01:37:56&#43;08:00" />
-<meta itemprop="wordCount" content="1272">
+<meta itemprop="wordCount" content="1512">
 <meta itemprop="keywords" content="Anaconda," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ubuntu18.04_python科学计算发行版Anaconda安装"/>
 <meta name="twitter:description" content="安装 Anaconda 1. 下载 Anaconda ​ 进入 Anaconda 官方下载页面，会看到类似下图的下载页面。根据自己的系统选择对应的安装包（通常选择下图中红框圈出的安装包）。 2. 安装 Anaconda $ bash"/>
@@ -135,8 +135,8 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 1272 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1512 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -257,11 +257,85 @@ $ conda activate seismo-learn
 </div>
 </div><h2 id="修改环境变量">修改环境变量</h2>
 <p>当 Anaconda 安装完成时，终端输入python，并没有显示，因此需要手动修改环境变量。</p>
-<p><code>sudo gedit ~/.bashrc</code></p>
-<p>添加：<code>export PATH=&quot;/home/tianyining/anaconda3/bin:$PATH&quot;</code></p>
-<p><code>source ~/.bashrc</code></p>
+<p><code> $ sudo gedit ~/.bashrc</code></p>
+<p>添加：</p>
+<p><code>$ export PATH=&quot;/home/tianyining/anaconda3/bin:$PATH&quot;</code></p>
+<p><code>$ source ~/.bashrc</code></p>
 <p>重启终端后生效。</p>
-<h2 id="取消每次启动前的自动激活base">取消每次启动前的自动激活base</h2>
+<p><strong>值得注意的是手动添加环境变量后，并没有使得终端出现 <code>base</code> 环境，并且无法从终端激活 <code>base </code> 环境，<code>~/.zshrc</code> 中也只有如下命令：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">## 终端生效 zsh
+$ PATH=/bin:/usr/bin:/usr/local/bin:${PATH} 
+$ export PATH
+
+## 无法从终端激活 base 环境
+$ conda activate base				## 报错
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>使用 <code>conda init zsh</code> 将向 <code>~/.zshrc </code> 中自动添加环境变量，进行 <code>conda</code> 初始化。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ conda init zsh
+$ code ~/.zshrc
+
+## 打开 ~/.zshrc 后发现
+# &gt;&gt;&gt; conda initialize &gt;&gt;&gt;
+# !! Contents within this block are managed by &#39;conda init&#39; !!
+__conda_setup=&#34;$(&#39;/opt/anaconda3/bin/conda&#39; &#39;shell.zsh&#39; &#39;hook&#39; 2&gt; /dev/null)&#34;
+if [ $? -eq 0 ]; then
+    eval &#34;$__conda_setup&#34;
+else
+    if [ -f &#34;/opt/anaconda3/etc/profile.d/conda.sh&#34; ]; then
+        . &#34;/opt/anaconda3/etc/profile.d/conda.sh&#34;
+    else
+        export PATH=&#34;/opt/anaconda3/bin:$PATH&#34;
+    fi
+fi
+unset __conda_setup
+# &lt;&lt;&lt; conda initialize &lt;&lt;&lt;
+</code></pre></td></tr></table>
+</div>
+</div><p>并且发现之前手动添加的环境变量，已经被自动注释掉。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">## Anaconda3 install
+# export PATH=&#34;/opt/anaconda3/bin:$PATH&#34;  # commented out by conda initialize
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="取消每次启动前的自动激活base">取消每次启动前的自动激活base</h2>
 <p>安装anaconda后，命令行自动显示在base环境下，通过如下命令：</p>
 <p><code>conda config --set auto_active_base false</code></p>
 <h2 id="升级">升级</h2>
