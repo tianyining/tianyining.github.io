@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 14 Jun 2021 10:37:25 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Jun 2021 10:14:44 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>机场汇总</title>
+      <link>https://tianyining.github.io/post/GFW/</link>
+      <pubDate>Fri, 18 Jun 2021 10:14:44 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GFW/</guid>
+      <description>本文主要汇总并记录我目前使用的的机场，以及曾经使用过的机场，可能会涉及到一些简单的配置，但是重点在于记录和整理，配置细节不做过多赘述。 接触新</description>
     </item>
     
     <item>
