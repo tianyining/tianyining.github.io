@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="前言 在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址来 准备工作(安装" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="前言 在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址的解决方案，则必" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -41,19 +41,19 @@
 
 
 <meta property="og:title" content="Ubuntu18.04 &amp; 20.04 picgo&#43;github搭建个人图床" />
-<meta property="og:description" content="前言 在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址来 准备工作(安装" />
+<meta property="og:description" content="前言 在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址的解决方案，则必" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/github-picgo/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-12-13T17:34:56&#43;08:00" />
 <meta property="article:modified_time" content="2021-06-19T01:37:56&#43;08:00" />
 
 <meta itemprop="name" content="Ubuntu18.04 &amp; 20.04 picgo&#43;github搭建个人图床">
-<meta itemprop="description" content="前言 在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址来 准备工作(安装"><meta itemprop="datePublished" content="2020-12-13T17:34:56&#43;08:00" />
+<meta itemprop="description" content="前言 在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址的解决方案，则必"><meta itemprop="datePublished" content="2020-12-13T17:34:56&#43;08:00" />
 <meta itemprop="dateModified" content="2021-06-19T01:37:56&#43;08:00" />
-<meta itemprop="wordCount" content="808">
+<meta itemprop="wordCount" content="2431">
 <meta itemprop="keywords" content="picgo,github,ubuntu奇技淫巧," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ubuntu18.04 &amp; 20.04 picgo&#43;github搭建个人图床"/>
-<meta name="twitter:description" content="前言 在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址来 准备工作(安装"/>
+<meta name="twitter:description" content="前言 在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址的解决方案，则必"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -135,8 +135,8 @@
         <div class="post-category">
             <a href="/categories/Ubuntu%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> Ubuntu奇技淫巧 </a>
             </div>
-          <span class="more-meta"> 约 808 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 2431 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -147,16 +147,29 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
+    <li><a href="#ubuntu1804-实现过程记录">Ubuntu18.04 实现过程记录</a></li>
     <li><a href="#准备工作安装nodejs">准备工作(安装nodejs)</a></li>
     <li><a href="#安装-picgo-gui">安装 PicGo-GUI</a></li>
     <li><a href="#在-typora-中插入已经倒入github仓库中的图片资源">在 Typora 中插入已经倒入GitHub仓库中的图片资源</a></li>
+    <li><a href="#ubuntu2004实现过程记录">Ubuntu20.04实现过程记录</a>
+      <ul>
+        <li><a href="#1-安装picgo">1. 安装PicGo</a></li>
+        <li><a href="#2-安装配置-picgo-core-和相关插件">2. 安装配置 PicGo-core 和相关插件</a></li>
+        <li><a href="#3-picgo-core-配置文件">3. PicGo-core 配置文件</a></li>
+        <li><a href="#4-配置-typora-集成-picgo-core">4. 配置 Typora 集成 PicGo-core</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <h2 id="前言">前言</h2>
-<p>在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址来</p>
+<p>在 Ubuntu 和 macOS 上用 Typora 编辑 markdown 文档很爽。但是存在一个问题，插入的图片如果是绝对地址，那么在另外的设备上则无法显示；如果采用相对地址的解决方案，则必定有一个放置图片的文件夹与<code>.md</code> 文件形影相随，不清爽😊。</p>
+<p>本文采取的解决方案是是在 Typora 中插入图片后，图片自动上传到 github 云端，本地地址变成网络地址。在 Ubuntu18.04 &amp; Ubuntu20.04 上都成功配置，现将实现过程详细记录。</p>
+<h2 id="ubuntu1804-实现过程记录">Ubuntu18.04 实现过程记录</h2>
 <h2 id="准备工作安装nodejs">准备工作(安装nodejs)</h2>
 <ol>
 <li>
@@ -242,6 +255,317 @@ sudo ln -s /usr/local/lib/nodejs/bin/npx /usr/bin/npx
 <li>在 Typora 中，输入如下语法，即可成功插入图片。</li>
 </ol>
 <p><code> ![say sth](copy image address)</code></p>
+<hr>
+<h2 id="ubuntu2004实现过程记录">Ubuntu20.04实现过程记录</h2>
+<h3 id="1-安装picgo">1. 安装PicGo</h3>
+<p>去 <a href="https://github.com/Molunerfinn/PicGo/releases">Molunerfinn/PicGo/releases</a> 下载最新版本的 <code>PicGo</code> ，我此时下载的最新版本为<code>PicGo 2.3.0-beta.6</code>。</p>
+<ul>
+<li>右键<code>PicGo-2.3.0-beta.6.AppImage</code>属性，选中<code>Allow executing file as program</code>，如下图所示：</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grnm8ifrz1j30d00bmdgz.jpg" alt="image-20210619153853102"></p>
+<ul>
+<li>右键<code>PicGo-2.3.0-beta.3.AppImage</code>，点击<code>run</code>，默认下面图标，不要着急，不要一气之下把它给删了，继续…</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grnm9dwhyzj301u01r0so.jpg" alt="image-20210619153947615"></p>
+<ul>
+<li>鼠标放在上面的小图标上，右键，打开详细窗口：</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grnma15bjjj30m50camyb.jpg" alt="image-20210619154024348"></p>
+<ul>
+<li><strong>github图床设置：</strong></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grnmfs9wk2j30m30cd0u1.jpg" alt="image-20210619154556621"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">## 设定仓库名
+$ tianyining/Y7000p-images
+## 设定分支名
+$ main
+## 设定token 
+$ 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
+## 指定存储路径
+$ img/
+
+</code></pre></td></tr></table>
+</div>
+</div><p>**PS: GitHub 图床设置前提是在 github 下搭建个人图床，也就是新建放置图床的仓库，获取私人令牌 <code>token</code> **</p>
+<ul>
+<li>参照<a href="https://www.cnblogs.com/geq2020/p/12506466.html">PicGo+Gitee搭建个人图床</a>，新建放置图床的仓库、获取私人令牌<code>token</code></li>
+</ul>
+<p><strong>PicGo 设置中我们需要将时间戳重命名打开，这样就可以避免图床在上传文件时，由于文件名相同造成的错误。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grnw6exf5rj30m30cc0u2.jpg" alt="image-20210619212255081"></p>
+<p>其他剩余的配置项可以先不管。配置完成后，拖动图片到上传区，我们可以测试一下，是否可以上传到 github 上。</p>
+<h3 id="2-安装配置-picgo-core-和相关插件">2. 安装配置 PicGo-core 和相关插件</h3>
+<p><strong>安装nodejs和npm前准备工作：</strong></p>
+<p>如果安装了旧版 <code>nodejs</code> ，我们需要先卸载掉旧版：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo apt-get remove nodejs
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>正式安装nodejs和npm:</strong></p>
+<ul>
+<li>
+<p>点击<a href="https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-x64.tar.xz">nodejs 12.18.3 LTS for Linux 64</a>下载得如下压缩文件：</p>
+</li>
+<li>
+<p>解压到当前文件夹，打开文件夹总共有四个子文件夹：</p>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grnwp8uog0j30if032dg4.jpg" alt="image-20210619214059833"></p>
+<ul>
+<li>将文件夹拷到<code>/usr/local/lib/nodejs</code>下,并将Nodejs添加到环境变量</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo cp -r node-v12.8.3-linux-x64 /usr/local/lib/nodejs
+
+$ echo &#34;export export PATH=/usr/local/lib/nodejs/bin:$PATH&#34; &gt;&gt; ~/.zshrc
+
+$ echo &#34;export export PATH=/usr/local/lib/nodejs/bin:$PATH&#34; &gt;&gt; ~/.zshrc
+
+$ . ~/.profile
+
+$ . ~/.zshrc
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>测试安装是否成功</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ node -v
+$ npm -v
+</code></pre></td></tr></table>
+</div>
+</div><p>分别显示：<code>v12.18.3</code>与<code>6.14.6</code></p>
+<ul>
+<li>如果想<code>sudo node xxxx</code> 或 <code>sudo npm xxxx</code>执行一些操作，需要执行以下命令：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo ln -s /usr/local/lib/nodejs/bin/node /usr/bin/node
+$ sudo ln -s /usr/local/lib/nodejs/bin/npm /usr/bin/npm
+$ sudo ln -s /usr/local/lib/nodejs/bin/npx /usr/bin/npx
+</code></pre></td></tr></table>
+</div>
+</div><p>否则，加上sudo时，系统会找不到node与npm。</p>
+<p><strong>安装PicGo-core</strong></p>
+<ul>
+<li>配置 cnpm</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo npm install -g cnpm
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>安装PicGo-core</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo cnpm install picgo -g
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="3-picgo-core-配置文件">3. PicGo-core 配置文件</h3>
+<p>PicGo-core的配置文件地址：<code>~/.picgo/config.json </code> ，文件的打开方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ code ~/.picgo/config.json
+</code></pre></td></tr></table>
+</div>
+</div><p>最终编写的PicGo-core的配置文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">// {
+//   &#34;picBed&#34;: {
+//     &#34;uploader&#34;: &#34;github&#34;,
+//     &#34;current&#34;: &#34;github&#34;,
+//     &#34;github&#34;: {
+//       &#34;repo&#34;: &#34;tianyining/picgo&#34;,
+//       &#34;branch&#34;: &#34;master&#34;,
+//       &#34;token&#34;: &#34;48bf66e2c6fa8599a644462b6878c6553782d6fa&#34;,
+//       &#34;path&#34;: &#34;img/&#34;,
+//       &#34;customUrl&#34;: &#34;&#34;
+//     },
+//     &#34;transformer&#34;: &#34;path&#34;
+//   },
+//   &#34;picgoPlugins&#34;: {
+//     &#34;picgo-plugin-gitee-uploader&#34;: true
+//   }
+// }
+
+
+{
+  &#34;picBed&#34;: {
+    &#34;github&#34;: {
+      &#34;repo&#34;: &#34;tianyining/Y7000p-images&#34;,
+      &#34;token&#34;: &#34;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&#34;,
+      &#34;path&#34;: &#34;img/&#34;,
+      &#34;customUrl&#34;: &#34;https://cdn.jsdelivr.net/gh/tianyining/Y7000p-images/&#34;,
+      &#34;branch&#34;: &#34;main&#34;
+    },
+    &#34;current&#34;: &#34;github&#34;,
+    &#34;uploader&#34;: &#34;github&#34;
+  },
+  &#34;picgoPlugins&#34;: {
+    &#34;picgo-plugin-gitee-uploader&#34;: true,
+    &#34;picgo-plugin-super-prefix&#34;: true
+  },
+  &#34;picgo-plugin-super-prefix&#34;: {
+    &#34;fileFormat&#34;: &#34;YYYYMMDDHHmmss&#34;
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>备注：<code>//</code> 部分的代码已经被注释掉。</strong></p>
+<h3 id="4-配置-typora-集成-picgo-core">4. 配置 Typora 集成 PicGo-core</h3>
+<p>打开 Typora ，file &ndash;&gt; preference &ndash;&gt; Image</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1grnxx84e2kj30ma0jjt9w.jpg" alt="image-20210619213257234.png"></p>
+<p>点击 <code>open Config File</code> ，具体配置如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+  &#34;picBed&#34;: {
+    &#34;github&#34;: {
+      &#34;repo&#34;: &#34;tianyining/Y7000p-images&#34;,
+      &#34;token&#34;: &#34;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&#34;,
+      &#34;path&#34;: &#34;img/&#34;,
+      &#34;customUrl&#34;: &#34;https://cdn.jsdelivr.net/gh/tianyining/Y7000p-images/&#34;,
+      &#34;branch&#34;: &#34;main&#34;
+    },
+    &#34;current&#34;: &#34;github&#34;,
+    &#34;uploader&#34;: &#34;github&#34;
+  },
+  &#34;picgoPlugins&#34;: {
+    &#34;picgo-plugin-gitee-uploader&#34;: true,
+    &#34;picgo-plugin-super-prefix&#34;: true
+  },
+  &#34;picgo-plugin-super-prefix&#34;: {
+    &#34;fileFormat&#34;: &#34;YYYYMMDDHHmmss&#34;
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>最后点击 <code> Test Uploader</code> ，显示成功即可。</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://blog.csdn.net/u013468614/article/details/108539933">https://blog.csdn.net/u013468614/article/details/108539933</a>（ubuntu下typora联合PicGo实现图片上传功能）⭐️</li>
+<li><a href="https://zhuanlan.zhihu.com/p/369836503">https://zhuanlan.zhihu.com/p/369836503</a>（安装 PicGo-Core 和配置 ~/.picgo/config.json）</li>
+<li><a href="https://juejin.cn/post/6844904137407086600">https://juejin.cn/post/6844904137407086600</a>（利用 GitHub + PicGo + Typora 搭建属于自己的图床）⭐️</li>
+<li><a href="https://picgo.github.io/PicGo-Doc/zh/guide/config.html#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E9%A2%84%E8%A7%88">https://picgo.github.io/PicGo-Doc/zh/guide/config.html#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E9%A2%84%E8%A7%88</a>（picgo 配置手册）⭐️</li>
+</ul>
+<h2 id="修订历史">修订历史</h2>
+<ul>
+<li>2020-12-13：初稿，只针对Ubuntu18.04配置</li>
+<li>2021-06-19：第二次修改，增加在Ubuntu20.04下的配置</li>
+</ul>
 
     </div>
 
