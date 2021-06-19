@@ -35,12 +35,12 @@
     </item>
     
     <item>
-      <title>Ubuntu18.04中安装Shutter截图工具</title>
+      <title>Ubuntu18.04 &amp; 20.04中安装Shutter截图工具</title>
       <link>https://tianyining.github.io/post/shutter_install/</link>
       <pubDate>Fri, 04 Dec 2020 16:39:19 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/shutter_install/</guid>
-      <description>下面提供两种安装方式 方式一：直接在Ubuntu Software 里 install （不推荐） 方式二：终端命令行安装（推荐） 命令行安装截图工具 Shutter 1. 添加安装包软件源 1 sudo add-apt-respository ppa:shutter/ppa 2.</description>
+      <description>Ubuntu18.04 中安装 shutter，下面提供两种安装方式 方式一：直接在Ubuntu Software 里 install （不推荐） 方式二：终端命令行安装（推荐） 命令行安装截图工具 Shutter 1. 添</description>
     </item>
     
     <item>
