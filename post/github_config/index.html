@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Github clone 超时解决办法">
 <meta itemprop="description" content="问题一 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &#39;https://github.com/tianyining/tianyining.github.io.git/&#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是htt"><meta itemprop="datePublished" content="2021-03-15T18:02:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-15T18:02:22&#43;08:00" />
-<meta itemprop="wordCount" content="415">
+<meta itemprop="wordCount" content="420">
 <meta itemprop="keywords" content="github," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Github clone 超时解决办法"/>
 <meta name="twitter:description" content="问题一 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &#39;https://github.com/tianyining/tianyining.github.io.git/&#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是htt"/>
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> Mac奇技淫巧 </a>
             </div>
-          <span class="more-meta"> 约 415 字 </span>
+          <span class="more-meta"> 约 420 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -151,7 +151,11 @@
     <li><a href="#解决方案1">解决方案1</a></li>
     <li><a href="#解决方案2">解决方案2</a></li>
     <li><a href="#问题二">问题二</a></li>
-    <li><a href="#解决方案">解决方案</a></li>
+    <li><a href="#解决方案">解决方案</a>
+      <ul>
+        <li><a href="#参考链接">参考链接</a></li>
+      </ul>
+    </li>
     <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
@@ -229,7 +233,11 @@ fatal: unable to access &#39;https://github.com/tianyining/tianyining.github.io.
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git config --global --add remote.origin.proxy &#34;&#34;
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="修订历史">修订历史</h2>
+</div><h3 id="参考链接">参考链接</h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/49345357/fatal-unable-to-access-https-github-com-xxx-openssl-ssl-connect-ssl-error">https://stackoverflow.com/questions/49345357/fatal-unable-to-access-https-github-com-xxx-openssl-ssl-connect-ssl-error</a></li>
+</ul>
+<h2 id="修订历史">修订历史</h2>
 <ul>
 <li>2021-03-15：初稿（问题一）</li>
 <li>2021-06-19：增加问题二，以及相应解决方案</li>
