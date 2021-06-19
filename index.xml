@@ -114,7 +114,7 @@ It makes use of a variety of open source projects including:
       <pubDate>Mon, 15 Mar 2021 18:02:22 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/github_config/</guid>
-      <description>问题 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &amp;#39;https://github.com/tianyining/tianyining.github.io.git/&amp;#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是http</description>
+      <description>问题一 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &amp;#39;https://github.com/tianyining/tianyining.github.io.git/&amp;#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是htt</description>
     </item>
     
     <item>
