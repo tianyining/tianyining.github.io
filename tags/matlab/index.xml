@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>matlab on Brave New World</title>
+    <link>https://tianyining.github.io/tags/matlab/</link>
+    <description>Recent content in matlab on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 24 Jun 2021 19:20:47 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/matlab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu20.04安装Matlab2017</title>
+      <link>https://tianyining.github.io/post/matlab2017_install/</link>
+      <pubDate>Thu, 24 Jun 2021 19:20:47 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/matlab2017_install/</guid>
+      <description>解压文件 1 2 3 $ sudo apt-get update $ sudo apt-get install unrar $ sudo unrar x MATLABR2017b_Linux_Crack.rar 包含三部分：iso镜像、Crack、key.txt 正式安装 解压任务完成后，开始正式安装： 挂载镜像文</description>
+    </item>
+    
+  </channel>
+</rss>

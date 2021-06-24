@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 18 Jun 2021 10:14:44 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 19:20:47 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu20.04安装Matlab2017</title>
+      <link>https://tianyining.github.io/post/matlab2017_install/</link>
+      <pubDate>Thu, 24 Jun 2021 19:20:47 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/matlab2017_install/</guid>
+      <description>解压文件 1 2 3 $ sudo apt-get update $ sudo apt-get install unrar $ sudo unrar x MATLABR2017b_Linux_Crack.rar 包含三部分：iso镜像、Crack、key.txt 正式安装 解压任务完成后，开始正式安装： 挂载镜像文</description>
     </item>
     
     <item>

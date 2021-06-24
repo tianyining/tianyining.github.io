@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 18 Jun 2021 10:14:44 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 19:20:47 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu20.04安装Matlab2017</title>
+      <link>https://tianyining.github.io/post/matlab2017_install/</link>
+      <pubDate>Thu, 24 Jun 2021 19:20:47 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/matlab2017_install/</guid>
+      <description>解压文件 1 2 3 $ sudo apt-get update $ sudo apt-get install unrar $ sudo unrar x MATLABR2017b_Linux_Crack.rar 包含三部分：iso镜像、Crack、key.txt 正式安装 解压任务完成后，开始正式安装： 挂载镜像文</description>
     </item>
     
     <item>
