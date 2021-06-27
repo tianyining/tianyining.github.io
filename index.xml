@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 24 Jun 2021 19:20:47 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Jun 2021 17:39:57 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu20.04编译问题汇总</title>
+      <link>https://tianyining.github.io/post/Compile_install/</link>
+      <pubDate>Sun, 27 Jun 2021 17:39:57 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Compile_install/</guid>
+      <description>说明 这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。 Question1 How can I install libgfortran3 in Ubuntu/Lubuntu 20.04? Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 libgfortran3 报错</description>
     </item>
     
     <item>

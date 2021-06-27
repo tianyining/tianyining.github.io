@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu编译 on Brave New World</title>
+    <link>https://tianyining.github.io/tags/Ubuntu%E7%BC%96%E8%AF%91/</link>
+    <description>Recent content in Ubuntu编译 on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 27 Jun 2021 17:39:57 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Ubuntu%E7%BC%96%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu20.04编译问题汇总</title>
+      <link>https://tianyining.github.io/post/Compile_install/</link>
+      <pubDate>Sun, 27 Jun 2021 17:39:57 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Compile_install/</guid>
+      <description>说明 这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。 Question1 How can I install libgfortran3 in Ubuntu/Lubuntu 20.04? Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 libgfortran3 报错</description>
+    </item>
+    
+  </channel>
+</rss>

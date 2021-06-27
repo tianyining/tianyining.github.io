@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 24 Jun 2021 19:20:47 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Jun 2021 17:39:57 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu20.04编译问题汇总</title>
+      <link>https://tianyining.github.io/post/Compile_install/</link>
+      <pubDate>Sun, 27 Jun 2021 17:39:57 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Compile_install/</guid>
+      <description>说明 这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。 Question1 How can I install libgfortran3 in Ubuntu/Lubuntu 20.04? Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 libgfortran3 报错</description>
     </item>
     
     <item>
