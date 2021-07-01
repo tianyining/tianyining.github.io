@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Ubuntu20.04编译问题汇总 - Brave New World</title>
+  <title>Pygmt ubuntu18.04 - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="说明 这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。 Question1 How can I install libgfortran3 in Ubuntu/Lubuntu 20.04? Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 libgfortran3 报错" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/Compile_install/" />
+<link rel="canonical" href="https://tianyining.github.io/post/Pygmt_install/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="Ubuntu20.04编译问题汇总" />
-<meta property="og:description" content="说明 这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。 Question1 How can I install libgfortran3 in Ubuntu/Lubuntu 20.04? Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 libgfortran3 报错" />
+<meta property="og:title" content="Pygmt ubuntu18.04" />
+<meta property="og:description" content="Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/Compile_install/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-06-27T17:39:57&#43;08:00" />
-<meta property="article:modified_time" content="2021-06-27T17:39:57&#43;08:00" />
+<meta property="og:url" content="https://tianyining.github.io/post/Pygmt_install/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-01T11:04:41&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-01T11:04:41&#43;08:00" />
 
-<meta itemprop="name" content="Ubuntu20.04编译问题汇总">
-<meta itemprop="description" content="说明 这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。 Question1 How can I install libgfortran3 in Ubuntu/Lubuntu 20.04? Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 libgfortran3 报错"><meta itemprop="datePublished" content="2021-06-27T17:39:57&#43;08:00" />
-<meta itemprop="dateModified" content="2021-06-27T17:39:57&#43;08:00" />
-<meta itemprop="wordCount" content="447">
-<meta itemprop="keywords" content="Ubuntu编译," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ubuntu20.04编译问题汇总"/>
-<meta name="twitter:description" content="说明 这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。 Question1 How can I install libgfortran3 in Ubuntu/Lubuntu 20.04? Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 libgfortran3 报错"/>
+<meta itemprop="name" content="Pygmt ubuntu18.04">
+<meta itemprop="description" content="Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安"><meta itemprop="datePublished" content="2021-07-01T11:04:41&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-01T11:04:41&#43;08:00" />
+<meta itemprop="wordCount" content="237">
+<meta itemprop="keywords" content="pygmt,科研-Ubuntu_疑惑," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pygmt ubuntu18.04"/>
+<meta name="twitter:description" content="Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,14 +128,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Ubuntu20.04编译问题汇总</h1>
+      <h1 class="post-title">Pygmt ubuntu18.04</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-06-27 17:39 </span>
+        <span class="post-time"> 2021-07-01 11:04 </span>
         <div class="post-category">
-            <a href="/categories/Ubuntu%E7%BC%96%E8%AF%91/"> Ubuntu编译 </a>
+            <a href="/categories/pygmt/"> pygmt </a>
+            <a href="/categories/%E7%A7%91%E7%A0%94-Ubuntu_%E7%96%91%E6%83%91/"> 科研-Ubuntu_疑惑 </a>
             </div>
-          <span class="more-meta"> 约 447 字 </span>
+          <span class="more-meta"> 约 237 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -146,72 +147,84 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#说明">说明</a></li>
-    <li><a href="#question1">Question1</a>
-      <ul>
-        <li><a href="#how-can-i-install-libgfortran3-in-ubuntulubuntu-2004httpsstackoverflowcomquestions61736953how-can-i-install-libgfortran3-in-ubuntu-lubuntu-20-04"><a href="https://stackoverflow.com/questions/61736953/how-can-i-install-libgfortran3-in-ubuntu-lubuntu-20-04">How can I install libgfortran3 in Ubuntu/Lubuntu 20.04?</a></a></li>
-        <li><a href="#installing-libgfortran3-for-ubuntu2004">Installing libgfortran3 for ubuntu20.04</a></li>
-      </ul>
-    </li>
-    <li><a href="#参考链接">参考链接</a>
-      <ul>
-        <li><a href="#question1-1">Question1</a></li>
-      </ul>
-    </li>
+    <li><a href="#pygmt-安装流程">Pygmt 安装流程</a></li>
+    <li><a href="#遗留问题-">遗留问题 😕</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="说明">说明</h2>
-<p>这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。</p>
-<h2 id="question1">Question1</h2>
-<h3 id="how-can-i-install-libgfortran3-in-ubuntulubuntu-2004httpsstackoverflowcomquestions61736953how-can-i-install-libgfortran3-in-ubuntu-lubuntu-20-04"><a href="https://stackoverflow.com/questions/61736953/how-can-i-install-libgfortran3-in-ubuntu-lubuntu-20-04">How can I install libgfortran3 in Ubuntu/Lubuntu 20.04?</a></h3>
-<p>Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 <code>libgfortran3</code> 报错。</p>
+      <h2 id="pygmt-安装流程">Pygmt 安装流程</h2>
+<p>在 Ubuntu18.04 上安装 pygmt 流程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ conda config --prepend channels conda-forge
+
+$ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt
+
+$ conda activate pygmt
+
+$ conda activate pygmt
+
+$ conda install pygmt
+
+$ conda update pygmt
+</code></pre></td></tr></table>
+</div>
+</div><p>安装成功之后，还可以安装一些其他的非依赖包：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="err">$</span> <span class="nx">sudo</span> <span class="nx">apt</span><span class="o">-</span><span class="nx">get</span> <span class="nx">install</span> <span class="nx">libgfortran3</span>
-<span class="err">$</span> <span class="nx">E</span><span class="p">:</span> <span class="nx">Unable</span> <span class="nx">to</span> <span class="nx">locate</span> <span class="kn">package</span> <span class="nx">libgfortran3</span>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ conda install autopep8
+$ conda install yapf
 </code></pre></td></tr></table>
 </div>
-</div><p>原因：In short, <code>libgfortran3</code> is no longer supported in Ubuntu 20.04. It depends on an older version of <code>gcc</code> which is no longer maintained in this version of the distribution.</p>
-<p>Ubuntu20.04 不再支持 <code>libgfortran3</code> ，因为 <code>libgfortran3</code> 依赖于一个旧版本的 <code>gcc</code> ，这个旧版本的 <code>gcc</code> 不再在 Ubuntu20.04 中维护。</p>
-<h3 id="installing-libgfortran3-for-ubuntu2004">Installing libgfortran3 for ubuntu20.04</h3>
+</div><p><strong>设置环境依赖：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># Linux/macOS
+$ export GMT_LIBRARY_PATH=$HOME/anaconda3/envs/pygmt/lib
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="遗留问题-">遗留问题 😕</h2>
+<p>成功创建 <code>pygmt</code> 虚拟环境后，重新打开终端，输入 <code>conda activate pygmt</code> ，进入 <code>pygmt</code> 环境后，<code> python -V</code> 显示版本是 <code> 3.6.13</code> ，此时无法使用 <code>pygmt</code> 。</p>
+<p>但是 <code>conda list</code> 显示的是 <code>python 3.9.5</code> ，很迷惑 😕</p>
+<p><strong>目前解决方案：</strong></p>
+<p>为何会出现这种情况，目前并不清楚，目前解决方案：</p>
+<p>先激活 <code>PKU_Summer</code> 环境，再激活 <code>pygmt</code> 环境，即可成功。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># !usr/bin/bash
-$ echo &#34;Downloading gcc-6-base&#34; &amp;&amp; \
-$ cd /tmp/ &amp;&amp; wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gcc-6/gcc-6-base_6.4.0-17ubuntu1_amd64.deb &amp;&amp; \
-$ echo &#34;Downloading libgfortran3&#34; &amp;&amp; \ 
-$ cd /tmp/ &amp;&amp; wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gcc-6/libgfortran3_6.4.0-17ubuntu1_amd64.deb &amp;&amp; \
-$ echo &#34;Installing gcc-6-base&#34; &amp;&amp; \
-$ cd /tmp/ &amp;&amp; sudo dpkg -i gcc-6-base_6.4.0-17ubuntu1_amd64.deb &amp;&amp; \ 
-$ echo &#34;Installing libgfortran3&#34; &amp;&amp; \
-$ cd /tmp/ &amp;&amp; sudo dpkg -i libgfortran3_6.4.0-17ubuntu1_amd64.deb
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ conda activate PKU_Summer
+$ conda activate pygmt
+$ python -V
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="参考链接">参考链接</h2>
-<h3 id="question1-1">Question1</h3>
-<ul>
-<li><a href="https://stackoverflow.com/questions/61736953/how-can-i-install-libgfortran3-in-ubuntu-lubuntu-20-04">https://stackoverflow.com/questions/61736953/how-can-i-install-libgfortran3-in-ubuntu-lubuntu-20-04</a>（描述为何 Ubuntu20.04 不再支持 libgfortran3）</li>
-<li><a href="https://gist.github.com/sakethramanujam/faf5b677b6505437dbdd82170ac55322">https://gist.github.com/sakethramanujam/faf5b677b6505437dbdd82170ac55322</a>（如何在 Ubuntu20.04 中安装 libgfortran3）</li>
-</ul>
-
+</div>
     </div>
 
     <div class="post-copyright">
@@ -222,7 +235,7 @@ $ cd /tmp/ &amp;&amp; sudo dpkg -i libgfortran3_6.4.0-17ubuntu1_amd64.deb
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-06-27 17:39
+        2021-07-01 11:04
         
     </span>
   </p>
@@ -248,16 +261,17 @@ $ cd /tmp/ &amp;&amp; sudo dpkg -i libgfortran3_6.4.0-17ubuntu1_amd64.deb
   </div>
 </div><footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/Ubuntu%E7%BC%96%E8%AF%91/">Ubuntu编译</a>
+          <a href="/tags/pygmt/">pygmt</a>
+          <a href="/tags/%E7%A7%91%E7%A0%94-Ubuntu_%E7%96%91%E6%83%91/">科研-Ubuntu_疑惑</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/Pygmt_install/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Pygmt ubuntu18.04</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/matlab2017_install/">
-            <span class="next-text nav-default">Ubuntu20.04安装Matlab2017</span>
+        <a class="next" href="/post/Compile_install/">
+            <span class="next-text nav-default">Ubuntu20.04编译问题汇总</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

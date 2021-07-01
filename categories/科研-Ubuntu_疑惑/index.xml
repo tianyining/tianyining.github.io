@@ -6,7 +6,16 @@
     <description>Recent content in 科研-Ubuntu_疑惑 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 31 Oct 2020 12:56:24 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E7%A7%91%E7%A0%94-Ubuntu_%E7%96%91%E6%83%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Jul 2021 11:04:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E7%A7%91%E7%A0%94-Ubuntu_%E7%96%91%E6%83%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pygmt ubuntu18.04</title>
+      <link>https://tianyining.github.io/post/Pygmt_install/</link>
+      <pubDate>Thu, 01 Jul 2021 11:04:41 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Pygmt_install/</guid>
+      <description>Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安</description>
+    </item>
+    
     <item>
       <title>Ubuntu_代理网页无法访问</title>
       <link>https://tianyining.github.io/post/ubuntu_%E4%BB%A3%E7%90%86%E7%BD%91%E9%A1%B5%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/</link>

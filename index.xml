@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 27 Jun 2021 17:39:57 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Jul 2021 11:04:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Pygmt ubuntu18.04</title>
+      <link>https://tianyining.github.io/post/Pygmt_install/</link>
+      <pubDate>Thu, 01 Jul 2021 11:04:41 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Pygmt_install/</guid>
+      <description>Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安</description>
     </item>
     
     <item>
