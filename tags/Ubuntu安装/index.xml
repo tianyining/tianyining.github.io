@@ -6,7 +6,16 @@
     <description>Recent content in Ubuntu安装 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 31 Jan 2021 23:38:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Ubuntu%E5%AE%89%E8%A3%85/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Jul 2021 13:44:17 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Ubuntu%E5%AE%89%E8%A3%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Openmpi在Ubuntu20.04上的安装</title>
+      <link>https://tianyining.github.io/post/openmpi_install/</link>
+      <pubDate>Mon, 05 Jul 2021 13:44:17 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/openmpi_install/</guid>
+      <description>下载 OpenMPI 在官网上下载最新版本的安装包. 解压并进行配置 1 2 3 4 5 $ tar -zxvf openmpi-X.X.X.tar.gz $ cd openmpi-X.X.X $ ./configure --prefix=&amp;#34;/usr/local/openmpi&amp;#34; 注意最后一行是将其安装到 /usr/local/openmpi</description>
+    </item>
+    
     <item>
       <title>Ubuntu安装WPS</title>
       <link>https://tianyining.github.io/post/Ubuntu-WPS/</link>

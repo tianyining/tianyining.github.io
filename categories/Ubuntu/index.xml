@@ -6,7 +6,16 @@
     <description>Recent content in Ubuntu on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 14 Jun 2021 10:37:25 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Jul 2021 13:44:17 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Openmpi在Ubuntu20.04上的安装</title>
+      <link>https://tianyining.github.io/post/openmpi_install/</link>
+      <pubDate>Mon, 05 Jul 2021 13:44:17 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/openmpi_install/</guid>
+      <description>下载 OpenMPI 在官网上下载最新版本的安装包. 解压并进行配置 1 2 3 4 5 $ tar -zxvf openmpi-X.X.X.tar.gz $ cd openmpi-X.X.X $ ./configure --prefix=&amp;#34;/usr/local/openmpi&amp;#34; 注意最后一行是将其安装到 /usr/local/openmpi</description>
+    </item>
+    
     <item>
       <title>联想拯救者Y7000P安装双系统win10&#43;ubuntu20.04</title>
       <link>https://tianyining.github.io/post/Y7000p_Ubuntu20.04_install/</link>
