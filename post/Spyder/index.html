@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Brave New World</title>
+  <title>Spyder的安装及使用 - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Steve Xu" /><meta name="description" content="Steve Xu&#39;s Blog" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/" />
-  <link href="https://tianyining.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Brave New World" />
-  <link href="https://tianyining.github.io/index.xml" rel="feed" type="application/rss+xml" title="Brave New World" />
+<link rel="canonical" href="https://tianyining.github.io/post/Spyder/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -42,15 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="Brave New World" />
-<meta property="og:description" content="Steve Xu&#39;s Blog" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://tianyining.github.io/" />
+<meta property="og:title" content="Spyder的安装及使用" />
+<meta property="og:description" content="安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/Spyder/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-07T20:28:07&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-07T20:28:07&#43;08:00" />
 
-<meta itemprop="name" content="Brave New World">
-<meta itemprop="description" content="Steve Xu&#39;s Blog"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Brave New World"/>
-<meta name="twitter:description" content="Steve Xu&#39;s Blog"/>
+<meta itemprop="name" content="Spyder的安装及使用">
+<meta itemprop="description" content="安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实"><meta itemprop="datePublished" content="2021-07-07T20:28:07&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-07T20:28:07&#43;08:00" />
+<meta itemprop="wordCount" content="102">
+<meta itemprop="keywords" content="Anaconda," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spyder的安装及使用"/>
+<meta name="twitter:description" content="安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -122,136 +125,124 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ubuntu_Graphics_card/">Ubuntu显卡驱动</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-22 13:24 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> python </a>
-          </div>
-        <span class="more-meta"> 约 390 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      写在最前面 在Ubuntu终端手贱安装了Nvidia显卡驱动，重新开机后发现无法进入图形可视化界面，通过以下操作拯救了Ubuntu系统。 解决步
-    </div>
-    <div class="read-more">
-      <a href="/post/ubuntu_Graphics_card/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Spyder的安装及使用</h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ubuntu_exFAT/">Ubuntu18.04挂载exFAT格式移动硬盘</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-18 20:15 </span>
-      <div class="post-category">
-          <a href="/categories/exFAT/"> exFAT </a>
-          </div>
-        <span class="more-meta"> 约 45 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      1. 安装expat-fuse 1 sudo apt-get install exfat-fuse 2. 重新拔掉移动硬盘，在插入，即可识别 查看挂载命令： 1 lsblk
-    </div>
-    <div class="read-more">
-      <a href="/post/ubuntu_exFAT/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-07 20:28 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            </div>
+          <span class="more-meta"> 约 102 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/jianguoyun_install/">Ubuntu18.04-从源代码安装坚果云</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-17 10:12 </span>
-      <div class="post-category">
-          <a href="/categories/Ubuntu/"> Ubuntu </a>
-          </div>
-        <span class="more-meta"> 约 406 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      写在最前面 坚果云客户端使用的是python2，但是事先在工作台式机上已经安装了Anaconda，系统默认python为3.8的版本，因此需要
-    </div>
-    <div class="read-more">
-      <a href="/post/jianguoyun_install/" class="read-more-link">阅读更多</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#anaconda-中-spyder40-后使用-kite-代码实时补全功能">Anaconda 中 Spyder4.0 后使用 kite 代码实时补全功能</a>
+      <ul>
+        <li><a href="#安装-1">安装</a></li>
+        <li><a href="#启动">启动</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav>
   </div>
-</article>
+</div>
+    <div class="post-content">
+      <h2 id="安装">安装</h2>
+<p><strong>建议新建 <code>conda</code> 虚拟环境，避免包污染。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ conda create -n spyder-env <span class="nv">spyder</span><span class="o">=</span><span class="m">4</span> <span class="nv">python</span><span class="o">=</span>3.8
+$ conda install numpy scipy pandas matplotlib sympy cython
+$ conda install -c conda-forge obspy
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>注意：在 <code>spyder-env</code> 环境下直接 <code>conda install obspy</code> 会失败。</strong></p>
+<h2 id="anaconda-中-spyder40-后使用-kite-代码实时补全功能">Anaconda 中 Spyder4.0 后使用 kite 代码实时补全功能</h2>
+<h3 id="安装-1">安装</h3>
+<p>官网下载安装： <a href="https://www.kite.com/">https://www.kite.com/</a></p>
+<h3 id="启动">启动</h3>
+<p>Lanchpad</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://docs.spyder-ide.org/current/installation.html(Spyder">https://docs.spyder-ide.org/current/installation.html(Spyder</a> 的安装)</li>
+<li><a href="https://anaconda.org/conda-forge/obspy(obspy">https://anaconda.org/conda-forge/obspy(obspy</a> 的安装)</li>
+</ul>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/iggcas/">Iggcas新生入学指南</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-15 20:20 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%89%AF%E9%97%B2%E7%AF%87%E5%84%BF/"> 扯闲篇儿 </a>
-          </div>
-        <span class="more-meta"> 约 308 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
     </div>
-  </header>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-07-07 20:28
+        
+    </span>
+  </p>
   
-  <div class="post-content">
-    <div class="post-summary">
-      办网 ​ 每年新生入学第一件事，都应该是去办理一个属于自己的上网帐号。不完全流程图如下： 前往地三楼219办公室，找相关人员开设网络账户，并拍下自
-    </div>
-    <div class="read-more">
-      <a href="/post/iggcas/" class="read-more-link">阅读更多</a>
-    </div>
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
   </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/ubuntu_update/">Ubuntu18.04 sudo apt update遇到问题</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-15 19:34 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%A7%91%E7%A0%94-Ubuntu_%E7%96%91%E6%83%91/"> 科研-Ubuntu_疑惑 </a>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Anaconda/">Anaconda</a>
           </div>
-        <span class="more-meta"> 约 197 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      人间迷惑之事常有八九 使用Ubuntu18.04 去更新源，遇到错误。 检查/etc/resolv.conf,发现之前修改的nameserver总
-    </div>
-    <div class="read-more">
-      <a href="/post/ubuntu_update/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/7/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">上一页</span>
-      </a>
-    <a class="next" href="/page/9/">
-        <span class="next-text">下一页</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Anaconda_remove/">
+            <span class="next-text nav-default">Ubuntu20.04卸载并重新安装Anaconda</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
 
       </div>
     </main>
