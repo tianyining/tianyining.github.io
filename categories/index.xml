@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 05 Jul 2021 13:44:17 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Jul 2021 09:17:54 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>python</title>
+      <link>https://tianyining.github.io/categories/python/</link>
+      <pubDate>Wed, 07 Jul 2021 09:17:54 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/categories/python/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Ubuntu</title>
       <link>https://tianyining.github.io/categories/Ubuntu/</link>
@@ -67,15 +76,6 @@
       <pubDate>Mon, 14 Jun 2021 10:37:25 +0800</pubDate>
       
       <guid>https://tianyining.github.io/categories/Windows/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://tianyining.github.io/categories/python/</link>
-      <pubDate>Sun, 06 Jun 2021 12:33:57 +0800</pubDate>
-      
-      <guid>https://tianyining.github.io/categories/python/</guid>
       <description></description>
     </item>
     

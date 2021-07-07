@@ -6,7 +6,16 @@
     <description>Recent content in Anaconda on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 22 Sep 2020 13:24:07 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Anaconda/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Jul 2021 09:17:54 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Anaconda/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu20.04卸载并重新安装Anaconda</title>
+      <link>https://tianyining.github.io/post/Anaconda_remove/</link>
+      <pubDate>Wed, 07 Jul 2021 09:17:54 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Anaconda_remove/</guid>
+      <description>说明 台式机 Ubuntu18.04，Anaconda 无法使用 conda 命令更新或安装，尝试多次未找出原因，因此重装 Anaconda 。 卸载 Anaconda 卸载 anaconda 的步骤如下： 删除整个</description>
+    </item>
+    
     <item>
       <title>Ubuntu显卡驱动</title>
       <link>https://tianyining.github.io/post/ubuntu_Graphics_card/</link>
