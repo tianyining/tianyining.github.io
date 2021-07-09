@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -41,19 +41,19 @@
 
 
 <meta property="og:title" content="Spyder的安装及使用" />
-<meta property="og:description" content="安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实" />
+<meta property="og:description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/Spyder/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-07-07T20:28:07&#43;08:00" />
 <meta property="article:modified_time" content="2021-07-07T20:28:07&#43;08:00" />
 
 <meta itemprop="name" content="Spyder的安装及使用">
-<meta itemprop="description" content="安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实"><meta itemprop="datePublished" content="2021-07-07T20:28:07&#43;08:00" />
+<meta itemprop="description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代"><meta itemprop="datePublished" content="2021-07-07T20:28:07&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-07T20:28:07&#43;08:00" />
-<meta itemprop="wordCount" content="102">
+<meta itemprop="wordCount" content="390">
 <meta itemprop="keywords" content="Anaconda," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Spyder的安装及使用"/>
-<meta name="twitter:description" content="安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实"/>
+<meta name="twitter:description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 102 字 </span>
+          <span class="more-meta"> 约 390 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -146,20 +146,22 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#安装">安装</a></li>
+    <li><a href="#spyder-的安装">Spyder 的安装</a></li>
     <li><a href="#anaconda-中-spyder40-后使用-kite-代码实时补全功能">Anaconda 中 Spyder4.0 后使用 kite 代码实时补全功能</a>
       <ul>
-        <li><a href="#安装-1">安装</a></li>
+        <li><a href="#安装">安装</a></li>
         <li><a href="#启动">启动</a></li>
       </ul>
     </li>
+    <li><a href="#ubuntu1804-创建虚拟环境安装spyder">Ubuntu18.04 创建虚拟环境，安装Spyder</a></li>
+    <li><a href="#修订历史">修订历史</a></li>
     <li><a href="#参考链接">参考链接</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="安装">安装</h2>
+      <h2 id="spyder-的安装">Spyder 的安装</h2>
 <p><strong>建议新建 <code>conda</code> 虚拟环境，避免包污染。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -175,10 +177,55 @@ $ conda install -c conda-forge obspy
 </div>
 </div><p><strong>注意：在 <code>spyder-env</code> 环境下直接 <code>conda install obspy</code> 会失败。</strong></p>
 <h2 id="anaconda-中-spyder40-后使用-kite-代码实时补全功能">Anaconda 中 Spyder4.0 后使用 kite 代码实时补全功能</h2>
-<h3 id="安装-1">安装</h3>
+<h3 id="安装">安装</h3>
 <p>官网下载安装： <a href="https://www.kite.com/">https://www.kite.com/</a></p>
 <h3 id="启动">启动</h3>
 <p>Lanchpad</p>
+<h2 id="ubuntu1804-创建虚拟环境安装spyder">Ubuntu18.04 创建虚拟环境，安装Spyder</h2>
+<p>新建一个虚拟环境：python=3.8，<strong>先不要 <code>conda install spyder=4</code> ，创建好环境后，直接先尝试打开 <code>spyder</code> 。</strong> </p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ conda create -n PKU_Summer <span class="nv">python</span><span class="o">=</span>3.8
+$ spyder
+<span class="c1">## 重启 spyder 后显示无法导入 kernel，需要安装 spyder-kenels=1 </span>
+<span class="c1">## 首先删掉原有版本的 spyder-kernels（可能版本较高，不匹配当前 conda 环境）</span>
+$ conda remove spyder-kernels
+$ conda install spyder-kernels<span class="o">=</span>1.10.0
+<span class="c1">## 再次打开 spyder，即可 connecting kernel</span>
+$ spyer
+
+
+<span class="c1">## 其他基本环境和包的安装</span>
+$ conda install -c conda-forge jupyterlab
+$ conda install -c conda-forge numpy
+$ conda install -c conda-forge scipy
+$ conda install -c conda-forge matplotlib
+$ conda install -c conda-forge obspy
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="修订历史">修订历史</h2>
+<ul>
+<li>初稿：2021-07-07：Spyder 的初次安装；</li>
+<li>第二次修改：2021-07-09：Ubuntu18.04 中安装虚拟环境及 Spyder 的使用；</li>
+</ul>
 <h2 id="参考链接">参考链接</h2>
 <ul>
 <li><a href="https://docs.spyder-ide.org/current/installation.html(Spyder">https://docs.spyder-ide.org/current/installation.html(Spyder</a> 的安装)</li>

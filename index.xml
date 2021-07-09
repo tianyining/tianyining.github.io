@@ -33,7 +33,7 @@ It makes use of a variety of open source projects including:
       <pubDate>Wed, 07 Jul 2021 20:28:07 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/Spyder/</guid>
-      <description>安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代码实</description>
+      <description>Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代</description>
     </item>
     
     <item>
