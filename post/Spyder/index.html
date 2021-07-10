@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Spyder的安装及使用">
 <meta itemprop="description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代"><meta itemprop="datePublished" content="2021-07-07T20:28:07&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-07T20:28:07&#43;08:00" />
-<meta itemprop="wordCount" content="390">
+<meta itemprop="wordCount" content="519">
 <meta itemprop="keywords" content="Anaconda," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Spyder的安装及使用"/>
 <meta name="twitter:description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代"/>
@@ -135,8 +135,8 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 390 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 519 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -154,6 +154,7 @@
       </ul>
     </li>
     <li><a href="#ubuntu1804-创建虚拟环境安装spyder">Ubuntu18.04 创建虚拟环境，安装Spyder</a></li>
+    <li><a href="#macos-系统安装spyder流程">macOS 系统安装Spyder流程：</a></li>
     <li><a href="#修订历史">修订历史</a></li>
     <li><a href="#参考链接">参考链接</a></li>
   </ul>
@@ -182,7 +183,7 @@ $ conda install -c conda-forge obspy
 <h3 id="启动">启动</h3>
 <p>Lanchpad</p>
 <h2 id="ubuntu1804-创建虚拟环境安装spyder">Ubuntu18.04 创建虚拟环境，安装Spyder</h2>
-<p>新建一个虚拟环境：python=3.8，<strong>先不要 <code>conda install spyder=4</code> ，创建好环境后，直接先尝试打开 <code>spyder</code> 。</strong> </p>
+<p>新建一个虚拟环境：python=3.8，<strong>先不要 <code>conda install spyder=4</code> ，创建好环境后，直接先尝试打开 <code>spyder</code> 。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -219,6 +220,38 @@ $ conda install -c conda-forge numpy
 $ conda install -c conda-forge scipy
 $ conda install -c conda-forge matplotlib
 $ conda install -c conda-forge obspy
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="macos-系统安装spyder流程">macOS 系统安装Spyder流程：</h2>
+<p>成功安装 <code>spyder</code> 后，打开 <code>spyder</code> <code>IPython</code> 报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">An exception has occurred, use %tb to see the full traceback.
+
+TypeError: handle_get_file_code<span class="o">()</span> got an unexpected keyword argument <span class="s1">&#39;save_all&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>解决方案：卸载 <code>spyder-kernels=1.94</code> ，重新安装 <code>spyder-kernels=1.93</code> ，安装成功后，<strong>重新启动 kernels</strong> ，方可生效。</p>
+<p><strong>完整安装及纠错过程：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ conda create -n PKU_Summer <span class="nv">python</span><span class="o">=</span>3.8
+$ conda install -c conda-forge <span class="nv">spyder</span><span class="o">=</span><span class="m">4</span>
+$ conda uninstall spyder-kernels
+$ conda install spyder-kernels<span class="o">=</span>1.9.3
+<span class="c1">## 重新打开 spyder 后，需要 Restart kernels</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="修订历史">修订历史</h2>
