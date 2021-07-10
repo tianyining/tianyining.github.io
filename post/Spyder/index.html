@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Spyder的安装及使用">
 <meta itemprop="description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代"><meta itemprop="datePublished" content="2021-07-07T20:28:07&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-07T20:28:07&#43;08:00" />
-<meta itemprop="wordCount" content="519">
+<meta itemprop="wordCount" content="713">
 <meta itemprop="keywords" content="Anaconda," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Spyder的安装及使用"/>
 <meta name="twitter:description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代"/>
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 519 字 </span>
+          <span class="more-meta"> 约 713 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -154,7 +154,13 @@
       </ul>
     </li>
     <li><a href="#ubuntu1804-创建虚拟环境安装spyder">Ubuntu18.04 创建虚拟环境，安装Spyder</a></li>
-    <li><a href="#macos-系统安装spyder流程">macOS 系统安装Spyder流程：</a></li>
+    <li><a href="#macos-系统安装spyder流程">macOS 系统安装Spyder流程：</a>
+      <ul>
+        <li><a href="#问题描述1及解决方案">问题描述1，及解决方案</a></li>
+        <li><a href="#问题描述2及解决方案">问题描述2，及解决方案</a></li>
+        <li><a href="#完整安装及纠错过程"><strong>完整安装及纠错过程：</strong></a></li>
+      </ul>
+    </li>
     <li><a href="#修订历史">修订历史</a></li>
     <li><a href="#参考链接">参考链接</a></li>
   </ul>
@@ -223,7 +229,27 @@ $ conda install -c conda-forge obspy
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="macos-系统安装spyder流程">macOS 系统安装Spyder流程：</h2>
-<p>成功安装 <code>spyder</code> 后，打开 <code>spyder</code> <code>IPython</code> 报错：</p>
+<h3 id="问题描述1及解决方案">问题描述1，及解决方案</h3>
+<p>成功安装 <code>spyder</code> 后，终端键入 <code>spyder</code> ，无法打开，并终端报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">/anaconda3/bin/pythonw: line 3: /anaconda3/python.app/Contents/MacOS/python: No such file or directory
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>解决方案：更新一下python.app即可</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ conda install -f python.app
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="问题描述2及解决方案">问题描述2，及解决方案</h3>
+<p>打开 <code>spyder</code> 后， <code>IPython</code> 报错：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -236,8 +262,8 @@ $ conda install -c conda-forge obspy
 TypeError: handle_get_file_code<span class="o">()</span> got an unexpected keyword argument <span class="s1">&#39;save_all&#39;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>解决方案：卸载 <code>spyder-kernels=1.94</code> ，重新安装 <code>spyder-kernels=1.93</code> ，安装成功后，<strong>重新启动 kernels</strong> ，方可生效。</p>
-<p><strong>完整安装及纠错过程：</strong></p>
+</div><p><strong>解决方案：</strong> 卸载 <code>spyder-kernels=1.94</code> ，重新安装 <code>spyder-kernels=1.93</code> ，安装成功后，<strong>重新启动 kernels</strong> ，方可生效。</p>
+<h3 id="完整安装及纠错过程"><strong>完整安装及纠错过程：</strong></h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -258,11 +284,14 @@ $ conda install spyder-kernels<span class="o">=</span>1.9.3
 <ul>
 <li>初稿：2021-07-07：Spyder 的初次安装；</li>
 <li>第二次修改：2021-07-09：Ubuntu18.04 中安装虚拟环境及 Spyder 的使用；</li>
+<li>第三次修改：2021-07-10：新增macOS系统下虚拟环境中 Spyder 的安装；</li>
 </ul>
 <h2 id="参考链接">参考链接</h2>
 <ul>
 <li><a href="https://docs.spyder-ide.org/current/installation.html(Spyder">https://docs.spyder-ide.org/current/installation.html(Spyder</a> 的安装)</li>
 <li><a href="https://anaconda.org/conda-forge/obspy(obspy">https://anaconda.org/conda-forge/obspy(obspy</a> 的安装)</li>
+<li><a href="https://blog.csdn.net/zkp_987/article/details/105314236">https://blog.csdn.net/zkp_987/article/details/105314236</a>（macos终端无法打开spyder)</li>
+<li><a href="https://stackoverflow.com/questions/63739215/spyder-returning-typeerror-after-updating-to-spyder-4-1-4(macos">https://stackoverflow.com/questions/63739215/spyder-returning-typeerror-after-updating-to-spyder-4-1-4(macos</a> Ipython 报错)</li>
 </ul>
 
     </div>
