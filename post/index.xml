@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 07 Jul 2021 20:28:07 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Jul 2021 17:34:49 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>PKU_Summer2021</title>
+      <link>https://tianyining.github.io/post/PKU_Summer2021/</link>
+      <pubDate>Mon, 12 Jul 2021 17:34:49 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/PKU_Summer2021/</guid>
+      <description>2021-07-12 上午： 陈晓非：地震物理学 王易：全波形成像方法简介 下午： 孙景南、纪晴、祝奇文：程序简介 有用的链接（纪晴推荐） https://github.com/kuangdai/AxiSEM-3D https://github.com/kuangdai/axisem https://sgylab.earth.ncu.edu.tw/kernel-video/</description>
     </item>
     
     <item>
