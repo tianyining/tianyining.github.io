@@ -6,22 +6,31 @@
     <description>Recent content in Categories on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 12 Jul 2021 17:34:49 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Jul 2021 14:01:35 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>PKU_Summer</title>
-      <link>https://tianyining.github.io/categories/PKU_Summer/</link>
-      <pubDate>Mon, 12 Jul 2021 17:34:49 +0800</pubDate>
+      <title>jupyter notebook</title>
+      <link>https://tianyining.github.io/categories/jupyter-notebook/</link>
+      <pubDate>Thu, 15 Jul 2021 14:01:35 +0800</pubDate>
       
-      <guid>https://tianyining.github.io/categories/PKU_Summer/</guid>
+      <guid>https://tianyining.github.io/categories/jupyter-notebook/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
       <link>https://tianyining.github.io/categories/python/</link>
-      <pubDate>Wed, 07 Jul 2021 20:28:07 +0800</pubDate>
+      <pubDate>Thu, 15 Jul 2021 14:01:35 +0800</pubDate>
       
       <guid>https://tianyining.github.io/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PKU_Summer</title>
+      <link>https://tianyining.github.io/categories/PKU_Summer/</link>
+      <pubDate>Mon, 12 Jul 2021 17:34:49 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/categories/PKU_Summer/</guid>
       <description></description>
     </item>
     

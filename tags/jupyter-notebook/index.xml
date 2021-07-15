@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jupyter notebook on Brave New World</title>
+    <link>https://tianyining.github.io/tags/jupyter-notebook/</link>
+    <description>Recent content in jupyter notebook on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 15 Jul 2021 14:01:35 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/jupyter-notebook/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jupyter Notebook使用技巧</title>
+      <link>https://tianyining.github.io/post/jupyter_notebook_manual/</link>
+      <pubDate>Thu, 15 Jul 2021 14:01:35 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/jupyter_notebook_manual/</guid>
+      <description>说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。</description>
+    </item>
+    
+  </channel>
+</rss>
