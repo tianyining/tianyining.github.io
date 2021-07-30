@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="问题一 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &amp;#39;https://github.com/tianyining/tianyining.github.io.git/&amp;#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是htt" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 bog 用于记录在自己的 MAC Air 上面提交 Github 代码时遇到的问题及解决方案，本文不断更新ing (⊙o⊙)… 问题一 我今天使用git push origin master的时" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -41,19 +41,19 @@
 
 
 <meta property="og:title" content="Github clone 超时解决办法" />
-<meta property="og:description" content="问题一 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &#39;https://github.com/tianyining/tianyining.github.io.git/&#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是htt" />
+<meta property="og:description" content="说明 本篇 bog 用于记录在自己的 MAC Air 上面提交 Github 代码时遇到的问题及解决方案，本文不断更新ing (⊙o⊙)… 问题一 我今天使用git push origin master的时" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/github_config/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-03-15T18:02:22&#43;08:00" />
 <meta property="article:modified_time" content="2021-03-15T18:02:22&#43;08:00" />
 
 <meta itemprop="name" content="Github clone 超时解决办法">
-<meta itemprop="description" content="问题一 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &#39;https://github.com/tianyining/tianyining.github.io.git/&#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是htt"><meta itemprop="datePublished" content="2021-03-15T18:02:22&#43;08:00" />
+<meta itemprop="description" content="说明 本篇 bog 用于记录在自己的 MAC Air 上面提交 Github 代码时遇到的问题及解决方案，本文不断更新ing (⊙o⊙)… 问题一 我今天使用git push origin master的时"><meta itemprop="datePublished" content="2021-03-15T18:02:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-03-15T18:02:22&#43;08:00" />
-<meta itemprop="wordCount" content="420">
+<meta itemprop="wordCount" content="601">
 <meta itemprop="keywords" content="github," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Github clone 超时解决办法"/>
-<meta name="twitter:description" content="问题一 我今天使用git push origin master的时候，提示我： 1 $ fatal: unable to access &#39;https://github.com/tianyining/tianyining.github.io.git/&#39;: Failed to connect to github.com port 443: Operation timed out 分析 在谷歌上查了很多办法都没有解决，有的方法是htt"/>
+<meta name="twitter:description" content="说明 本篇 bog 用于记录在自己的 MAC Air 上面提交 Github 代码时遇到的问题及解决方案，本文不断更新ing (⊙o⊙)… 问题一 我今天使用git push origin master的时"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -135,8 +135,8 @@
         <div class="post-category">
             <a href="/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> Mac奇技淫巧 </a>
             </div>
-          <span class="more-meta"> 约 420 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 601 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -146,6 +146,7 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
+    <li><a href="#说明">说明</a></li>
     <li><a href="#问题一">问题一</a></li>
     <li><a href="#分析">分析</a></li>
     <li><a href="#解决方案1">解决方案1</a></li>
@@ -156,13 +157,22 @@
         <li><a href="#参考链接">参考链接</a></li>
       </ul>
     </li>
+    <li><a href="#问题三">问题三</a></li>
+    <li><a href="#错误分析">错误分析</a></li>
+    <li><a href="#解决方案-1">解决方案</a>
+      <ul>
+        <li><a href="#参考链接-1">参考链接</a></li>
+      </ul>
+    </li>
     <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="问题一">问题一</h2>
+      <h2 id="说明">说明</h2>
+<p>本篇 <code>bog</code> 用于记录在自己的 <code>MAC Air</code>  上面提交 <code>Github</code> 代码时遇到的问题及解决方案，本文不断更新<code>ing</code>  (⊙o⊙)…</p>
+<h2 id="问题一">问题一</h2>
 <p>我今天使用git push origin master的时候，提示我：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -237,10 +247,59 @@ fatal: unable to access &#39;https://github.com/tianyining/tianyining.github.io.
 <ul>
 <li><a href="https://stackoverflow.com/questions/49345357/fatal-unable-to-access-https-github-com-xxx-openssl-ssl-connect-ssl-error">https://stackoverflow.com/questions/49345357/fatal-unable-to-access-https-github-com-xxx-openssl-ssl-connect-ssl-error</a></li>
 </ul>
+<h2 id="问题三">问题三</h2>
+<p>同样在使用 <code>  git push -u origin master</code> 的时候 ，出现以下报错信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"> $ git push origin master
+  remote: Not Found
+  fatal: repository <span class="s1">&#39;https://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@github.com/https://github.com/tianyining/tianyining.github.io.git/&#39;</span> not found
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="错误分析">错误分析</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">Because you probably did not identify the remote git repository to your terminal first.
+
+$ git remote set-url origin https://github.com/MyRepo/project.git
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="解决方案-1">解决方案</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git remote set-url origin https://github.com/tianyining/tianyining.github.io.git
+$ git add . 
+$ git commit -m <span class="s2">&#34;install commit&#34;</span>
+$ git push origin master  
+<span class="c1">## 成功</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="参考链接-1">参考链接</h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/37813568/git-remote-repository-not-found">https://stackoverflow.com/questions/37813568/git-remote-repository-not-found</a></li>
+</ul>
 <h2 id="修订历史">修订历史</h2>
 <ul>
 <li>2021-03-15：初稿（问题一）</li>
 <li>2021-06-19：增加问题二，以及相应解决方案</li>
+<li>2021-07-30：增加问题三，以及相应解决方案</li>
 </ul>
 
     </div>
