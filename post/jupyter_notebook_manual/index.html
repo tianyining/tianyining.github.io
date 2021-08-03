@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Jupyter Notebook使用技巧">
 <meta itemprop="description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"><meta itemprop="datePublished" content="2021-07-15T14:01:35&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-15T14:01:35&#43;08:00" />
-<meta itemprop="wordCount" content="144">
+<meta itemprop="wordCount" content="696">
 <meta itemprop="keywords" content="jupyter notebook,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Jupyter Notebook使用技巧"/>
 <meta name="twitter:description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/jupyter-notebook/"> jupyter notebook </a>
             </div>
-          <span class="more-meta"> 约 144 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 696 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -154,6 +154,12 @@
         <li><a href="#参考链接">参考链接</a></li>
       </ul>
     </li>
+    <li><a href="#2-解决中文显示负号显示问题">2. 解决中文显示&amp;负号显示问题</a>
+      <ul>
+        <li><a href="#解决方案-1">解决方案</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接-1">参考链接</a></li>
   </ul>
 </nav>
   </div>
@@ -184,6 +190,176 @@
 </div><h3 id="参考链接">参考链接</h3>
 <ul>
 <li><a href="https://blog.csdn.net/haley_yuen/article/details/108429708">https://blog.csdn.net/haley_yuen/article/details/108429708</a></li>
+</ul>
+<h2 id="2-解决中文显示负号显示问题">2. 解决中文显示&amp;负号显示问题</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span>    <span class="c1"># 用来正常显示中文标签</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span><span class="o">=</span><span class="bp">False</span>    <span class="c1"># 用来正常显示负号</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可能出现的问题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ne">UserWarning</span><span class="p">:</span> <span class="n">findfont</span><span class="p">:</span> <span class="n">Font</span> <span class="n">family</span> <span class="p">[</span><span class="sa">u</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="n">found</span><span class="o">.</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="解决方案-1">解决方案</h3>
+<p><strong>1. 下载字体</strong></p>
+<p>字体下载网站：http://www.font5.com.cn/font_download.php?id=151&amp;part=1237887120</p>
+<p><strong>2. 中文字体安装：将下载的字体，拷贝到 <code>matplot</code>下的字体目录下</strong></p>
+<p>输入以下代码，获取字体安装目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Python</span> <span class="mf">3.8</span><span class="o">.</span><span class="mi">10</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">May</span> <span class="mi">19</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span><span class="mo">01</span><span class="p">:</span><span class="mi">55</span><span class="p">)</span> 
+<span class="p">[</span><span class="n">Clang</span> <span class="mf">10.0</span><span class="o">.</span><span class="mi">0</span> <span class="p">]</span> <span class="p">::</span> <span class="n">Anaconda</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.</span> <span class="n">on</span> <span class="n">darwin</span>
+<span class="n">Type</span> <span class="s2">&#34;help&#34;</span><span class="p">,</span> <span class="s2">&#34;copyright&#34;</span><span class="p">,</span> <span class="s2">&#34;credits&#34;</span> <span class="ow">or</span> <span class="s2">&#34;license&#34;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">matplotlib_fname</span><span class="p">()</span>
+<span class="s1">&#39;/opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/matplotlibrc&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">exit</span><span class="p">()</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 最终的字体安装路径 /ttf</span>
+$ <span class="nb">cd</span> /opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/ 
+$ <span class="nb">cd</span> fonts 
+$ <span class="nb">cd</span> ttf  
+$ <span class="nb">pwd</span>
+$  /opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/fonts/ttf 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>将下载好的字体，<code>ttf</code> 文件拷贝到字体安装路径</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cp simhei.ttf /opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/fonts/ttf
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>3. 清理原先字体缓存文件夹</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">get_cachedir</span><span class="p">())</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ rm -rf /Users/edn-tian/.matplotlib
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>4. 修改matplotlibrc文件</strong></p>
+<p>用文本编辑器打开 matplotlibrc 文件，修改以下三个地方：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$  code /opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/matplotlibrc
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>第一个地方：去掉前面的 #</li>
+<li>第二个地方：去掉前面的 #，并添加 SimHei</li>
+<li>第三个地方：去掉前面的 #，并修改 True 为 False</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gt42s3j54gj30za0f478f.jpg" alt="img"></p>
+<p>**5. 重新启动 <code>jupyter</code> **</p>
+<p>查看字体是否安装成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">import</span> <span class="n">_rebuild</span>
+<span class="n">_rebuild</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">font_manager</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">ttflist</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>6. 可以正常使用中文字体</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;SimHei&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c1"># 负号正常显示</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;横坐标&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;纵坐标&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">*</span><span class="mf">1.5</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">*</span><span class="mf">2.5</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">*</span><span class="mf">3.5</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">*</span><span class="mf">4.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="参考链接-1">参考链接</h2>
+<ul>
+<li><a href="https://blog.csdn.net/weixin_38746310/article/details/106800940">https://blog.csdn.net/weixin_38746310/article/details/106800940</a></li>
+<li><a href="https://blog.csdn.net/D_Ddd0701/article/details/113743015">https://blog.csdn.net/D_Ddd0701/article/details/113743015</a></li>
+<li><a href="https://wangjs-jacky.github.io/2019/12/19/python-matplotlib%E6%A1%88%E4%BE%8B/">https://wangjs-jacky.github.io/2019/12/19/python-matplotlib%E6%A1%88%E4%BE%8B/</a></li>
 </ul>
 
     </div>
