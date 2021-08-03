@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Jupyter Notebook使用技巧">
 <meta itemprop="description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"><meta itemprop="datePublished" content="2021-07-15T14:01:35&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-15T14:01:35&#43;08:00" />
-<meta itemprop="wordCount" content="696">
+<meta itemprop="wordCount" content="725">
 <meta itemprop="keywords" content="jupyter notebook,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Jupyter Notebook使用技巧"/>
 <meta name="twitter:description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"/>
@@ -136,7 +136,7 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/jupyter-notebook/"> jupyter notebook </a>
             </div>
-          <span class="more-meta"> 约 696 字 </span>
+          <span class="more-meta"> 约 725 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -296,12 +296,27 @@ $  /opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-dat
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">$  code /opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/matplotlibrc
 </code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>第一个地方：去掉前面的 #</li>
-<li>第二个地方：去掉前面的 #，并添加 SimHei</li>
-<li>第三个地方：去掉前面的 #，并修改 True 为 False</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gt42s3j54gj30za0f478f.jpg" alt="img"></p>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">font.family:  sans-serif
+<span class="c1">#去掉前面的#</span>
+font.sans-serif: SimHei, DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
+<span class="c1">#去掉前面的#，手动添加SimHei</span>
+axes.unicode_minus: False  
+<span class="c1">#去掉前面的#，把True改为False</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gt42s3j54gj30za0f478f.jpg" alt="img"></p>
 <p>**5. 重新启动 <code>jupyter</code> **</p>
 <p>查看字体是否安装成功</p>
 <div class="highlight"><div class="chroma">
