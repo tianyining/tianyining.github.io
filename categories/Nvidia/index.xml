@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nvidia on Brave New World</title>
+    <link>https://tianyining.github.io/categories/Nvidia/</link>
+    <description>Recent content in Nvidia on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 12 Aug 2021 22:56:58 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/Nvidia/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu20.04显卡驱动</title>
+      <link>https://tianyining.github.io/post/Ubuntu_Nvidia/</link>
+      <pubDate>Thu, 12 Aug 2021 22:56:58 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Ubuntu_Nvidia/</guid>
+      <description>说明 本篇 blog 记录在 Ubuntu20.04 上显卡驱动的安装及问题解决。 拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案 手动安装 nvidia 显卡，设置失败，导致重启计算机后</description>
+    </item>
+    
+  </channel>
+</rss>

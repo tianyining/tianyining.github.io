@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 03 Aug 2021 12:04:52 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Aug 2021 22:56:58 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu20.04显卡驱动</title>
+      <link>https://tianyining.github.io/post/Ubuntu_Nvidia/</link>
+      <pubDate>Thu, 12 Aug 2021 22:56:58 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Ubuntu_Nvidia/</guid>
+      <description>说明 本篇 blog 记录在 Ubuntu20.04 上显卡驱动的安装及问题解决。 拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案 手动安装 nvidia 显卡，设置失败，导致重启计算机后</description>
     </item>
     
     <item>

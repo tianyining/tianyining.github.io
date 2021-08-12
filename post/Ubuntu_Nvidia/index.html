@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Courses汇总 - Brave New World</title>
+  <title>Ubuntu20.04显卡驱动 - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="中国科学技术大学——固体地球物理专业本科生课程 地震学原理及应用（刘斌） 岩石物理学（戴志阳） 连续介质力学基础（黄建华） 信号分析与数据处理（查显" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 blog 记录在 Ubuntu20.04 上显卡驱动的安装及问题解决。 拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案 手动安装 nvidia 显卡，设置失败，导致重启计算机后" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/Courses/" />
+<link rel="canonical" href="https://tianyining.github.io/post/Ubuntu_Nvidia/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="Courses汇总" />
-<meta property="og:description" content="中国科学技术大学——固体地球物理专业本科生课程 地震学原理及应用（刘斌） 岩石物理学（戴志阳） 连续介质力学基础（黄建华） 信号分析与数据处理（查显" />
+<meta property="og:title" content="Ubuntu20.04显卡驱动" />
+<meta property="og:description" content="说明 本篇 blog 记录在 Ubuntu20.04 上显卡驱动的安装及问题解决。 拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案 手动安装 nvidia 显卡，设置失败，导致重启计算机后" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/Courses/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-08-03T12:04:52&#43;08:00" />
-<meta property="article:modified_time" content="2021-08-03T12:04:52&#43;08:00" />
+<meta property="og:url" content="https://tianyining.github.io/post/Ubuntu_Nvidia/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-12T22:56:58&#43;08:00" />
+<meta property="article:modified_time" content="2021-08-12T22:56:58&#43;08:00" />
 
-<meta itemprop="name" content="Courses汇总">
-<meta itemprop="description" content="中国科学技术大学——固体地球物理专业本科生课程 地震学原理及应用（刘斌） 岩石物理学（戴志阳） 连续介质力学基础（黄建华） 信号分析与数据处理（查显"><meta itemprop="datePublished" content="2021-08-03T12:04:52&#43;08:00" />
-<meta itemprop="dateModified" content="2021-08-03T12:04:52&#43;08:00" />
-<meta itemprop="wordCount" content="195">
-<meta itemprop="keywords" content="Courses," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Courses汇总"/>
-<meta name="twitter:description" content="中国科学技术大学——固体地球物理专业本科生课程 地震学原理及应用（刘斌） 岩石物理学（戴志阳） 连续介质力学基础（黄建华） 信号分析与数据处理（查显"/>
+<meta itemprop="name" content="Ubuntu20.04显卡驱动">
+<meta itemprop="description" content="说明 本篇 blog 记录在 Ubuntu20.04 上显卡驱动的安装及问题解决。 拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案 手动安装 nvidia 显卡，设置失败，导致重启计算机后"><meta itemprop="datePublished" content="2021-08-12T22:56:58&#43;08:00" />
+<meta itemprop="dateModified" content="2021-08-12T22:56:58&#43;08:00" />
+<meta itemprop="wordCount" content="668">
+<meta itemprop="keywords" content="Ubuntu,Nvidia," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ubuntu20.04显卡驱动"/>
+<meta name="twitter:description" content="说明 本篇 blog 记录在 Ubuntu20.04 上显卡驱动的安装及问题解决。 拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案 手动安装 nvidia 显卡，设置失败，导致重启计算机后"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,15 +128,16 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Courses汇总</h1>
+      <h1 class="post-title">Ubuntu20.04显卡驱动</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-08-03 12:04 </span>
+        <span class="post-time"> 2021-08-12 22:56 </span>
         <div class="post-category">
-            <a href="/categories/Courses/"> Courses </a>
+            <a href="/categories/Ubuntu/"> Ubuntu </a>
+            <a href="/categories/Nvidia/"> Nvidia </a>
             </div>
-          <span class="more-meta"> 约 195 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 668 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -146,31 +147,59 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#中国科学技术大学固体地球物理专业本科生课程">中国科学技术大学——固体地球物理专业本科生课程</a></li>
-    <li><a href="#中国科学技术大学固体地球物理专业研究生课程">中国科学技术大学——固体地球物理专业研究生课程</a></li>
+    <li><a href="#说明">说明</a></li>
+    <li><a href="#拯救者y7000-nividia-gtx2060ubuntu-2004无法启动问题及解决方案">拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案</a>
+      <ul>
+        <li><a href="#解决方案进入-ubuntu系统">解决方案：进入 <code>Ubuntu</code> 系统</a></li>
+        <li><a href="#问题分析">问题分析</a></li>
+        <li><a href="#恢复默认驱动-nouveau">恢复默认驱动 Nouveau</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="中国科学技术大学固体地球物理专业本科生课程">中国科学技术大学——固体地球物理专业本科生课程</h2>
+      <h2 id="说明">说明</h2>
+<p>本篇 <code>blog</code> 记录在 <code>Ubuntu20.04</code> 上显卡驱动的安装及问题解决。</p>
+<h2 id="拯救者y7000-nividia-gtx2060ubuntu-2004无法启动问题及解决方案">拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案</h2>
+<p>手动安装 <code>nvidia</code> 显卡，设置失败，导致重启计算机后，选择 <code>Ubuntu</code> 系统无法进入（卡在 <code>LEGION logo</code> 界面）。</p>
+<h3 id="解决方案进入-ubuntu系统">解决方案：进入 <code>Ubuntu</code> 系统</h3>
 <ol>
-<li>地震学原理及应用（刘斌）</li>
-<li>岩石物理学（戴志阳）</li>
-<li>连续介质力学基础（黄建华）</li>
-<li>信号分析与数据处理（查显杰、贾晓峰）</li>
-<li>地震勘探引论（贾晓峰）</li>
+<li>我们按下开机键后，进入到 <code>Ubuntu</code> 选择界面选择 <code>Advanced options for Ubuntu</code></li>
 </ol>
-<h2 id="中国科学技术大学固体地球物理专业研究生课程">中国科学技术大学——固体地球物理专业研究生课程</h2>
-<ol>
-<li>计算地震学（孙道远）</li>
-<li>地球内部物理学（毛竹）</li>
-<li>定量地震学（陈晓非）</li>
-<li>地震勘探进展（张伟）</li>
-<li>地球物理反演（张海江、姚华建）</li>
-<li>固体力学（冷伟、吴忠庆）</li>
-<li>地球科学前沿讲座（张海江、姚华建）</li>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gteeiyejh8j60lo0bv74o02.jpg" alt="image-20210812230243099"></p>
+<ol start="2">
+<li>找到 <code>recovery mode</code> 回车进入：（本次进入后，发现有三个 <code>recovery mode</code> ，选择最高版本的仍无法进入系统，经验来看，尽量选低版本的）</li>
 </ol>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gteekfs5ojj60le0b1aab02.jpg" alt="image-20210812230410736"></p>
+<ol start="3">
+<li>这时系统会进入到 recovery menu 选择 <strong>resume</strong> <strong>resume normal boot</strong></li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gteem9pkwvj60lw08uaak02.jpg" alt="image-20210812230556372"></p>
+<p>此时就可以成功进入 <code>Ubuntu</code> 系统。</p>
+<h3 id="问题分析">问题分析</h3>
+<p>进入系统后，打开终端命令行，通过命令<code>nvidia-smi</code>查看显卡驱动信息（我的电脑显示我竟然没有任何驱动信息，难怪一直卡死），然后我们重新安装显卡驱动。</p>
+<h3 id="恢复默认驱动-nouveau">恢复默认驱动 Nouveau</h3>
+<p>不想折腾，只想赶紧恢复系统，能用就行，于是打算恢复 <code>Ubuntu</code> 默认的 <code>nouveau</code> 显卡驱动。</p>
+<p><code>Nouveau</code> 是由第三方为 <code>NVIDIA</code> 显卡开发的一个开源3D驱动，让 <code>Linux</code> 更容易的应对各种复杂的 <code>NVIDIA</code> 显卡环境，安装完<code> Linux</code> 系统即可进入桌面并且有不错的显示效果，所以，很多 <code>Linux</code> 发行版默认集成了 <code>Nouveau</code> 驱动，在使用 <code>NVIDIA</code> 显卡时默认安装   <code>Nouveau</code> 驱动。</p>
+<p><strong>恢复方法：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Software and Update &gt; Additional drivers 
+</code></pre></td></tr></table>
+</div>
+</div><p>选择 <code>nouveau</code> 显卡驱动即可；<code>Apply Changes</code> .</p>
+<p><strong>重启电脑，即可生效：可以成功进入 <code>Ubuntu</code> 系统。</strong></p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://blog.csdn.net/hacyork/article/details/109288442">https://blog.csdn.net/hacyork/article/details/109288442</a>（显卡崩坏，解决无法进入Ubuntu20.04系统的问题）</li>
+<li><a href="https://askubuntu.com/questions/1032357/how-to-switch-from-nvidia-to-nouveau-drivers-on-ubuntu-18-04">https://askubuntu.com/questions/1032357/how-to-switch-from-nvidia-to-nouveau-drivers-on-ubuntu-18-04</a>（ How to switch from Nvidia to Nouveau )</li>
+</ul>
 
     </div>
 
@@ -182,7 +211,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-08-03 12:04
+        2021-08-12 22:56
         
     </span>
   </p>
@@ -208,16 +237,17 @@
   </div>
 </div><footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/Courses/">Courses</a>
+          <a href="/tags/Ubuntu/">Ubuntu</a>
+          <a href="/tags/Nvidia/">Nvidia</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/Ubuntu_Nvidia/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Ubuntu20.04显卡驱动</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/ffmpeg/">
-            <span class="next-text nav-default">Ffmpeg 命令行如何将 .m4a 音频文件转换为 .mp3</span>
+        <a class="next" href="/post/Courses/">
+            <span class="next-text nav-default">Courses汇总</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

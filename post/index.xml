@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 03 Aug 2021 12:04:52 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Aug 2021 22:56:58 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu20.04显卡驱动</title>
+      <link>https://tianyining.github.io/post/Ubuntu_Nvidia/</link>
+      <pubDate>Thu, 12 Aug 2021 22:56:58 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Ubuntu_Nvidia/</guid>
+      <description>说明 本篇 blog 记录在 Ubuntu20.04 上显卡驱动的安装及问题解决。 拯救者Y7000 (NIVIDIA GTX2060)Ubuntu 20.04无法启动问题及解决方案 手动安装 nvidia 显卡，设置失败，导致重启计算机后</description>
     </item>
     
     <item>
