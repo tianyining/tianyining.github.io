@@ -50,7 +50,7 @@
 <meta itemprop="name" content="建站日志">
 <meta itemprop="description" content="Hello World！欢迎来到 Eden_Tian 的个人独立博客。 本博客成立于 2020 年，主要关注地震学的基础知识、相关软件以及一些编程语言与工具。同时记录科研生活（至少这"><meta itemprop="datePublished" content="2020-04-22T12:23:39&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-23T01:37:56&#43;08:00" />
-<meta itemprop="wordCount" content="1222">
+<meta itemprop="wordCount" content="1783">
 <meta itemprop="keywords" content="建站日志," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="建站日志"/>
 <meta name="twitter:description" content="Hello World！欢迎来到 Eden_Tian 的个人独立博客。 本博客成立于 2020 年，主要关注地震学的基础知识、相关软件以及一些编程语言与工具。同时记录科研生活（至少这"/>
@@ -135,8 +135,8 @@
         <div class="post-category">
             <a href="/categories/%E5%BB%BA%E7%AB%99%E6%97%A5%E5%BF%97/"> 建站日志 </a>
             </div>
-          <span class="more-meta"> 约 1222 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1783 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -156,6 +156,7 @@
     <li><a href="#4-启动个人博客"><strong>4. 启动个人博客</strong></a></li>
     <li><a href="#5-让我们来写下第一篇博客"><strong>5. 让我们来写下第一篇博客</strong></a></li>
     <li><a href="#6-将个人博客部署到远端的github服务器"><strong>6. 将个人博客部署到远端的GitHub服务器</strong></a></li>
+    <li><a href="#github-不再支持密码验证解决方案ssh-免密与-token-登录配置">GitHub 不再支持密码验证解决方案：SSH 免密与 Token 登录配置</a></li>
   </ul>
 </nav>
   </div>
@@ -257,8 +258,48 @@ git push -u origin master
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>✨注意：</strong> 一定要将文章配置信息中的<code>draft:</code> 改为 <code>false</code> 然后再执行命令。</p>
-<h1 id="heading"></h1>
-
+<h2 id="github-不再支持密码验证解决方案ssh-免密与-token-登录配置">GitHub 不再支持密码验证解决方案：SSH 免密与 Token 登录配置</h2>
+<p>今天提交代码，push到GitHub上，突然出现这个问题。</p>
+<p>remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.</p>
+<p>remote: Please see <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/</a> for more information.</p>
+<p>fatal: unable to access &lsquo;<a href="https://github.com/zhoulujun/algorithm.git/':">https://github.com/zhoulujun/algorithm.git/':</a> The requested URL returned error: 403</p>
+<p>官方的解释：https://github.blog/changelog/2021-08-12-git-password-authentication-is-shutting-down/</p>
+<blockquote>
+<p>As previously announced, starting on August 13, 2021, at 09:00 PST, we will no longer accept account passwords when authenticating Git operations on GitHub.com. Instead, token-based authentication (for example, personal access, OAuth, SSH Key, or GitHub App installation token) will be required for all authenticated Git operations. Please refer to this blog post for instructions on what you need to do to continue using git operations securely. <strong>Removal</strong></p>
+</blockquote>
+<ul>
+<li>August 13, 2021, at 09:00 PST</li>
+</ul>
+<p>大致意思是，密码验证于2021年8月13日不再支持，也就是今天intellij不能再用密码方式去提交代码。请用使用 <strong>personal access token</strong> 替代。</p>
+<p>这个去年年底就说了，https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/</p>
+<blockquote>
+<p><a href="https://github.blog/2020-07-30-token-authentication-requirements-for-api-and-git-operations/">In July 2020</a>, we announced our intent to require the use of token-based authentication (for example, a personal access, OAuth, or GitHub App installation token) for all authenticated Git operations. <strong>Beginning August 13, 2021, we will no longer accept account passwords when authenticating Git operations on GitHub.com</strong>.</p>
+</blockquote>
+<p>自己鼓捣了一遍 Token，烦人的很。还是觉得直接ssh 的方式操作git就好(之前是ssh的源，也没有这个问题)。</p>
+<p><strong>暂时解决方案：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># /Users/edn-tian/yiningblog/
+$ hugo 
+# /Users/edn-tian/yiningblog/public
+$ git init
+$ git remote set-url origin git@github.com:tianyining/tianyining.github.io
+$ git add .
+$ git commit -m &#34;test&#34;
+$ git push -u origin master
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
