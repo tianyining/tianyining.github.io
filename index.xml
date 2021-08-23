@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 12 Aug 2021 22:56:58 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Aug 2021 15:07:34 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Pygmt_安装&amp;Study_1</title>
+      <link>https://tianyining.github.io/post/pygmt_learn1/</link>
+      <pubDate>Mon, 23 Aug 2021 15:07:34 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/pygmt_learn1/</guid>
+      <description>Pygmt 安装 参考官方教程即可； Plot the high resolution topography from the data source 参考链接：https://www.earthinversion.com/utilities/pyg</description>
     </item>
     
     <item>
