@@ -50,7 +50,7 @@
 <meta itemprop="name" content="建站日志">
 <meta itemprop="description" content="Hello World！欢迎来到 Eden_Tian 的个人独立博客。 本博客成立于 2020 年，主要关注地震学的基础知识、相关软件以及一些编程语言与工具。同时记录科研生活（至少这"><meta itemprop="datePublished" content="2020-04-22T12:23:39&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-23T01:37:56&#43;08:00" />
-<meta itemprop="wordCount" content="1821">
+<meta itemprop="wordCount" content="1967">
 <meta itemprop="keywords" content="建站日志," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="建站日志"/>
 <meta name="twitter:description" content="Hello World！欢迎来到 Eden_Tian 的个人独立博客。 本博客成立于 2020 年，主要关注地震学的基础知识、相关软件以及一些编程语言与工具。同时记录科研生活（至少这"/>
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/%E5%BB%BA%E7%AB%99%E6%97%A5%E5%BF%97/"> 建站日志 </a>
             </div>
-          <span class="more-meta"> 约 1821 字 </span>
+          <span class="more-meta"> 约 1967 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -299,10 +299,49 @@ $ git commit -m &#34;test&#34;
 $ git push -u origin master
 </code></pre></td></tr></table>
 </div>
+</div><h1 id="添加-shell-脚本">添加 shell 脚本</h1>
+<p>可以通过添加 <code>shell</code> 脚本的方式，这样每次 <code>git push</code> 就不需要输入那么多命令，直接在 <code>/public</code> 文件夹下运行 <code>gitpush.sh</code> 脚本即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="k">if</span> <span class="o">[</span> ! -n <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span>  <span class="c1">#-n str，字符串不为null，长度大于零</span>
+<span class="k">then</span>
+    <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;msg&#34;</span>
+<span class="k">else</span>
+    <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+<span class="k">fi</span>
+ 
+git add .  
+git commit -m <span class="s1">&#39;$msg&#39;</span>  
+git remote add origin git@github.com/tianyining/tianyining.git 
+git pull --rebase origin master
+git push origin master
+
+
+
+</code></pre></td></tr></table>
+</div>
 </div><h1 id="修订历史">修订历史</h1>
 <ul>
 <li>2020-04-22 初稿；</li>
 <li>2021-08-17：GitHub 不再支持密码验证解决方案；</li>
+<li>2021-08-25：添加 shell 脚本，帮助快捷 git push；</li>
 </ul>
 
     </div>
