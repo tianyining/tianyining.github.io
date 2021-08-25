@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Basemap on Brave New World</title>
+    <link>https://tianyining.github.io/tags/Basemap/</link>
+    <description>Recent content in Basemap on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 25 Aug 2021 23:41:38 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Basemap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python_Basemap</title>
+      <link>https://tianyining.github.io/post/python_basemap/</link>
+      <pubDate>Wed, 25 Aug 2021 23:41:38 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/python_basemap/</guid>
+      <description>Basemap 环境安装 说明 在 python=3.9 的 pygmt 环境中无法安装 basemap ，因此创建新的 conda 环境。 1 2 3 $ conda create --name basemap $ conda activate basemap $ conda install -c anaconda basemap</description>
+    </item>
+    
+  </channel>
+</rss>
