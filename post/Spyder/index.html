@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Spyder的安装及使用">
 <meta itemprop="description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代"><meta itemprop="datePublished" content="2021-07-07T20:28:07&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-07T20:28:07&#43;08:00" />
-<meta itemprop="wordCount" content="865">
+<meta itemprop="wordCount" content="1092">
 <meta itemprop="keywords" content="Anaconda," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Spyder的安装及使用"/>
 <meta name="twitter:description" content="Spyder 的安装 建议新建 conda 虚拟环境，避免包污染。 1 2 3 $ conda create -n spyder-env spyder=4 python=3.8 $ conda install numpy scipy pandas matplotlib sympy cython $ conda install -c conda-forge obspy 注意：在 spyder-env 环境下直接 conda install obspy 会失败。 Anaconda 中 Spyder4.0 后使用 kite 代"/>
@@ -135,8 +135,8 @@
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 865 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 1092 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -161,9 +161,10 @@
         <li><a href="#完整安装及纠错过程"><strong>完整安装及纠错过程：</strong></a></li>
       </ul>
     </li>
-    <li><a href="#问题">问题</a>
+    <li><a href="#解决-spyder-中不能输入中文注释的方法">解决 Spyder 中不能输入中文注释的方法</a></li>
+    <li><a href="#ubuntu2004-创建虚拟环境安装-spyder">Ubuntu20.04 创建虚拟环境，安装 Spyder</a>
       <ul>
-        <li><a href="#解决-spyder-中不能输入中文注释的方法">解决 Spyder 中不能输入中文注释的方法</a></li>
+        <li><a href="#问题描述">问题描述</a></li>
       </ul>
     </li>
     <li><a href="#修订历史">修订历史</a></li>
@@ -285,8 +286,7 @@ $ conda install spyder-kernels<span class="o">=</span>1.9.3
 <span class="c1">## 重新打开 spyder 后，需要 Restart kernels</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="问题">问题</h2>
-<h3 id="解决-spyder-中不能输入中文注释的方法">解决 Spyder 中不能输入中文注释的方法</h3>
+</div><h2 id="解决-spyder-中不能输入中文注释的方法">解决 Spyder 中不能输入中文注释的方法</h2>
 <p>打开终端，输入：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -299,12 +299,45 @@ $ conda install spyder-kernels<span class="o">=</span>1.9.3
 </code></pre></td></tr></table>
 </div>
 </div><p>运行完重启 <code>Spyder</code> 即可生效。</p>
+<h2 id="ubuntu2004-创建虚拟环境安装-spyder">Ubuntu20.04 创建虚拟环境，安装 Spyder</h2>
+<p>创建 <code>spyder-env</code> 虚拟环境，并安装 <code>pygmt</code> ，测试成功。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ conda create -n spyder-env <span class="nv">spyder</span><span class="o">=</span><span class="m">4</span> numpy scipy pandas matplotlib sympy cython
+$ conda activate spyder-env 
+$ conda install -c conda-forge xarray netcdf4 packaging gmt 
+$ conda install pygmt 
+$ conda install -c conda-forge obspy 
+$ conda install -c conda-forge jupyter_contrib_nbextensions
+$ conda install -c conda-forge jupyter_nbextensions_configurator
+$ conda install yapf <span class="c1"># code pretty 安装需要依赖的包</span>
+$ conda install autopep8 
+$ pip install jupyterthemes
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="问题描述">问题描述</h3>
+<p>成功运行 <code>Spyder</code> ，<code>import</code> 导入 <code>numpy</code> 等库没有问题，无法成功导入 <code>pygmt</code> ，原因未知，猜测可能是由于 <code>pygmt</code> 和 <code>Spyder</code> 图形化 <code>IDE</code> 不兼容？目前只能在 <code>jupyter notebook</code> 、<code>Ipython</code> 等编辑下使用 <code>pygmt</code>。</p>
 <h2 id="修订历史">修订历史</h2>
 <ul>
 <li>初稿：2021-07-07：Spyder 的初次安装；</li>
 <li>第二次修改：2021-07-09：Ubuntu18.04 中安装虚拟环境及 Spyder 的使用；</li>
 <li>第三次修改：2021-07-10：新增macOS系统下虚拟环境中 Spyder 的安装；</li>
 <li>第四次修改：2021-07-15：新增 Spyder 中不能输入中文注释的解决方法；</li>
+<li>第五次修改：2021-09-02：新增 Ubuntu20.04 中创建虚拟环境，以及 Spyder 的安装； </li>
 </ul>
 <h2 id="参考链接">参考链接</h2>
 <ul>
