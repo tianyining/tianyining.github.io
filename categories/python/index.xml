@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 25 Aug 2021 23:41:38 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Sep 2021 19:49:15 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AFTAN_to_DSurfTomo频散文件数据格式转换_Version1</title>
+      <link>https://tianyining.github.io/post/AFTAN_to_DSurfTomo/</link>
+      <pubDate>Mon, 20 Sep 2021 19:49:15 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/AFTAN_to_DSurfTomo/</guid>
+      <description>本篇 blog 记录利用 python 实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输出。 前期数据准备</description>
+    </item>
+    
     <item>
       <title>Python_Basemap</title>
       <link>https://tianyining.github.io/post/python_basemap/</link>
