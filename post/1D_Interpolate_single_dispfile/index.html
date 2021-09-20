@@ -50,7 +50,7 @@
 <meta itemprop="name" content="1D_Interpolate_single_dispfile单一频散文件插值示例_Version1">
 <meta itemprop="description" content="本篇 blog 记录利用 python 对单一频散文件进行插值的示例，实现将 AFTAN 计算出来的某一个频散文件（原始未经任何处理），对其中的 period phase_velocity 相应的两列数据进行插值，并绘"><meta itemprop="datePublished" content="2021-09-20T21:55:11&#43;08:00" />
 <meta itemprop="dateModified" content="2021-09-20T21:55:11&#43;08:00" />
-<meta itemprop="wordCount" content="1082">
+<meta itemprop="wordCount" content="1657">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="1D_Interpolate_single_dispfile单一频散文件插值示例_Version1"/>
 <meta name="twitter:description" content="本篇 blog 记录利用 python 对单一频散文件进行插值的示例，实现将 AFTAN 计算出来的某一个频散文件（原始未经任何处理），对其中的 period phase_velocity 相应的两列数据进行插值，并绘"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 1082 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1657 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -150,10 +150,12 @@
     <li><a href="#前期数据准备">前期数据准备</a></li>
     <li><a href="#代码及结果展示">代码及结果展示</a>
       <ul>
-        <li><a href="#1-生成数据进行插值">1. 生成数据进行插值</a></li>
+        <li><a href="#1-生成数据进行插值演示">1. 生成数据进行插值演示</a></li>
         <li><a href="#2-从原始频散文件中仅提取-period-pha_v-两列数据并写入新文件">2. 从原始频散文件中仅提取 Period Pha_V 两列数据，并写入新文件</a></li>
         <li><a href="#21-对提取出来的两列数据-period-pha_v-绘制插值前的相速度频散曲线">2.1 对提取出来的两列数据 Period Pha_V 绘制插值前的相速度频散曲线</a></li>
         <li><a href="#22-对提取出来的两列数据-period-pha_v-进行插值绘制插值后的相速度频散曲线">2.2 对提取出来的两列数据 Period Pha_V 进行插值，绘制插值后的相速度频散曲线</a></li>
+        <li><a href="#23-将插值后的-period-phase_velocity-写入新文件-disp_phase_interpolatecsv-中">2.3 将插值后的 period phase_velocity 写入新文件 disp_phase_interpolate.csv 中</a></li>
+        <li><a href="#24-将插值前后的相速度频散曲线绘制在一张图上进行对比">2.4 将插值前后的相速度频散曲线绘制在一张图上，进行对比</a></li>
       </ul>
     </li>
   </ul>
@@ -181,7 +183,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="代码及结果展示">代码及结果展示</h2>
-<h3 id="1-生成数据进行插值">1. 生成数据进行插值</h3>
+<h3 id="1-生成数据进行插值演示">1. 生成数据进行插值演示</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -248,7 +250,7 @@
 <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="" alt="EBgAAAAASUVORK5CYII= (405×336)"></p>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gunghye6hhj60br09kmxg02.jpg" alt="image-20210920222126000"></p>
 <h3 id="2-从原始频散文件中仅提取-period-pha_v-两列数据并写入新文件">2. 从原始频散文件中仅提取 Period Pha_V 两列数据，并写入新文件</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -385,7 +387,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="" alt="img"></p>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gungimrzi3j60bx0aa74d02.jpg" alt="image-20210920222205314"></p>
 <h3 id="22-对提取出来的两列数据-period-pha_v-进行插值绘制插值后的相速度频散曲线">2.2 对提取出来的两列数据 Period Pha_V 进行插值，绘制插值后的相速度频散曲线</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -489,7 +491,264 @@
 <span class="c1"># plt.close()</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="" alt="img"></p>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gungiyx5bsj30c30aeq30.jpg" alt="image-20210920222224787"></p>
+<h3 id="23-将插值后的-period-phase_velocity-写入新文件-disp_phase_interpolatecsv-中">2.3 将插值后的 period phase_velocity 写入新文件 disp_phase_interpolate.csv 中</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># @File  :</span>
+<span class="c1"># @Author : Yining Tian</span>
+<span class="c1"># @Date : 2021-09-13</span>
+<span class="c1"># @Reference : https://blog.csdn.net/qq_42197919/article/details/102579184</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">将插值过后的 period_list &amp; phase_velocity_list 写入到新的文件 
+</span><span class="s1">disp_phase_interpolate.csv 中
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_new</span><span class="p">)</span>
+
+<span class="n">period_interpolate</span> <span class="o">=</span> <span class="n">x_new</span>
+<span class="n">phase_velocity_interpolate</span> <span class="o">=</span> <span class="n">y_new</span>
+<span class="c1"># print(period_interpolate)</span>
+<span class="c1"># print(phase_velocity_interpolate)</span>
+
+<span class="n">period_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">period_interpolate</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="c1"># print(&#39;period_array = \n&#39;, period_array)</span>
+<span class="n">phase_velocity_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">phase_velocity_interpolate</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="c1"># print(&#34;phase_velocity_interpolate = \n&#34;, phase_velocity_array)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;period_array.shape = &#39;</span><span class="p">,</span> <span class="n">period_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;phase_velocity_array.shape = &#39;</span><span class="p">,</span> <span class="n">phase_velocity_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># 将 period_array &amp; phase_velocity_array 拼接成一个 array</span>
+<span class="n">concatenate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">period_array</span><span class="p">,</span> <span class="n">phase_velocity_array</span><span class="p">),</span>
+                                   <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">concatenate_array</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;concatenate_array.shape = &#39;</span><span class="p">,</span> <span class="n">concatenate_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># 将 concatenate_array 转化成 DataFrame 类型，为最终保存为 csv 格式做准备</span>
+<span class="n">disp_data_interpolate</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">concatenate_array</span><span class="p">,</span>
+                                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;period&#34;</span><span class="p">,</span> <span class="s2">&#34;ph_V&#34;</span><span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;disp_data_interpolate = </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">disp_data_interpolate</span><span class="p">)</span>
+<span class="c1"># print(type(disp_data_interpolate))</span>
+
+<span class="n">disp_data_interpolate</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&#34;./disp_phase_interpolate.csv&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>输出格式如下所示：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gungl1exnoj609m0hmwfr02.jpg" alt="image-20210920222424126"></p>
+<h3 id="24-将插值前后的相速度频散曲线绘制在一张图上进行对比">2.4 将插值前后的相速度频散曲线绘制在一张图上，进行对比</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">将插值后的相速度频散曲线与插值前的相速度频散曲线做对比；
+</span><span class="s1">画在同一张图上；
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s1">&#39;monokai&#39;</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">提取出 period_list
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./disp_phase.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">period_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">file_info</span> <span class="ow">in</span> <span class="nb">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+    <span class="n">c_array</span> <span class="o">=</span> <span class="n">file_info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">c_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">period_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">period_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">period_list</span><span class="p">))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">提取出 phase_velocity_list
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./disp_phase.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">phase_velocity_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">file_info</span> <span class="ow">in</span> <span class="nb">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+    <span class="n">c_array</span> <span class="o">=</span> <span class="n">file_info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">)</span>
+    <span class="n">phase_velocity</span> <span class="o">=</span> <span class="n">c_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1">#     print(phase_velocity)</span>
+    <span class="n">phase_velocity_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">phase_velocity</span><span class="p">))</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">phase_velocity_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">phase_velocity_list</span><span class="p">))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">提取出 period_list_interpolate
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./disp_phase_interpolate.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">column</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">]</span>
+    <span class="c1">#     print(column)</span>
+    <span class="n">column_period</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="c1">#     print(column_period)</span>
+    <span class="n">column_period_float</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">column_period</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;column_period_float = </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">column_period_float</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">提取出 phase_velocity_list_interpolate 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./disp_phase_interpolate.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">column</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">]</span>
+    <span class="n">column_phase_velocity</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="c1">#     print(column_phase_velocity)</span>
+    <span class="n">column_phase_velocity_float</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">column_phase_velocity</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;column_phase_velocity_float = </span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">column_phase_velocity_float</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">Matplotlib 绘图
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">period_list</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">phase_velocity_list</span>
+<span class="n">x_new</span> <span class="o">=</span> <span class="n">column_period_float</span>
+<span class="n">y_new</span> <span class="o">=</span> <span class="n">column_phase_velocity_float</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Compare Analysis&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Before Interpolate&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">y_new</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;After Interpolate&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="c1"># 设置坐标轴范围</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mf">7.5</span><span class="p">,</span> <span class="mi">33</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># 设置坐标轴名称</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;period(s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Phase Velocity(km/s)&#39;</span><span class="p">)</span>
+<span class="c1"># 设置坐标轴刻度</span>
+<span class="n">my_x_ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">my_y_ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">my_x_ticks</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">my_y_ticks</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gungm731kqj30cl0ah74f.jpg" alt="image-20210920222531115"></p>
 
     </div>
 
