@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Jupyter Notebook使用技巧">
 <meta itemprop="description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"><meta itemprop="datePublished" content="2021-07-15T14:01:35&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-15T14:01:35&#43;08:00" />
-<meta itemprop="wordCount" content="886">
+<meta itemprop="wordCount" content="1249">
 <meta itemprop="keywords" content="jupyter notebook,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Jupyter Notebook使用技巧"/>
 <meta name="twitter:description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/jupyter-notebook/"> jupyter notebook </a>
             </div>
-          <span class="more-meta"> 约 886 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 1249 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -163,6 +163,13 @@
     <li><a href="#3-jupyter-notebook-设置黑色背景主题字体大小代码自动补全">3. Jupyter Notebook 设置黑色背景主题、字体大小、代码自动补全</a>
       <ul>
         <li><a href="#背景主题字体大小设置">背景主题、字体大小设置</a></li>
+      </ul>
+    </li>
+    <li><a href="#4--markdown-如何在-jupyter-notebook-里面改变字体大小颜色以及高亮">4.  Markdown 如何在 jupyter notebook 里面改变字体、大小、颜色以及高亮</a>
+      <ul>
+        <li><a href="#改变字体颜色color">改变字体颜色(color)</a></li>
+        <li><a href="#改变字体face大小size">改变字体(face)、大小(size)</a></li>
+        <li><a href="#参考链接-2">参考链接</a></li>
       </ul>
     </li>
   </ul>
@@ -419,6 +426,64 @@ axes.unicode_minus: False
 </code></pre></td></tr></table>
 </div>
 </div><p>-f(字体) -fs(字体大小) -cellw(占屏比或宽度) -ofs(输出段的字号) -T(显示工具栏) -N(显示自己主机名)</p>
+<h2 id="4--markdown-如何在-jupyter-notebook-里面改变字体大小颜色以及高亮">4.  Markdown 如何在 jupyter notebook 里面改变字体、大小、颜色以及高亮</h2>
+<h3 id="改变字体颜色color">改变字体颜色(color)</h3>
+<p><strong>红色+加粗</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">**&lt;font color = red&gt;红色+加粗&lt;/font&gt;**
+</code></pre></td></tr></table>
+</div>
+</div><p><em>蓝色+斜体</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">*&lt;font color = blue&gt;蓝色+斜体&lt;/font&gt;*
+或
+_&lt;font color = blue&gt;蓝色+斜体&lt;/font&gt;_
+</code></pre></td></tr></table>
+</div>
+</div><p><em><strong>绿色+加粗+斜体</strong></em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">***&lt;font color=green&gt;绿色+加粗+斜体&lt;/font&gt;***
+或
+_**&lt;font color=green&gt;绿色+加粗+斜体&lt;/font&gt;**_
+或
+___&lt;font color=green&gt;绿色+加粗+斜体&lt;/font&gt;___
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="改变字体face大小size">改变字体(face)、大小(size)</h3>
+<p>5号雅黑</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;font color=steel size=5 face=雅黑&gt;5号雅黑&lt;/font&gt;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>可以看出来 color, size, font 的顺序可以随意调整，且参数不需要加引号</li>
+</ul>
+<h3 id="参考链接-2">参考链接</h3>
+<ul>
+<li><a href="https://blog.csdn.net/AlanGuoo/article/details/86318381">https://blog.csdn.net/AlanGuoo/article/details/86318381</a></li>
+</ul>
 
     </div>
 
