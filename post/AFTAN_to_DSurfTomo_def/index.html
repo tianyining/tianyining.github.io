@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>AFTAN_to_DSurfTomo频散文件数据格式转换_Version1 - Brave New World</title>
+  <title>AFTAN_to_DSurfTomo频散文件数据格式转换_def_Version - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 记录利用 python 实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输出。 前期数据准备" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/AFTAN_to_DSurfTomo/" />
+<link rel="canonical" href="https://tianyining.github.io/post/AFTAN_to_DSurfTomo_def/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="AFTAN_to_DSurfTomo频散文件数据格式转换_Version1" />
-<meta property="og:description" content="本篇 blog 记录利用 python 实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输出。 前期数据准备" />
+<meta property="og:title" content="AFTAN_to_DSurfTomo频散文件数据格式转换_def_Version" />
+<meta property="og:description" content="本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/AFTAN_to_DSurfTomo/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-09-20T19:49:15&#43;08:00" />
-<meta property="article:modified_time" content="2021-09-20T19:49:15&#43;08:00" />
+<meta property="og:url" content="https://tianyining.github.io/post/AFTAN_to_DSurfTomo_def/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-20T21:25:06&#43;08:00" />
+<meta property="article:modified_time" content="2021-09-20T21:25:06&#43;08:00" />
 
-<meta itemprop="name" content="AFTAN_to_DSurfTomo频散文件数据格式转换_Version1">
-<meta itemprop="description" content="本篇 blog 记录利用 python 实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输出。 前期数据准备"><meta itemprop="datePublished" content="2021-09-20T19:49:15&#43;08:00" />
-<meta itemprop="dateModified" content="2021-09-20T19:49:15&#43;08:00" />
-<meta itemprop="wordCount" content="608">
+<meta itemprop="name" content="AFTAN_to_DSurfTomo频散文件数据格式转换_def_Version">
+<meta itemprop="description" content="本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输"><meta itemprop="datePublished" content="2021-09-20T21:25:06&#43;08:00" />
+<meta itemprop="dateModified" content="2021-09-20T21:25:06&#43;08:00" />
+<meta itemprop="wordCount" content="529">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="AFTAN_to_DSurfTomo频散文件数据格式转换_Version1"/>
-<meta name="twitter:description" content="本篇 blog 记录利用 python 实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输出。 前期数据准备"/>
+<meta name="twitter:title" content="AFTAN_to_DSurfTomo频散文件数据格式转换_def_Version"/>
+<meta name="twitter:description" content="本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式化输"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,15 +128,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">AFTAN_to_DSurfTomo频散文件数据格式转换_Version1</h1>
+      <h1 class="post-title">AFTAN_to_DSurfTomo频散文件数据格式转换_def_Version</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-09-20 19:49 </span>
+        <span class="post-time"> 2021-09-20 21:25 </span>
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 608 字 </span>
+          <span class="more-meta"> 约 529 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -155,9 +155,9 @@
   </div>
 </div>
     <div class="post-content">
-      <p><strong>本篇 <code>blog</code> 记录利用 <code>python</code> 实现将 <code>AFTAN</code> 计算出来的多个单一频散文件（原始未经任何处理）整理成 <code>DSurfTomo</code> 反演所需的文件数据格式，实现批量处理，格式化输出。</strong></p>
+      <p><strong>本篇 <code>blog</code> 记录利用 <code>python</code> 定义函数的形式，实现将 <code>AFTAN</code> 计算出来的多个单一频散文件（原始未经任何处理）整理成 <code>DSurfTomo</code> 反演所需的文件数据格式，实现批量处理，格式化输出。</strong></p>
 <h2 id="前期数据准备">前期数据准备</h2>
-<p><code>AFTAN_to_DsurfTomo</code> 文件夹中包含的数据文件夹及代码有：</p>
+<p><code>AFTAN_to_DsurfTomo_def</code> 文件夹中包含的数据文件夹及代码有：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -167,9 +167,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">* MM1_s_2_DISP.1 文件夹:利用 AFTAN 提取出来的 COR_XXX_XXX.SAC_s_2_DISP.1 频散文件；
-* output_test 文件夹：批量格式转换后的频散文件存放的文件夹，单个频散文件命名为 COR_XXX_XXX.SAC_s_2_DISP.1.new；
+* output_tyn 文件夹：批量格式转换后的频散文件存放的文件夹，单个频散文件命名为 Cdisp.XXX-XXX.dat；
 * station_mm.lst:台站名+ 经纬度文件(源自 Professor Jiang)；
-* Conver format Strict.ipynb：jupyternote book 代码(origin from yangsh)；
+* Conver format.ipynb：jupyternote book 代码(origin from Suwen)；
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="代码">代码</h2>
@@ -225,12 +225,6 @@
 </span><span class="lnt">48
 </span><span class="lnt">49
 </span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -238,62 +232,56 @@
 <span class="kn">import</span> <span class="nn">glob</span>
 
 <span class="n">input_Dir</span> <span class="o">=</span> <span class="s1">&#39;./MM1_s_2_DISP.1/&#39;</span>
-<span class="n">output_Dir</span> <span class="o">=</span> <span class="s1">&#39;./output_test/&#39;</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1"> output format:
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;15.6f} {:&lt;15.6f}</span><span class="se">\n</span><span class="s2">&#34;</span>
-<span class="n">fmt2</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;15.6f} {:&lt;15.6f}</span><span class="se">\n</span><span class="s2">&#34;</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1"> obtain the information of stations. 
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./station_mm.lst&#39;</span><span class="p">)</span>
-<span class="n">single_station_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-<span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1"> deal with station information.
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">sta_infos</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">single_station_info</span><span class="p">)):</span>
-    <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">single_station_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># 读取每一个台站的信息</span>
-    <span class="n">stan</span><span class="p">,</span> <span class="n">stalon</span><span class="p">,</span> <span class="n">stalat</span> <span class="o">=</span> <span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-    <span class="n">stalon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stalon</span><span class="p">)</span>
-    <span class="n">stalat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stalat</span><span class="p">)</span>
-    <span class="n">sta_infos</span><span class="p">[</span><span class="n">stan</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;stalon&#34;</span><span class="p">:</span> <span class="n">stalon</span><span class="p">,</span> <span class="s2">&#34;stalat&#34;</span><span class="p">:</span> <span class="n">stalat</span><span class="p">}</span>
+<span class="n">output_Dir</span> <span class="o">=</span> <span class="s1">&#39;./output_tyn/&#39;</span>
 
-<span class="k">for</span> <span class="n">single_disp_path</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;./MM1_s_2_DISP.1/*DISP*&#39;</span><span class="p">):</span>
-    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">single_disp_path</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
-    <span class="n">data_lines</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="s1">&#39;&#39;&#39; Create new file to save the results. output_test/ 下新建 disp files &#39;&#39;&#39;</span>
-    <span class="n">single_disp_path_new</span> <span class="o">=</span> <span class="n">single_disp_path</span> <span class="o">+</span> <span class="s2">&#34;.new&#34;</span>  <span class="c1"># 定义新的 disp 文件名</span>
-    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_Dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">single_disp_path_new</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-    <span class="s1">&#39;&#39;&#39;  Write head lines into the new file  &#39;&#39;&#39;</span>
-    <span class="n">single_disp_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">single_disp_path</span><span class="p">)</span>
-    <span class="n">sta1</span><span class="p">,</span> <span class="n">sta2</span> <span class="o">=</span> <span class="n">single_disp_file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
-    <span class="n">sta1_lon</span> <span class="o">=</span> <span class="n">sta_infos</span><span class="p">[</span><span class="n">sta1</span><span class="p">][</span><span class="s2">&#34;stalon&#34;</span><span class="p">]</span>
-    <span class="n">sta1_lat</span> <span class="o">=</span> <span class="n">sta_infos</span><span class="p">[</span><span class="n">sta1</span><span class="p">][</span><span class="s2">&#34;stalat&#34;</span><span class="p">]</span>
-    <span class="n">sta2_lon</span> <span class="o">=</span> <span class="n">sta_infos</span><span class="p">[</span><span class="n">sta2</span><span class="p">][</span><span class="s2">&#34;stalon&#34;</span><span class="p">]</span>
-    <span class="n">sta2_lat</span> <span class="o">=</span> <span class="n">sta_infos</span><span class="p">[</span><span class="n">sta2</span><span class="p">][</span><span class="s2">&#34;stalat&#34;</span><span class="p">]</span>
 
-    <span class="c1"># Write head lines sta1 &amp; sta2 lon &amp; lat</span>
-    <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sta1_lon</span><span class="p">,</span> <span class="n">sta1_lat</span><span class="p">))</span>
-    <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fmt2</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sta2_lon</span><span class="p">,</span> <span class="n">sta2_lat</span><span class="p">))</span>
-    <span class="n">fileID</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>  <span class="c1"># 刷新缓冲区；</span>
+<span class="k">def</span> <span class="nf">getLoLa</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&#34;lat&#34;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&#34;error type !!!!!&#34;</span><span class="p">)</span>
 
-    <span class="c1"># Traverse every data line. 对每个 disp file 都执行此操作；</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_lines</span><span class="p">)):</span>
-        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">data_lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="n">sgl_line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-        <span class="n">ph_V</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fmt2</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">ph_V</span><span class="p">))</span>
-    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+
+    <span class="n">dispFiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_Dir</span> <span class="o">+</span> <span class="s1">&#39;/*.SAC_s_2_DISP.1&#39;</span><span class="p">)</span>
+    <span class="n">stationInfoFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./station_mm.lst&#39;</span><span class="p">)</span>
+    <span class="n">stationInfo</span> <span class="o">=</span> <span class="n">stationInfoFile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="c1">#     data = stationInfo</span>
+
+    <span class="k">for</span> <span class="n">dispfile</span> <span class="ow">in</span> <span class="n">dispFiles</span><span class="p">:</span>
+        <span class="n">stationName1</span> <span class="o">=</span> <span class="n">dispfile</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">stationName2</span> <span class="o">=</span> <span class="n">dispfile</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+            <span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">rawdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">dispfile</span><span class="p">)</span>  <span class="c1"># 将每个 dispfile load 进来，ndarray 格式；</span>
+        <span class="n">outputData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">rawdata</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+        <span class="n">lat1</span> <span class="o">=</span> <span class="n">getLoLa</span><span class="p">(</span><span class="n">stationInfo</span><span class="p">,</span> <span class="n">stationName1</span><span class="p">,</span> <span class="s2">&#34;lat&#34;</span><span class="p">)</span>
+        <span class="n">lon1</span> <span class="o">=</span> <span class="n">getLoLa</span><span class="p">(</span><span class="n">stationInfo</span><span class="p">,</span> <span class="n">stationName1</span><span class="p">,</span> <span class="s2">&#34;lon&#34;</span><span class="p">)</span>
+        <span class="n">lat2</span> <span class="o">=</span> <span class="n">getLoLa</span><span class="p">(</span><span class="n">stationInfo</span><span class="p">,</span> <span class="n">stationName2</span><span class="p">,</span> <span class="s2">&#34;lat&#34;</span><span class="p">)</span>
+        <span class="n">lon2</span> <span class="o">=</span> <span class="n">getLoLa</span><span class="p">(</span><span class="n">stationInfo</span><span class="p">,</span> <span class="n">stationName2</span><span class="p">,</span> <span class="s2">&#34;lon&#34;</span><span class="p">)</span>
+
+        <span class="n">outputData</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lon1</span>
+        <span class="n">outputData</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lat1</span>
+        <span class="n">outputData</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lon2</span>
+        <span class="n">outputData</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">lat2</span>
+
+        <span class="n">outputData</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">rawdata</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">outputData</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rawdata</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span>
+            <span class="n">output_Dir</span> <span class="o">+</span> <span class="s2">&#34;Cdisp.{}-{}.dat&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stationName1</span><span class="p">,</span> <span class="n">stationName2</span><span class="p">),</span>
+            <span class="n">outputData</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="输出效果">输出效果</h2>
-<p><strong>Version_1 最终将每个频散文件整理成如下格式：两个台站的经度、纬度 + 周期及对应的相速度。此时的周期 period 只是从原始的频散文件中搬运过来，未经过任何处理。</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gunen0wpxyj60hs0bfjs802.jpg" alt="image-20210920211706876"></p>
+<p><strong>def_Version 最终将每个频散文件整理成如下格式：两个台站的经度、纬度 + 周期及对应的相速度。此时的周期 period 只是从原始的频散文件中搬运过来，未经过任何处理。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gunf57jkgdj60hr0bd40t02.jpg" alt="image-20210920213434952"></p>
 
     </div>
 
@@ -305,7 +293,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-09-20 19:49
+        2021-09-20 21:25
         
     </span>
   </p>
@@ -335,13 +323,13 @@
           <a href="/tags/python/">python</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/AFTAN_to_DSurfTomo_def/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">AFTAN_to_DSurfTomo频散文件数据格式转换_def_Version</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/pygmt_Seismic_Station_Maps/">
-            <span class="next-text nav-default">Pygmt_Seismic_Station_Maps</span>
+        <a class="next" href="/post/AFTAN_to_DSurfTomo/">
+            <span class="next-text nav-default">AFTAN_to_DSurfTomo频散文件数据格式转换_Version1</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
