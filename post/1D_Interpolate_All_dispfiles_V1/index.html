@@ -50,7 +50,7 @@
 <meta itemprop="name" content="1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1">
 <meta itemprop="description" content="本篇 blog 记录利用 python 对所有频散文件进行插值的示例，对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。"><meta itemprop="datePublished" content="2021-09-23T14:50:21&#43;08:00" />
 <meta itemprop="dateModified" content="2021-09-23T14:50:21&#43;08:00" />
-<meta itemprop="wordCount" content="1057">
+<meta itemprop="wordCount" content="1150">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1"/>
 <meta name="twitter:description" content="本篇 blog 记录利用 python 对所有频散文件进行插值的示例，对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。"/>
@@ -136,7 +136,7 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 1057 字 </span>
+          <span class="more-meta"> 约 1150 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -233,6 +233,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="2-对所有频散文件进行批量插值处理得到每秒一个数据点的插值后的相速度频散文件">2. 对所有频散文件进行批量插值处理，得到每秒一个数据点的插值后的相速度频散文件</h3>
+<p><strong>需要注意的是：Version1 版本的批量处理代码，并未考虑插值范围以外的值，在插值过程中，为防止溢出，对周期最小值向上取整，对周期最大值向下取整。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -413,7 +414,9 @@
                                         <span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div>
+</div><p><strong>实现批量处理，插值后的单一频散文件如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1guqkvng76yj605f0avglz02.jpg" alt="image-20210923150940997"></p>
+
     </div>
 
     <div class="post-copyright">
