@@ -6,7 +6,16 @@
     <description>Recent content in 数据格式转换 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 22 Sep 2021 20:06:57 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Sep 2021 14:50:21 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1</title>
+      <link>https://tianyining.github.io/post/1D_Interpolate_All_dispfiles_V1/</link>
+      <pubDate>Thu, 23 Sep 2021 14:50:21 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/1D_Interpolate_All_dispfiles_V1/</guid>
+      <description>本篇 blog 记录利用 python 对所有频散文件进行插值的示例，对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。</description>
+    </item>
+    
     <item>
       <title>1D_Interpolate_single_dispfile单一频散文件插值示例_Version2</title>
       <link>https://tianyining.github.io/post/1D_Interpolate_single_dispfile_V2/</link>

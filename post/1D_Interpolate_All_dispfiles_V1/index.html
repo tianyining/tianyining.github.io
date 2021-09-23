@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>1D_Interpolate_single_dispfile单一频散文件插值示例_Version2 - Brave New World</title>
+  <title>1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1 - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 记录利用 python 对单一频散文件进行插值的示例，实现将 AFTAN 计算出来的某一个频散文件（原始未经任何处理），对其中的 period phase_velocity 相应的两列数据进行插值，插值" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 记录利用 python 对所有频散文件进行插值的示例，对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/1D_Interpolate_single_dispfile_V2/" />
+<link rel="canonical" href="https://tianyining.github.io/post/1D_Interpolate_All_dispfiles_V1/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="1D_Interpolate_single_dispfile单一频散文件插值示例_Version2" />
-<meta property="og:description" content="本篇 blog 记录利用 python 对单一频散文件进行插值的示例，实现将 AFTAN 计算出来的某一个频散文件（原始未经任何处理），对其中的 period phase_velocity 相应的两列数据进行插值，插值" />
+<meta property="og:title" content="1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1" />
+<meta property="og:description" content="本篇 blog 记录利用 python 对所有频散文件进行插值的示例，对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/1D_Interpolate_single_dispfile_V2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-09-22T20:06:57&#43;08:00" />
-<meta property="article:modified_time" content="2021-09-22T20:06:57&#43;08:00" />
+<meta property="og:url" content="https://tianyining.github.io/post/1D_Interpolate_All_dispfiles_V1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-23T14:50:21&#43;08:00" />
+<meta property="article:modified_time" content="2021-09-23T14:50:21&#43;08:00" />
 
-<meta itemprop="name" content="1D_Interpolate_single_dispfile单一频散文件插值示例_Version2">
-<meta itemprop="description" content="本篇 blog 记录利用 python 对单一频散文件进行插值的示例，实现将 AFTAN 计算出来的某一个频散文件（原始未经任何处理），对其中的 period phase_velocity 相应的两列数据进行插值，插值"><meta itemprop="datePublished" content="2021-09-22T20:06:57&#43;08:00" />
-<meta itemprop="dateModified" content="2021-09-22T20:06:57&#43;08:00" />
-<meta itemprop="wordCount" content="1012">
+<meta itemprop="name" content="1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1">
+<meta itemprop="description" content="本篇 blog 记录利用 python 对所有频散文件进行插值的示例，对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。"><meta itemprop="datePublished" content="2021-09-23T14:50:21&#43;08:00" />
+<meta itemprop="dateModified" content="2021-09-23T14:50:21&#43;08:00" />
+<meta itemprop="wordCount" content="1057">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="1D_Interpolate_single_dispfile单一频散文件插值示例_Version2"/>
-<meta name="twitter:description" content="本篇 blog 记录利用 python 对单一频散文件进行插值的示例，实现将 AFTAN 计算出来的某一个频散文件（原始未经任何处理），对其中的 period phase_velocity 相应的两列数据进行插值，插值"/>
+<meta name="twitter:title" content="1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1"/>
+<meta name="twitter:description" content="本篇 blog 记录利用 python 对所有频散文件进行插值的示例，对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,15 +128,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">1D_Interpolate_single_dispfile单一频散文件插值示例_Version2</h1>
+      <h1 class="post-title">1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-09-22 20:06 </span>
+        <span class="post-time"> 2021-09-23 14:50 </span>
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 1012 字 </span>
+          <span class="more-meta"> 约 1057 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -151,7 +151,7 @@
     <li><a href="#代码及结果展示">代码及结果展示</a>
       <ul>
         <li><a href="#1-批量处理将-aftan-提取出来的原始频散文件只提取其中的-period-ph_v-两列并写入新的文件中">1. 批量处理，将 AFTAN 提取出来的原始频散文件只提取其中的 period ph_V 两列，并写入新的文件中</a></li>
-        <li><a href="#2-对单一频散文件进行插值处理得到每秒一个数据点的插值后的相速度频散文件">2. 对单一频散文件进行插值处理，得到每秒一个数据点的插值后的相速度频散文件</a></li>
+        <li><a href="#2-对所有频散文件进行批量插值处理得到每秒一个数据点的插值后的相速度频散文件">2. 对所有频散文件进行批量插值处理，得到每秒一个数据点的插值后的相速度频散文件</a></li>
       </ul>
     </li>
   </ul>
@@ -159,7 +159,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p><strong>本篇 <code>blog</code> 记录利用 <code>python</code> 对单一频散文件进行插值的示例，实现将 <code>AFTAN</code> 计算出来的某一个频散文件（原始未经任何处理），对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。</strong></p>
+      <p><strong>本篇 <code>blog</code> 记录利用 <code>python</code> 对所有频散文件进行插值的示例，对其中的 period phase_velocity 相应的两列数据进行插值，插值的结果是每秒一个数据点，及其相对应的插值过后的相速度。实现对频散文件的批量插值处理，最终得到插值过后的相速度频散文件。</strong></p>
 <h2 id="前期数据准备">前期数据准备</h2>
 <p><code>1D_interpolate_all</code> 文件夹中包含的数据文件有：</p>
 <div class="highlight"><div class="chroma">
@@ -167,15 +167,11 @@
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">* Interpolate_all：存放插值过后的单一频散文件；
-* MM1_s_2_DISP.1：包含 AFTAN 提取出来的所有原始频散文件；
-* Period_PhV：将 AFTAN 提取出来的所有原始频散文件提取出其中的 period ph_V 两列，重新写入到各频散文件中；
-* 1D_Interpolate_All_Disp.ipynb：对单一频散文件进行插值处理，得到每秒一个数据点的插值后的相速度频散文件；
-* Extracr_Period_PhV.ipynb：批量处理，将所有 AFTAN 提取出的频散文件只提取其中的 period ph_V 两列，并重新写入到新的文件中；
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">* Period_PhV：将 AFTAN 提取出来的所有原始频散文件提取出其中的 period ph_V 两列，重新写入到各频散文件中；
+* Interpolate_all_Practice.ipynb：实现对所有频散文件进行相速度插值的 jupyter notebook；
+* Interpolate_Practice：存放插值过后的相速度频散文件，文件格式为 CSV；
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="代码及结果展示">代码及结果展示</h2>
@@ -226,7 +222,7 @@
     <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">single_disp_path_new</span> <span class="o">=</span> <span class="n">single_disp_path</span> <span class="o">+</span> <span class="s2">&#34;.new&#34;</span>
     <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_Dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">single_disp_path_new</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-    <span class="c1"># 只读取 data_lines 的两列</span>
+    <span class="c1"># 只读取 data_lines 的两列 period ph_V</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_lines</span><span class="p">)):</span>
         <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">data_lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">elements</span> <span class="o">=</span> <span class="n">sgl_line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
@@ -236,7 +232,7 @@
     <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="2-对单一频散文件进行插值处理得到每秒一个数据点的插值后的相速度频散文件">2. 对单一频散文件进行插值处理，得到每秒一个数据点的插值后的相速度频散文件</h3>
+</div><h3 id="2-对所有频散文件进行批量插值处理得到每秒一个数据点的插值后的相速度频散文件">2. 对所有频散文件进行批量插值处理，得到每秒一个数据点的插值后的相速度频散文件</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -326,112 +322,98 @@
 </span><span class="lnt">85
 </span><span class="lnt">86
 </span><span class="lnt">87
-</span><span class="lnt">88
-</span><span class="lnt">89
-</span><span class="lnt">90
-</span><span class="lnt">91
-</span><span class="lnt">92
-</span><span class="lnt">93
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># @File  :</span>
+<span class="c1"># @Author : Yining Tian</span>
+<span class="c1"># @Date : 2021-09-23</span>
+<span class="c1"># @Update:插值过程中，如何外推以适应插值范围以外的值，参考链接如下</span>
+<span class="c1"># @Reference: https://www.pythonheidong.com/blog/article/124937/b29df977f1615acde66f/</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span>
+<span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span> 
-<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s2">&#34;monokai&#34;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
 
-<span class="n">input_Dir</span> <span class="o">=</span> <span class="s1">&#39;./Period_PhV/&#39;</span>
-<span class="n">output_Dir</span> <span class="o">=</span> <span class="s1">&#39;./Interpolate_all/&#39;</span>
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">&#34;monokai&#34;</span><span class="p">)</span>
 
-<span class="n">input_Dir</span> <span class="o">=</span> <span class="s1">&#39;./Period_PhV/&#39;</span>
-<span class="n">output_Dir</span> <span class="o">=</span> <span class="s1">&#39;./Interpolate_all/&#39;</span>
-<span class="n">disp_file_name</span> <span class="o">=</span> <span class="s1">&#39;COR_BAS_CAY.SAC_s_2_DISP.1.new&#39;</span>
-<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;15.6f} {:&lt;15.6f}</span><span class="se">\n</span><span class="s2">&#34;</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">将一个文件转换为 CSV 格式
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">读取其中一个 disp 文件全部
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./Period_PhV/COR_BAS_CAY.SAC_s_2_DISP.1.new&#39;</span><span class="p">)</span>
-<span class="n">single_disp_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-<span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">将读取的 disp 文件中的 period 信息存为列表
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">period</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">ph_v</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">single_disp_info</span><span class="p">)):</span>
-    <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">single_disp_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">elements</span> <span class="o">=</span> <span class="n">sgl_line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-    <span class="n">time_ele</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">period</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time_ele</span><span class="p">)</span>
-    <span class="n">phv_ele</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">ph_v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phv_ele</span><span class="p">)</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">将读取的 period ph_V 列表进行 1D_Interpolate 
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="c1"># print(&#34;period list = \n&#34;, period)</span>
-<span class="c1"># print(&#34;ph_V list = \n&#34;,ph_v)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">period</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">ph_v</span>
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s1">&#39;./Period_PhV/&#39;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s1">&#39;./Interpolate_Practice/&#39;</span>
 
-<span class="c1"># 根据 period list 定义插值点，并合成 period_interpolate list</span>
-<span class="n">period_interpolate</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">min_point</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">period</span><span class="p">))</span>
-<span class="n">max_point</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">period</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">single_disp_path</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;./Period_PhV/*.new&#39;</span><span class="p">):</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    读取其中一个只有两列 period ph_V 数据的 disp file 全部
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">single_disp_path</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+    <span class="n">single_disp_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>  <span class="c1"># 读取 single_disp_file_new 全部</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    读取 single_disp_info 中的 period 信息，并存为列表
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ph_V</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">single_disp_info</span><span class="p">)):</span>
+        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">single_disp_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="n">sgl_line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">time_ele</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">phv_ele</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">period</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time_ele</span><span class="p">)</span>
+        <span class="n">ph_V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phv_ele</span><span class="p">)</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    将读取的 period ph_V 列表进行 1D_Interpolate 
+</span><span class="s1">    对于最小值首先尝试向上取整，此时最小插值点的数值会大于 min(period)
+</span><span class="s1">    对于最大值尝试向下取整，此时 最大插值点的数值会小于 max(period)
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">period</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ph_V</span>
+    <span class="n">period_Interpolate</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">#     min_point = round(min(period))</span>
+    <span class="c1">#     max_point = round(max(period))</span>
+    <span class="c1">#     ceil_interpolate_point = math.ceil(min(period))  # 向上取整</span>
+    <span class="c1">#     print(&#39;ceil_interpolate_point =&#39;, ceil_interpolate_point)</span>
+    <span class="n">ceil_interpolate_point</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">period</span><span class="p">))</span>  <span class="c1"># 向下取整</span>
+    <span class="c1">#     print(&#39;floor_interpolate_point =&#39;, floor_interpolate_point)</span>
+    <span class="n">floor_interpolate_point</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">period</span><span class="p">))</span>
+    <span class="c1">#     print(&#39;ceil_interpolate_point =&#39;, ceil_interpolate_point)</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_point</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_point</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">period_interpolate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="c1"># print(period)</span>
-<span class="c1"># print(period_interpolate)</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">定义插值函数 f 
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&#34;linear&#34;</span><span class="p">)</span>
-<span class="n">x_new</span> <span class="o">=</span> <span class="n">period_interpolate</span>
-<span class="n">y_new</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span>
-
-<span class="c1"># print(x_new)</span>
-<span class="c1"># print(y_new)</span>
-
-<span class="nb">len</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_new</span><span class="p">)</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">将插值后的 x_new y_new list 写入到新的 disp 文件中
-</span><span class="s1">新建 single_disp_path_new 文件
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">single_disp_path</span> <span class="o">=</span> <span class="s1">&#39;./Period_PhV/COR_BAS_CAY.SAC_s_2_DISP.1.new&#39;</span>
-<span class="n">single_disp_path_new</span> <span class="o">=</span> <span class="n">single_disp_path</span> <span class="o">+</span> <span class="s1">&#39;.interp&#39;</span>
-<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_Dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">single_disp_path_new</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-
-
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;----------------&#39;</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
-
-<span class="n">period_interpolate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_new</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
-<span class="n">ph_v_interpolate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_new</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
-<span class="n">concatenate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">period_interpolate_array</span><span class="p">,</span> <span class="n">ph_v_interpolate_array</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">将 concatenate_array 转化成 DataFrame 类型，并最终保存为 CSV 格式
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">single_disp_file_Interpolate</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">concatenate_array</span><span class="p">,</span>
-                                         <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;period&#34;</span><span class="p">,</span> <span class="s2">&#34;ph_V&#34;</span><span class="p">])</span>
-
-<span class="c1"># single_disp_file_Interpolate.to_csv(</span>
-<span class="c1">#     output_Dir + &#39;test.csv&#39;, float_format=&#39;%.1f&#39;)</span>
-<span class="n">single_disp_file_Interpolate</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_Dir</span> <span class="o">+</span> <span class="n">disp_file_name</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
-
-<span class="s1">&#39;&#39;&#39;
-</span><span class="s1">将 test.csv 格式转换为 disp_file[i] 即可
-</span><span class="s1">&#39;&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ceil_interpolate_point</span><span class="p">,</span> <span class="n">floor_interpolate_point</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">period_Interpolate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    定义插值函数 f
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+    <span class="n">x_new</span> <span class="o">=</span> <span class="n">period_Interpolate</span>
+    <span class="n">y_new</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_new</span><span class="p">)</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    将插值后的 x_new y_new list 写入到新的 disp file 中
+</span><span class="s1">    新建插值处理后的 single_disp_path_new 文件
+</span><span class="s1">    （此处只新建存储插值后数值的频散文件，并未将插值后的相速度频散写入文件）
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="c1">#     single_disp_path_new = single_disp_path + &#39;_interp1D&#39;</span>
+    <span class="c1">#     fileID = open(output_dir + os.path.basename(single_disp_path_new),</span>
+    <span class="c1">#                   &#39;w&#39;)  # 新建所有插值后的频散文件；</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    新建插值处理后的 period ph_V ndarray 以及合并后的 concatenate_array
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">period_interpolate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_new</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">ph_v_interpolate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_new</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">concatenate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">period_interpolate_array</span><span class="p">,</span> <span class="n">ph_v_interpolate_array</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    将 concatenate_array 转化成 DataFrame 类型，并最终保存为 CSV 格式
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">single_disp_file_Interpolate</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">concatenate_array</span><span class="p">,</span>
+                                             <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;ph_V&#39;</span><span class="p">])</span>
+    <span class="n">single_disp_file_Interpolate</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">single_disp_path</span><span class="p">)</span> <span class="o">+</span>
+                                        <span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>插值后的单一频散文件如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gupozwj00dj605g0de0tc02.jpg" alt="image-20210922204622512"></p>
-
+</div>
     </div>
 
     <div class="post-copyright">
@@ -442,7 +424,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-09-22 20:06
+        2021-09-23 14:50
         
     </span>
   </p>
@@ -472,13 +454,13 @@
           <a href="/tags/python/">python</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/1D_Interpolate_All_dispfiles_V1/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">1D_Interpolate_All_dispfiles所有频散文件插值示例_Version1</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/1D_Interpolate_single_dispfile/">
-            <span class="next-text nav-default">1D_Interpolate_single_dispfile单一频散文件插值示例_Version1</span>
+        <a class="next" href="/post/1D_Interpolate_single_dispfile_V2/">
+            <span class="next-text nav-default">1D_Interpolate_single_dispfile单一频散文件插值示例_Version2</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
