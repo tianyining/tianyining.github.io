@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 23 Sep 2021 14:50:21 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Sep 2021 15:13:46 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Python文件的格式化输入输出</title>
+      <link>https://tianyining.github.io/post/File_Format_IPO/</link>
+      <pubDate>Thu, 23 Sep 2021 15:13:46 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/File_Format_IPO/</guid>
+      <description>说明 Python 文件的格式化输入输出，基本格式化输出采用 % 方法，但是 format() 的功能更为强大，该函数把字符串当成一个模板，通过传入的参数进行格式化，并且使用 {}</description>
     </item>
     
     <item>
