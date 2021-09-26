@@ -6,7 +6,16 @@
     <description>Recent content in pygmt on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 26 Sep 2021 19:49:47 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/pygmt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Sep 2021 20:41:53 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/pygmt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Practice for fig.text()</title>
+      <link>https://tianyining.github.io/post/Practice_fig.text/</link>
+      <pubDate>Sun, 26 Sep 2021 20:41:53 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Practice_fig.text/</guid>
+      <description>本篇 blog 记录使用 pygmt 练习使用 fig.text() 命令。 注明：本篇 blog 并非原创，主要借鉴的是下面的 pygmt 示例，仅作为自我学习目的，侵权必删。 参考链接：https://ww</description>
+    </item>
+    
     <item>
       <title>Seismic_Station_Plot_Practice</title>
       <link>https://tianyining.github.io/post/Seismic_Station_Plot_Practice/</link>
