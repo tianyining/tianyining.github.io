@@ -6,7 +6,16 @@
     <description>Recent content in 数据格式转换 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 01 Oct 2021 14:29:11 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Oct 2021 14:49:35 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将所有格式化输出的相速度频散txt文件整理成带有分隔符的一个txt文件</title>
+      <link>https://tianyining.github.io/post/Merge_txt_all/</link>
+      <pubDate>Fri, 01 Oct 2021 14:49:35 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Merge_txt_all/</guid>
+      <description>说明 本篇 blog 记录利用 python 将所有 txt 文件合成为一个 txt 文件。将上一篇 blog 上一篇实现的格式化输出的所有 txt 文件整合为一个 txt 文件。 将所有格式化输出的相速度频散</description>
+    </item>
+    
     <item>
       <title>txt文件批量处理，实现格式化输出txt</title>
       <link>https://tianyining.github.io/post/txt_format/</link>

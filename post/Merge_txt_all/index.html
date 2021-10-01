@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>txt文件批量处理，实现格式化输出txt - Brave New World</title>
+  <title>将所有格式化输出的相速度频散txt文件整理成带有分隔符的一个txt文件 - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件&#43;批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 blog 记录利用 python 将所有 txt 文件合成为一个 txt 文件。将上一篇 blog 上一篇实现的格式化输出的所有 txt 文件整合为一个 txt 文件。 将所有格式化输出的相速度频散" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/txt_format/" />
+<link rel="canonical" href="https://tianyining.github.io/post/Merge_txt_all/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="txt文件批量处理，实现格式化输出txt" />
-<meta property="og:description" content="说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件&#43;批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处" />
+<meta property="og:title" content="将所有格式化输出的相速度频散txt文件整理成带有分隔符的一个txt文件" />
+<meta property="og:description" content="说明 本篇 blog 记录利用 python 将所有 txt 文件合成为一个 txt 文件。将上一篇 blog 上一篇实现的格式化输出的所有 txt 文件整合为一个 txt 文件。 将所有格式化输出的相速度频散" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/txt_format/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-10-01T14:29:11&#43;08:00" />
-<meta property="article:modified_time" content="2021-10-01T14:29:11&#43;08:00" />
+<meta property="og:url" content="https://tianyining.github.io/post/Merge_txt_all/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-01T14:49:35&#43;08:00" />
+<meta property="article:modified_time" content="2021-10-01T14:49:35&#43;08:00" />
 
-<meta itemprop="name" content="txt文件批量处理，实现格式化输出txt">
-<meta itemprop="description" content="说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件&#43;批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处"><meta itemprop="datePublished" content="2021-10-01T14:29:11&#43;08:00" />
-<meta itemprop="dateModified" content="2021-10-01T14:29:11&#43;08:00" />
-<meta itemprop="wordCount" content="329">
+<meta itemprop="name" content="将所有格式化输出的相速度频散txt文件整理成带有分隔符的一个txt文件">
+<meta itemprop="description" content="说明 本篇 blog 记录利用 python 将所有 txt 文件合成为一个 txt 文件。将上一篇 blog 上一篇实现的格式化输出的所有 txt 文件整合为一个 txt 文件。 将所有格式化输出的相速度频散"><meta itemprop="datePublished" content="2021-10-01T14:49:35&#43;08:00" />
+<meta itemprop="dateModified" content="2021-10-01T14:49:35&#43;08:00" />
+<meta itemprop="wordCount" content="236">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="txt文件批量处理，实现格式化输出txt"/>
-<meta name="twitter:description" content="说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件&#43;批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处"/>
+<meta name="twitter:title" content="将所有格式化输出的相速度频散txt文件整理成带有分隔符的一个txt文件"/>
+<meta name="twitter:description" content="说明 本篇 blog 记录利用 python 将所有 txt 文件合成为一个 txt 文件。将上一篇 blog 上一篇实现的格式化输出的所有 txt 文件整合为一个 txt 文件。 将所有格式化输出的相速度频散"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,15 +128,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">txt文件批量处理，实现格式化输出txt</h1>
+      <h1 class="post-title">将所有格式化输出的相速度频散txt文件整理成带有分隔符的一个txt文件</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-10-01 14:29 </span>
+        <span class="post-time"> 2021-10-01 14:49 </span>
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 329 字 </span>
+          <span class="more-meta"> 约 236 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -148,15 +148,16 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#说明">说明</a></li>
-    <li><a href="#批量处理将所有-txt-文件格式化输出">批量处理，将所有 txt 文件格式化输出</a></li>
+    <li><a href="#将所有格式化输出的相速度频散-txt-文件整合为一个-txt-文件">将所有格式化输出的相速度频散 txt 文件整合为一个 txt 文件</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <h2 id="说明">说明</h2>
-<p>上一篇 <code>blog</code> 实现了利用 <code>python</code> 将 <code>csv</code>格式的文件转化为 <code>txt</code>格式（单一文件+批量处理，详情查看<a href="https://tianyining.github.io/post/CSV2TXT/">上一篇</a>），本篇 <code>blog</code> 实现，将所有 <code>txt</code> 文件格式化输出。</p>
-<h2 id="批量处理将所有-txt-文件格式化输出">批量处理，将所有 txt 文件格式化输出</h2>
+<p>本篇 <code>blog</code> 记录利用 <code>python</code> 将所有 <code>txt</code> 文件合成为一个 <code>txt</code> 文件。将上一篇 <code>blog</code> <a href="https://tianyining.github.io/post/txt_format/">上一篇</a>实现的格式化输出的所有 <code>txt</code> 文件整合为一个 <code>txt</code> 文件。</p>
+<h2 id="将所有格式化输出的相速度频散-txt-文件整合为一个-txt-文件">将所有格式化输出的相速度频散 txt 文件整合为一个 txt 文件</h2>
+<p><strong>每个格式化输出的相速度频散 txt 文件，自定义分隔符分开。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -184,70 +185,36 @@
 </span><span class="lnt">23
 </span><span class="lnt">24
 </span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 
-<span class="n">input_dir</span> <span class="o">=</span> <span class="s1">&#39;../txtFile/&#39;</span>
-<span class="n">output_dir</span> <span class="o">=</span> <span class="s1">&#39;../Format_txt/&#39;</span>
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s1">&#39;../Format_txt/*&#39;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s1">&#39;../Merge_File/&#39;</span>
 <span class="s1">&#39;&#39;&#39;
-</span><span class="s1">output_format 
+</span><span class="s1">新建 Mergefile
 </span><span class="s1">&#39;&#39;&#39;</span>
-<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;15.6f} {:&lt;15.6f}</span><span class="se">\n</span><span class="s2">&#34;</span>
-<span class="n">fmt2</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;15.6f}&#34;</span>
-<span class="k">for</span> <span class="n">sgl_txt</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;../txtFile/*&#39;</span><span class="p">):</span>
-    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">sgl_txt</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
-    <span class="n">data_lines</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>  <span class="c1"># 将原始格式的每个 txt 都全部按行读入；</span>
+<span class="n">Merge_file_path</span> <span class="o">=</span> <span class="s1">&#39;../Merge_File/Mergefile_test.txt&#39;</span>
+<span class="n">Merge_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">Merge_file_path</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>  <span class="c1"># 打开 Merge_file 文件并覆盖原文件；</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">遍历每个 format txt 并读取数字的行数，最终写入 Mergefile
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">single_format_txt</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;../Format_txt/*&#39;</span><span class="p">):</span>
+    <span class="c1">#     print(single_format_txt)</span>
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">single_format_txt</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">single_disp_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
     <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="s1">&#39;&#39;&#39;
-</span><span class="s1">    Create new files to save formated txt files
-</span><span class="s1">    &#39;&#39;&#39;</span>
-    <span class="n">sgl_txt_format</span> <span class="o">=</span> <span class="n">sgl_txt</span> <span class="o">+</span> <span class="s2">&#34;.format&#34;</span>
-    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">sgl_txt_format</span><span class="p">),</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
-    <span class="s1">&#39;&#39;&#39;
-</span><span class="s1">    Write head lines into the format txt files (period ph_V)
-</span><span class="s1">    &#39;&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># 读入每个文件的第一行 period ph_V</span>
-        <span class="n">sgl_info</span> <span class="o">=</span> <span class="n">data_lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="n">sgl_info</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="n">period_info</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">ph_V_info</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">period_info</span> <span class="o">+</span> <span class="s2">&#34;          &#34;</span><span class="p">)</span>
-        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ph_V_info</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="s1">&#39;&#39;&#39;
-</span><span class="s1">    Write info lines into the format txt files (period &amp; ph_V)
-</span><span class="s1">    &#39;&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_lines</span><span class="p">)):</span>
-        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">data_lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">elements</span> <span class="o">=</span> <span class="n">sgl_line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">ph_V</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="c1">#         fileID.write(&#34;period\n&#34;)</span>
-        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">ph_V</span><span class="p">))</span>
-    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">single_disp_info</span><span class="p">)):</span>
+        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">single_disp_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1">#         Merge_file.writelines(sgl_line)</span>
+        <span class="n">Merge_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sgl_line</span><span class="p">)</span>
+<span class="c1">#     Merge_file.write(&#39;&gt; &gt; &gt; &gt;\n&#39;)  # Merge_file 写入每一个 format txt 后，分隔符；</span>
+<span class="c1">#     Merge_file.write(&#39;\n&#39;)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>对所有 txt 文件，实现格式化输出后，文件格式如下，这里仅举其中一个格式化输出的txt文件的例子：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1guzsxqacaxj60hr0bh3ze02.jpg" alt="image-20211001143828736"></p>
-
+</div>
     </div>
 
     <div class="post-copyright">
@@ -258,7 +225,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-10-01 14:29
+        2021-10-01 14:49
         
     </span>
   </p>
@@ -288,13 +255,13 @@
           <a href="/tags/python/">python</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/Merge_txt_all/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">将所有格式化输出的相速度频散txt文件整理成带有分隔符的一个txt文件</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/CSV2TXT/">
-            <span class="next-text nav-default">将CSV格式的文件转化为txt格式（单一文件&#43;批处理）</span>
+        <a class="next" href="/post/txt_format/">
+            <span class="next-text nav-default">txt文件批量处理，实现格式化输出txt</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
