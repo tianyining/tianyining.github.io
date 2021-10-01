@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 26 Sep 2021 20:41:53 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Oct 2021 14:11:53 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>将CSV格式的文件转化为txt格式（单一文件&#43;批处理）</title>
+      <link>https://tianyining.github.io/post/CSV2TXT/</link>
+      <pubDate>Fri, 01 Oct 2021 14:11:53 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/CSV2TXT/</guid>
+      <description>说明 本篇 blog 记录利用 python 实现将 csv 格式的文件转化为 txt 格式的文件，包含单一文件格式转换，也包含实现批处理的代码。 1. 实现将单一相速度频散文件由 csv 格式转</description>
     </item>
     
     <item>

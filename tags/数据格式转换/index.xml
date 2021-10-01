@@ -6,7 +6,16 @@
     <description>Recent content in 数据格式转换 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 23 Sep 2021 15:13:46 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Oct 2021 14:11:53 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将CSV格式的文件转化为txt格式（单一文件&#43;批处理）</title>
+      <link>https://tianyining.github.io/post/CSV2TXT/</link>
+      <pubDate>Fri, 01 Oct 2021 14:11:53 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/CSV2TXT/</guid>
+      <description>说明 本篇 blog 记录利用 python 实现将 csv 格式的文件转化为 txt 格式的文件，包含单一文件格式转换，也包含实现批处理的代码。 1. 实现将单一相速度频散文件由 csv 格式转</description>
+    </item>
+    
     <item>
       <title>Python文件的格式化输入输出</title>
       <link>https://tianyining.github.io/post/File_Format_IPO/</link>

@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 26 Sep 2021 20:41:53 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Oct 2021 14:11:53 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>将CSV格式的文件转化为txt格式（单一文件&#43;批处理）</title>
+      <link>https://tianyining.github.io/post/CSV2TXT/</link>
+      <pubDate>Fri, 01 Oct 2021 14:11:53 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/CSV2TXT/</guid>
+      <description>说明 本篇 blog 记录利用 python 实现将 csv 格式的文件转化为 txt 格式的文件，包含单一文件格式转换，也包含实现批处理的代码。 1. 实现将单一相速度频散文件由 csv 格式转</description>
     </item>
     
     <item>
