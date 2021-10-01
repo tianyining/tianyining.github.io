@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Myanmar Seismic Stations Maps_Version2 - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version1 的提升 相较于 Version1 ，本篇 blog 实现利用 pandas 读入台站信息； fig.grdimage() 模块，利用键值对的方式，保存 grdimage 信息； 对" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/Seismic_Station_Plot_Myanmar/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="Myanmar Seismic Stations Maps_Version2" />
+<meta property="og:description" content="本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version1 的提升 相较于 Version1 ，本篇 blog 实现利用 pandas 读入台站信息； fig.grdimage() 模块，利用键值对的方式，保存 grdimage 信息； 对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/Seismic_Station_Plot_Myanmar/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-01T15:24:18&#43;08:00" />
+<meta property="article:modified_time" content="2021-10-01T15:24:18&#43;08:00" />
+
+<meta itemprop="name" content="Myanmar Seismic Stations Maps_Version2">
+<meta itemprop="description" content="本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version1 的提升 相较于 Version1 ，本篇 blog 实现利用 pandas 读入台站信息； fig.grdimage() 模块，利用键值对的方式，保存 grdimage 信息； 对"><meta itemprop="datePublished" content="2021-10-01T15:24:18&#43;08:00" />
+<meta itemprop="dateModified" content="2021-10-01T15:24:18&#43;08:00" />
+<meta itemprop="wordCount" content="695">
+<meta itemprop="keywords" content="pygmt,GMT," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Myanmar Seismic Stations Maps_Version2"/>
+<meta name="twitter:description" content="本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version1 的提升 相较于 Version1 ，本篇 blog 实现利用 pandas 读入台站信息； fig.grdimage() 模块，利用键值对的方式，保存 grdimage 信息； 对"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Myanmar Seismic Stations Maps_Version2</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-10-01 15:24 </span>
+        <div class="post-category">
+            <a href="/categories/pygmt/"> pygmt </a>
+            <a href="/categories/GMT/"> GMT </a>
+            </div>
+          <span class="more-meta"> 约 695 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-相较于-version1-的提升">1. 相较于 Version1 的提升</a></li>
+    <li><a href="#pygmt-绘制台站分布图">Pygmt 绘制台站分布图</a>
+      <ul>
+        <li><a href="#cpt--my2cpt-的绘制效果origin-from-yangshun">cpt = my2cpt 的绘制效果（origin from yangshun）</a></li>
+        <li><a href="#cpt--terra-的绘图效果">cpt = &lsquo;terra&rsquo; 的绘图效果</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>本篇 blog 记录使用 <code>pygmt</code> 绘制研究区域地震台站分布图。</strong></p>
+<h2 id="1-相较于-version1-的提升">1. 相较于 Version1 的提升</h2>
+<ul>
+<li>
+<p><strong>相较于 <code>Version1</code> ，本篇 <code>blog</code> 实现利用 <code>pandas</code> 读入台站信息；</strong></p>
+</li>
+<li>
+<p><strong><code>fig.grdimage()</code> 模块，利用键值对的方式，保存 <code>grdimage</code> 信息；</strong></p>
+</li>
+<li>
+<p><strong>对比不同 <code>cpt</code> 的绘制效果，<code>my2.cpt</code> from yangshun；</strong></p>
+</li>
+<li>
+<p><strong>添加断层线的绘制（目前只绘制 <code>Sagaing Fault</code> + <code>RedRiver Fault</code>，断层信息来源于 yangshun）；</strong></p>
+</li>
+<li>
+<p><strong>添加 fig.text() 模块；</strong></p>
+</li>
+</ul>
+<h2 id="pygmt-绘制台站分布图">Pygmt 绘制台站分布图</h2>
+<h3 id="cpt--my2cpt-的绘制效果origin-from-yangshun">cpt = my2cpt 的绘制效果（origin from yangshun）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pygmt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="c1"># 读入台站信息</span>
+<span class="n">MM_stations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./station_mm.lst&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>  <span class="c1"># 正则表达式</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">Generate Myanmar Map
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="c1"># fig = pygmt.Figure.plot(size=(20, 20), dpi=100)</span>
+<span class="c1"># fig = plt.figure(figsize=(16,8), dpi=100)</span>
+<span class="c1"># 将 grdimage 信息导入到 KWARGS 中；</span>
+<span class="n">KWARGS</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;studyarea.grd&#39;</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="mi">91</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
+    <span class="c1">#     projection=&#39;M10i&#39;,</span>
+    <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;M10i&#39;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;my2.cpt&#39;</span><span class="p">,</span>
+    <span class="n">frame</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">shading</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">grdimage</span><span class="p">(</span><span class="o">**</span><span class="n">KWARGS</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">coast</span><span class="p">(</span>
+    <span class="n">shorelines</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="c1">#           borders = &#34;1/0.8p&#34;,</span>
+    <span class="n">borders</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;1/0.8p&#34;</span><span class="p">,</span> <span class="s2">&#34;2/0.1p&#34;</span><span class="p">],</span>
+    <span class="n">frame</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">map_scale</span><span class="o">=</span><span class="s1">&#39;-68.5/7.0/7.0/200&#39;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 绘制台站分布；</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">MM_stations</span><span class="o">.</span><span class="n">sta_lon</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">MM_stations</span><span class="o">.</span><span class="n">sta_lat</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s1">&#39;i0.2i&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span>
+    <span class="n">pen</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 绘制断层线</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_2.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_3.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_4.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_5.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_6.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_7.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_8.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_9.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_10.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./RedRiver/RRF.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;2.0,black&#34;</span><span class="p">)</span>
+<span class="c1"># pygmt.Figure().plot(data=&#39;./SF/SF.txt&#39;, pen=&#34;1.5,black&#34;)</span>
+<span class="c1"># fig.text()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">textfiles</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="mf">96.3</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">21.7</span><span class="p">,</span>
+    <span class="n">position</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Sagaing Fault&#39;</span><span class="p">,</span>
+    <span class="n">angle</span><span class="o">=-</span><span class="mi">82</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s1">&#39;28p,Helvetica-Bold,black&#39;</span><span class="p">,</span>
+    <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;LM&#39;</span><span class="p">,</span>
+    <span class="c1">#     fill = &#39;green&#39;,</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">textfiles</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="mf">103.0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">22.3</span><span class="p">,</span>
+    <span class="n">position</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;RedRiver Fault&#39;</span><span class="p">,</span>
+    <span class="n">angle</span><span class="o">=-</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s1">&#39;28p,Helvetica-Bold,black&#39;</span><span class="p">,</span>
+    <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;BL&#39;</span><span class="p">,</span>
+    <span class="c1">#     fill = &#39;green&#39;,</span>
+<span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">Pygmt Visualization 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./MM_test.pdf&#39;</span><span class="p">,</span> <span class="n">crop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1guzuia9cilj60l20i6adl02.jpg" alt="image-20211001153253970"></p>
+<h3 id="cpt--terra-的绘图效果">cpt = &lsquo;terra&rsquo; 的绘图效果</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pygmt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="c1"># 读入台站信息</span>
+<span class="n">MM_stations</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./station_mm.lst&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>  <span class="c1"># 正则表达式</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">Generate Myanmar Map
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span> 
+<span class="c1"># fig = pygmt.Figure.plot(size=(20, 20), dpi=100)</span>
+<span class="c1"># fig = plt.figure(figsize=(16,8), dpi=100)</span>
+<span class="c1"># 将 grdimage 信息导入到 KWARGS 中；</span>
+<span class="n">KWARGS</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;studyarea.grd&#39;</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="mi">91</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
+<span class="c1">#     projection=&#39;M10i&#39;,</span>
+    <span class="n">projection</span> <span class="o">=</span> <span class="s1">&#39;M10i&#39;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terra&#39;</span><span class="p">,</span>
+    <span class="n">frame</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">shading</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">grdimage</span><span class="p">(</span><span class="o">**</span><span class="n">KWARGS</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">coast</span><span class="p">(</span>
+    <span class="n">shorelines</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="c1">#           borders = &#34;1/0.8p&#34;,</span>
+    <span class="n">borders</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;1/0.8p&#34;</span><span class="p">,</span> <span class="s2">&#34;2/0.1p&#34;</span><span class="p">],</span>
+    <span class="n">frame</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">map_scale</span><span class="o">=</span><span class="s1">&#39;-68.5/7.0/7.0/200&#39;</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 绘制台站分布；</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">MM_stations</span><span class="o">.</span><span class="n">sta_lon</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">MM_stations</span><span class="o">.</span><span class="n">sta_lat</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s1">&#39;i0.2i&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span>
+    <span class="n">pen</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 绘制断层线</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_2.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_3.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_4.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_5.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_6.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_7.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_8.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_9.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./SF/SF_10.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1.5,black&#34;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="s1">&#39;./RedRiver/RRF.txt&#39;</span><span class="p">,</span> <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;2.0,black&#34;</span><span class="p">)</span>
+<span class="c1"># pygmt.Figure().plot(data=&#39;./SF/SF.txt&#39;, pen=&#34;1.5,black&#34;)</span>
+<span class="c1"># fig.text()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">textfiles</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="mf">96.3</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">21.7</span><span class="p">,</span>
+    <span class="n">position</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Sagaing Fault&#39;</span><span class="p">,</span>
+    <span class="n">angle</span><span class="o">=-</span><span class="mi">82</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s1">&#39;28p,Helvetica-Bold,black&#39;</span><span class="p">,</span>
+    <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;LM&#39;</span><span class="p">,</span>
+    <span class="c1">#     fill = &#39;green&#39;,</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">textfiles</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="mf">103.0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">22.3</span><span class="p">,</span>
+    <span class="n">position</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s1">&#39;RedRiver Fault&#39;</span><span class="p">,</span>
+    <span class="n">angle</span><span class="o">=-</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s1">&#39;28p,Helvetica-Bold,black&#39;</span><span class="p">,</span>
+    <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;BL&#39;</span><span class="p">,</span>
+    <span class="c1">#     fill = &#39;green&#39;,</span>
+<span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Pygmt Visualization 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./MM_test.png&#39;</span><span class="p">,</span> <span class="n">crop</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1guzul6acttj60ys0u046g02.jpg" alt="image-20211001153513686"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-10-01 15:24
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/pygmt/">pygmt</a>
+          <a href="/tags/GMT/">GMT</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Merge_txt_all/">
+            <span class="next-text nav-default">将所有格式化输出的相速度频散txt文件整理成带有分隔符的一个txt文件</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

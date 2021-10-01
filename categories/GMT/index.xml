@@ -6,7 +6,16 @@
     <description>Recent content in GMT on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 26 Sep 2021 20:41:53 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/GMT/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Oct 2021 15:24:18 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/GMT/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Myanmar Seismic Stations Maps_Version2</title>
+      <link>https://tianyining.github.io/post/Seismic_Station_Plot_Myanmar/</link>
+      <pubDate>Fri, 01 Oct 2021 15:24:18 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Seismic_Station_Plot_Myanmar/</guid>
+      <description>本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version1 的提升 相较于 Version1 ，本篇 blog 实现利用 pandas 读入台站信息； fig.grdimage() 模块，利用键值对的方式，保存 grdimage 信息； 对</description>
+    </item>
+    
     <item>
       <title>Practice for fig.text()</title>
       <link>https://tianyining.github.io/post/Practice_fig.text/</link>
@@ -26,7 +35,7 @@
     </item>
     
     <item>
-      <title>Pygmt_Seismic_Station_Maps</title>
+      <title>Myanmar Seismic Stations Maps_Version1</title>
       <link>https://tianyining.github.io/post/pygmt_Seismic_Station_Maps/</link>
       <pubDate>Fri, 17 Sep 2021 16:33:10 +0800</pubDate>
       
