@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 01 Oct 2021 14:11:53 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Oct 2021 14:29:11 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>txt文件批量处理，实现格式化输出txt</title>
+      <link>https://tianyining.github.io/post/txt_format/</link>
+      <pubDate>Fri, 01 Oct 2021 14:29:11 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/txt_format/</guid>
+      <description>说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件+批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处</description>
+    </item>
+    
     <item>
       <title>将CSV格式的文件转化为txt格式（单一文件&#43;批处理）</title>
       <link>https://tianyining.github.io/post/CSV2TXT/</link>

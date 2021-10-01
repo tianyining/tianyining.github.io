@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>将CSV格式的文件转化为txt格式（单一文件&#43;批处理） - Brave New World</title>
+  <title>txt文件批量处理，实现格式化输出txt - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 blog 记录利用 python 实现将 csv 格式的文件转化为 txt 格式的文件，包含单一文件格式转换，也包含实现批处理的代码。 1. 实现将单一相速度频散文件由 csv 格式转" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件&#43;批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/CSV2TXT/" />
+<link rel="canonical" href="https://tianyining.github.io/post/txt_format/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="将CSV格式的文件转化为txt格式（单一文件&#43;批处理）" />
-<meta property="og:description" content="说明 本篇 blog 记录利用 python 实现将 csv 格式的文件转化为 txt 格式的文件，包含单一文件格式转换，也包含实现批处理的代码。 1. 实现将单一相速度频散文件由 csv 格式转" />
+<meta property="og:title" content="txt文件批量处理，实现格式化输出txt" />
+<meta property="og:description" content="说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件&#43;批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/CSV2TXT/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-10-01T14:11:53&#43;08:00" />
-<meta property="article:modified_time" content="2021-10-01T14:11:53&#43;08:00" />
+<meta property="og:url" content="https://tianyining.github.io/post/txt_format/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-01T14:29:11&#43;08:00" />
+<meta property="article:modified_time" content="2021-10-01T14:29:11&#43;08:00" />
 
-<meta itemprop="name" content="将CSV格式的文件转化为txt格式（单一文件&#43;批处理）">
-<meta itemprop="description" content="说明 本篇 blog 记录利用 python 实现将 csv 格式的文件转化为 txt 格式的文件，包含单一文件格式转换，也包含实现批处理的代码。 1. 实现将单一相速度频散文件由 csv 格式转"><meta itemprop="datePublished" content="2021-10-01T14:11:53&#43;08:00" />
-<meta itemprop="dateModified" content="2021-10-01T14:11:53&#43;08:00" />
-<meta itemprop="wordCount" content="466">
+<meta itemprop="name" content="txt文件批量处理，实现格式化输出txt">
+<meta itemprop="description" content="说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件&#43;批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处"><meta itemprop="datePublished" content="2021-10-01T14:29:11&#43;08:00" />
+<meta itemprop="dateModified" content="2021-10-01T14:29:11&#43;08:00" />
+<meta itemprop="wordCount" content="329">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="将CSV格式的文件转化为txt格式（单一文件&#43;批处理）"/>
-<meta name="twitter:description" content="说明 本篇 blog 记录利用 python 实现将 csv 格式的文件转化为 txt 格式的文件，包含单一文件格式转换，也包含实现批处理的代码。 1. 实现将单一相速度频散文件由 csv 格式转"/>
+<meta name="twitter:title" content="txt文件批量处理，实现格式化输出txt"/>
+<meta name="twitter:description" content="说明 上一篇 blog 实现了利用 python 将 csv格式的文件转化为 txt格式（单一文件&#43;批量处理，详情查看上一篇），本篇 blog 实现，将所有 txt 文件格式化输出。 批量处"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,15 +128,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">将CSV格式的文件转化为txt格式（单一文件&#43;批处理）</h1>
+      <h1 class="post-title">txt文件批量处理，实现格式化输出txt</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-10-01 14:11 </span>
+        <span class="post-time"> 2021-10-01 14:29 </span>
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 466 字 </span>
+          <span class="more-meta"> 约 329 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -148,65 +148,15 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#说明">说明</a></li>
-    <li><a href="#1-实现将单一相速度频散文件由-csv-格式转化为-txt-文件">1. 实现将单一相速度频散文件由 csv 格式转化为 txt 文件</a></li>
-    <li><a href="#2-实现批处理将所有的-csv-文件转换为-txt-格式的文件">2. 实现批处理，将所有的 csv 文件转换为 txt 格式的文件</a></li>
+    <li><a href="#批量处理将所有-txt-文件格式化输出">批量处理，将所有 txt 文件格式化输出</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <h2 id="说明">说明</h2>
-<p>本篇 <code>blog</code> 记录利用 <code>python</code> 实现将 <code>csv</code> 格式的文件转化为 <code>txt</code> 格式的文件，包含单一文件格式转换，也包含实现批处理的代码。</p>
-<h2 id="1-实现将单一相速度频散文件由-csv-格式转化为-txt-文件">1. 实现将单一相速度频散文件由 csv 格式转化为 txt 文件</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
-</span><span class="s1">实现将单一相速度频散文件 CSV 格式，转化为 txt 格式；
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="c1">#@File :</span>
-<span class="c1">#@Author : Yining Tian </span>
-<span class="c1">#@Date : 2021-09-26</span>
-<span class="c1">#@Reference : https://stackoverflow.com/questions/47339698/how-to-convert-csv-file-to-text-file-using-python</span>
-<span class="c1"># (python 将单一 csv 格式的文件，转换为 txt 格式)</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-
-<span class="n">csv_file</span> <span class="o">=</span> <span class="s1">&#39;../Interpolate_onefile/COR_BAS_CAY.SAC_s_2_DISP.1.new.csv&#39;</span>
-<span class="n">txt_file</span> <span class="o">=</span> <span class="s1">&#39;../Merge_File/test2.txt&#39;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">txt_file</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_output_file</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">my_input_file</span><span class="p">:</span>
-        <span class="p">[</span>
-            <span class="c1">#             my_output_file.write(&#34; &#34;.join(row) + &#39;\n&#39;)</span>
-            <span class="n">my_output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;  &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">my_input_file</span><span class="p">)</span>
-        <span class="p">]</span>
-    <span class="n">my_output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>转换格式后，输出的 <code>txt</code> 文件格式如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1guzsgst5saj60hr0bewfg02.jpg" alt="image-20211001142214600"></p>
-<h2 id="2-实现批处理将所有的-csv-文件转换为-txt-格式的文件">2. 实现批处理，将所有的 csv 文件转换为 txt 格式的文件</h2>
+<p>上一篇 <code>blog</code> 实现了利用 <code>python</code> 将 <code>csv</code>格式的文件转化为 <code>txt</code>格式（单一文件+批量处理，详情查看<a href="https://tianyining.github.io/post/CSV2TXT/">上一篇</a>），本篇 <code>blog</code> 实现，将所有 <code>txt</code> 文件格式化输出。</p>
+<h2 id="批量处理将所有-txt-文件格式化输出">批量处理，将所有 txt 文件格式化输出</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -242,45 +192,61 @@
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
-</span><span class="s1">实现批量处理，将所有插值后的相速度频散文件 csv 格式，转换为 txt 格式；
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="c1">#@File :</span>
-<span class="c1">#@Author : Yining Tian</span>
-<span class="c1">#@Date : 2021-09-26</span>
-<span class="c1">#@Reference : https://blog.csdn.net/XBR_2014/article/details/86591515</span>
-<span class="c1">#             (python 批量将 CSV 保存为 txt)</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
 
-<span class="n">csvPath</span> <span class="o">=</span> <span class="s1">&#39;../Interpolate_onefile/&#39;</span>
-<span class="n">outPath</span> <span class="o">=</span> <span class="s1">&#39;../txtFile/&#39;</span>
-<span class="n">csvLists</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">csvPath</span><span class="p">)</span>  <span class="c1"># 列出文件夹下所有的目录与文件</span>
-
-<span class="k">for</span> <span class="n">single_csv</span> <span class="ow">in</span> <span class="n">csvLists</span><span class="p">:</span>
-    <span class="c1">#     filepath, filename = os.path.split(single_csv)</span>
-    <span class="c1"># print(&#34;{} ---{}&#34;.format(filepath,filename))</span>
-    <span class="c1"># print(single_csv)</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">single_csv</span>
-    <span class="c1"># prename = *.new suffix = .csv</span>
-    <span class="p">(</span><span class="n">prename</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-        <span class="n">csvPath</span> <span class="o">+</span> <span class="n">single_csv</span><span class="p">,</span>
-        <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;ph_V&#39;</span><span class="p">],</span>
-        <span class="c1">#                      nrows=10</span>
-    <span class="p">)</span>  <span class="c1"># df 是单一相速度频散文件</span>
-
-    <span class="c1"># 筛选 col 和 row 的数据</span>
-
-<span class="c1">#     df.to_csv(outPath + prename + &#39;.txt&#39;, header=None, sep=&#39; &#39;, index=None)</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">outPath</span> <span class="o">+</span> <span class="n">prename</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-    <span class="c1"># header 指是否省略 period ph_V</span>
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s1">&#39;../txtFile/&#39;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s1">&#39;../Format_txt/&#39;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">output_format 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;15.6f} {:&lt;15.6f}</span><span class="se">\n</span><span class="s2">&#34;</span>
+<span class="n">fmt2</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;15.6f}&#34;</span>
+<span class="k">for</span> <span class="n">sgl_txt</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;../txtFile/*&#39;</span><span class="p">):</span>
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">sgl_txt</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+    <span class="n">data_lines</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>  <span class="c1"># 将原始格式的每个 txt 都全部按行读入；</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    Create new files to save formated txt files
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">sgl_txt_format</span> <span class="o">=</span> <span class="n">sgl_txt</span> <span class="o">+</span> <span class="s2">&#34;.format&#34;</span>
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">sgl_txt_format</span><span class="p">),</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    Write head lines into the format txt files (period ph_V)
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># 读入每个文件的第一行 period ph_V</span>
+        <span class="n">sgl_info</span> <span class="o">=</span> <span class="n">data_lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="n">sgl_info</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">period_info</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ph_V_info</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">period_info</span> <span class="o">+</span> <span class="s2">&#34;          &#34;</span><span class="p">)</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ph_V_info</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    Write info lines into the format txt files (period &amp; ph_V)
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_lines</span><span class="p">)):</span>
+        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">data_lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="n">sgl_line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">ph_V</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1">#         fileID.write(&#34;period\n&#34;)</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">ph_V</span><span class="p">))</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>转换格式后，所有的相速度频散文件格式如下，这里仅举其中一个文件的例子：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1guzsknoafzj60hp0bfmy502.jpg" alt="image-20211001142559219"></p>
+</div><p><strong>对所有 txt 文件，实现格式化输出后，文件格式如下，这里仅举其中一个格式化输出的txt文件的例子：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1guzsxqacaxj60hr0bh3ze02.jpg" alt="image-20211001143828736"></p>
 
     </div>
 
@@ -292,7 +258,7 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-10-01 14:11
+        2021-10-01 14:29
         
     </span>
   </p>
@@ -322,13 +288,13 @@
           <a href="/tags/python/">python</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/txt_format/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">txt文件批量处理，实现格式化输出txt</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/Practice_fig.text/">
-            <span class="next-text nav-default">Practice for fig.text()</span>
+        <a class="next" href="/post/CSV2TXT/">
+            <span class="next-text nav-default">将CSV格式的文件转化为txt格式（单一文件&#43;批处理）</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
