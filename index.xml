@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 01 Oct 2021 15:24:18 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Oct 2021 21:22:44 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>感冒流程记录</title>
+      <link>https://tianyining.github.io/post/Catch_cold/</link>
+      <pubDate>Sat, 02 Oct 2021 21:22:44 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Catch_cold/</guid>
+      <description>说明 本篇 blog 记录自己 2021 年度第一场感冒，发生在夏秋（亦或是秋冬）换季之际，谨以此篇 blog 督促自己天气转凉后应及时加衣换被子，保持心态平和（很重要），</description>
     </item>
     
     <item>
