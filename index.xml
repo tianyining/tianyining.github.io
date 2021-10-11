@@ -33,7 +33,7 @@ It makes use of a variety of open source projects including:
       <pubDate>Mon, 11 Oct 2021 17:27:21 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/lst2csv/</guid>
-      <description></description>
+      <description>说明 本篇 blog 记录利用 python 实现将 .lst 格式的文件转化为 txt 格式的文件，这里以将研究区域台站信息 station_mm.lst 整理为 station_MM.csv 为例。 数据准备 只需要研究区域的台站信息文件 station_mm.lst 。 代</description>
     </item>
     
     <item>
