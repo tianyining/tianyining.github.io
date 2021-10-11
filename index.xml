@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 02 Oct 2021 21:22:44 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Oct 2021 17:27:21 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>将.lst格式的文件转化为csv格式文件</title>
+      <link>https://tianyining.github.io/post/lst2csv/</link>
+      <pubDate>Mon, 11 Oct 2021 17:27:21 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/lst2csv/</guid>
+      <description></description>
     </item>
     
     <item>
