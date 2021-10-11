@@ -17,42 +17,63 @@
   
   <url>
     <loc>https://tianyining.github.io/</loc>
-    <lastmod>2021-10-11T17:27:21+08:00</lastmod>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/categories/</loc>
-    <lastmod>2021-10-11T17:27:21+08:00</lastmod>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/GMT/</loc>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/GMT/</loc>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/post/</loc>
-    <lastmod>2021-10-11T17:27:21+08:00</lastmod>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/tags/python/</loc>
-    <lastmod>2021-10-11T17:27:21+08:00</lastmod>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/categories/python/</loc>
-    <lastmod>2021-10-11T17:27:21+08:00</lastmod>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/tags/</loc>
-    <lastmod>2021-10-11T17:27:21+08:00</lastmod>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/rec_station_map_ThreeStations/</loc>
+    <lastmod>2021-10-11T17:55:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -95,20 +116,6 @@
   <url>
     <loc>https://tianyining.github.io/categories/%E6%89%AF%E9%97%B2%E7%AF%87%E5%84%BF/</loc>
     <lastmod>2021-10-02T21:22:44+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/GMT/</loc>
-    <lastmod>2021-10-01T15:24:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/GMT/</loc>
-    <lastmod>2021-10-01T15:24:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
