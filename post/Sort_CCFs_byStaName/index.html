@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Ubuntu18.04北大VPN客户端安装 - Brave New World</title>
+  <title>按照台站名整理互相关文件 - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="1. 官网下载客户端 客户端下载：https://its.pku.edu.cn/service_1_vpn_client.jsp 注意：在安装客户端" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 记录利用 python 实现将计算好的 CCFs 按照台站名进行整理，每一个以台站名命名的文件夹内部都包含 *Sta_N* 的所有互相关文件。 前期数据准备 1 2 3 4 * COR-M" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
-<link rel="canonical" href="https://tianyining.github.io/post/ubuntu_pku_vpn/" />
+<link rel="canonical" href="https://tianyining.github.io/post/Sort_CCFs_byStaName/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +40,20 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="Ubuntu18.04北大VPN客户端安装" />
-<meta property="og:description" content="1. 官网下载客户端 客户端下载：https://its.pku.edu.cn/service_1_vpn_client.jsp 注意：在安装客户端" />
+<meta property="og:title" content="按照台站名整理互相关文件" />
+<meta property="og:description" content="本篇 blog 记录利用 python 实现将计算好的 CCFs 按照台站名进行整理，每一个以台站名命名的文件夹内部都包含 *Sta_N* 的所有互相关文件。 前期数据准备 1 2 3 4 * COR-M" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://tianyining.github.io/post/ubuntu_pku_vpn/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-10-21T21:47:39&#43;08:00" />
-<meta property="article:modified_time" content="2020-10-21T21:47:39&#43;08:00" />
+<meta property="og:url" content="https://tianyining.github.io/post/Sort_CCFs_byStaName/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-10-23T17:23:05&#43;08:00" />
+<meta property="article:modified_time" content="2021-10-23T17:23:05&#43;08:00" />
 
-<meta itemprop="name" content="Ubuntu18.04北大VPN客户端安装">
-<meta itemprop="description" content="1. 官网下载客户端 客户端下载：https://its.pku.edu.cn/service_1_vpn_client.jsp 注意：在安装客户端"><meta itemprop="datePublished" content="2020-10-21T21:47:39&#43;08:00" />
-<meta itemprop="dateModified" content="2020-10-21T21:47:39&#43;08:00" />
-<meta itemprop="wordCount" content="130">
-<meta itemprop="keywords" content="VPN,PKU," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ubuntu18.04北大VPN客户端安装"/>
-<meta name="twitter:description" content="1. 官网下载客户端 客户端下载：https://its.pku.edu.cn/service_1_vpn_client.jsp 注意：在安装客户端"/>
+<meta itemprop="name" content="按照台站名整理互相关文件">
+<meta itemprop="description" content="本篇 blog 记录利用 python 实现将计算好的 CCFs 按照台站名进行整理，每一个以台站名命名的文件夹内部都包含 *Sta_N* 的所有互相关文件。 前期数据准备 1 2 3 4 * COR-M"><meta itemprop="datePublished" content="2021-10-23T17:23:05&#43;08:00" />
+<meta itemprop="dateModified" content="2021-10-23T17:23:05&#43;08:00" />
+<meta itemprop="wordCount" content="407">
+<meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="按照台站名整理互相关文件"/>
+<meta name="twitter:description" content="本篇 blog 记录利用 python 实现将计算好的 CCFs 按照台站名进行整理，每一个以台站名命名的文件夹内部都包含 *Sta_N* 的所有互相关文件。 前期数据准备 1 2 3 4 * COR-M"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,14 +128,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Ubuntu18.04北大VPN客户端安装</h1>
+      <h1 class="post-title">按照台站名整理互相关文件</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-10-21 21:47 </span>
+        <span class="post-time"> 2021-10-23 17:23 </span>
         <div class="post-category">
-            <a href="/categories/VPN/"> VPN </a>
+            <a href="/categories/python/"> python </a>
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 130 字 </span>
+          <span class="more-meta"> 约 407 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -146,48 +147,105 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#1-官网下载客户端">1. 官网下载客户端</a></li>
-    <li><a href="#2-安装">2. 安装</a></li>
+    <li><a href="#前期数据准备">前期数据准备</a></li>
+    <li><a href="#代码">代码</a></li>
+    <li><a href="#空文件夹-pbkt">空文件夹 PBKT</a></li>
   </ul>
 </nav>
   </div>
 </div>
-  <div class="post-outdated">
-    <div class="hint">
-      <p>【注意】最后更新于 <span class="timeago" datetime="2020-10-21T21:47:39" title="October 21, 2020">October 21, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
-    </div>
-  </div>
     <div class="post-content">
-      <h2 id="1-官网下载客户端">1. 官网下载客户端</h2>
-<p>客户端下载：https://its.pku.edu.cn/service_1_vpn_client.jsp</p>
-<p><strong>注意：在安装客户端之前，请断开 fq</strong></p>
-<h2 id="2-安装">2. 安装</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo dpkg -i ps-pulse-linux-9.1r8.0-ubuntu-64bit-installer.deb
-</code></pre></td></tr></table>
-</div>
-</div><p>按照命令行提示，安装缺失的包（如没有提示，可忽略）</p>
+      <p><strong>本篇 <code>blog</code> 记录利用 <code>python</code> 实现将计算好的 CCFs 按照台站名进行整理，每一个以台站名命名的文件夹内部都包含 <code>*Sta_N*</code> 的所有互相关文件。</strong></p>
+<h2 id="前期数据准备">前期数据准备</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">apt-get install libwebkitgtk-1.0-0
-apt-get install libproxy1-plugin-webkit
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">* COR-MM：存放互相关文件 CCFs；
+* Myanmar_Sta_CCF：最终的输出路径，按照台站名存放 CCFs；
+* SRC：脚本；
+* plot：绘制 M00 及其他所有台站的互相关叠加示意图，检查是否成功整理文件；
 </code></pre></td></tr></table>
 </div>
-</div><p>再次安装 deb 即可</p>
+</div><h2 id="代码">代码</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 读入台站信息，将台站名存为列表 Sta_n 
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">Sta_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;../station_mm.lst&#34;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+<span class="n">Sta_n</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">single_sta</span> <span class="ow">in</span> <span class="n">Sta_info</span><span class="o">.</span><span class="n">Sta_n</span><span class="p">:</span>
+    <span class="n">Sta_n</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_sta</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 新建以台站名命名的文件夹，添加判断语句，若不存在以台站名命名的文件夹，则新建；
+</span><span class="s1"> 若已经存在，则不再重新创建；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s1">&#39;../COR-MM/&#39;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s1">&#39;../Myanmar_Sta_CCF/&#39;</span>
+
+<span class="k">for</span> <span class="n">single_sta</span> <span class="ow">in</span> <span class="n">Sta_n</span><span class="p">:</span>
+    <span class="c1">#     print(single_sta)</span>
+    <span class="k">if</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">single_sta</span><span class="p">)</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="c1">#         print(&#39;Sta_n file not exist. You need to mkdir Sta_n folder !!! &#39;)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">single_sta</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">single_sta</span><span class="p">,</span> <span class="s2">&#34; folder establish !!!&#34;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#         print(single_sta, &#39; folder already here !!! &#39;)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">input_dir</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&#34;cp &#34;</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span> <span class="o">+</span> <span class="n">single_sta</span> <span class="o">+</span> <span class="s2">&#34;* &#34;</span> <span class="o">+</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="n">single_sta</span> <span class="o">+</span>
+                  <span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">single_sta</span> <span class="o">+</span> <span class="s2">&#34; ok&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="空文件夹-pbkt">空文件夹 PBKT</h2>
+<p><strong>由于 <code>PBKT</code> 台站与其他所有台站都没有互相关文件，因此，<code>PBKT</code>文件为空。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">sudo dpkg -i ps-pulse-linux-9.1r8.0-ubuntu-64bit-installer.deb
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">cp</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">stat</span> <span class="s1">&#39;*PBKT*&#39;</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="nb">file</span> <span class="ow">or</span> <span class="n">directory</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -201,7 +259,7 @@ apt-get install libproxy1-plugin-webkit
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2020-10-21 21:47
+        2021-10-23 17:23
         
     </span>
   </p>
@@ -227,17 +285,17 @@ apt-get install libproxy1-plugin-webkit
   </div>
 </div><footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/VPN/">VPN</a>
-          <a href="/tags/PKU/">PKU</a>
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">数据格式转换</a>
+          <a href="/tags/python/">python</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/2020-10-28%E7%BB%84%E4%BC%9A/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">2020-10-28组会</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
-        <a class="next" href="/post/ubuntu_Graphics_card/">
-            <span class="next-text nav-default">Ubuntu显卡驱动</span>
+        <a class="next" href="/post/Plan/">
+            <span class="next-text nav-default">Plan</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>

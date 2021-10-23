@@ -6,7 +6,16 @@
     <description>Recent content in 数据格式转换 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 11 Oct 2021 17:27:21 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Oct 2021 17:23:05 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>按照台站名整理互相关文件</title>
+      <link>https://tianyining.github.io/post/Sort_CCFs_byStaName/</link>
+      <pubDate>Sat, 23 Oct 2021 17:23:05 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Sort_CCFs_byStaName/</guid>
+      <description>本篇 blog 记录利用 python 实现将计算好的 CCFs 按照台站名进行整理，每一个以台站名命名的文件夹内部都包含 *Sta_N* 的所有互相关文件。 前期数据准备 1 2 3 4 * COR-M</description>
+    </item>
+    
     <item>
       <title>将.lst格式的文件转化为csv格式文件</title>
       <link>https://tianyining.github.io/post/lst2csv/</link>

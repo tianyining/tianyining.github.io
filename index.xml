@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 13 Oct 2021 12:59:35 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Oct 2021 17:23:05 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>按照台站名整理互相关文件</title>
+      <link>https://tianyining.github.io/post/Sort_CCFs_byStaName/</link>
+      <pubDate>Sat, 23 Oct 2021 17:23:05 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Sort_CCFs_byStaName/</guid>
+      <description>本篇 blog 记录利用 python 实现将计算好的 CCFs 按照台站名进行整理，每一个以台站名命名的文件夹内部都包含 *Sta_N* 的所有互相关文件。 前期数据准备 1 2 3 4 * COR-M</description>
     </item>
     
     <item>
