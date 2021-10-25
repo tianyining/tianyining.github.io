@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 23 Oct 2021 17:23:05 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Oct 2021 17:02:14 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Plot_Single_disp_Version1</title>
+      <link>https://tianyining.github.io/post/Plot_Single_disp/</link>
+      <pubDate>Mon, 25 Oct 2021 17:02:14 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Plot_Single_disp/</guid>
+      <description>说明 本篇 blog 记录在背景噪声互相关处理中，利用 AFTAN 提取频散曲线后，绘制台站对间的相速度、群速度频散曲线。 代码及示意图 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15</description>
     </item>
     
     <item>
