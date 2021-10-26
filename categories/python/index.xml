@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 25 Oct 2021 17:22:55 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Oct 2021 13:19:43 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1D_Interpolate_disp&#43;snr_Version1</title>
+      <link>https://tianyining.github.io/post/1D_Interpolate_disp&#43;snr_Version1/</link>
+      <pubDate>Tue, 26 Oct 2021 13:19:43 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/1D_Interpolate_disp&#43;snr_Version1/</guid>
+      <description>本篇 blog 记录利用 python根据单一频散文件 COR_H1250_H1530.SAC_s_2_DISP.1 中的周期，对计算出来的信噪比 COR_H1250_H1530.SAC_s_snr.txt文件进行插</description>
+    </item>
+    
     <item>
       <title>Plot_phV_Disp_all_Version1</title>
       <link>https://tianyining.github.io/post/Plot_phV_Disp_all/</link>
