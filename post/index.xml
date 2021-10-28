@@ -44,6 +44,15 @@
     </item>
     
     <item>
+      <title>Plot_phV_all</title>
+      <link>https://tianyining.github.io/post/Plot_phV_Disp_all/</link>
+      <pubDate>Mon, 25 Oct 2021 17:22:55 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Plot_phV_Disp_all/</guid>
+      <description>说明 本篇 blog 记录在背景噪声互相关处理中，利用 AFTAN 提取频散曲线后，将所有台站对间提取出来的相速度频散曲线绘制在一张图上。 本篇 blog 使用的数据来自 PKU Su</description>
+    </item>
+    
+    <item>
       <title>Plot_phV_disp_subplot_all_Version1</title>
       <link>https://tianyining.github.io/post/Plot_phV_disp_subplot_all/</link>
       <pubDate>Mon, 25 Oct 2021 17:13:26 +0800</pubDate>

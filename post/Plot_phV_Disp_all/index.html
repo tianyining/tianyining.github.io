@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Plot_phV_Disp_all_Version1 - Brave New World</title>
+  <title>Plot_phV_all - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -40,19 +40,19 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="Plot_phV_Disp_all_Version1" />
+<meta property="og:title" content="Plot_phV_all" />
 <meta property="og:description" content="说明 本篇 blog 记录在背景噪声互相关处理中，利用 AFTAN 提取频散曲线后，将所有台站对间提取出来的相速度频散曲线绘制在一张图上。 本篇 blog 使用的数据来自 PKU Su" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/Plot_phV_Disp_all/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-10-25T17:22:55&#43;08:00" />
 <meta property="article:modified_time" content="2021-10-25T17:22:55&#43;08:00" />
 
-<meta itemprop="name" content="Plot_phV_Disp_all_Version1">
+<meta itemprop="name" content="Plot_phV_all">
 <meta itemprop="description" content="说明 本篇 blog 记录在背景噪声互相关处理中，利用 AFTAN 提取频散曲线后，将所有台站对间提取出来的相速度频散曲线绘制在一张图上。 本篇 blog 使用的数据来自 PKU Su"><meta itemprop="datePublished" content="2021-10-25T17:22:55&#43;08:00" />
 <meta itemprop="dateModified" content="2021-10-25T17:22:55&#43;08:00" />
-<meta itemprop="wordCount" content="332">
+<meta itemprop="wordCount" content="614">
 <meta itemprop="keywords" content="python," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Plot_phV_Disp_all_Version1"/>
+<meta name="twitter:title" content="Plot_phV_all"/>
 <meta name="twitter:description" content="说明 本篇 blog 记录在背景噪声互相关处理中，利用 AFTAN 提取频散曲线后，将所有台站对间提取出来的相速度频散曲线绘制在一张图上。 本篇 blog 使用的数据来自 PKU Su"/>
 
 <!--[if lte IE 9]>
@@ -128,15 +128,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Plot_phV_Disp_all_Version1</h1>
+      <h1 class="post-title">Plot_phV_all</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-10-25 17:22 </span>
         <div class="post-category">
             <a href="/categories/python/"> python </a>
             </div>
-          <span class="more-meta"> 约 332 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 614 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -147,7 +147,13 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#说明">说明</a></li>
-    <li><a href="#代码及示意图">代码及示意图</a></li>
+    <li><a href="#代码及示意图pku-summer2020">代码及示意图(PKU Summer2020)</a></li>
+    <li><a href="#绘制研究区域的相速度频散曲线mm_version">绘制研究区域的相速度频散曲线(MM_Version)</a>
+      <ul>
+        <li><a href="#将极度异常的相速度值去除未加信噪比约束">将极度异常的相速度值去除（未加信噪比约束）</a></li>
+        <li><a href="#绘制相速度频散曲线信噪比筛选去掉极度异常值">绘制相速度频散曲线（信噪比筛选+去掉极度异常值）</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -156,7 +162,7 @@
       <h2 id="说明">说明</h2>
 <p><strong>本篇 <code>blog</code> 记录在背景噪声互相关处理中，利用 <code>AFTAN</code> 提取频散曲线后，将所有台站对间提取出来的相速度频散曲线绘制在一张图上。</strong></p>
 <p><strong>本篇 <code>blog</code> 使用的数据来自 PKU Summer_2020。</strong></p>
-<h2 id="代码及示意图">代码及示意图</h2>
+<h2 id="代码及示意图pku-summer2020">代码及示意图(PKU Summer2020)</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -249,7 +255,128 @@
 </div>
 </div><p><strong>所有台站对的相速度频散曲线示意图如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvrqqsx8bkj30bj0ad0t3.jpg" alt="image-20211025183828241"></p>
+<h2 id="绘制研究区域的相速度频散曲线mm_version">绘制研究区域的相速度频散曲线(MM_Version)</h2>
+<h3 id="将极度异常的相速度值去除未加信噪比约束">将极度异常的相速度值去除（未加信噪比约束）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
 
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s1">&#39;monokai&#39;</span><span class="p">)</span>
+
+<span class="n">inDir</span> <span class="o">=</span> <span class="s2">&#34;../MM_DISP_Interp/&#34;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">inDir</span><span class="p">)</span>
+<span class="n">csvfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;*.csv&#34;</span><span class="p">)</span>
+<span class="n">count_bad</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">csvfile</span> <span class="ow">in</span> <span class="n">csvfiles</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">inDir</span><span class="p">,</span> <span class="n">csvfile</span><span class="p">),</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">phV</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">snr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">phV</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">phV</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;skip&#34;</span><span class="p">)</span>
+        <span class="n">count_bad</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">continue</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">phV</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;bad SWD {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count_bad</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">csvfiles</span><span class="p">)))</span>
+<span class="c1"># plt.show()</span>
+<span class="c1"># plt.savefig(&#39;./test.png&#39;)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="绘制相速度频散曲线信噪比筛选去掉极度异常值">绘制相速度频散曲线（信噪比筛选+去掉极度异常值）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s1">&#39;monokai&#39;</span><span class="p">)</span>
+
+<span class="n">inDir</span> <span class="o">=</span> <span class="s2">&#34;../MM_DISP_Interp/&#34;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">inDir</span><span class="p">)</span>
+<span class="n">csvfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;*.csv&#34;</span><span class="p">)</span>
+<span class="n">count_bad</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">csvfile</span> <span class="ow">in</span> <span class="n">csvfiles</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">inDir</span><span class="p">,</span> <span class="n">csvfile</span><span class="p">),</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">phV</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">snr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">phV</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">4.5</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">phV</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">snr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;skip&#34;</span><span class="p">)</span>
+        <span class="n">count_bad</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">continue</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PhV Dispersion Curves&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">phV</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;bad SWD {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count_bad</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">csvfiles</span><span class="p">)))</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
