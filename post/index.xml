@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 26 Oct 2021 14:45:09 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Oct 2021 13:35:12 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Merge_DISP and SNR_interp_Version1</title>
+      <link>https://tianyining.github.io/post/Merge_DISPandSNR/</link>
+      <pubDate>Thu, 28 Oct 2021 13:35:12 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Merge_DISPandSNR/</guid>
+      <description>说明 本篇 blog 记录利用 python 实现将 AFTAN 提取出的原始频散文件和计算出的信噪比文件（包括插值部分）合并整理成以台站对命名的频散文件，每个频散文件包含三列信</description>
     </item>
     
     <item>
