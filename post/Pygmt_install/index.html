@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Pygmt ubuntu18.04">
 <meta itemprop="description" content="Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安"><meta itemprop="datePublished" content="2021-07-01T11:04:41&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-01T11:04:41&#43;08:00" />
-<meta itemprop="wordCount" content="237">
+<meta itemprop="wordCount" content="488">
 <meta itemprop="keywords" content="pygmt,科研-Ubuntu_疑惑," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Pygmt ubuntu18.04"/>
 <meta name="twitter:description" content="Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安"/>
@@ -136,7 +136,7 @@
             <a href="/categories/pygmt/"> pygmt </a>
             <a href="/categories/%E7%A7%91%E7%A0%94-Ubuntu_%E7%96%91%E6%83%91/"> 科研-Ubuntu_疑惑 </a>
             </div>
-          <span class="more-meta"> 约 237 字 </span>
+          <span class="more-meta"> 约 488 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -148,7 +148,12 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#pygmt-安装流程">Pygmt 安装流程</a></li>
-    <li><a href="#遗留问题-">遗留问题 😕</a></li>
+    <li><a href="#遗留问题-">遗留问题 😕</a>
+      <ul>
+        <li><a href="#最终解决方案">最终解决方案</a></li>
+        <li><a href="#默认福昕阅读器gmt6-生成-pdf-格式图片终端会卡死">默认福昕阅读器，gmt6 生成 pdf 格式图片终端会卡死</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
@@ -206,12 +211,14 @@ $ conda install yapf
 $ export GMT_LIBRARY_PATH=$HOME/anaconda3/envs/pygmt/lib
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="遗留问题-">遗留问题 😕</h2>
+</div><p><strong>如果没有设置环境依赖，<code>ipython</code> 无法 <code>import pygmt </code> 。</strong></p>
+<p> </p>
+<h2 id="遗留问题-">遗留问题 😕</h2>
 <p>成功创建 <code>pygmt</code> 虚拟环境后，重新打开终端，输入 <code>conda activate pygmt</code> ，进入 <code>pygmt</code> 环境后，<code> python -V</code> 显示版本是 <code> 3.6.13</code> ，此时无法使用 <code>pygmt</code> 。</p>
-<p>但是 <code>conda list</code> 显示的是 <code>python 3.9.5</code> ，很迷惑 😕</p>
+<p>但是 <code>conda list</code> 显示的是 <code>python 3.9.5</code> ，很迷惑 😕</p>
 <p><strong>目前解决方案：</strong></p>
 <p>为何会出现这种情况，目前并不清楚，目前解决方案：</p>
-<p>先激活 <code>PKU_Summer</code> 环境，再激活 <code>pygmt</code> 环境，即可成功。</p>
+<p>先激活 <code>PKU_Summer</code> 环境，再激活 <code>pygmt</code> 环境，即可成功。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -224,7 +231,24 @@ $ conda activate pygmt
 $ python -V
 </code></pre></td></tr></table>
 </div>
+</div><h3 id="最终解决方案">最终解决方案</h3>
+<p><strong>正确设置环境变量即可，想 <code>~/.zshrc</code> 中添加如下语句：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">## pygmt 
+export GMT_LIBRARY_PATH=$HOME/anaconda3/envs/pygmt/lib
+</code></pre></td></tr></table>
 </div>
+</div><h3 id="默认福昕阅读器gmt6-生成-pdf-格式图片终端会卡死">默认福昕阅读器，gmt6 生成 pdf 格式图片终端会卡死</h3>
+<p>如果使用福昕阅读器为默认打开 <code>pdf</code> 格式的图片，执行 <code>gmt6</code> 的脚本后终端会卡死，但是不影响正常出图。</p>
+<p><strong>解决方案：</strong></p>
+<p>更改 <code>pdf</code> 浏览器，将默认应用从福昕浏览器改为 <code>wps</code> 或者默认的浏览器。</p>
+<p><strong>虽然最终很简单就解决了，但是从遇到问题到发觉这是 <code>pdf</code> 浏览器问题导致的，确实费了一番功夫，经过 直接安装gmt6.2 &mdash;&gt; 卸载 gmt6.1 &mdash;&gt; 卸载 anaconda 等等折腾后，才意识到，这些都是徒劳，报错原因是福昕阅读器。</strong></p>
+
     </div>
 
     <div class="post-copyright">
