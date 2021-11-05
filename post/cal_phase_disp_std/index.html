@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>计算所有台站对不同周期相速度频散曲线的标准差&amp;整合文件 - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 记录利用 python，将所有台站对的不同周期的相速度频散文件 disper_curves_compute （包含两列 period &amp;amp; phase velocity）计算对应的标准差，并最终整合为一个文件" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/cal_phase_disp_std/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="计算所有台站对不同周期相速度频散曲线的标准差&amp;整合文件" />
+<meta property="og:description" content="本篇 blog 记录利用 python，将所有台站对的不同周期的相速度频散文件 disper_curves_compute （包含两列 period &amp; phase velocity）计算对应的标准差，并最终整合为一个文件" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/cal_phase_disp_std/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-05T14:42:47&#43;08:00" />
+<meta property="article:modified_time" content="2021-11-05T14:42:47&#43;08:00" />
+
+<meta itemprop="name" content="计算所有台站对不同周期相速度频散曲线的标准差&amp;整合文件">
+<meta itemprop="description" content="本篇 blog 记录利用 python，将所有台站对的不同周期的相速度频散文件 disper_curves_compute （包含两列 period &amp; phase velocity）计算对应的标准差，并最终整合为一个文件"><meta itemprop="datePublished" content="2021-11-05T14:42:47&#43;08:00" />
+<meta itemprop="dateModified" content="2021-11-05T14:42:47&#43;08:00" />
+<meta itemprop="wordCount" content="1580">
+<meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="计算所有台站对不同周期相速度频散曲线的标准差&amp;整合文件"/>
+<meta name="twitter:description" content="本篇 blog 记录利用 python，将所有台站对的不同周期的相速度频散文件 disper_curves_compute （包含两列 period &amp; phase velocity）计算对应的标准差，并最终整合为一个文件"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">计算所有台站对不同周期相速度频散曲线的标准差&amp;整合文件</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-05 14:42 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
+            </div>
+          <span class="more-meta"> 约 1580 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#声明">声明</a></li>
+    <li><a href="#数据准备">数据准备</a></li>
+    <li><a href="#计算不同周期相速度对应的标准差并整合文件">计算不同周期相速度对应的标准差，并整合文件</a></li>
+    <li><a href="#输出的数据文件格式">输出的数据文件格式</a>
+      <ul>
+        <li></li>
+        <li><a href="#select-period_phvplusgmt-绘图文件">select-period_phvplus（GMT 绘图文件）</a></li>
+        <li><a href="#number_ray_gmtgmt-绘图文件">number_ray_gmt（GMT 绘图文件）</a></li>
+      </ul>
+    </li>
+    <li><a href="#gmt-绘图">GMT 绘图</a>
+      <ul>
+        <li><a href="#1-只绘制所有相速度频散图">1. 只绘制所有相速度频散图</a></li>
+        <li><a href="#2-绘制相速度频散曲线--符合偏离标准差的范围红线">2. 绘制相速度频散曲线 &amp; 符合偏离标准差的范围（红线）</a></li>
+        <li><a href="#3-绘制不同周期对应的射线路径柱状统计分布图">3. 绘制不同周期对应的射线路径柱状统计分布图</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>本篇 <code>blog</code> 记录利用 <code>python</code>，将所有台站对的不同周期的相速度频散文件 <code> disper_curves_compute</code> （包含两列 period &amp; phase velocity）计算对应的标准差，并最终整合为一个文件，包含三列：<code>period</code> &amp; <code>period-average phv</code> &amp; <code>std</code>；</strong></p>
+<h2 id="声明">声明</h2>
+<p><strong>本篇 <code>blog</code> 使用的数据来自东北，并非自己的研究区域。<code>origin from Fan &amp; hyx</code>.</strong></p>
+<h2 id="数据准备">数据准备</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">disper_curves_compute 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>该 python 程序需要的输入文件是 disper_curves_compute 即所有台站对的相速度频散文件（整合为一个文件，包含两列 period &amp; phase velocity）。</strong></p>
+<p><strong>disper_curves_compute 文件格式如下（需要提前将所有台站对的相速度频散文件整理成如下格式）：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw4d0zhuo1j30hq0bgmxi.jpg" alt="image-20211105163612752"></p>
+<h2 id="计算不同周期相速度对应的标准差并整合文件">计算不同周期相速度对应的标准差，并整合文件</h2>
+<p><strong>执行如下代码，会生成三个数据文件：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">* each-period_average_std 
+* select-period_phvplus 
+* number_ray_gmt
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Right Version 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../data_infos/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Output/&#34;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;disper_curves_compute&#34;</span><span class="p">)</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># (193610, 2)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1">establish dict
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">dict_disp</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the value of d is standard deviation 标准差</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the value of a is average 每个周期对应的相速度平均值；</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># sum velocity of each period 每个周期的相速度和</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># get the number of each period 每个周期对应有多少个相速度值</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># sum of square(real phV - average)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 已求取出： a-每个周期对应的相速度平均值；
+</span><span class="s1">          s-每个周期对应的相速度和;
+</span><span class="s1">          n-每个周期上分别有多少个相速度测量值；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">n</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">n</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> index j 求取 ss-每个周期对应的平方和（测量值-周期平均值）的平方和 
+</span><span class="s1">            d-计算得到每个周期对应的标准差 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ss</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ss</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将计算结果写入新的频散文件，用于绘图和筛选
+</span><span class="s1"> each-period_average_std 三列分别代表：周期 - 周期对应的平均相速度 - 标准差
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;each-period_average_std&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ss</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;d} {:&lt;.4f} {:&lt;4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">]))</span>
+
+<span class="c1"># 某些特定周期对应的相速度取值范围</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;select-period_phvplus&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;&gt; </span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;d} {:&lt;.6f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">item</span><span class="p">]))</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;d} {:&lt;.6f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">item</span><span class="p">]))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 计算自定义周期的射线路径
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;number_ray_gmt&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]:</span>
+            <span class="n">n</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">n</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">41</span><span class="p">):</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;&gt; </span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;.1f} {:&lt;d}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="n">item</span><span class="p">]))</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;.1f} {:&lt;d}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="n">item</span><span class="p">]))</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;.1f} {:&lt;d}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;.1f} {:&lt;d}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="输出的数据文件格式">输出的数据文件格式</h2>
+<h4 id="each-period_average_std">each-period_average_std</h4>
+<p><strong>生成的文件包含三列数据，周期、该周期对应的相速度平均值、std</strong></p>
+<p><strong>注意：该文件周期与该周期对应的相速度平均值为键值对关系，因此不可能存在重复的周期。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw4d9u6ssfj30ho0bewf7.jpg" alt="image-20211105164444733"></p>
+<h3 id="select-period_phvplusgmt-绘图文件">select-period_phvplus（GMT 绘图文件）</h3>
+<p><strong>挑选的特定周期对应的相速度取值范围文件（即GMT绘图的红线数据范围内的横纵坐标启始点）：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw4dilb0zfj30hq0bhjrn.jpg" alt="image-20211105165311037"></p>
+<h3 id="number_ray_gmtgmt-绘图文件">number_ray_gmt（GMT 绘图文件）</h3>
+<p><strong>绘制不同周期射线路径的柱状统计分布图，每个 <code>&gt;</code> <code>&gt;</code> 中间表示的是一个柱子从左上角开始，顺时针方向计数，共 <code>4</code> 个点的坐标值。</strong></p>
+<p><strong>该文件是 GMT 绘制柱状统计图的参考文件。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw4dqf87nmj30hq0begls.jpg" alt="image-20211105170042763"></p>
+<h2 id="gmt-绘图">GMT 绘图</h2>
+<h3 id="1-只绘制所有相速度频散图">1. 只绘制所有相速度频散图</h3>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash 
+</span><span class="cp"></span>
+<span class="c1"># Version: gmt6.2</span>
+<span class="c1"># Function: Plot phase dispersion curves all </span>
+<span class="c1"># Date:2021-11-04 </span>
+<span class="c1"># Author:Yining Tian </span>
+
+<span class="nv">disp_file</span><span class="o">=</span><span class="s2">&#34;../data_infos/disper_curves&#34;</span>
+<span class="nv">output</span><span class="o">=</span><span class="s2">&#34;../Figs/dispersion_tyn&#34;</span>
+
+<span class="c1"># gmt begin ${psdir}sst_${cdate} jpeg</span>
+gmt begin <span class="si">${</span><span class="nv">output</span><span class="si">}</span>_basic png
+    gmt basemap -JX5i/3.5i -R0/50/2/5 -Bxa5f2.5+l<span class="s1">&#39;period(s)&#39;</span> -Bya0.5f0.25+l<span class="s1">&#39;phase velocity(km/s)&#39;</span>  -BWS 
+    gmt plot <span class="nv">$disp_file</span>  
+
+gmt end show 
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw4dxfc16vj316a0u0tha.jpg" alt="image-20211105170725525"></p>
+<h3 id="2-绘制相速度频散曲线--符合偏离标准差的范围红线">2. 绘制相速度频散曲线 &amp; 符合偏离标准差的范围（红线）</h3>
+<p><strong>将该周期下的相速度平均值偏离二倍标准差的范围用红线绘制在图中：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash 
+</span><span class="cp"></span>
+<span class="c1"># Version: gmt6.2</span>
+<span class="c1"># Function: Plot phase dispersion curves all </span>
+<span class="c1"># Date:2021-11-04 </span>
+<span class="c1"># Author:Yining Tian </span>
+
+<span class="nv">disp_file</span><span class="o">=</span><span class="s2">&#34;../data_infos/disper_curves&#34;</span>
+<span class="nv">red_point</span><span class="o">=</span><span class="s2">&#34;../data_infos/select-period_phvplus&#34;</span>
+<span class="nv">output</span><span class="o">=</span><span class="s2">&#34;../Figs/dispersion_tyn&#34;</span>
+
+gmt begin <span class="si">${</span><span class="nv">output</span><span class="si">}</span>_all png
+    gmt basemap -JX5i/3.5i -R0/50/2/5 -Bxa5f2.5+l<span class="s1">&#39;period(s)&#39;</span> -Bya0.5f0.25+l<span class="s1">&#39;phase velocity(km/s)&#39;</span>  -BWS 
+    gmt plot <span class="nv">$disp_file</span>  
+    <span class="c1"># gmt basemap -JX5i/3.5i -R0/50/2/5 -B0 -Bne </span>
+    gmt plot <span class="nv">$red_point</span> -JX5i/3.5i -R0/50/2/5 -W0.5p,red 
+    <span class="nb">echo</span> <span class="s2">&#34;2 4.8 (a) &#34;</span> <span class="p">|</span>gmt pstext -JX5i/3.5i -R0/50/2/5 -F+f18p,8
+    <span class="nb">echo</span> <span class="m">35</span> 2.3 <span class="s1">&#39;\140\156 \261 2\163&#39;</span> <span class="p">|</span>gmt pstext -JX5i/3.5i -R0/50/2/5 -F+f20p,12 
+gmt end show 
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw4e0b2miuj316a0u011m.jpg" alt="image-20211105171011507"></p>
+<h3 id="3-绘制不同周期对应的射线路径柱状统计分布图">3. 绘制不同周期对应的射线路径柱状统计分布图</h3>
+<p><strong>绘制不同周期对应的射线路径统计分布图，是根据不同台站对的相速度频散文件，共统计在某一个周期，共有多少个台站对测量提取了相速度，例如， <code>4s</code> 这一周期在共多少个台站对频散文件中出现，或者 <code>disper_curves_compute </code> 中共有多少个 <code>4s</code> 周期，即作为该周期对应的柱状图的高度。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash 
+</span><span class="cp"></span><span class="c1"># Version: gmt6.2</span>
+<span class="c1"># Function: Plot number of ray paths in the period </span>
+<span class="c1"># Date:2021-11-05 </span>
+<span class="c1"># Author:Yining Tian </span>
+
+<span class="nv">output</span><span class="o">=</span><span class="s2">&#34;../Figs/dispersion_tyn&#34;</span>
+<span class="nv">inp</span><span class="o">=</span><span class="s2">&#34;../data_infos/number_ray_gmt&#34;</span>
+
+<span class="nv">Rb</span><span class="o">=</span><span class="s2">&#34;-R0/45/0/8000&#34;</span>
+<span class="nv">Jb</span><span class="o">=</span><span class="s2">&#34;-JX4.5i/3.5i&#34;</span>
+gmt begin <span class="si">${</span><span class="nv">output</span><span class="si">}</span>_number_ray_path png 
+    gmt basemap <span class="nv">$Rb</span> <span class="nv">$Jb</span> -Bya1000f500+l<span class="s1">&#39;number of ray paths&#39;</span> -Bxa5f2.5+l<span class="s1">&#39;period (s)&#39;</span> -BWS -X6i 
+    gmt plot <span class="nv">$inp</span> <span class="nv">$Rb</span> <span class="nv">$Jb</span> -W0p -Ggray -L 
+    <span class="nb">echo</span> <span class="s2">&#34;2 7600 (b) &#34;</span> <span class="p">|</span>gmt pstext <span class="si">${</span><span class="nv">Rb</span><span class="si">}</span> <span class="si">${</span><span class="nv">Jb</span><span class="si">}</span> -F+f20p,8 
+gmt end show 
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gw4e7p5nn9j31350u0mzb.jpg" alt="image-20211105171718403"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-05 14:42
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">数据格式转换</a>
+          <a href="/tags/python/">python</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Group_Meeting_Record/">
+            <span class="next-text nav-default">Group_Meeting_Record</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
