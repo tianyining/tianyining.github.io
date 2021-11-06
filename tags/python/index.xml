@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 05 Nov 2021 14:42:47 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Nov 2021 12:32:13 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从互相关SAC文件中提取台站对dist并按震中距大小排列整合</title>
+      <link>https://tianyining.github.io/post/get_dist_and_Format/</link>
+      <pubDate>Sat, 06 Nov 2021 12:32:13 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/get_dist_and_Format/</guid>
+      <description>本篇 blog 记录利用 python，提取所有台站对互相关 SAC 文件的 dist ，并按照震中距由小到大排列整合文件。输出文件包含三列：dist sta1 sta2。 说明 本篇</description>
+    </item>
+    
     <item>
       <title>计算所有台站对不同周期相速度频散曲线的标准差&amp;整合文件</title>
       <link>https://tianyining.github.io/post/cal_phase_disp_std/</link>
