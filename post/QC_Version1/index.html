@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="**本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行质量控制；" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行初步的质量控制。 QCstep1_Del_extremly_Bad 将存在极度异常值的相速度频散曲线，整支删除；具体来说，就是将频散" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -41,19 +41,19 @@
 
 
 <meta property="og:title" content="QC_Version1" />
-<meta property="og:description" content="**本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行质量控制；" />
+<meta property="og:description" content="本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行初步的质量控制。 QCstep1_Del_extremly_Bad 将存在极度异常值的相速度频散曲线，整支删除；具体来说，就是将频散" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/QC_Version1/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-11-11T19:25:39&#43;08:00" />
 <meta property="article:modified_time" content="2021-11-11T19:25:39&#43;08:00" />
 
 <meta itemprop="name" content="QC_Version1">
-<meta itemprop="description" content="**本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行质量控制；"><meta itemprop="datePublished" content="2021-11-11T19:25:39&#43;08:00" />
+<meta itemprop="description" content="本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行初步的质量控制。 QCstep1_Del_extremly_Bad 将存在极度异常值的相速度频散曲线，整支删除；具体来说，就是将频散"><meta itemprop="datePublished" content="2021-11-11T19:25:39&#43;08:00" />
 <meta itemprop="dateModified" content="2021-11-11T19:25:39&#43;08:00" />
-<meta itemprop="wordCount" content="36">
+<meta itemprop="wordCount" content="711">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="QC_Version1"/>
-<meta name="twitter:description" content="**本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行质量控制；"/>
+<meta name="twitter:description" content="本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行初步的质量控制。 QCstep1_Del_extremly_Bad 将存在极度异常值的相速度频散曲线，整支删除；具体来说，就是将频散"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 36 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 711 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -145,12 +145,291 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#qcstep1_del_extremly_bad">QCstep1_Del_extremly_Bad</a></li>
+    <li><a href="#qcstep2_del_snr">QCstep2_del_snr</a></li>
+  </ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <p>**本篇 <code>blog</code> 记录利用 <code>python</code>，对 <code>/MM_DISP_Interp/</code> 中的全部相速度频散文件进行质量控制；</p>
+      <p><strong>本篇 <code>blog</code> 记录利用 <code>python</code>，对 <code>/MM_DISP_Interp/</code> 中的全部相速度频散文件进行初步的质量控制。</strong></p>
+<h2 id="qcstep1_del_extremly_bad">QCstep1_Del_extremly_Bad</h2>
+<p><strong>将存在极度异常值的相速度频散曲线，整支删除；具体来说，就是将频散曲线中存在相速度数值大于 5.5 以及小于 1 的整支频散曲线删掉。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
 
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s1">&#39;monokai&#39;</span><span class="p">)</span>
+
+<span class="n">inDir</span> <span class="o">=</span> <span class="s2">&#34;/home/tianyining/Practice/MM_Whole/input/MM_DISP_Interp/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;/home/tianyining/Practice/MM_Whole/output/step1_del_extremely_Bad/&#34;</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">inDir</span><span class="p">)</span>
+<span class="n">csvfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&#34;*.csv&#34;</span><span class="p">)</span>
+<span class="n">count_bad</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">csvfile</span> <span class="ow">in</span> <span class="n">csvfiles</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">phV</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">snr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">phV</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">5.5</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">phV</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">sta1</span> <span class="o">=</span> <span class="n">csvfile</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sta2</span> <span class="o">=</span> <span class="n">csvfile</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">sta1</span><span class="p">,</span> <span class="n">sta2</span><span class="p">,</span> <span class="s2">&#34;skip&#34;</span><span class="p">)</span>
+        <span class="n">count_bad</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">continue</span>
+
+    <span class="n">period_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">period</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">phV_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">phV</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">snr_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">snr</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">concatenate_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">period_array</span><span class="p">,</span> <span class="n">phV_array</span><span class="p">,</span> <span class="n">snr_array</span><span class="p">),</span>
+                                       <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">sgl_disp_file</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">concatenate_array</span><span class="p">,</span>
+                              <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;ph_V&#39;</span><span class="p">,</span> <span class="s1">&#39;SNR&#39;</span><span class="p">])</span>
+    <span class="n">sgl_disp_file</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">csvfile</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;_QC1.csv&#34;</span><span class="p">,</span>
+                         <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="c1"># 设置坐标范围</span>
+<span class="c1">#     plt.xlim((1, 55))</span>
+<span class="c1">#     plt.ylim((0.8, 5.0))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PhV Dispersion Curves del Extremely Bad&#39;</span><span class="p">,</span>
+              <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">phV</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;bad SWD {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count_bad</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">csvfiles</span><span class="p">)))</span>
+<span class="c1"># plt.show()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="s1">&#39;/home/tianyining/Practice/MM_Whole/Figs/QCstep1_Del_Extremely_Bad.jpg&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwg3lnudu2j30o00d0t9x.jpg" alt="image-20211115201653149"></p>
+<p><strong>单独绘制相速度频散曲线的代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s1">&#39;monokai&#39;</span><span class="p">)</span>
+
+<span class="n">inDir</span> <span class="o">=</span> <span class="s2">&#34;/home/tianyining/Practice/MM_Whole/output/step1_del_extremely_Bad/&#34;</span>
+
+<span class="n">csvfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">inDir</span> <span class="o">+</span> <span class="s2">&#34;*.csv&#34;</span><span class="p">)</span>
+<span class="n">count_bad</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">csvfile</span> <span class="ow">in</span> <span class="n">csvfiles</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">inDir</span><span class="p">,</span> <span class="n">csvfile</span><span class="p">),</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">phV</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">snr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1">#设置坐标轴范围</span>
+<span class="c1">#     plt.xlim((1, 55))</span>
+<span class="c1">#     plt.ylim((0.8, 5.5))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PhV Dispersion Curves del Extremely Bad&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">phV</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="qcstep2_del_snr">QCstep2_del_snr</h2>
+<p><strong>在 step1 中去掉存在异常值的整支频散曲线的基础上，对信噪比进行筛选，将 snr &lt; 10 的相速度数值点删除，并存为新的文件；</strong></p>
+<p><strong>这里只是将信噪比低的数据点删除，并非将相速度频散曲线整支删除；</strong></p>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">实现批量处理，将 SNR &lt; 10 的数据点删除，另存为新的 CSV 文件；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;/home/tianyining/Practice/MM_Whole/output/step1_del_extremely_Bad/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;/home/tianyining/Practice/MM_Whole/output/step2_del_snr/&#34;</span>
+
+<span class="n">csvfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">csvfile</span> <span class="ow">in</span> <span class="n">csvfiles</span><span class="p">:</span>
+    <span class="n">sgl_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+    <span class="n">sgl_file_new_name</span> <span class="o">=</span> <span class="n">sgl_file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;_snr&#34;</span> <span class="o">+</span> <span class="s2">&#34;.csv&#34;</span>
+    <span class="n">sgl_data_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+<span class="c1">#     sgl_data_info[&#34;SNR&#34;].describe()</span>
+    <span class="n">sgl_data_new</span> <span class="o">=</span> <span class="n">sgl_data_info</span><span class="p">[</span><span class="n">sgl_data_info</span><span class="p">[</span><span class="s2">&#34;SNR&#34;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+    <span class="n">sgl_data_new</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">sgl_file_new_name</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwg3rb07g8j30jd0b8wfq.jpg" alt="image-20211115202220230"></p>
+<p><strong>绘图代码：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s2">&#34;monokai&#34;</span><span class="p">)</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;/home/tianyining/Practice/MM_Whole/output/step2_del_snr/&#34;</span>
+<span class="n">csvfiles</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;/*.csv&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">csvfile</span> <span class="ow">in</span> <span class="n">csvfiles</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;period&#34;</span><span class="p">,</span> <span class="s2">&#34;ph_V&#34;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">period</span>
+    <span class="n">phV</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">ph_V</span>
+
+    <span class="c1">#设置坐标轴范围</span>
+    <span class="c1">#     plt.xlim((1, 45))</span>
+    <span class="c1">#     plt.ylim((0.8, 4.5))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PhV Dispersion Curves Del SNR&#39;</span><span class="p">,</span>
+              <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">,</span>
+              <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">phV</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;/home/tianyining/Practice/MM_Whole/Figs/QCstep2_SNR.jpg&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">

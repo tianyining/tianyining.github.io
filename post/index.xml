@@ -31,7 +31,7 @@
       <pubDate>Thu, 11 Nov 2021 19:25:39 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/QC_Version1/</guid>
-      <description>**本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行质量控制；</description>
+      <description>本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行初步的质量控制。 QCstep1_Del_extremly_Bad 将存在极度异常值的相速度频散曲线，整支删除；具体来说，就是将频散</description>
     </item>
     
     <item>
