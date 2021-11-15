@@ -6,7 +6,25 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 06 Nov 2021 12:32:13 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Nov 2021 16:54:51 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MM_Yiming</title>
+      <link>https://tianyining.github.io/post/MM_Yiming/</link>
+      <pubDate>Mon, 15 Nov 2021 16:54:51 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/MM_Yiming/</guid>
+      <description>说明 本篇 blog 用于记录 Yiming Bai 在 Myanmar 的部分工作； Date:2021-11-11：拿到 Yiming Bai 的相速度频散曲线（手动挑选，仅缺少最后试错反演的质量控制） 1. Get</description>
+    </item>
+    
+    <item>
+      <title>QC_Version1</title>
+      <link>https://tianyining.github.io/post/QC_Version1/</link>
+      <pubDate>Thu, 11 Nov 2021 19:25:39 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/QC_Version1/</guid>
+      <description>**本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行质量控制；</description>
+    </item>
+    
     <item>
       <title>从互相关SAC文件中提取台站对dist并按震中距大小排列整合</title>
       <link>https://tianyining.github.io/post/get_dist_and_Format/</link>

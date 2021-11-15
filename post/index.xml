@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 06 Nov 2021 12:32:13 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Nov 2021 16:54:51 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,24 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>MM_Yiming</title>
+      <link>https://tianyining.github.io/post/MM_Yiming/</link>
+      <pubDate>Mon, 15 Nov 2021 16:54:51 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/MM_Yiming/</guid>
+      <description>说明 本篇 blog 用于记录 Yiming Bai 在 Myanmar 的部分工作； Date:2021-11-11：拿到 Yiming Bai 的相速度频散曲线（手动挑选，仅缺少最后试错反演的质量控制） 1. Get</description>
+    </item>
+    
+    <item>
+      <title>QC_Version1</title>
+      <link>https://tianyining.github.io/post/QC_Version1/</link>
+      <pubDate>Thu, 11 Nov 2021 19:25:39 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/QC_Version1/</guid>
+      <description>**本篇 blog 记录利用 python，对 /MM_DISP_Interp/ 中的全部相速度频散文件进行质量控制；</description>
     </item>
     
     <item>
