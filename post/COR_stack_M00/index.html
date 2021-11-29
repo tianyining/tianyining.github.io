@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>M00台站与其余所有台站的背景噪声互相关函数叠加示意图_COR_stack_2 - Brave New World</title>
+  <title>某一台站与其余所有台站的背景噪声互相关函数叠加_Plot - Brave New World</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -40,19 +40,19 @@
 <link rel="stylesheet" href="/css/reset-even.css">
 
 
-<meta property="og:title" content="M00台站与其余所有台站的背景噪声互相关函数叠加示意图_COR_stack_2" />
+<meta property="og:title" content="某一台站与其余所有台站的背景噪声互相关函数叠加_Plot" />
 <meta property="og:description" content="说明 本篇 blog 展现在背景噪声互相关处理中，M00 台站与其余所有台站的背景噪声互相关函数示意图如何利用 python 进行绘制（参考 Three Station）。 Written by Shane Zhang" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/COR_stack_M00/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-10-11T18:06:47&#43;08:00" />
 <meta property="article:modified_time" content="2021-10-11T18:06:47&#43;08:00" />
 
-<meta itemprop="name" content="M00台站与其余所有台站的背景噪声互相关函数叠加示意图_COR_stack_2">
+<meta itemprop="name" content="某一台站与其余所有台站的背景噪声互相关函数叠加_Plot">
 <meta itemprop="description" content="说明 本篇 blog 展现在背景噪声互相关处理中，M00 台站与其余所有台站的背景噪声互相关函数示意图如何利用 python 进行绘制（参考 Three Station）。 Written by Shane Zhang"><meta itemprop="datePublished" content="2021-10-11T18:06:47&#43;08:00" />
 <meta itemprop="dateModified" content="2021-10-11T18:06:47&#43;08:00" />
-<meta itemprop="wordCount" content="463">
+<meta itemprop="wordCount" content="683">
 <meta itemprop="keywords" content="python,GMT," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="M00台站与其余所有台站的背景噪声互相关函数叠加示意图_COR_stack_2"/>
+<meta name="twitter:title" content="某一台站与其余所有台站的背景噪声互相关函数叠加_Plot"/>
 <meta name="twitter:description" content="说明 本篇 blog 展现在背景噪声互相关处理中，M00 台站与其余所有台站的背景噪声互相关函数示意图如何利用 python 进行绘制（参考 Three Station）。 Written by Shane Zhang"/>
 
 <!--[if lte IE 9]>
@@ -128,7 +128,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">M00台站与其余所有台站的背景噪声互相关函数叠加示意图_COR_stack_2</h1>
+      <h1 class="post-title">某一台站与其余所有台站的背景噪声互相关函数叠加_Plot</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2021-10-11 18:06 </span>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/GMT/"> GMT </a>
             </div>
-          <span class="more-meta"> 约 463 字 </span>
-          <span class="more-meta"> 预计阅读 1 分钟 </span>
+          <span class="more-meta"> 约 683 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -154,6 +154,8 @@
       </ul>
     </li>
     <li><a href="#2-m00-台站与其余所有台站的背景噪声互相关函数滤波后">2. M00 台站与其余所有台站的背景噪声互相关函数（滤波后）</a></li>
+    <li><a href="#互相关函数叠加示意图gmt62_version">互相关函数叠加示意图(GMT6.2_Version)</a></li>
+    <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
   </div>
@@ -352,6 +354,69 @@
 </div>
 </div><p><strong>滤波后的 M00 台站背景噪声互相关函数记录示意图如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvllry01u1j60pc0n1n2b02.jpg" alt="image-20211020111313387"></p>
+<h2 id="互相关函数叠加示意图gmt62_version">互相关函数叠加示意图(GMT6.2_Version)</h2>
+<p><strong>使用数据：<code>PKU2020</code> 计算出的互相关函数，代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh 
+</span><span class="cp"></span><span class="c1"># Version:gmt6.2 </span>
+<span class="c1"># Function: Plot stacked cross correlation sac files</span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Date:2021-11-29  </span>
+
+<span class="nv">border</span><span class="o">=</span><span class="s2">&#34;-R-600/600/0/800&#34;</span> <span class="c1"># -R</span>
+<span class="nv">J</span><span class="o">=</span><span class="s2">&#34;-JX4i/3i&#34;</span> <span class="c1"># -J </span>
+<span class="nv">ps</span><span class="o">=</span><span class="s2">&#34;plot_stackCC_tyn&#34;</span>
+<span class="nv">inp</span><span class="o">=</span><span class="s2">&#34;../CCFs/&#34;</span>
+<span class="nv">output_dir</span><span class="o">=</span><span class="s2">&#34;../Figs/&#34;</span>
+
+gmt begin <span class="si">${</span><span class="nv">output_dir</span><span class="si">}</span>_<span class="si">${</span><span class="nv">ps</span><span class="si">}</span> png 
+    <span class="c1"># gmt plot ${border} ${J} &gt; ${ps}   </span>
+    gmt basemap <span class="si">${</span><span class="nv">border</span><span class="si">}</span> <span class="si">${</span><span class="nv">J</span><span class="si">}</span> -Bya100f50+l<span class="s2">&#34;Distance(km)&#34;</span> -Bxa200f100+l<span class="s2">&#34;Times (s)&#34;</span>  -BWS <span class="c1"># 只有 W S 有边框</span>
+    gmt basemap <span class="si">${</span><span class="nv">border</span><span class="si">}</span> <span class="si">${</span><span class="nv">J</span><span class="si">}</span> -B0 -Ben <span class="c1"># 全包边框；</span>
+    <span class="c1"># for files in `ls ./CC_AFTAN/DB.EN23/ `</span>
+    <span class="k">for</span> files in  <span class="sb">`</span>ls ../CCFs <span class="sb">`</span>
+        <span class="k">do</span>  
+            gmt sac <span class="nv">$J</span> <span class="nv">$R</span> -W0p -M10p -Ek <span class="nv">$inp</span><span class="s2">&#34;/&#34;</span>*.SAC
+
+        <span class="k">done</span> <span class="c1"># basic；</span>
+gmt end show
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘图结果：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwvxez05a9j31280sy78a.jpg" alt="image-20211129125152867"></p>
+<h2 id="修订历史">修订历史</h2>
+<ul>
+<li>2021-10-11：第一次撰稿；</li>
+<li>2021-11-29：增加 <code>gmt6.2</code> 版本的绘图；</li>
+</ul>
 
     </div>
 
