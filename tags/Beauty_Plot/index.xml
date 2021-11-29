@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Beauty_Plot on Brave New World</title>
+    <link>https://tianyining.github.io/tags/Beauty_Plot/</link>
+    <description>Recent content in Beauty_Plot on Brave New World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 29 Nov 2021 16:13:31 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/Beauty_Plot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Beauty_Scatterplot_Python</title>
+      <link>https://tianyining.github.io/post/Beauty_Scatterplot_Python/</link>
+      <pubDate>Mon, 29 Nov 2021 16:13:31 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Beauty_Scatterplot_Python/</guid>
+      <description>说明 本篇 blog 用于记录如何使用 python 绘制好看的图图。 Color Scatterplot by a variable in Matplotlib Reference:https://datavizpyr.com/how-to-color-scatterplot-by-a-variable-in-matplotlib/ Date:2021-11-29 Author:Yining Tian 代码及示意图如下，不同代码块表示 jupyter notebook 的不同 cell ： 1 2 3 4 5 6 7 8 9 10 11 12 13 import</description>
+    </item>
+    
+  </channel>
+</rss>
