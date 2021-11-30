@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 29 Nov 2021 16:13:31 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Nov 2021 21:34:00 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Merge_DISP and SNR_interp_Version2</title>
+      <link>https://tianyining.github.io/post/AFTAN_Interp_Format_DISP/</link>
+      <pubDate>Tue, 30 Nov 2021 21:34:00 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/AFTAN_Interp_Format_DISP/</guid>
+      <description>说明 本篇 blog 记录利用 python 实现将 AFTAN 提取出的原始频散文件，利用样条插值，整合计算出的信噪比文件（包括插值部分），合并整理成以台站对命名的频散文件，最</description>
+    </item>
+    
     <item>
       <title>Beauty_Scatterplot_Python</title>
       <link>https://tianyining.github.io/post/Beauty_Scatterplot_Python/</link>
