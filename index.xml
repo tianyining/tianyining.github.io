@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 30 Nov 2021 21:34:00 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Dec 2021 13:11:29 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Pygmt_Seismic_Station_Practice2</title>
+      <link>https://tianyining.github.io/post/pygmt_Seismic_Station_Practice2/</link>
+      <pubDate>Wed, 01 Dec 2021 13:11:29 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/pygmt_Seismic_Station_Practice2/</guid>
+      <description>本篇 blog 用于记录使用 pygmt 练习绘制地震台站分布图。 注明：本篇 blog 并非原创，主要借鉴的是下面的 github 示例，仅作为自我学习目的，侵权必删。 参考链接：http</description>
     </item>
     
     <item>
@@ -244,7 +253,7 @@ It makes use of a variety of open source projects including:
     </item>
     
     <item>
-      <title>Seismic_Station_Plot_Practice</title>
+      <title>Pygmt Seismic Station Plot_Practice1</title>
       <link>https://tianyining.github.io/post/Seismic_Station_Plot_Practice/</link>
       <pubDate>Sun, 26 Sep 2021 19:49:47 +0800</pubDate>
       

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Pygmt_Seismic_Station_Practice2 - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 用于记录使用 pygmt 练习绘制地震台站分布图。 注明：本篇 blog 并非原创，主要借鉴的是下面的 github 示例，仅作为自我学习目的，侵权必删。 参考链接：http" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/pygmt_Seismic_Station_Practice2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="Pygmt_Seismic_Station_Practice2" />
+<meta property="og:description" content="本篇 blog 用于记录使用 pygmt 练习绘制地震台站分布图。 注明：本篇 blog 并非原创，主要借鉴的是下面的 github 示例，仅作为自我学习目的，侵权必删。 参考链接：http" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/pygmt_Seismic_Station_Practice2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-01T13:11:29&#43;08:00" />
+<meta property="article:modified_time" content="2021-12-01T13:11:29&#43;08:00" />
+
+<meta itemprop="name" content="Pygmt_Seismic_Station_Practice2">
+<meta itemprop="description" content="本篇 blog 用于记录使用 pygmt 练习绘制地震台站分布图。 注明：本篇 blog 并非原创，主要借鉴的是下面的 github 示例，仅作为自我学习目的，侵权必删。 参考链接：http"><meta itemprop="datePublished" content="2021-12-01T13:11:29&#43;08:00" />
+<meta itemprop="dateModified" content="2021-12-01T13:11:29&#43;08:00" />
+<meta itemprop="wordCount" content="1046">
+<meta itemprop="keywords" content="pygmt,GMT," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Pygmt_Seismic_Station_Practice2"/>
+<meta name="twitter:description" content="本篇 blog 用于记录使用 pygmt 练习绘制地震台站分布图。 注明：本篇 blog 并非原创，主要借鉴的是下面的 github 示例，仅作为自我学习目的，侵权必删。 参考链接：http"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Pygmt_Seismic_Station_Practice2</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-01 13:11 </span>
+        <div class="post-category">
+            <a href="/categories/pygmt/"> pygmt </a>
+            <a href="/categories/GMT/"> GMT </a>
+            </div>
+          <span class="more-meta"> 约 1046 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#数据准备">数据准备</a></li>
+    <li><a href="#分步骤绘图展示">分步骤绘图展示</a>
+      <ul>
+        <li><a href="#绘制底图">绘制底图</a></li>
+        <li><a href="#绘制海岸线国界线">绘制海岸线、国界线</a></li>
+        <li><a href="#pandas-读入台站信息将部分台站高亮绘制">pandas 读入台站信息，将部分台站高亮绘制</a></li>
+        <li><a href="#根据台站信息文件对台站进行分类绘制">根据台站信息文件对台站进行分类绘制</a></li>
+        <li><a href="#添加-legend-台站信息图例">添加 legend 台站信息图例</a></li>
+      </ul>
+    </li>
+    <li><a href="#添加-colorbar-表示-topography">添加 colorbar 表示 topography</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>本篇 <code>blog</code> 用于记录使用 <code>pygmt</code> 练习绘制地震台站分布图。</strong></p>
+<p><strong>注明：本篇 <code>blog</code> 并非原创，主要借鉴的是下面的 <code>github</code> 示例，仅作为自我学习目的，侵权必删。</strong></p>
+<p><strong>参考链接：https://github.com/michaelgrund/GMT-plotting</strong></p>
+<h2 id="数据准备">数据准备</h2>
+<p><strong>绘制台站分布图，需要事先在 <code>github</code> 仓库下载准备好两个文件：台站信息以及 <code>cpt</code> 文件；</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">* sta_coordinates.txt
+* topo.cpt
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="分步骤绘图展示">分步骤绘图展示</h2>
+<h3 id="绘制底图">绘制底图</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pygmt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Plot Begin !!! 
+</span><span class="s1"> fig.grdimage() 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">grdimage</span><span class="p">(</span><span class="s2">&#34;@earth_relief_15s&#34;</span><span class="p">,</span>
+             <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">72</span><span class="p">],</span>
+             <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;m1:55000000&#39;</span><span class="p">,</span>
+             <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;./Infos_tyn/topo.cpt&#34;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>底图绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gwycflwim6j30ol0sfjvw.jpg" alt="image-20211201150239492"></p>
+<h3 id="绘制海岸线国界线">绘制海岸线、国界线</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pygmt</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+    <span class="n">MAP_FRAME_TYPE</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">,</span> <span class="c1"># 不添加黑白相间的 frame 边框；</span>
+    <span class="n">MAP_FRAME_WIDTH</span><span class="o">=</span><span class="s1">&#39;2p&#39;</span><span class="p">,</span> <span class="c1"># 绘制边框的画笔粗细 2p </span>
+    <span class="n">FORMAT_GEO_MAP</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="c1"># 设置经纬度表示方式，不显示 E N，只显示浮点数；</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">coast</span><span class="p">(</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">,</span>
+    <span class="n">shorelines</span><span class="o">=</span><span class="s1">&#39;1/thinnest,black&#39;</span><span class="p">,</span>
+    <span class="n">frame</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x5&#39;</span><span class="p">,</span> <span class="s1">&#39;y5&#39;</span><span class="p">,</span> <span class="s1">&#39;NESW&#39;</span><span class="p">],</span>
+    <span class="n">borders</span><span class="o">=</span><span class="s1">&#39;1/0.25p,-&#39;</span><span class="p">,</span>  <span class="c1"># 用虚线表示国界线；</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;./Figs_test/Fig_coast.png&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gwyclunxa0j30te0vv0zj.jpg" alt="image-20211201150839262"></p>
+<h3 id="pandas-读入台站信息将部分台站高亮绘制">pandas 读入台站信息，将部分台站高亮绘制</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 使用 pandas 读入台站信息；
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">Sta_File</span> <span class="o">=</span> <span class="s2">&#34;./Infos_tyn/sta_coordinates.txt&#34;</span>
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;staname&#34;</span><span class="p">,</span> <span class="s2">&#34;stalon&#34;</span><span class="p">,</span> <span class="s2">&#34;stalat&#34;</span><span class="p">]</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">Sta_File</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">)</span>
+
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Mark Stations that should be Highlight !!! 
+</span><span class="s1"> Only plot blue circle 
+</span><span class="s1"> 只能执行一次，否则 Highlight 部分无法出渐变效果；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">Sta_Highlight_List_blue</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;KEV&#34;</span><span class="p">,</span> <span class="s2">&#34;HAMF&#34;</span><span class="p">,</span> <span class="s2">&#34;VAF&#34;</span><span class="p">,</span> <span class="s2">&#34;NWG28&#34;</span><span class="p">,</span> <span class="s2">&#34;SA64&#34;</span><span class="p">,</span> <span class="s2">&#34;SA39&#34;</span><span class="p">]</span>
+<span class="n">circsize</span> <span class="o">=</span> <span class="s2">&#34;c0.35c&#34;</span>  <span class="c1"># 定义圆圈的大小；</span>
+<span class="n">circcol</span> <span class="o">=</span> <span class="s2">&#34;blue&#34;</span>  <span class="c1"># 定义圆圈的填充颜色；</span>
+<span class="n">circthick</span> <span class="o">=</span> <span class="s2">&#34;0.034c&#34;</span>  <span class="c1"># 定义圆圈线条厚度；</span>
+<span class="n">circtrans</span> <span class="o">=</span> <span class="s2">&#34;50&#34;</span>  <span class="c1"># &#34;blue@50&#34; 产生渐变的色彩；</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">stalon</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;staname&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Sta_Highlight_List_blue</span><span class="p">)]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">stalat</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;staname&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Sta_Highlight_List_blue</span><span class="p">)]</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">stalon</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;staname&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Sta_Highlight_List_blue</span><span class="p">)],</span>
+         <span class="n">y</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">stalat</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;staname&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Sta_Highlight_List_blue</span><span class="p">)],</span>
+         <span class="n">style</span><span class="o">=</span><span class="n">circsize</span><span class="p">,</span>
+         <span class="n">pen</span><span class="o">=</span><span class="n">circthick</span> <span class="o">+</span> <span class="s2">&#34;,&#34;</span> <span class="o">+</span> <span class="n">circcol</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="n">circcol</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">circtrans</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;./Figs_test/Fig_Sta_Highlight.png&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>蓝色圆圈高亮绘制效果：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gwycpd2r31j30sz0vcq9u.jpg" alt="image-20211201151202097"></p>
+<p><strong>将部分台站使用橙色圆圈高亮绘制：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Mark Stations that should be Highlight !!! 
+</span><span class="s1"> Add plot orange circles 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">Sta_Highlight_List_orange</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;OUL&#34;</span><span class="p">,</span> <span class="s2">&#34;TRO&#34;</span><span class="p">,</span> <span class="s2">&#34;RATU&#34;</span><span class="p">]</span>
+<span class="n">circsize</span> <span class="o">=</span> <span class="s2">&#34;c0.35c&#34;</span>
+<span class="n">circcol_orange</span> <span class="o">=</span> <span class="s2">&#34;orange&#34;</span>
+<span class="n">circthick</span> <span class="o">=</span> <span class="s2">&#34;0.034c&#34;</span>  <span class="c1"># 定义圆圈线条厚度；</span>
+<span class="n">circtrans</span> <span class="o">=</span> <span class="s2">&#34;50&#34;</span>  <span class="c1"># &#34;orange@50&#34; 产生渐变的色彩；</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">stalon</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;staname&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Sta_Highlight_List_orange</span><span class="p">)],</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">stalat</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;staname&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Sta_Highlight_List_orange</span><span class="p">)],</span>
+    <span class="n">style</span> <span class="o">=</span><span class="n">circsize</span><span class="p">,</span> 
+    <span class="n">pen</span> <span class="o">=</span> <span class="s2">&#34;0.034c&#34;</span> <span class="o">+</span> <span class="s2">&#34;,&#34;</span> <span class="o">+</span>  <span class="s2">&#34;orange&#34;</span><span class="p">,</span> <span class="c1"># 设置圆圈的画笔粗细；</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s2">&#34;orange&#34;</span> <span class="o">+</span> <span class="s2">&#34;@&#34;</span> <span class="o">+</span> <span class="n">circtrans</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;./Figs_test/Fig_Sta_Highlight_all.png&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gwycqsiurvj30te0vvjyb.jpg" alt="image-20211201151324863"></p>
+<h3 id="根据台站信息文件对台站进行分类绘制">根据台站信息文件对台站进行分类绘制</h3>
+<p><strong>首先绘制 <code>permanent stations</code> ，用红色正三角表示：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 首先绘制永久台站 红色 正三角表示；
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">stalon</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">136</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">stalat</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">136</span><span class="p">],</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&#34;t0.16c&#34;</span><span class="p">,</span>
+    <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;0.015c,black&#34;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red2&#39;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&#34;permanent&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;./Figs_test/Permanent_Sta.png&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘图效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gwycu6wtmnj30sz0vcwm6.jpg" alt="image-20211201151640792"></p>
+<p><strong>通过定义函数的方式，绘制剩余不同来源的台站，将不同类别的台站用不同颜色表示：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 通过定义函数的方式，绘制剩余不同来源的台站，不同来源用不同颜色表示；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">stasym</span> <span class="o">=</span> <span class="s2">&#34;t0.16c&#34;</span>
+<span class="n">staedg</span> <span class="o">=</span> <span class="s2">&#34;0.015c&#34;</span> <span class="o">+</span> <span class="s2">&#34;,black&#34;</span>
+
+
+<span class="c1"># helper function</span>
+<span class="k">def</span> <span class="nf">plot_stas</span><span class="p">(</span><span class="n">staid</span><span class="p">,</span> <span class="n">stacol</span><span class="p">,</span> <span class="n">stalab</span><span class="p">):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">stalon</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;staname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">staid</span><span class="p">)],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">stalat</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;staname&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">staid</span><span class="p">)],</span>
+        <span class="n">style</span><span class="o">=</span><span class="n">stasym</span><span class="p">,</span>
+        <span class="n">pen</span><span class="o">=</span><span class="n">staedg</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">stacol</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="n">stalab</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="n">plot_stas</span><span class="p">(</span><span class="s2">&#34;SA&#34;</span><span class="p">,</span> <span class="s2">&#34;yellow&#34;</span><span class="p">,</span> <span class="s1">&#39;&#34;ScanArray Core&#34;&#39;</span><span class="p">)</span>  <span class="c1"># 用黄色绘制 &#34;SA&#34; 开头的台站</span>
+<span class="n">plot_stas</span><span class="p">((</span><span class="s2">&#34;N2&#34;</span><span class="p">,</span> <span class="s2">&#34;NBB&#34;</span><span class="p">),</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s2">&#34;Neonor2&#34;</span><span class="p">)</span>  <span class="c1"># 以橙色绘制 &#34;N2&#34; &#34;NBB&#34; 开头的台站</span>
+<span class="n">plot_stas</span><span class="p">(</span><span class="s1">&#39;N1&#39;</span><span class="p">,</span> <span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span> <span class="s2">&#34;SCANLIPS3D&#34;</span><span class="p">)</span>  <span class="c1"># 以 dodgerblue 绘制 &#34;N1&#34; 开头的台站</span>
+<span class="n">plot_stas</span><span class="p">(</span><span class="s2">&#34;NWG&#34;</span><span class="p">,</span> <span class="s1">&#39;0/205/102&#39;</span><span class="p">,</span> <span class="s2">&#34;MAGNUS&#34;</span><span class="p">)</span>  <span class="c1"># 以 绿色 绘制 &#34;NWG&#34; 开头的台站</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;./Figs_test/Fig_Sta_Whole.png&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘图效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gwycw5i0btj30te0vv46l.jpg" alt="image-20211201151833574"></p>
+<h3 id="添加-legend-台站信息图例">添加 legend 台站信息图例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">FONT_ANNOT_PRIMARY</span><span class="o">=</span><span class="s1">&#39;6p,Helvetica&#39;</span><span class="p">,</span> <span class="c1"># legend 注释使用的字体大小；</span>
+                  <span class="n">FONT_LABEL</span><span class="o">=</span><span class="s1">&#39;6&#39;</span><span class="p">,</span>
+                  <span class="n">MAP_FRAME_PEN</span><span class="o">=</span><span class="s1">&#39;0.4p&#39;</span><span class="p">):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+        <span class="n">position</span><span class="o">=</span><span class="s1">&#39;JBR+jBR+o0.1c&#39;</span><span class="p">,</span>  <span class="c1"># 放在右下角，偏移 0.1cm </span>
+        <span class="n">box</span><span class="o">=</span><span class="s1">&#39;+plinen+glinen+gwhite+p0.5p,black&#39;</span><span class="p">)</span>
+    <span class="c1"># which draws a box around the legend using a 1p black pen and adds a white background.</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘图如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gwydyya4cjj30sz0vcjzw.jpg" alt="image-20211201155551078"></p>
+<h2 id="添加-colorbar-表示-topography">添加 colorbar 表示 topography</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+        <span class="n">FONT_ANNOT_PRIMARY</span><span class="o">=</span><span class="s1">&#39;5.5p,Helvetica&#39;</span><span class="p">,</span>
+        <span class="n">FONT_LABEL</span><span class="o">=</span><span class="s1">&#39;5.5p&#39;</span><span class="p">,</span>
+        <span class="n">MAP_ANNOT_OFFSET_PRIMARY</span><span class="o">=</span><span class="s1">&#39;0.05i&#39;</span><span class="p">,</span>
+        <span class="n">MAP_TICK_LENGTH_PRIMARY</span><span class="o">=</span><span class="s1">&#39;0.05&#39;</span><span class="p">,</span>
+        <span class="n">MAP_LABEL_OFFSET</span><span class="o">=</span><span class="s1">&#39;3.5p&#39;</span><span class="p">,</span>
+        <span class="n">MAP_FRAME_PEN</span><span class="o">=</span><span class="s1">&#39;0.8p&#39;</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;topo.cpt&#39;</span><span class="p">,</span>
+                 <span class="n">position</span><span class="o">=</span><span class="s2">&#34;x0.1i/2.085i+w1.2i/0.075i&#34;</span><span class="p">,</span>
+                 <span class="n">frame</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1000+l&#34;topography in m&#34;&#39;</span><span class="p">],</span>
+                 <span class="n">box</span> <span class="o">=</span> <span class="s1">&#39;+r2p+pwhite+gwhite@20+p0.5p&#39;</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># fig.savefig(&#34;../pygmt_jn_fig_2/Figs_tyn/Fig_Colorbar.jpg&#34;)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>最终绘图如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gwye0ghm77j30te0vvaio.jpg" alt="image-20211201155717850"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-01 13:11
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/pygmt/">pygmt</a>
+          <a href="/tags/GMT/">GMT</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/AFTAN_Interp_Format_DISP/">
+            <span class="next-text nav-default">Merge_DISP and SNR_interp_Version2</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
