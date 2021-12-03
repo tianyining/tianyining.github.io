@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Jupyter Notebook使用技巧">
 <meta itemprop="description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"><meta itemprop="datePublished" content="2021-07-15T14:01:35&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-15T14:01:35&#43;08:00" />
-<meta itemprop="wordCount" content="1249">
+<meta itemprop="wordCount" content="1750">
 <meta itemprop="keywords" content="jupyter notebook,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Jupyter Notebook使用技巧"/>
 <meta name="twitter:description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/jupyter-notebook/"> jupyter notebook </a>
             </div>
-          <span class="more-meta"> 约 1249 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1750 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -154,7 +154,7 @@
         <li><a href="#参考链接">参考链接</a></li>
       </ul>
     </li>
-    <li><a href="#2-解决中文显示负号显示问题">2. 解决中文显示&amp;负号显示问题</a>
+    <li><a href="#2-解决中文显示负号显示问题_macos">2. 解决中文显示&amp;负号显示问题_MacOS</a>
       <ul>
         <li><a href="#解决方案-1">解决方案</a></li>
       </ul>
@@ -170,6 +170,14 @@
         <li><a href="#改变字体颜色color">改变字体颜色(color)</a></li>
         <li><a href="#改变字体face大小size">改变字体(face)、大小(size)</a></li>
         <li><a href="#参考链接-2">参考链接</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-解决-matplotlib-中文显示问题--安装英文字体_ubuntu1804">4. 解决 matplotlib 中文显示问题 &amp; 安装英文字体_Ubuntu18.04</a>
+      <ul>
+        <li><a href="#安装-simhei-字体可支持中文显示">安装 SimHei 字体(可支持中文显示)</a></li>
+        <li><a href="#jupyter-notebook-中使用-times-new-roman-字体_ubuntu1804"><code>jupyter notebook</code> 中使用 <code>Times New Roman</code> 字体_Ubuntu18.04</a></li>
+        <li><a href="#测试字体安装是否成功simhei--tiems-new-roman">测试字体安装是否成功(SimHei &amp; Tiems New Roman)</a></li>
+        <li><a href="#参考链接-3">参考链接</a></li>
       </ul>
     </li>
   </ul>
@@ -203,7 +211,7 @@
 <ul>
 <li><a href="https://blog.csdn.net/haley_yuen/article/details/108429708">https://blog.csdn.net/haley_yuen/article/details/108429708</a></li>
 </ul>
-<h2 id="2-解决中文显示负号显示问题">2. 解决中文显示&amp;负号显示问题</h2>
+<h2 id="2-解决中文显示负号显示问题_macos">2. 解决中文显示&amp;负号显示问题_MacOS</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -483,6 +491,160 @@ ___&lt;font color=green&gt;绿色+加粗+斜体&lt;/font&gt;___
 <h3 id="参考链接-2">参考链接</h3>
 <ul>
 <li><a href="https://blog.csdn.net/AlanGuoo/article/details/86318381">https://blog.csdn.net/AlanGuoo/article/details/86318381</a></li>
+</ul>
+<h2 id="4-解决-matplotlib-中文显示问题--安装英文字体_ubuntu1804">4. 解决 matplotlib 中文显示问题 &amp; 安装英文字体_Ubuntu18.04</h2>
+<h3 id="安装-simhei-字体可支持中文显示">安装 SimHei 字体(可支持中文显示)</h3>
+<p><strong>在 <code>jupyter notebook</code> 中如果想使用 <code>SimHei</code> 字体，可能需要自行安装，否则会报错：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Font</span> <span class="n">family</span> <span class="p">[</span><span class="err">‘</span><span class="n">sans</span><span class="o">-</span><span class="n">serif</span><span class="err">‘</span><span class="p">]</span> <span class="ow">not</span> <span class="n">found</span><span class="o">.</span><span class="n">Falling</span> <span class="n">back</span> <span class="n">to</span> <span class="n">DejaVu</span> <span class="n">Sans</span><span class="o">.</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>安装步骤如下：</strong></p>
+<h4 id="1-在conda-环境终端下jupyter-notebook中也可查看字体路径">1. 在<code>conda</code> 环境终端下<code>jupyter notebook</code>中也可 ，查看字体路径</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib</span>    
+<span class="k">print</span><span class="p">(</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">matplotlib_fname</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>类似输出如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">/opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/matplotlibrc
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2-下载-simhei-字体">2. 下载 <code>SimHei</code> 字体</h4>
+<p><a href="https://www.fontpalace.com/font-download/SimHei/">官网下载地址</a></p>
+<p><strong>将下载好的 <code>SimHei</code> <code>ttf</code> 移动到指定目录下，指定目录一般为：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">/opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/fonts/ttf
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="3-删除-matplotlib-的缓冲目录">3. 删除 <code>matplotlib</code> 的缓冲目录</h4>
+<p><strong>首先查看 <code>matplotlib</code> 的字体缓存路径：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib</span> 
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">get_cachedir</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>删除缓存路径：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">rm ~/..cache/matplotlib -fr 
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="4-修改-matplotlibrc-文件">4. 修改 <code>matplotlibrc</code> 文件</h4>
+<p><strong>打开 <code>matplotlibrc</code> 文件：</strong></p>
+<p><strong>文件路径：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">/opt/anaconda3/envs/PKU_Summer/lib/python3.8/site-packages/matplotlib/mpl-data/matplotlibrc
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>修改如下内容：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"> font.family         : sans-serif   
+ <span class="c1"># 去掉前面的#     </span>
+ font.sans-serif     : SimHei, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif  
+ <span class="c1"># 去掉前面的#，并在冒号后面添加SimHei</span>
+ axes.unicode_minus  : False
+ <span class="c1"># 去掉前面的#，并将True改为False</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="5-重新启动-jupyter-notebook">5. 重新启动 <code>jupyter notebook</code></h4>
+<h3 id="jupyter-notebook-中使用-times-new-roman-字体_ubuntu1804"><code>jupyter notebook</code> 中使用 <code>Times New Roman</code> 字体_Ubuntu18.04</h3>
+<p><strong>问题描述：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">I didn<span class="err">&#39;</span>t find msttcorefonts in the apt pool, so I installed only ttf-mscorefonts-installer. It works <span class="k">for</span> me
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>解决方案：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">sudo apt install ttf-mscorefonts-installer
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="测试字体安装是否成功simhei--tiems-new-roman">测试字体安装是否成功(SimHei &amp; Tiems New Roman)</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s1">&#39;monokai&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>  <span class="c1"># 空，表示默认值 (111)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="c1"># plt.title(&#39;Simple Scatter&#39;, fontproperties=&#39;SimHei&#39;, fontsize=26)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Simple Scatter&#39;</span><span class="p">,</span> <span class="n">fontproperties</span><span class="o">=</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>  <span class="c1"># 与 plt.title() 效果相同</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>显示结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gx0kyqjks1j30bj0aa3yp.jpg" alt="image-20211203132856294"></p>
+<h3 id="参考链接-3">参考链接</h3>
+<ul>
+<li><a href="https://askubuntu.com/questions/210680/installing-times-new-roman-font">Install Times New Roman Font</a></li>
+<li><a href="https://blog.csdn.net/sinat_40875078/article/details/104326855">Install SimHei Font</a></li>
 </ul>
 
     </div>
