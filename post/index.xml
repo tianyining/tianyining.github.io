@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 04 Dec 2021 12:17:07 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Dec 2021 20:55:13 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>将频散文件(DEL_SNR)整理成以整数周期命名的多个频散文件</title>
+      <link>https://tianyining.github.io/post/Seperate_Disp_Period_Myanmar/</link>
+      <pubDate>Sat, 25 Dec 2021 20:55:13 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Seperate_Disp_Period_Myanmar/</guid>
+      <description>说明 实现 python 批量处理，将两步质量控制后的台站对频散文件（剔除挑错支 &amp;amp; 低信噪比数据点），整理成分别以整数周期命名的多个频散文件，其中整理后的每个</description>
     </item>
     
     <item>
