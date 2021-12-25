@@ -50,7 +50,7 @@
 <meta itemprop="name" content="将频散文件(After_DEL_SNR)整理成以整数周期命名的多个频散文件">
 <meta itemprop="description" content="说明 实现 python 批量处理，将两步质量控制后的台站对频散文件（剔除挑错支 &amp; 低信噪比数据点），整理成分别以整数周期命名的多个频散文件，其中整理后的每个"><meta itemprop="datePublished" content="2021-12-25T20:55:13&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-25T20:55:13&#43;08:00" />
-<meta itemprop="wordCount" content="941">
+<meta itemprop="wordCount" content="1057">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="将频散文件(After_DEL_SNR)整理成以整数周期命名的多个频散文件"/>
 <meta name="twitter:description" content="说明 实现 python 批量处理，将两步质量控制后的台站对频散文件（剔除挑错支 &amp; 低信噪比数据点），整理成分别以整数周期命名的多个频散文件，其中整理后的每个"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 941 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 1057 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -154,6 +154,7 @@
         <li></li>
       </ul>
     </li>
+    <li><a href="#参考链接">参考链接</a></li>
   </ul>
 </nav>
   </div>
@@ -480,6 +481,54 @@
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxqe717t4sj31900u0wlq.jpg" alt="image-20211225211924318"></p>
 <p><strong>我们可以和使用连线形式绘制出的相速度频散效果进行对比（两种绘制方式，本身数据没有区别；</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxqeeygaggj316k0u046i.jpg" alt="image-20211225212702511"></p>
+<h2 id="参考链接">参考链接</h2>
+<p>**以 26s 周期为例，绘图的重点主要在于 <code>How to plot multiple Y values for one X</code> ? ** </p>
+<p><strong>这里有一个 <a href="https://stackoverflow.com/questions/34280444/python-scatter-plot-with-multiple-y-values-for-each-x">StackOverflow</a> 的 <code>Demo</code></strong></p>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Demo 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">xe</span><span class="p">,</span> <span class="n">ye</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">xe</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ye</span><span class="p">),</span>
+        <span class="n">ye</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘图效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxqeshk490j32i00u0402.jpg" alt="image-20211225214002865"></p>
 
     </div>
 
