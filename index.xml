@@ -28,7 +28,7 @@ It makes use of a variety of open source projects including:
     </item>
     
     <item>
-      <title>将频散文件(DEL_SNR)整理成以整数周期命名的多个频散文件</title>
+      <title>将频散文件(After_DEL_SNR)整理成以整数周期命名的多个频散文件</title>
       <link>https://tianyining.github.io/post/Seperate_Disp_Period_Myanmar/</link>
       <pubDate>Sat, 25 Dec 2021 20:55:13 +0800</pubDate>
       
