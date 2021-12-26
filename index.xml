@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 25 Dec 2021 20:55:13 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Dec 2021 15:59:10 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>使用箱型图的方法对频散文件中的异常值分析处理及可视化</title>
+      <link>https://tianyining.github.io/post/Box_Del_Outlier_Myanmar/</link>
+      <pubDate>Sun, 26 Dec 2021 15:59:10 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Box_Del_Outlier_Myanmar/</guid>
+      <description>说明 在频散曲线质量控制时，最初采用计算不同整数周期相速度平均值以及标准差的方法，将偏离 2~3 倍标准差以外的数据点剔除。但是这种判别处理的原理及方</description>
     </item>
     
     <item>
