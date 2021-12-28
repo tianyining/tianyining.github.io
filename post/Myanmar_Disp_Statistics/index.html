@@ -234,7 +234,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>整理后的相速度频散文件格式如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtddw42o7j30hr0bgdhh.jpg" alt="image-20211228110805151"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtetwoptaj30hl0begn6.jpg" alt="image-20211228115806695"></p>
 <h3 id="version2--add--seperation">Version2 : Add <code>&lt;</code> Seperation</h3>
 <p><strong>整合频散文件时，不同台站对的频散文件用 <code>&gt;</code> 分离，代码及效果如下：</strong></p>
 <div class="highlight"><div class="chroma">
@@ -627,7 +627,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>文件格式如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxteqtmidej30ho0bfjt0.jpg" alt="image-20211228112959393"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxteusv2ehj30hr0bh0uj.jpg" alt="image-20211228115858622"></p>
 <h2 id="step3-del-std-myanmar-disp-files">STEP3 Del Std Myanmar Disp Files</h2>
 <p><strong>实现批量处理，将 QC_STEP2 质量控制后剔除挑错支、低信噪比数据点后的台站对频散文件进一步筛选，剔除偏离 2 倍标准差的数据点，得到筛选后的台站对频散数据，并保存为新的频散文件（台站对形式）；</strong></p>
 <p><strong>这一步筛选数据中，筛选的相速度阈值范围是 <code>STEP2</code> 中计算出的不同周期对应的 <code>PhaseV</code> 取值范围。</strong></p>
