@@ -291,7 +291,7 @@
 <span class="n">Merge_File</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtdfw5gzaj30hp0bfabm.jpg" alt="image-20211228111002422"></p>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxteqdpunlj30hp0bf402.jpg" alt="image-20211228111002422"></p>
 <h2 id="step2-cal-different-period-std">STEP2 Cal Different Period STD</h2>
 <p><strong>计算不同周期相速度对应的标准差，并写入新的文件，存放计算结果；</strong></p>
 <p><strong>主要通过构建字典的形式存储计算出的统计值以及不同周期相速度筛选阈值。</strong></p>
@@ -464,7 +464,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>文件格式如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtdw9nh23j30ht0bhjt7.jpg" alt="image-20211228112547250"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxteqmz3mhj30ht0bhgnf.jpg" alt="image-20211228112547250"></p>
 <h3 id="3--std">3 * STD</h3>
 <p><strong>计算不同周期相速度对应的标准差，相较于两倍标准差，这里放宽准则，使用三倍标准差的准则对不同周期的相速度数据阈值进行计算；输出文件同样包含 <code>5</code> 列信息：</strong></p>
 <p><strong>代码如下：</strong></p>
@@ -627,7 +627,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>文件格式如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxteouwwuyj30ho0bfjt0.jpg" alt="image-20211228112959393"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxteqtmidej30ho0bfjt0.jpg" alt="image-20211228112959393"></p>
 <h2 id="step3-del-std-myanmar-disp-files">STEP3 Del Std Myanmar Disp Files</h2>
 <p><strong>实现批量处理，将 QC_STEP2 质量控制后剔除挑错支、低信噪比数据点后的台站对频散文件进一步筛选，剔除偏离 2 倍标准差的数据点，得到筛选后的台站对频散数据，并保存为新的频散文件（台站对形式）；</strong></p>
 <p><strong>这一步筛选数据中，筛选的相速度阈值范围是 <code>STEP2</code> 中计算出的不同周期对应的 <code>PhaseV</code> 取值范围。</strong></p>
