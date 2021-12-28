@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 26 Dec 2021 15:59:10 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Dec 2021 10:12:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Myanmar_Disp_Statistics</title>
+      <link>https://tianyining.github.io/post/Myanmar_Disp_Statistics/</link>
+      <pubDate>Tue, 28 Dec 2021 10:12:19 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Myanmar_Disp_Statistics/</guid>
+      <description>说明 利用 AFTAN 提取出频散曲线后，经过前两步质量控制后：1) 剔除挑错支的频散； 2) 剔除掉低信噪比的相速度数据点。对于频散数据的离群点需要进一步剔除，</description>
     </item>
     
     <item>

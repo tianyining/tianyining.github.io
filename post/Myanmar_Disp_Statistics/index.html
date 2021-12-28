@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Myanmar_Disp_Statistics - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 利用 AFTAN 提取出频散曲线后，经过前两步质量控制后：1) 剔除挑错支的频散； 2) 剔除掉低信噪比的相速度数据点。对于频散数据的离群点需要进一步剔除，" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/Myanmar_Disp_Statistics/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="Myanmar_Disp_Statistics" />
+<meta property="og:description" content="说明 利用 AFTAN 提取出频散曲线后，经过前两步质量控制后：1) 剔除挑错支的频散； 2) 剔除掉低信噪比的相速度数据点。对于频散数据的离群点需要进一步剔除，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/Myanmar_Disp_Statistics/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-28T10:12:19&#43;08:00" />
+<meta property="article:modified_time" content="2021-12-28T10:12:19&#43;08:00" />
+
+<meta itemprop="name" content="Myanmar_Disp_Statistics">
+<meta itemprop="description" content="说明 利用 AFTAN 提取出频散曲线后，经过前两步质量控制后：1) 剔除挑错支的频散； 2) 剔除掉低信噪比的相速度数据点。对于频散数据的离群点需要进一步剔除，"><meta itemprop="datePublished" content="2021-12-28T10:12:19&#43;08:00" />
+<meta itemprop="dateModified" content="2021-12-28T10:12:19&#43;08:00" />
+<meta itemprop="wordCount" content="2902">
+<meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Myanmar_Disp_Statistics"/>
+<meta name="twitter:description" content="说明 利用 AFTAN 提取出频散曲线后，经过前两步质量控制后：1) 剔除挑错支的频散； 2) 剔除掉低信噪比的相速度数据点。对于频散数据的离群点需要进一步剔除，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Myanmar_Disp_Statistics</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-28 10:12 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
+            </div>
+          <span class="more-meta"> 约 2902 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#说明">说明</a></li>
+    <li><a href="#step1-mergefile">STEP1 MergeFile</a>
+      <ul>
+        <li><a href="#version1--no-seperation">Version1 : No Seperation</a></li>
+        <li><a href="#version2--add--seperation">Version2 : Add <code>&lt;</code> Seperation</a></li>
+      </ul>
+    </li>
+    <li><a href="#step2-cal-different-period-std">STEP2 Cal Different Period STD</a>
+      <ul>
+        <li><a href="#2--std">2 * STD</a></li>
+        <li><a href="#3--std">3 * STD</a></li>
+      </ul>
+    </li>
+    <li><a href="#step3-del-std-myanmar-disp-files">STEP3 Del Std Myanmar Disp Files</a>
+      <ul>
+        <li><a href="#按照-2-倍标准差准则去筛选相速度频散数据">按照 <code>2</code> 倍标准差准则去筛选相速度频散数据</a></li>
+      </ul>
+    </li>
+    <li><a href="#step4-plot-del-2--std-phasev-scatter-plot">STEP4 Plot Del 2 * STD PhaseV Scatter Plot</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="说明">说明</h2>
+<p><strong>利用 <code>AFTAN</code> 提取出频散曲线后，经过前两步质量控制后：1) 剔除挑错支的频散； 2) 剔除掉低信噪比的相速度数据点。对于频散数据的离群点需要进一步剔除，本篇 <code>blog</code> 使用标准差的筛选方式（通过控制偏离平均值筛选数据点）对相速度频散数据点进行筛选；</strong></p>
+<p><strong>之前的 <code>blog</code> <a href="https://tianyining.github.io/post/Box_Del_Outlier_Myanmar/">使用箱型图的方法筛选相速度频散数据</a> ，本质上是用中位数代表总体评价水平，而本篇 <code>blog</code> 的标准差筛选准则是基于数据相对于平均值的偏离程度。</strong></p>
+<h2 id="step1-mergefile">STEP1 MergeFile</h2>
+<p><strong>将 <code>QCSTEP2</code> 中去除低信噪比数据点后的所有频散文件，整理成一个 <code>disper_curves_compute</code> 文件，文件包含四列：<code>period</code> <code> phaseV</code> <code> GroupV</code>  <code>SNR</code> 。</strong></p>
+<p><strong>这样做的目的是为后面计算不同周期的相（群）速度标准差做准备。</strong></p>
+<h3 id="version1--no-seperation">Version1 : No Seperation</h3>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> No seperate Version 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../Del_SNR_DISP/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../MergeFile/&#34;</span>
+
+<span class="n">Merge_File_path</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Disper_Curves_Merge&#34;</span>
+<span class="n">Merge_File</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">Merge_File_path</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
+
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将 input_dir 中的多个单一频散文件拼接起来；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">sgl_disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*_Merge_Disp_QC2.txt&#34;</span><span class="p">):</span>
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">sgl_disp</span><span class="p">)</span>
+    <span class="n">tmp_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> 
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> 
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tmp_info</span><span class="p">)):</span>
+        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">tmp_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> 
+        <span class="n">Merge_File</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sgl_line</span><span class="p">)</span>
+<span class="n">Merge_File</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>整理后的相速度频散文件格式如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtddw42o7j30hr0bgdhh.jpg" alt="image-20211228110805151"></p>
+<h3 id="version2--add--seperation">Version2 : Add <code>&lt;</code> Seperation</h3>
+<p><strong>整合频散文件时，不同台站对的频散文件用 <code>&gt;</code> 分离，代码及效果如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Add Seperate &#39;&gt;&#39; between each disp file Version 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../Del_SNR_DISP/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../MergeFile/&#34;</span>
+
+<span class="n">Merge_File_path</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Disper_Curves_Merge_Seperate&#34;</span>
+<span class="n">Merge_File</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">Merge_File_path</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将 input_dir 中的多个单一频散文件拼接起来；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">sgl_disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*_Merge_Disp_QC2.txt&#34;</span><span class="p">):</span>
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">sgl_disp</span><span class="p">)</span>
+    <span class="n">tmp_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_info</span><span class="p">)):</span>
+        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">tmp_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">Merge_File</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sgl_line</span><span class="p">)</span>
+    <span class="n">Merge_File</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;&gt;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">Merge_File</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtdfw5gzaj30hp0bfabm.jpg" alt="image-20211228111002422"></p>
+<h2 id="step2-cal-different-period-std">STEP2 Cal Different Period STD</h2>
+<p><strong>计算不同周期相速度对应的标准差，并写入新的文件，存放计算结果；</strong></p>
+<p><strong>主要通过构建字典的形式存储计算出的统计值以及不同周期相速度筛选阈值。</strong></p>
+<h3 id="2--std">2 * STD</h3>
+<p><strong>计算不同周期相速度对应的标准差，并使用两倍标准差的准则对不同周期的相速度数据阈值进行计算；输出文件包含 <code>5</code> 列信息：</strong></p>
+<ul>
+<li>整数周期；</li>
+<li>对应的相速度；</li>
+<li>计算出的标准差；</li>
+<li>根据 <code>2</code> 倍 标准差计算出的该周期 <code>PhaseV_min</code>；</li>
+<li>根据 <code>2</code> 倍 标准差计算出的该周期 <code>PhaseV_max</code>；</li>
+</ul>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Version : 2 * std 
+</span><span class="s1"> 计算不同周期的相速度平均值、对应的标准差、以及统计每个周期对应有多少个相速度值
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../MergeFile/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Myanmar_Statistcs_File/&#34;</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;Disper_Curves_Merge&#34;</span><span class="p">)</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> eatablish dict 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">dict_disp</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the value of d is standard deviation 不同周期对应标准差</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the value of a is average velocity for each period 不同周期相速度平均值</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the value of s is sum phaseV of each period</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># data point of each period</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># sum of square(real phaseV - average)</span>
+<span class="n">PhaseV_min</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">PhaseV_max</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> index i 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">n</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">n</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+<span class="c1"># 对 a s n 按照 key 的大小进行排序(key=period)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> index j 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ss</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ss</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> index k 偏离 2 倍标准差；
+</span><span class="s1"> 2*sigma
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PhaseV_min</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">PhaseV_min</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
+        <span class="n">PhaseV_max</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
+<span class="n">PhaseV_min</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">PhaseV_min</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">PhaseV_max</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">PhaseV_max</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将计算结果写入新的统计文件
+</span><span class="s1"> All_Period_PhaseV_Scope
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;All_Period_PhaseV_Scope_2std&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PhaseV_min</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;d}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">PhaseV_min</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">PhaseV_max</span><span class="p">[</span><span class="n">p</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>文件格式如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtdw9nh23j30ht0bhjt7.jpg" alt="image-20211228112547250"></p>
+<h3 id="3--std">3 * STD</h3>
+<p><strong>计算不同周期相速度对应的标准差，相较于两倍标准差，这里放宽准则，使用三倍标准差的准则对不同周期的相速度数据阈值进行计算；输出文件同样包含 <code>5</code> 列信息：</strong></p>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Version : 3 * std 
+</span><span class="s1"> 计算不同周期的相速度平均值、对应的标准差、以及统计每个周期对应有多少个相速度值
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../MergeFile/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Myanmar_Statistcs_File/&#34;</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;Disper_Curves_Merge&#34;</span><span class="p">)</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> eatablish dict 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">dict_disp</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the value of d is standard deviation 不同周期对应标准差</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the value of a is average velocity for each period 不同周期相速度平均值</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the value of s is sum phaseV of each period</span>
+<span class="n">n</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># data point of each period</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># sum of square(real phaseV - average)</span>
+<span class="n">PhaseV_min</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">PhaseV_max</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> index i 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">n</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">n</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+<span class="c1"># 对 a s n 按照 key 的大小进行排序(key=period)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> index j 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ss</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">ss</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ss</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> index k 偏离 2 倍标准差；
+</span><span class="s1"> 2*sigma
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">period</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PhaseV_min</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">PhaseV_min</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
+        <span class="n">PhaseV_max</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
+<span class="n">PhaseV_min</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">PhaseV_min</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">PhaseV_max</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">PhaseV_max</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将计算结果写入新的统计文件
+</span><span class="s1"> All_Period_PhaseV_Scope
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;All_Period_PhaseV_Scope_3std&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PhaseV_min</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;d}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">PhaseV_min</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">PhaseV_max</span><span class="p">[</span><span class="n">p</span><span class="p">]))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>文件格式如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxte0n3qulj30ho0bfmys.jpg" alt="image-20211228112959393"></p>
+<h2 id="step3-del-std-myanmar-disp-files">STEP3 Del Std Myanmar Disp Files</h2>
+<p><strong>实现批量处理，将 QC_STEP2 质量控制后剔除挑错支、低信噪比数据点后的台站对频散文件进一步筛选，剔除偏离 2 倍标准差的数据点，得到筛选后的台站对频散数据，并保存为新的频散文件（台站对形式）；</strong></p>
+<p><strong>这一步筛选数据中，筛选的相速度阈值范围是 <code>STEP2</code> 中计算出的不同周期对应的 <code>PhaseV</code> 取值范围。</strong></p>
+<h3 id="按照-2-倍标准差准则去筛选相速度频散数据">按照 <code>2</code> 倍标准差准则去筛选相速度频散数据</h3>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 按照 2 倍标准差文件 All_Period_PhaseV_Scope_2std 建立字典
+</span><span class="s1"> 规定不同周期 PhaseV 的阈值范围
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../Del_SNR_DISP/&#34;</span>
+<span class="n">output_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../Del_STD_Phase_2std/&#34;</span>
+<span class="n">input_statistics_file</span> <span class="o">=</span> <span class="s2">&#34;../Myanmar_Statistcs_File/&#34;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> mkdir 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_disp_dir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_disp_dir</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;output_disp_dir all ready exists !!!&#34;</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> eatablish dict firstly 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;period&#34;</span><span class="p">,</span> <span class="s2">&#34;average_phaseV&#34;</span><span class="p">,</span> <span class="s2">&#34;std&#34;</span><span class="p">,</span> <span class="s2">&#34;PhaseV_min&#34;</span><span class="p">,</span> <span class="s2">&#34;PhaseV_max&#34;</span><span class="p">]</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">input_statistics_file</span> <span class="o">+</span> <span class="s2">&#34;All_Period_PhaseV_Scope_2std&#34;</span><span class="p">,</span>
+                        <span class="n">delim_whitespace</span><span class="o">=</span><span class="s2">&#34;</span><span class="se">\t</span><span class="s2">&#34;</span><span class="p">,</span>
+                        <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">)</span>
+<span class="n">PhaseV_min</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;PhaseV_min&#34;</span><span class="p">])</span>
+<span class="n">PhaseV_max</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;PhaseV_max&#34;</span><span class="p">])</span>
+<span class="n">Period</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;period&#34;</span><span class="p">])</span>
+
+<span class="n">PhaseVmin_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">Period</span><span class="p">,</span> <span class="n">PhaseV_min</span><span class="p">))</span>
+<span class="n">PhaseVmax_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">Period</span><span class="p">,</span> <span class="n">PhaseV_max</span><span class="p">))</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 使用 pandas 对每个台站对的频散文件进行数值筛选： 2 * std 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">period_select</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sgl_disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp_dir</span> <span class="o">+</span> <span class="s2">&#34;*_Disp_QC2.txt&#34;</span><span class="p">):</span>
+    <span class="n">sgl_disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">sgl_disp</span><span class="p">)</span>
+    <span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Period&#34;</span><span class="p">,</span> <span class="s2">&#34;GroupV&#34;</span><span class="p">,</span> <span class="s2">&#34;PhaseV&#34;</span><span class="p">,</span> <span class="s2">&#34;SNR&#34;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">sgl_disp</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span>  <span class="c1"># 使用正则表达式；</span>
+        <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+        <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    筛选 &amp; 将筛选后的台站对频散文件重新保存为新的频散文件；
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span>
+    <span class="n">new_disp_name</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">sgl_disp_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_disp_dir</span> <span class="o">+</span> <span class="n">new_disp_name</span> <span class="o">+</span> <span class="s2">&#34;_Del_2std&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">period_select</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">&#34;Period&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+                <span class="c1">#                 print(item)</span>
+                <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">                 读取 select_period 周期的 PhaseV 数值
+</span><span class="s1">                &#39;&#39;&#39;</span>
+                <span class="n">PhaseV_part</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&#34;Period&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">][</span><span class="s1">&#39;PhaseV&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">                 判断该数值 PhaseV_part 是否在对应周期的 2 * std 范围内？
+</span><span class="s1">                &#39;&#39;&#39;</span>
+                <span class="k">if</span> <span class="n">PhaseVmin_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">PhaseV_part</span> <span class="o">&lt;=</span> <span class="n">PhaseVmax_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]:</span>
+                    <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;d}</span><span class="se">\t</span><span class="s2">{:&lt;4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">PhaseV_part</span><span class="p">))</span>
+                    <span class="n">fp</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">pass</span> 
+                
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>剔除偏离 <code>2</code> 倍标准差后的相速度数据点，筛选后另存为新的台站对频散文件，格式如下，这里仅以 <code>COR_CAY_YUL_Del_2std</code>  台站对为例：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtecih6xij30hq0bfwez.jpg" alt="image-20211228114123982"></p>
+<h2 id="step4-plot-del-2--std-phasev-scatter-plot">STEP4 Plot Del 2 * STD PhaseV Scatter Plot</h2>
+<p><strong>绘制出 <code>STEP3</code> 中按照 <code>2</code> 倍标准差剔除相速度异常值后的总体相速度频散曲线：</strong></p>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Plot Scatter After Del 2std 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s2">&#34;monokai&#34;</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;axes.linewidth&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 图框宽度；</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;figure.dpi&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">720</span>  <span class="c1">#</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.title_fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;20&#39;</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../Del_STD_Phase_2std/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Figs/&#34;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 设置图片
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;Period(s)&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;PhaseV(km/s)&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&#34;--&#34;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&#34;grey&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">disp_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*_2std&#34;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sgl_disp</span> <span class="ow">in</span> <span class="n">disp_files</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="n">sgl_disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">sgl_disp</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Period&#34;</span><span class="p">,</span> <span class="s2">&#34;PhaseV&#34;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">sgl_disp</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span>
+        <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+        <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">Period</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Period</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">PhaseV</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">PhaseV</span><span class="o">.</span><span class="n">values</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">     Plot Begin !!! 
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;All Period PhaseV Scatter Plot After Del STD&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">Period</span><span class="p">,</span>
+        <span class="n">PhaseV</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;darkviolet&#34;</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">disp_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="n">Period</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">Period</span><span class="o">.</span><span class="n">values</span>
+<span class="n">PhaseV</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">PhaseV</span><span class="o">.</span><span class="n">values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Period</span><span class="p">,</span> <span class="n">PhaseV</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&#34;brown&#34;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;2*STD&#34;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;Standard Deviation&#34;</span><span class="p">),</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s2">&#34;best&#34;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&#34;grey&#34;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">shadow</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Savefig 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;../Figs/All Period PhaseV Scatter Plot After Del 2STD legend.png&#34;</span><span class="p">,</span>
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>**这里只是为了绘制 <code>legend</code> **</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtei0895nj31900u0jxi.jpg" alt="image-20211228114638140"></p>
+<p><strong>对所有频散文件使用同样的表现形式：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Plot Scatter After Del 2std 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">theme</span><span class="o">=</span><span class="s2">&#34;monokai&#34;</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;axes.linewidth&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 图框宽度；</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;figure.dpi&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">720</span>  <span class="c1">#</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.title_fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;20&#39;</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../Del_STD_Phase_2std/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Figs/&#34;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 设置图片
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;Period(s)&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;PhaseV(km/s)&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&#34;--&#34;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&#34;grey&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">disp_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*_2std&#34;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sgl_disp</span> <span class="ow">in</span> <span class="n">disp_files</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="n">sgl_disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">sgl_disp</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Period&#34;</span><span class="p">,</span> <span class="s2">&#34;PhaseV&#34;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">sgl_disp</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span>
+        <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+        <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">Period</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Period</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">PhaseV</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">PhaseV</span><span class="o">.</span><span class="n">values</span>
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">     Plot Begin !!! 
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;All Period PhaseV Scatter Plot After Del STD&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">Period</span><span class="p">,</span>
+        <span class="n">PhaseV</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;darkviolet&#34;</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">edgecolors</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">disp_files</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="n">Period</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">Period</span><span class="o">.</span><span class="n">values</span>
+<span class="n">PhaseV</span> <span class="o">=</span> <span class="n">final</span><span class="o">.</span><span class="n">PhaseV</span><span class="o">.</span><span class="n">values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Period</span><span class="p">,</span> <span class="n">PhaseV</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&#34;darkviolet&#34;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;2*STD&#34;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;Standard Deviation&#34;</span><span class="p">),</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s2">&#34;best&#34;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&#34;grey&#34;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">shadow</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Savefig 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;../Figs/All Period PhaseV Scatter Plot After Del 2STD Final.png&#34;</span><span class="p">,</span>
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxtekrrx5uj31900u0grp.jpg" alt="image-20211228114917557"></p>
+<p><strong>Attention !!!</strong></p>
+<p><strong>这两张图使用的数据一致，只是其中的一个台站对频散文件 <code>scatter plot</code> 的表现形式不同；</strong></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-12-28 10:12
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">数据格式转换</a>
+          <a href="/tags/python/">python</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Box_Del_Outlier_Myanmar/">
+            <span class="next-text nav-default">使用箱型图的方法对频散文件中的异常值分析处理及可视化</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

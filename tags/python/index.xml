@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 26 Dec 2021 15:59:10 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Dec 2021 10:12:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Myanmar_Disp_Statistics</title>
+      <link>https://tianyining.github.io/post/Myanmar_Disp_Statistics/</link>
+      <pubDate>Tue, 28 Dec 2021 10:12:19 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Myanmar_Disp_Statistics/</guid>
+      <description>说明 利用 AFTAN 提取出频散曲线后，经过前两步质量控制后：1) 剔除挑错支的频散； 2) 剔除掉低信噪比的相速度数据点。对于频散数据的离群点需要进一步剔除，</description>
+    </item>
+    
     <item>
       <title>使用箱型图的方法对频散文件中的异常值分析处理及可视化</title>
       <link>https://tianyining.github.io/post/Box_Del_Outlier_Myanmar/</link>
