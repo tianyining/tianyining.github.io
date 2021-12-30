@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 28 Dec 2021 10:12:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Dec 2021 14:05:00 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>UCAS_Courses</title>
+      <link>https://tianyining.github.io/post/UCAS_Course/</link>
+      <pubDate>Thu, 30 Dec 2021 14:05:00 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/UCAS_Course/</guid>
+      <description>写在最开始🌾 **虽然距离</description>
     </item>
     
     <item>

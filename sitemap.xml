@@ -17,27 +17,55 @@
   
   <url>
     <loc>https://tianyining.github.io/</loc>
-    <lastmod>2021-12-28T10:12:19+08:00</lastmod>
+    <lastmod>2021-12-30T14:05:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/categories/</loc>
-    <lastmod>2021-12-28T10:12:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/post/Myanmar_Disp_Statistics/</loc>
-    <lastmod>2021-12-28T10:12:19+08:00</lastmod>
+    <lastmod>2021-12-30T14:05:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/post/</loc>
+    <lastmod>2021-12-30T14:05:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/</loc>
+    <lastmod>2021-12-30T14:05:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/UCAS_Course/</loc>
+    <lastmod>2021-12-30T14:05:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/%E6%89%AF%E9%97%B2%E7%AF%87%E5%84%BF/</loc>
+    <lastmod>2021-12-30T14:05:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/%E6%89%AF%E9%97%B2%E7%AF%87%E5%84%BF/</loc>
+    <lastmod>2021-12-30T14:05:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/Myanmar_Disp_Statistics/</loc>
     <lastmod>2021-12-28T10:12:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -52,13 +80,6 @@
   
   <url>
     <loc>https://tianyining.github.io/categories/python/</loc>
-    <lastmod>2021-12-28T10:12:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/</loc>
     <lastmod>2021-12-28T10:12:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -199,20 +220,6 @@
   
   <url>
     <loc>https://tianyining.github.io/post/Group_Meeting_Record/</loc>
-    <lastmod>2021-10-28T14:49:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/%E6%89%AF%E9%97%B2%E7%AF%87%E5%84%BF/</loc>
-    <lastmod>2021-10-28T14:49:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/%E6%89%AF%E9%97%B2%E7%AF%87%E5%84%BF/</loc>
     <lastmod>2021-10-28T14:49:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
