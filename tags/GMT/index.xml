@@ -6,7 +6,16 @@
     <description>Recent content in GMT on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 01 Dec 2021 13:11:29 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/GMT/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Jan 2022 12:57:17 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/GMT/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Myanmar_Seismic_Stations_Maps_Version3</title>
+      <link>https://tianyining.github.io/post/Myanmar_Seismic_Stations_Maps_Version3/</link>
+      <pubDate>Sun, 02 Jan 2022 12:57:17 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Myanmar_Seismic_Stations_Maps_Version3/</guid>
+      <description>本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version2 的提升 Version2 相较于 Version2 ，本篇 blog 添加板块俯冲边界、断层走滑方向等构造信息； 使用 topo.cpt 绘制底图； 添加</description>
+    </item>
+    
     <item>
       <title>Pygmt_Seismic_Station_Practice2</title>
       <link>https://tianyining.github.io/post/pygmt_Seismic_Station_Practice2/</link>
