@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Myanmar_Seismic_Stations_Maps_Version3">
 <meta itemprop="description" content="本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version2 的提升 Version2 相较于 Version2 ，本篇 blog 添加板块俯冲边界、断层走滑方向等构造信息； 使用 topo.cpt 绘制底图； 添加"><meta itemprop="datePublished" content="2022-01-02T12:57:17&#43;08:00" />
 <meta itemprop="dateModified" content="2022-01-02T12:57:17&#43;08:00" />
-<meta itemprop="wordCount" content="1105">
+<meta itemprop="wordCount" content="1111">
 <meta itemprop="keywords" content="pygmt,GMT," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Myanmar_Seismic_Stations_Maps_Version3"/>
 <meta name="twitter:description" content="本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version2 的提升 Version2 相较于 Version2 ，本篇 blog 添加板块俯冲边界、断层走滑方向等构造信息； 使用 topo.cpt 绘制底图； 添加"/>
@@ -136,7 +136,7 @@
             <a href="/categories/pygmt/"> pygmt </a>
             <a href="/categories/GMT/"> GMT </a>
             </div>
-          <span class="more-meta"> 约 1105 字 </span>
+          <span class="more-meta"> 约 1111 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -486,6 +486,7 @@
 </span><span class="lnt">203
 </span><span class="lnt">204
 </span><span class="lnt">205
+</span><span class="lnt">206
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
@@ -513,7 +514,8 @@
 <span class="n">fig</span><span class="o">.</span><span class="n">grdimage</span><span class="p">(</span>
     <span class="s2">&#34;@earth_relief_15s&#34;</span><span class="p">,</span>
     <span class="c1"># region=[84, 107.5, 12, 34],</span>
-    <span class="n">region</span> <span class="o">=</span> <span class="p">[</span><span class="mi">84</span><span class="p">,</span><span class="mf">107.5</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">30</span><span class="p">],</span>
+    <span class="c1"># region = [84,107.5,12,30],</span>
+    <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="mi">89</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">29</span><span class="p">],</span>
     <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;m1:35000000&#39;</span><span class="p">,</span>  <span class="c1"># </span>
     <span class="c1">#     projection= &#34;M3i&#34;,</span>
     <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;../Figure_Data/CPT/topo.cpt&#34;</span><span class="p">)</span>
@@ -697,7 +699,7 @@
 </div>
 </div><p><strong>绘制效果如下：</strong></p>
 <p><strong><code>png</code> 格式如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gxzdcxqiurj31690u0wna.jpg" alt="image-20220102154033750"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gy1f7uxjq9j31900u07dz.jpg" alt="image-20220104101559170"></p>
 <h2 id="参考链接">参考链接</h2>
 <ul>
 <li><a href="https://www.pygmt.org/latest/gallery/lines/linefronts.html#sphx-glr-gallery-lines-linefronts-py">pygmt plot vectors</a></li>
