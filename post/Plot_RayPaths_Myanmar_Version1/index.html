@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Plot_RayPaths_Myanmar_Version1">
 <meta itemprop="description" content="Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map"><meta itemprop="datePublished" content="2022-01-09T12:13:28&#43;08:00" />
 <meta itemprop="dateModified" content="2022-01-09T12:13:28&#43;08:00" />
-<meta itemprop="wordCount" content="1006">
+<meta itemprop="wordCount" content="1567">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Plot_RayPaths_Myanmar_Version1"/>
 <meta name="twitter:description" content="Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 1006 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1567 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -159,6 +159,15 @@
         <li><a href="#23-calculate-distance-between-two-stations-using-pyproj">2.3 Calculate distance between two stations using pyproj</a></li>
       </ul>
     </li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-import-module">1. import module</a></li>
+    <li><a href="#2-def-functions">2. def functions</a></li>
+    <li><a href="#3-read-cor_mm_dist_pyproj_sort-files">3. Read COR_MM_dist_pyproj_Sort Files</a></li>
+    <li><a href="#4-calculate-paths--dists">4. Calculate Paths &amp; Dists</a></li>
+    <li><a href="#5-plot-raypaths">5. Plot Raypaths</a></li>
   </ul>
 </nav>
   </div>
@@ -501,6 +510,327 @@
 </div><p><strong>整理后的 <code>COR_MM_dist_pyproj_Sort</code> 文件格式如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gy7dkm8svqj30ho0bhwf6.jpg" alt="image-20220109135230174"></p>
 <p><strong>对比利用 <code>obspy</code> 计算出的台站对之间的 <code>distance</code> 以及使用 <code>pyproj</code> 计算出的台站间距，几乎相同，证明两种方式的可行性。</strong></p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://github.com/roseseismo/roses2021/tree/main/unit03">https://github.com/roseseismo/roses2021/tree/main/unit03</a></li>
+</ul>
+<h1 id="plot-raypaths-according-to-cor_mm-functions">Plot Raypaths according to COR_MM Functions</h1>
+<p><strong>绘制研究区域台站对间射线覆盖分布图；需要注意的是，本次绘制射线覆盖图，是根据互相关函数 <code>COR_MM</code> 绘制的台站对间连线。</strong></p>
+<h2 id="1-import-module">1. import module</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">obspy</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">noise_module</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">obspy</span> <span class="kn">import</span> <span class="n">UTCDateTime</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+
+<span class="n">jtplot</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="s2">&#34;monokai&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-def-functions">2. def functions</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pyproj</span>
+
+<span class="n">wgs84</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Geod</span><span class="p">(</span><span class="n">ellps</span><span class="o">=</span><span class="s1">&#39;WGS84&#39;</span><span class="p">)</span> 
+
+<span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="n">lons1</span><span class="p">,</span> <span class="n">lats1</span><span class="p">,</span> <span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Returns an array of geodetic distance(s) in km between
+</span><span class="s2">    points (lon1, lat1) and (lon2, lat2)
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">wgs84</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">lons1</span><span class="o">=</span><span class="n">lons1</span><span class="p">,</span> <span class="n">lats1</span><span class="o">=</span><span class="n">lats1</span><span class="p">,</span> <span class="n">lons2</span><span class="o">=</span><span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="o">=</span><span class="n">lats2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span>
+  
+ <span class="k">def</span> <span class="nf">geodesic</span><span class="p">(</span><span class="n">coord1</span><span class="p">,</span> <span class="n">coord2</span><span class="p">,</span> <span class="n">npts</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Returns a list of *npts* points along the geodesic between
+</span><span class="s2">    (and including) *coord1* and *coord2*, in an array of
+</span><span class="s2">    shape (*npts*, 2).
+</span><span class="s2">    @rtype: L{ndarray}
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="k">if</span> <span class="n">npts</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;nb of points must be at least 2&#39;</span><span class="p">)</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="n">wgs84</span><span class="o">.</span><span class="n">npts</span><span class="p">(</span><span class="n">lon1</span><span class="o">=</span><span class="n">coord1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat1</span><span class="o">=</span><span class="n">coord1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="n">lon2</span><span class="o">=</span><span class="n">coord2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat2</span><span class="o">=</span><span class="n">coord2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">coord1</span><span class="p">]</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">coord2</span><span class="p">])</span>
+ 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3-read-cor_mm_dist_pyproj_sort-files">3. Read COR_MM_dist_pyproj_Sort Files</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Read COR_MM_dist_pyproj_Sort Infos
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">input_stainfos</span> <span class="o">=</span> <span class="s2">&#34;./outputfiles/Stainfo_MM&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;sta1&#34;</span><span class="p">,</span> <span class="s2">&#34;sta2&#34;</span><span class="p">,</span> <span class="s2">&#34;sta1_lon&#34;</span><span class="p">,</span> <span class="s2">&#34;sta1_lat&#34;</span><span class="p">,</span> <span class="s2">&#34;sta2_lon&#34;</span><span class="p">,</span> <span class="s2">&#34;sta2_lat&#34;</span><span class="p">]</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">input_stainfos</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+    <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-calculate-paths--dists">4. Calculate Paths &amp; Dists</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Modified from seismic noise tomography 
+</span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">pysismo</span>
+<span class="kn">from</span> <span class="nn">pysismo</span> <span class="kn">import</span> <span class="n">psutils</span>
+
+<span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">test</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">dist_MM</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">sta1_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">sta1_lat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">sta2_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">sta2_lat</span><span class="p">)</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">dist_MM</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+    <span class="n">source_coords</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">sta1_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">sta1_lat</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">source_coords</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source_coords</span><span class="p">)</span>
+    <span class="n">receiver_coords</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">sta2_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">sta2_lat</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">receiver_coords</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">receiver_coords</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">geodesic</span><span class="p">(</span><span class="n">source_coords</span><span class="p">,</span> <span class="n">receiver_coords</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span>
+
+    <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">dists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dist_MM</span><span class="p">)</span>
+
+<span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dists</span><span class="p">)</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&#34;object&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="5-plot-raypaths">5. Plot Raypaths</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;./figures/&#34;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Set picture 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;axes.linewidth&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 图框宽度；</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;figure.dpi&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">720</span>  <span class="c1">#</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.title_fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;20&#39;</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="s1">&#39;v&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;purple&#34;</span><span class="p">,</span>
+        <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span>
+        <span class="n">markeredgewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="c1"># Create custom legend</span>
+<span class="n">my_legend</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Raypath&#34;</span><span class="p">),</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s2">&#34;v&#34;</span><span class="p">,</span>
+           <span class="n">color</span><span class="o">=</span><span class="s2">&#34;purple&#34;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Station&#34;</span><span class="p">,</span>
+           <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+           <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">handles</span><span class="o">=</span><span class="n">my_legend</span><span class="p">,</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s2">&#34;best&#34;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&#34;grey&#34;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">shadow</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span>
+    <span class="s2">&#34;Longitude&#34;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span>
+    <span class="s2">&#34;Latitude&#34;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Station Geometry&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">26</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Visulization 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Station Geometry.png&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gy7e36n6lgj30u00u0jtl.jpg" alt="Station Geometry"></p>
 
     </div>
 
