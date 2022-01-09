@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 28 Dec 2021 10:12:19 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Jan 2022 12:13:28 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Plot_RayPaths_Myanmar_Version1</title>
+      <link>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version1/</link>
+      <pubDate>Sun, 09 Jan 2022 12:13:28 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version1/</guid>
+      <description>Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map</description>
+    </item>
+    
     <item>
       <title>Myanmar_Disp_Statistics</title>
       <link>https://tianyining.github.io/post/Myanmar_Disp_Statistics/</link>

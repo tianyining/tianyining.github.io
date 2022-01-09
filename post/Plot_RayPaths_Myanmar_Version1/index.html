@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Plot_RayPaths_Myanmar_Version1 - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="Plot_RayPaths_Myanmar_Version1" />
+<meta property="og:description" content="Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-09T12:13:28&#43;08:00" />
+<meta property="article:modified_time" content="2022-01-09T12:13:28&#43;08:00" />
+
+<meta itemprop="name" content="Plot_RayPaths_Myanmar_Version1">
+<meta itemprop="description" content="Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map"><meta itemprop="datePublished" content="2022-01-09T12:13:28&#43;08:00" />
+<meta itemprop="dateModified" content="2022-01-09T12:13:28&#43;08:00" />
+<meta itemprop="wordCount" content="1006">
+<meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Plot_RayPaths_Myanmar_Version1"/>
+<meta name="twitter:description" content="Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Plot_RayPaths_Myanmar_Version1</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-01-09 12:13 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
+            </div>
+          <span class="more-meta"> 约 1006 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#making-a-2-d-map-of-surface-wave-velocities">Making a 2-D map of surface wave velocities</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-get-dist-from-cor_mm-using-obspy">1. Get dist from COR_MM using Obspy</a></li>
+    <li><a href="#2-get-dist-from-cor_mm-using-pyproj">2. Get dist from COR_MM using pyproj</a>
+      <ul>
+        <li><a href="#21-定义函数-dist">2.1 定义函数 <code>dist</code></a></li>
+        <li><a href="#22-读取台站信息建立新的台站信息文件-stainfo_mm">2.2 读取台站信息，建立新的台站信息文件 <code>Stainfo_MM</code> </a></li>
+        <li><a href="#23-calculate-distance-between-two-stations-using-pyproj">2.3 Calculate distance between two stations using pyproj</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="making-a-2-d-map-of-surface-wave-velocities">Making a 2-D map of surface wave velocities</h2>
+<p><strong>There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map is to determine where along this path the variations in velocity occur. Here I&rsquo;ll use seismic-noise-tomography, produced by Dr. Bruno Gotourbes as the framework for developing these 2-D period maps. I&rsquo;ll go through the tomography workflow step by step, although I have also included a wrapper function called <code>invert4model</code> in rosesutils that can be used to do the same thing but more concisely.</strong></p>
+<h1 id="calculate-the-distance-between-two-pointsstation-pairs">Calculate the distance between two points(Station Pairs)</h1>
+<h2 id="1-get-dist-from-cor_mm-using-obspy">1. Get dist from COR_MM using Obspy</h2>
+<p><strong>利用台站经纬度，使用 <code>obspy</code> 中的 <code>dist</code> 计算两台站间的距离，并按照震中距的大小，进行排列，输出文件  <code>COR_MM_dist_Sort</code> 记录。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">obspy</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;./COR-MM/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;./outputfiles/&#34;</span>
+
+<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;10s} {:&lt;10s} {:&lt;10.4f}</span><span class="se">\n</span><span class="s2">&#34;</span>
+
+<span class="n">COR_MM</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*.SAC&#34;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;COR_MM_dist&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">sgl_cor</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*.SAC&#34;</span><span class="p">):</span>
+        <span class="n">sgl_cor_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">sgl_cor</span><span class="p">)</span>
+        <span class="n">sta1</span> <span class="o">=</span> <span class="n">sgl_cor_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sta2</span> <span class="o">=</span> <span class="n">sgl_cor_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">trace</span> <span class="o">=</span> <span class="n">obspy</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">sgl_cor</span><span class="p">)</span>
+
+        <span class="n">sgl_cor_dist</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">sac</span><span class="o">.</span><span class="n">dist</span>
+
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sta1</span><span class="p">,</span> <span class="n">sta2</span><span class="p">,</span> <span class="n">sgl_cor_dist</span><span class="p">))</span>
+<span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>对于提取的 <code>dist</code> 按大小进行排列，并格式化输出；</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 对于提取的 dist 按照大小进行排列 &amp; 格式化输出；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;./outputfiles/&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;sta1&#34;</span><span class="p">,</span> <span class="s2">&#34;sta2&#34;</span><span class="p">,</span><span class="s2">&#34;dist&#34;</span><span class="p">]</span>
+<span class="n">data_origin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;COR_MM_dist&#34;</span><span class="p">,</span>
+                          <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span>
+                          <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+                          <span class="n">index_col</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">data_new</span> <span class="o">=</span> <span class="n">data_origin</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">])</span>
+
+<span class="n">data_new</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;COR_MM_dist_Sort&#34;</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+    <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>整理后的 <code>COR_MM_dist_Sort</code> 文件格式如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gy7c33tjd4j30hr0bgq3l.jpg" alt="image-20220109130102153"></p>
+<h2 id="2-get-dist-from-cor_mm-using-pyproj">2. Get dist from COR_MM using pyproj</h2>
+<h3 id="21-定义函数-dist">2.1 定义函数 <code>dist</code></h3>
+<p><strong>利用 <code>pyproj</code> 库，计算两个台站间的 <code>distance</code> ，其中 <code>pyproj</code> 库可以进行坐标系转换、方位角计算、两点之间距离计算等。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pyproj</span>
+
+<span class="n">wgs84</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Geod</span><span class="p">(</span><span class="n">ellps</span><span class="o">=</span><span class="s1">&#39;WGS84&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="n">lons1</span><span class="p">,</span> <span class="n">lats1</span><span class="p">,</span> <span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Returns an array of geodetic distance(s) in km between
+</span><span class="s2">    points (lon1, lat1) and (lon2, lat2)
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">wgs84</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">lons1</span><span class="o">=</span><span class="n">lons1</span><span class="p">,</span> <span class="n">lats1</span><span class="o">=</span><span class="n">lats1</span><span class="p">,</span> <span class="n">lons2</span><span class="o">=</span><span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="o">=</span><span class="n">lats2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="22-读取台站信息建立新的台站信息文件-stainfo_mm">2.2 读取台站信息，建立新的台站信息文件 <code>Stainfo_MM</code> </h3>
+<p><strong>定义完 <code>function dist</code> 后，要想计算两点之间距离，需要输入四个参数：<code>sta1_lon</code> <code>sta1_lat</code> <code>sta2_lon</code> <code>sta2_lat</code> ；</strong></p>
+<p><strong>读取台站信息 <code>station_mm.lst</code> 并将台站信息以字典键值对形式存储 <code>Sta_Info</code> 。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Deal with Sta Info : establish dict to save messages
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;./station_mm.lst&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;./outputfiles/&#34;</span>
+<span class="n">Sta_Info</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)):</span>
+    <span class="n">sta_name</span><span class="p">,</span> <span class="n">sta_lon</span><span class="p">,</span> <span class="n">sta_lat</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">sta_lon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sta_lon</span><span class="p">)</span>
+    <span class="n">sta_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sta_lat</span><span class="p">)</span>
+    <span class="n">Sta_Info</span><span class="p">[</span><span class="n">sta_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;sta_lon&#34;</span><span class="p">:</span> <span class="n">sta_lon</span><span class="p">,</span> <span class="s2">&#34;sta_lat&#34;</span><span class="p">:</span> <span class="n">sta_lat</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>**根据 COR_MM 建立 Stainfo_MM 文件
+文件包含六列信息： <code>Sta1</code> <code> Sta2</code> <code> Sta1_lon</code>  <code>Sta1_lat</code> <code> Sta2_lon</code>  <code>Sta2_lat </code> **</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;./COR-MM/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;./outputfiles/&#34;</span>
+<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;10s} {:&lt;10s} {:&lt;10.4f} {:&lt;10.4f} {:&lt;10.4f} {:&lt;10.4f}</span><span class="se">\n</span><span class="s2">&#34;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Stainfo_MM&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+
+    <span class="k">for</span> <span class="n">sgl_cor</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*.SAC&#34;</span><span class="p">):</span>
+        <span class="n">sgl_cor_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">sgl_cor</span><span class="p">)</span>
+        <span class="n">sta1</span> <span class="o">=</span> <span class="n">sgl_cor_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sta2</span> <span class="o">=</span> <span class="n">sgl_cor_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="n">sta1_lon</span> <span class="o">=</span> <span class="n">Sta_Info</span><span class="p">[</span><span class="n">sta1</span><span class="p">][</span><span class="s2">&#34;sta_lon&#34;</span><span class="p">]</span>
+        <span class="n">sta1_lat</span> <span class="o">=</span> <span class="n">Sta_Info</span><span class="p">[</span><span class="n">sta1</span><span class="p">][</span><span class="s2">&#34;sta_lat&#34;</span><span class="p">]</span>
+        <span class="n">sta2_lon</span> <span class="o">=</span> <span class="n">Sta_Info</span><span class="p">[</span><span class="n">sta2</span><span class="p">][</span><span class="s2">&#34;sta_lon&#34;</span><span class="p">]</span>
+        <span class="n">sta2_lat</span> <span class="o">=</span> <span class="n">Sta_Info</span><span class="p">[</span><span class="n">sta2</span><span class="p">][</span><span class="s2">&#34;sta_lat&#34;</span><span class="p">]</span>
+
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sta1</span><span class="p">,</span> <span class="n">sta2</span><span class="p">,</span> <span class="n">sta1_lon</span><span class="p">,</span> <span class="n">sta1_lat</span><span class="p">,</span> <span class="n">sta2_lon</span><span class="p">,</span> <span class="n">sta2_lat</span><span class="p">))</span>
+<span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="23-calculate-distance-between-two-stations-using-pyproj">2.3 Calculate distance between two stations using pyproj</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;./outputfiles/Stainfo_MM&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;./outputfiles/&#34;</span>
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Sta1&#34;</span><span class="p">,</span> <span class="s2">&#34;Sta2&#34;</span><span class="p">,</span> <span class="s2">&#34;Sta1_lon&#34;</span><span class="p">,</span> <span class="s2">&#34;Sta1_lat&#34;</span><span class="p">,</span> <span class="s2">&#34;Sta2_lon&#34;</span><span class="p">,</span> <span class="s2">&#34;Sta2_lat&#34;</span><span class="p">]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Cal_dist_pyproj_MM&#34;</span><span class="p">,</span><span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">dist_MM</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">Sta1_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">Sta1_lat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">Sta2_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">Sta2_lat</span><span class="p">)</span>
+        <span class="n">sta1</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">Sta1</span>
+        <span class="n">sta2</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">Sta2</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;10s} {:&lt;10s} {:&lt;10.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sta1</span><span class="p">,</span> <span class="n">sta2</span><span class="p">,</span> <span class="n">dist_MM</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>按照 <code>dist</code> 由小到大进行排列，整理并输出新的文件 <code>COR_MM_dist_pyproj_Sort</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 对于提取的 dist 按照大小进行排列 &amp; 格式化输出；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;./outputfiles/&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;sta1&#34;</span><span class="p">,</span> <span class="s2">&#34;sta2&#34;</span><span class="p">,</span> <span class="s2">&#34;dist&#34;</span><span class="p">]</span>
+<span class="n">data_origin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;Cal_dist_pyproj_MM&#34;</span><span class="p">,</span>
+                          <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span>
+                          <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+                          <span class="n">index_col</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">data_new</span> <span class="o">=</span> <span class="n">data_origin</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">])</span>
+
+<span class="n">data_new</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;COR_MM_dist_pyproj_Sort&#34;</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+    <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>整理后的 <code>COR_MM_dist_pyproj_Sort</code> 文件格式如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gy7dkm8svqj30ho0bhwf6.jpg" alt="image-20220109135230174"></p>
+<p><strong>对比利用 <code>obspy</code> 计算出的台站对之间的 <code>distance</code> 以及使用 <code>pyproj</code> 计算出的台站间距，几乎相同，证明两种方式的可行性。</strong></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-01-09 12:13
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">数据格式转换</a>
+          <a href="/tags/python/">python</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Myanmar_Seismic_Stations_Maps_Version3/">
+            <span class="next-text nav-default">Myanmar_Seismic_Stations_Maps_Version3</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
