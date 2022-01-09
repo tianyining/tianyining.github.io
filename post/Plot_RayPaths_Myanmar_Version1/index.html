@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Plot_RayPaths_Myanmar_Version1">
 <meta itemprop="description" content="Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map"><meta itemprop="datePublished" content="2022-01-09T12:13:28&#43;08:00" />
 <meta itemprop="dateModified" content="2022-01-09T12:13:28&#43;08:00" />
-<meta itemprop="wordCount" content="1567">
+<meta itemprop="wordCount" content="1561">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Plot_RayPaths_Myanmar_Version1"/>
 <meta name="twitter:description" content="Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map"/>
@@ -136,7 +136,7 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 1567 字 </span>
+          <span class="more-meta"> 约 1561 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -148,21 +148,17 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#making-a-2-d-map-of-surface-wave-velocities">Making a 2-D map of surface wave velocities</a></li>
-  </ul>
-
-  <ul>
+    <li><a href="#calculate-the-distance-between-two-pointsstation-pairs">Calculate the distance between two points(Station Pairs)</a></li>
     <li><a href="#1-get-dist-from-cor_mm-using-obspy">1. Get dist from COR_MM using Obspy</a></li>
     <li><a href="#2-get-dist-from-cor_mm-using-pyproj">2. Get dist from COR_MM using pyproj</a>
       <ul>
         <li><a href="#21-定义函数-dist">2.1 定义函数 <code>dist</code></a></li>
         <li><a href="#22-读取台站信息建立新的台站信息文件-stainfo_mm">2.2 读取台站信息，建立新的台站信息文件 <code>Stainfo_MM</code> </a></li>
         <li><a href="#23-calculate-distance-between-two-stations-using-pyproj">2.3 Calculate distance between two stations using pyproj</a></li>
+        <li><a href="#reference">Reference</a></li>
       </ul>
     </li>
-    <li><a href="#参考链接">参考链接</a></li>
-  </ul>
-
-  <ul>
+    <li><a href="#plot-raypaths-according-to-cor_mm-functions">Plot Raypaths according to COR_MM Functions</a></li>
     <li><a href="#1-import-module">1. import module</a></li>
     <li><a href="#2-def-functions">2. def functions</a></li>
     <li><a href="#3-read-cor_mm_dist_pyproj_sort-files">3. Read COR_MM_dist_pyproj_Sort Files</a></li>
@@ -175,7 +171,7 @@
     <div class="post-content">
       <h2 id="making-a-2-d-map-of-surface-wave-velocities">Making a 2-D map of surface wave velocities</h2>
 <p><strong>There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map is to determine where along this path the variations in velocity occur. Here I&rsquo;ll use seismic-noise-tomography, produced by Dr. Bruno Gotourbes as the framework for developing these 2-D period maps. I&rsquo;ll go through the tomography workflow step by step, although I have also included a wrapper function called <code>invert4model</code> in rosesutils that can be used to do the same thing but more concisely.</strong></p>
-<h1 id="calculate-the-distance-between-two-pointsstation-pairs">Calculate the distance between two points(Station Pairs)</h1>
+<h2 id="calculate-the-distance-between-two-pointsstation-pairs">Calculate the distance between two points(Station Pairs)</h2>
 <h2 id="1-get-dist-from-cor_mm-using-obspy">1. Get dist from COR_MM using Obspy</h2>
 <p><strong>利用台站经纬度，使用 <code>obspy</code> 中的 <code>dist</code> 计算两台站间的距离，并按照震中距的大小，进行排列，输出文件  <code>COR_MM_dist_Sort</code> 记录。</strong></p>
 <div class="highlight"><div class="chroma">
@@ -361,8 +357,8 @@
     <span class="n">Sta_Info</span><span class="p">[</span><span class="n">sta_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;sta_lon&#34;</span><span class="p">:</span> <span class="n">sta_lon</span><span class="p">,</span> <span class="s2">&#34;sta_lat&#34;</span><span class="p">:</span> <span class="n">sta_lat</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>**根据 COR_MM 建立 Stainfo_MM 文件
-文件包含六列信息： <code>Sta1</code> <code> Sta2</code> <code> Sta1_lon</code>  <code>Sta1_lat</code> <code> Sta2_lon</code>  <code>Sta2_lat </code> **</p>
+</div><p><strong>根据 COR_MM 建立 Stainfo_MM 文件
+文件包含六列信息： <code>Sta1</code> <code> Sta2</code> <code> Sta1_lon</code>  <code>Sta1_lat</code> <code> Sta2_lon</code>  <code>Sta2_lat </code></strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -510,11 +506,12 @@
 </div><p><strong>整理后的 <code>COR_MM_dist_pyproj_Sort</code> 文件格式如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gy7dkm8svqj30ho0bhwf6.jpg" alt="image-20220109135230174"></p>
 <p><strong>对比利用 <code>obspy</code> 计算出的台站对之间的 <code>distance</code> 以及使用 <code>pyproj</code> 计算出的台站间距，几乎相同，证明两种方式的可行性。</strong></p>
-<h2 id="参考链接">参考链接</h2>
+<h3 id="reference">Reference</h3>
 <ul>
 <li><a href="https://github.com/roseseismo/roses2021/tree/main/unit03">https://github.com/roseseismo/roses2021/tree/main/unit03</a></li>
 </ul>
-<h1 id="plot-raypaths-according-to-cor_mm-functions">Plot Raypaths according to COR_MM Functions</h1>
+<hr>
+<h2 id="plot-raypaths-according-to-cor_mm-functions">Plot Raypaths according to COR_MM Functions</h2>
 <p><strong>绘制研究区域台站对间射线覆盖分布图；需要注意的是，本次绘制射线覆盖图，是根据互相关函数 <code>COR_MM</code> 绘制的台站对间连线。</strong></p>
 <h2 id="1-import-module">1. import module</h2>
 <div class="highlight"><div class="chroma">
