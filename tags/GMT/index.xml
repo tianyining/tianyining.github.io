@@ -106,5 +106,14 @@
       <description>​ 尽管大多数Linux发行版都提供了GMT二进制包，可以直接通过软件包管理器 apt 或 yum 安装，但发行版提供的GMT版本都很老，不建议使用。 ​ 本文介</description>
     </item>
     
+    <item>
+      <title>GMT_Slice_Version1</title>
+      <link>https://tianyining.github.io/post/GMT_Slice/</link>
+      <pubDate>Tue, 12 Jan 2021 17:13:14 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT_Slice/</guid>
+      <description>本篇 blog 尝试绘制 DSurfTomo 反演出的 3D 横波速度结构的深度切片，这里仅以 4km 深度为例进行绘制； 说明 本篇 blog 所用数据来自东北，并非自己的研究区域，origin from</description>
+    </item>
+    
   </channel>
 </rss>
