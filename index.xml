@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 09 Jan 2022 12:13:28 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jan 2022 17:13:14 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>GMT_Slice_Version1</title>
+      <link>https://tianyining.github.io/post/GMT_Slice/</link>
+      <pubDate>Wed, 12 Jan 2022 17:13:14 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT_Slice/</guid>
+      <description>本篇 blog 尝试绘制 DSurfTomo 反演出的 3D 横波速度结构的深度切片，这里仅以 4km 深度为例进行绘制； 说明 本篇 blog 所用数据来自东北，并非自己的研究区域，origin from</description>
     </item>
     
     <item>
@@ -664,15 +673,6 @@ It makes use of a variety of open source projects including:
       
       <guid>https://tianyining.github.io/post/2020final/</guid>
       <description>时间线：2020-09～2021-01 写在最开始🌾 ​ 很多东西最开始看，觉得这些没什么了不起，好像看起来很简单，实际是你太 low ，也没有静下心来细</description>
-    </item>
-    
-    <item>
-      <title>GMT_Slice_Version1</title>
-      <link>https://tianyining.github.io/post/GMT_Slice/</link>
-      <pubDate>Tue, 12 Jan 2021 17:13:14 +0800</pubDate>
-      
-      <guid>https://tianyining.github.io/post/GMT_Slice/</guid>
-      <description>本篇 blog 尝试绘制 DSurfTomo 反演出的 3D 横波速度结构的深度切片，这里仅以 4km 深度为例进行绘制； 说明 本篇 blog 所用数据来自东北，并非自己的研究区域，origin from</description>
     </item>
     
     <item>
