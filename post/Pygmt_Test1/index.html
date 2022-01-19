@@ -325,55 +325,55 @@
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">import pygmt
-import os
-import pandas as pd
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pygmt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 
-data = pd.read_csv(&#34;../InpFiles/japen_quakes.csv&#34;, sep=&#34;,&#34;)
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;../InpFiles/japen_quakes.csv&#34;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;,&#34;</span><span class="p">)</span>
 
-test_data_part = data[[&#34;longitude&#34;, &#34;latitude&#34;, &#34;depth_km&#34;]]
-&#39;&#39;&#39;
- Set Region 
-&#39;&#39;&#39;
-fig = pygmt.Figure()
-region = [130, 152.5, 32.5, 52.5]
-spacing = &#34;150m&#34;
-&#39;&#39;&#39;
- Calculate number of total locations within 150*150 minute bins via 
- blockmean&#39;s summary parameters 
-&#39;&#39;&#39;
-df = pygmt.blockmean(
-    data=test_data_part, region=region, spacing=spacing,
-    S=&#34;n&#34;)  # Use S=&#34;n&#34; to report the number of input points inside each block,
+<span class="n">test_data_part</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s2">&#34;longitude&#34;</span><span class="p">,</span> <span class="s2">&#34;latitude&#34;</span><span class="p">,</span> <span class="s2">&#34;depth_km&#34;</span><span class="p">]]</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Set Region 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">region</span> <span class="o">=</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mf">152.5</span><span class="p">,</span> <span class="mf">32.5</span><span class="p">,</span> <span class="mf">52.5</span><span class="p">]</span>
+<span class="n">spacing</span> <span class="o">=</span> <span class="s2">&#34;150m&#34;</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Calculate number of total locations within 150*150 minute bins via 
+</span><span class="s1"> blockmean&#39;s summary parameters 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">blockmean</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">test_data_part</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span>
+    <span class="n">S</span><span class="o">=</span><span class="s2">&#34;n&#34;</span><span class="p">)</span>  <span class="c1"># Use S=&#34;n&#34; to report the number of input points inside each block,</span>
 
-grd = pygmt.xyz2grd(
-    data=df,
-    region=region,
-    spacing=spacing,
-)
+<span class="n">grd</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">xyz2grd</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span>
+    <span class="n">spacing</span><span class="o">=</span><span class="n">spacing</span><span class="p">,</span>
+<span class="p">)</span>
 
-fig.grdimage(
-    grid=grd,
-    region=region,
-    frame=[&#34;af&#34;, &#39;+t&#34;Number of points inside each bloack&#34;&#39;],
-    cmap=&#34;batlow&#34;,
-)
-fig.plot(
-    x=test_data_part.longitude,
-    y=test_data_part.latitude,
-    style=&#34;c0.3c&#34;,
-    pen=&#34;1p,black&#34;,
-    color=&#34;white&#34;,
-)
-fig.coast(
-    land=&#34;darkgrey&#34;,
-    transparency=40,
-)
-fig.colorbar(frame=[&#39;x+l&#34;Total Number of Events in each Blocks(count)&#34;&#39;])
-fig.show()
+<span class="n">fig</span><span class="o">.</span><span class="n">grdimage</span><span class="p">(</span>
+    <span class="n">grid</span><span class="o">=</span><span class="n">grd</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span>
+    <span class="n">frame</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;af&#34;</span><span class="p">,</span> <span class="s1">&#39;+t&#34;Number of points inside each bloack&#34;&#39;</span><span class="p">],</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;batlow&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">test_data_part</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">test_data_part</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&#34;c0.3c&#34;</span><span class="p">,</span>
+    <span class="n">pen</span><span class="o">=</span><span class="s2">&#34;1p,black&#34;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&#34;white&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">coast</span><span class="p">(</span>
+    <span class="n">land</span><span class="o">=</span><span class="s2">&#34;darkgrey&#34;</span><span class="p">,</span>
+    <span class="n">transparency</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">frame</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x+l&#34;Total Number of Events in each Blocks(count)&#34;&#39;</span><span class="p">])</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>绘图效果如下：</strong></p>
+</div><p><strong>绘图效果如下：</strong> </p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gyist6tae1j30u00w677n.jpg" alt="image-20220119110055947"></p>
 <h2 id="basic-map-via-depth--magnitude">Basic Map via depth &amp; magnitude</h2>
 <p><strong>绘制地震事件分布图，用不同颜色表示地震深度，用圆圈大小表示地震事件震级大小；</strong></p>
