@@ -320,7 +320,7 @@ gmt clip <span class="nv">$R</span> -JM2i -W0.5p,black,-  <span class="s">&lt;&l
 <span class="c1">## 开始绘制 4km 的切片，包含三列 首先挑选出 4km 深度处的反演结果；</span>
 awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$4}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;4.0&#34;</span> <span class="nv">$inp3D</span> &gt; tmp.dat <span class="c1"># 生成的 tmp.dat 包含三列：lon lat velocity_S </span>
 gmt xyz2grd tmp.dat  -R124/131.5/40/44.5 -I0.25/0.25 -Gtmp.grd  
-gmt grdimage tmp.grd  -Cvelocity.cpt <span class="nv">$J</span> <span class="nv">$R</span> -E100 -Q 
+gmt grdimage tmp.grd  -Cvelocity.cpt <span class="nv">$J</span> <span class="nv">$R</span> -E720 -Q 
 <span class="c1"># stop clip </span>
 gmt clip -C 
 
