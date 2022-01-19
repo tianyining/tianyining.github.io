@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 12 Jan 2022 17:13:14 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jan 2022 10:36:46 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Pygmt Blockmean Test</title>
+      <link>https://tianyining.github.io/post/Pygmt_Test1/</link>
+      <pubDate>Wed, 19 Jan 2022 10:36:46 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Pygmt_Test1/</guid>
+      <description>说明 blockmean 模块计算不同块体内部的数量，其中块体尺寸大小是按照空间距离等距离划分的，下面的两个例子，分别展示了如何使用 blockmean 模块计算每个 block 内部地震事件</description>
     </item>
     
     <item>

@@ -16,15 +16,64 @@
   </url>
   
   <url>
+    <loc>https://tianyining.github.io/tags/Beauty_Plot/</loc>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/Beauty_Plot/</loc>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://tianyining.github.io/</loc>
-    <lastmod>2022-01-12T17:13:14+08:00</lastmod>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/categories/</loc>
-    <lastmod>2022-01-12T17:13:14+08:00</lastmod>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/</loc>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/pygmt/</loc>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/pygmt/</loc>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/Pygmt_Test1/</loc>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/</loc>
+    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -45,20 +94,6 @@
   
   <url>
     <loc>https://tianyining.github.io/post/GMT_Slice/</loc>
-    <lastmod>2022-01-12T17:13:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/post/</loc>
-    <lastmod>2022-01-12T17:13:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/</loc>
     <lastmod>2022-01-12T17:13:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -101,20 +136,6 @@
   
   <url>
     <loc>https://tianyining.github.io/post/Myanmar_Seismic_Stations_Maps_Version3/</loc>
-    <lastmod>2022-01-02T12:57:17+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/pygmt/</loc>
-    <lastmod>2022-01-02T12:57:17+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/pygmt/</loc>
     <lastmod>2022-01-02T12:57:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -172,20 +193,6 @@
   <url>
     <loc>https://tianyining.github.io/post/AFTAN_Interp_Format_DISP/</loc>
     <lastmod>2021-11-30T21:34:00+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/Beauty_Plot/</loc>
-    <lastmod>2021-11-29T16:13:31+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/Beauty_Plot/</loc>
-    <lastmod>2021-11-29T16:13:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
