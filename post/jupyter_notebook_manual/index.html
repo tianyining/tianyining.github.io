@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Jupyter Notebook使用技巧">
 <meta itemprop="description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"><meta itemprop="datePublished" content="2021-07-15T14:01:35&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-15T14:01:35&#43;08:00" />
-<meta itemprop="wordCount" content="1750">
+<meta itemprop="wordCount" content="1813">
 <meta itemprop="keywords" content="jupyter notebook,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Jupyter Notebook使用技巧"/>
 <meta name="twitter:description" content="说明 这篇 blog 记录 jupyter notebook 下的使用技巧。 1. jupyter notebook 深色主题背景下图表坐标看不清 将 jupyter notebook 设置为深色背景，但深色背景画图就会遇到图表坐标文字显示看不清的问题。"/>
@@ -136,7 +136,7 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/jupyter-notebook/"> jupyter notebook </a>
             </div>
-          <span class="more-meta"> 约 1750 字 </span>
+          <span class="more-meta"> 约 1813 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -177,9 +177,14 @@
         <li><a href="#安装-simhei-字体可支持中文显示">安装 SimHei 字体(可支持中文显示)</a></li>
         <li><a href="#jupyter-notebook-中使用-times-new-roman-字体_ubuntu1804"><code>jupyter notebook</code> 中使用 <code>Times New Roman</code> 字体_Ubuntu18.04</a></li>
         <li><a href="#测试字体安装是否成功simhei--tiems-new-roman">测试字体安装是否成功(SimHei &amp; Tiems New Roman)</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-ubuntu2004-解决字体问题">5. Ubuntu20.04 解决字体问题</a>
+      <ul>
         <li><a href="#参考链接-3">参考链接</a></li>
       </ul>
     </li>
+    <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
   </div>
@@ -504,7 +509,7 @@ ___&lt;font color=green&gt;绿色+加粗+斜体&lt;/font&gt;___
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>安装步骤如下：</strong></p>
-<h4 id="1-在conda-环境终端下jupyter-notebook中也可查看字体路径">1. 在<code>conda</code> 环境终端下<code>jupyter notebook</code>中也可 ，查看字体路径</h4>
+<h4 id="1-在conda-环境终端下jupyter-notebook中也可-查看字体路径">1. 在<code>conda</code> 环境终端下<code>jupyter notebook</code>中也可 ，查看字体路径</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -553,7 +558,7 @@ ___&lt;font color=green&gt;绿色+加粗+斜体&lt;/font&gt;___
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">rm ~/..cache/matplotlib -fr 
+<pre class="chroma"><code class="language-shell" data-lang="shell">rm ~/.cache/matplotlib -rf 
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="4-修改-matplotlibrc-文件">4. 修改 <code>matplotlibrc</code> 文件</h4>
@@ -641,10 +646,28 @@ ___&lt;font color=green&gt;绿色+加粗+斜体&lt;/font&gt;___
 </div>
 </div><p><strong>显示结果如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gx0kyqjks1j30bj0aa3yp.jpg" alt="image-20211203132856294"></p>
+<h2 id="5-ubuntu2004-解决字体问题">5. Ubuntu20.04 解决字体问题</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install msttcorefonts -qq
+$ rm ~/.cache/matplotlib -rf
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Restarting Jupyter</strong></p>
 <h3 id="参考链接-3">参考链接</h3>
 <ul>
 <li><a href="https://askubuntu.com/questions/210680/installing-times-new-roman-font">Install Times New Roman Font</a></li>
 <li><a href="https://blog.csdn.net/sinat_40875078/article/details/104326855">Install SimHei Font</a></li>
+<li><a href="https://stackoverflow.com/questions/42097053/matplotlib-cannot-find-basic-fonts">https://stackoverflow.com/questions/42097053/matplotlib-cannot-find-basic-fonts</a></li>
+</ul>
+<h2 id="修订历史">修订历史</h2>
+<ul>
+<li>2021-07-15：初稿；</li>
+<li>2022-01-21：增加 Ubuntu20.04 下字体安装问题；</li>
 </ul>
 
     </div>
