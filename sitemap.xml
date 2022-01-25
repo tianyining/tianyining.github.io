@@ -16,6 +16,69 @@
   </url>
   
   <url>
+    <loc>https://tianyining.github.io/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/plot_period_raypath_version2/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/python/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/python/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2022-01-25T20:56:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://tianyining.github.io/tags/Beauty_Plot/</loc>
     <lastmod>2022-01-19T10:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -24,27 +87,6 @@
   
   <url>
     <loc>https://tianyining.github.io/categories/Beauty_Plot/</loc>
-    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/</loc>
-    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/</loc>
-    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/post/</loc>
     <lastmod>2022-01-19T10:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -66,13 +108,6 @@
   
   <url>
     <loc>https://tianyining.github.io/post/Pygmt_Test1/</loc>
-    <lastmod>2022-01-19T10:36:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/</loc>
     <lastmod>2022-01-19T10:36:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -101,34 +136,6 @@
   
   <url>
     <loc>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version1/</loc>
-    <lastmod>2022-01-09T12:13:28+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/python/</loc>
-    <lastmod>2022-01-09T12:13:28+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/python/</loc>
-    <lastmod>2022-01-09T12:13:28+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</loc>
-    <lastmod>2022-01-09T12:13:28+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</loc>
     <lastmod>2022-01-09T12:13:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

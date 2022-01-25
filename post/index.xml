@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 19 Jan 2022 10:36:46 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Jan 2022 20:56:45 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Plot_period_raypath_version2</title>
+      <link>https://tianyining.github.io/post/plot_period_raypath_version2/</link>
+      <pubDate>Tue, 25 Jan 2022 20:56:45 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/plot_period_raypath_version2/</guid>
+      <description>说明 本篇 blog 记录如何利用 AFTAN 从互相关对称分量中提取频散文件，计算不同周期的射线路径，并最终绘制绘制不同周期的台站对射线路径分布图； Here we will calculate the paths. In</description>
     </item>
     
     <item>

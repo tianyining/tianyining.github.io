@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 09 Jan 2022 12:13:28 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Jan 2022 20:56:45 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Plot_period_raypath_version2</title>
+      <link>https://tianyining.github.io/post/plot_period_raypath_version2/</link>
+      <pubDate>Tue, 25 Jan 2022 20:56:45 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/plot_period_raypath_version2/</guid>
+      <description>说明 本篇 blog 记录如何利用 AFTAN 从互相关对称分量中提取频散文件，计算不同周期的射线路径，并最终绘制绘制不同周期的台站对射线路径分布图； Here we will calculate the paths. In</description>
+    </item>
+    
     <item>
       <title>Plot_RayPaths_Myanmar_Version1</title>
       <link>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version1/</link>
