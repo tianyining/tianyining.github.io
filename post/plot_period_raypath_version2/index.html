@@ -850,31 +850,31 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">import pandas as pd
-import numpy as np
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-namescol = [
-    &#34;source_name&#34;, &#34;receiver_name&#34;, &#34;group_velocity&#34;, &#34;phase_velocity&#34;,
-    &#34;signal2noise_ratio&#34;, &#34;source_lon&#34;, &#34;source_lat&#34;, &#34;receiver_lon&#34;,
-    &#34;receiver_lat&#34;, &#34;inter-station_distance&#34;
-]
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&#34;source_name&#34;</span><span class="p">,</span> <span class="s2">&#34;receiver_name&#34;</span><span class="p">,</span> <span class="s2">&#34;group_velocity&#34;</span><span class="p">,</span> <span class="s2">&#34;phase_velocity&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;signal2noise_ratio&#34;</span><span class="p">,</span> <span class="s2">&#34;source_lon&#34;</span><span class="p">,</span> <span class="s2">&#34;source_lat&#34;</span><span class="p">,</span> <span class="s2">&#34;receiver_lon&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;receiver_lat&#34;</span><span class="p">,</span> <span class="s2">&#34;inter-station_distance&#34;</span>
+<span class="p">]</span>
 
-disp_curves = pd.read_csv(
-    &#34;../DISP_Period/10.dat&#34;,
-    names=namescol,
-    delim_whitespace=&#34; &#34;,
-)
+<span class="n">disp_curves</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&#34;../DISP_Period/10.dat&#34;</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+    <span class="n">delim_whitespace</span><span class="o">=</span><span class="s2">&#34; &#34;</span><span class="p">,</span>
+<span class="p">)</span>
 
-# Clean Data Delete Outliers
-v_type = &#34;phase_velocity&#34;
-origin = len(disp_curves)
-std_crit = np.abs(disp_curves[v_type] - np.mean(disp_curves[v_type])
-                  ) &lt; 3 * np.std(disp_curves[v_type])
+<span class="c1"># Clean Data Delete Outliers</span>
+<span class="n">v_type</span> <span class="o">=</span> <span class="s2">&#34;phase_velocity&#34;</span>
+<span class="n">origin</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">)</span>
+<span class="n">std_crit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="n">v_type</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="n">v_type</span><span class="p">])</span>
+                  <span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="n">v_type</span><span class="p">])</span>
 
-disp_curves_clean = disp_curves[std_crit]
-clean = len(disp_curves_clean)
+<span class="n">disp_curves_clean</span> <span class="o">=</span> <span class="n">disp_curves</span><span class="p">[</span><span class="n">std_crit</span><span class="p">]</span>
+<span class="n">clean</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">disp_curves_clean</span><span class="p">)</span>
 
-print(f&#34;{origin - clean} measurements were removed&#34;)
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;{origin - clean} measurements were removed&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>2. Calculate Ray Paths</strong></p>
@@ -892,16 +892,16 @@ print(f&#34;{origin - clean} measurements were removed&#34;)
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">import pyproj
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pyproj</span>
 
-wgs84 = pyproj.Geod(ellps=&#39;WGS84&#39;)
-def dist(lons1, lats1, lons2, lats2):
-    &#34;&#34;&#34;
-    Returns an array of geodetic distance(s) in km between
-    points (lon1, lat1) and (lon2, lat2)
-    &#34;&#34;&#34;
-    _, _, d = wgs84.inv(lons1=lons1, lats1=lats1, lons2=lons2, lats2=lats2)
-    return np.array(d) / 1000.0  
+<span class="n">wgs84</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Geod</span><span class="p">(</span><span class="n">ellps</span><span class="o">=</span><span class="s1">&#39;WGS84&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dist</span><span class="p">(</span><span class="n">lons1</span><span class="p">,</span> <span class="n">lats1</span><span class="p">,</span> <span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Returns an array of geodetic distance(s) in km between
+</span><span class="s2">    points (lon1, lat1) and (lon2, lat2)
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">wgs84</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">lons1</span><span class="o">=</span><span class="n">lons1</span><span class="p">,</span> <span class="n">lats1</span><span class="o">=</span><span class="n">lats1</span><span class="p">,</span> <span class="n">lons2</span><span class="o">=</span><span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="o">=</span><span class="n">lats2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span>  
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
