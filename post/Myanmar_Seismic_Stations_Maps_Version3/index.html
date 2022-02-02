@@ -50,7 +50,7 @@
 <meta itemprop="name" content="Myanmar_Seismic_Stations_Maps_Version3">
 <meta itemprop="description" content="本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version2 的提升 Version2 相较于 Version2 ，本篇 blog 添加板块俯冲边界、断层走滑方向等构造信息； 使用 topo.cpt 绘制底图； 添加"><meta itemprop="datePublished" content="2022-01-02T12:57:17&#43;08:00" />
 <meta itemprop="dateModified" content="2022-01-02T12:57:17&#43;08:00" />
-<meta itemprop="wordCount" content="1111">
+<meta itemprop="wordCount" content="1838">
 <meta itemprop="keywords" content="pygmt,GMT," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Myanmar_Seismic_Stations_Maps_Version3"/>
 <meta name="twitter:description" content="本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version2 的提升 Version2 相较于 Version2 ，本篇 blog 添加板块俯冲边界、断层走滑方向等构造信息； 使用 topo.cpt 绘制底图； 添加"/>
@@ -136,8 +136,8 @@
             <a href="/categories/pygmt/"> pygmt </a>
             <a href="/categories/GMT/"> GMT </a>
             </div>
-          <span class="more-meta"> 约 1111 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1838 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -151,6 +151,12 @@
     <li><a href="#2-将台站按照不同来源进行分类">2. 将台站按照不同来源进行分类</a></li>
     <li><a href="#3-pygmt-绘制台站分布图">3. Pygmt 绘制台站分布图</a></li>
     <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#gmt620-plot">GMT6.2.0 Plot</a>
+      <ul>
+        <li><a href="#update">Update</a></li>
+      </ul>
+    </li>
+    <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
   </div>
@@ -705,6 +711,219 @@
 <li><a href="https://www.pygmt.org/latest/gallery/lines/linefronts.html#sphx-glr-gallery-lines-linefronts-py">pygmt plot vectors</a></li>
 <li><a href="https://docs.gmt-china.org/latest/module/plot/">GMT 中文手册 plot</a></li>
 <li><a href="https://blog.xumijian.me/post/gmt-map/">https://blog.xumijian.me/post/gmt-map/</a></li>
+</ul>
+<h2 id="gmt620-plot">GMT6.2.0 Plot</h2>
+<p><strong>使用 <code>gmt6.2.0</code> 绘制研究区域地形图、台站分布以及地震分布；</strong></p>
+<h3 id="update">Update</h3>
+<ul>
+<li><strong>相较于 <code>pygmt</code> 版本，添加了 <code>Block cpt</code> 信息；</strong></li>
+<li><strong>添加 <code>Kabaw Fault</code> 构造信息；</strong></li>
+</ul>
+<p><strong>绘图代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh
+</span><span class="cp"></span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Date:2022-02-02</span>
+<span class="c1"># Function:plot eq &amp; MM_2 Station distribution </span>
+<span class="c1"># GMT 6.2.0 </span>
+
+<span class="nv">fig</span><span class="o">=</span><span class="s2">&#34;./Figs/plot_eq_sta_MM2_FINAL&#34;</span>
+<span class="c1"># Data </span>
+<span class="nv">topo</span><span class="o">=</span><span class="s2">&#34;extra_gd/Wangxi_Figure1/Block/topo.cpt&#34;</span>
+<span class="nv">DATA</span><span class="o">=</span><span class="s2">&#34;extra_gd/Wangxi_Figure1&#34;</span>
+<span class="nv">extra_gd_path</span><span class="o">=</span><span class="s2">&#34;./extra_gd&#34;</span>
+<span class="nv">sagaingfault</span><span class="o">=</span><span class="s2">&#34;extra_gd/Sagaingfault.dat&#34;</span>
+<span class="nv">kabawfault</span><span class="o">=</span><span class="s2">&#34;extra_gd/Kabawfault.dat&#34;</span>
+<span class="nv">eqfile</span><span class="o">=</span><span class="s2">&#34;./eq/catalog_sel_1901-2008_after_relo000.txt&#34;</span> 
+<span class="nv">station_tyn</span><span class="o">=</span><span class="s2">&#34;/home/edentian/Myanmar_ANT/plot_eq_tyn/Station_Info/station.mm_right&#34;</span>
+<span class="nv">station_jmm</span><span class="o">=</span><span class="s2">&#34;./Station_Info/stn_M2&#34;</span>
+
+<span class="c1"># parameters related to the horizontal slices.</span>
+<span class="nv">JJ</span><span class="o">=</span>M9.0c
+<span class="nv">RR</span><span class="o">=</span>91.5/101/16/24.5 
+
+<span class="c1"># GMT plot Begin !!! </span>
+gmt begin <span class="nv">$fig</span> png,pdf
+    gmt <span class="nb">set</span> MAP_FRAME_WIDTH 2p  <span class="c1"># width of fancy frame 边框宽度；</span>
+    gmt <span class="nb">set</span> MAP_FRAME_PEN 0.5p <span class="c1"># pen width of plain frame </span>
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 10p,Times-Roman,black <span class="c1"># primary annotation font 边框注释字体大小;</span>
+    gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 0.025c <span class="c1"># Length of primary tick marks colorbar &amp; 边框刻度大小</span>
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,red <span class="c1"># colorbar 注释字体</span>
+
+    <span class="c1"># 绘制地形图 </span>
+    gmt basemap -R<span class="nv">$RR</span> -J<span class="nv">$JJ</span> -Bxa2f1WSen -Bya2f1WSen 
+    gmt grdimage @earth_relief_15s -R<span class="nv">$RR</span> -J<span class="nv">$JJ</span> -C<span class="nv">$topo</span> -I 
+
+    <span class="c1"># -t 设置透明度，range 0~100 默认是0,为不透明；</span>
+    cat <span class="nv">$DATA</span>/Block/IndoBurma.txt <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -G219/214/169 -t60
+    cat <span class="nv">$DATA</span>/Block/CMB.txt <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -G162/200/185 -t60
+    cat <span class="nv">$DATA</span>/Block/ShanTaiBlock.txt <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -G204/204/204 -t80
+
+    cat <span class="nv">$DATA</span>/Block/ST2.txt <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -G204/204/204 -t80
+    cat <span class="nv">$DATA</span>/Block/ST3.txt <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -G204/204/204 -t80 
+    cat <span class="nv">$DATA</span>/Block/MMB.txt <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -G204/153/102 -t60 
+
+    <span class="c1"># 绘制海岸线；</span>
+    gmt coast -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -W1p,black -Di -S99/102/106
+
+    <span class="c1"># 绘制构造线 </span>
+    <span class="c1"># cat $extra_gd_path/Major_faults.gmt | gmt plot -J$JJ -R$RR -W1.0p </span>
+    cat <span class="nv">$extra_gd_path</span>/Sagaingfault.dat <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -Sf4/0.6+r+s+o0.9i -W1.0p,black 
+    <span class="c1"># cat $extra_gd_path/Shanscarpfault.dat | gmt plot -J$JJ -R$RR -W1.0p,blue </span>
+    <span class="c1"># cat $extra_gd_path/Myanmar_newfaults_CL.gmt | gmt plot -J$JJ -R$RR -W1.5p,blue</span>
+    <span class="c1"># cat $extra_gd_path/KF_a | gmt plot -J$JJ -R$RR -W1.5p,blue </span>
+    gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -W1,red -Gred -Sf0.5/0.05i+r+t <span class="nv">$kabawfault</span>
+
+    <span class="c1"># plot eq  </span>
+    cat <span class="nv">$eqfile</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$3,0.038}&#39;</span> <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -Sci -Ccolor.cpt -W0.6p,black 
+    
+<span class="c1"># gmt text </span>
+gmt text -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -F+f+a+j -Gwhite -: &gt;&gt; <span class="nv">$fig</span> <span class="s">&lt;&lt; EOF
+</span><span class="s">16.57 98.90 7 0 1 Focal Depth
+</span><span class="s">16.2 96.16 8 92 1 Sagaing Fault
+</span><span class="s">23.0 93.80 8 77 1 Kabaw Fault
+</span><span class="s">16.57 97.80 8 0 1 City
+</span><span class="s">EOF</span>
+
+<span class="c1"># plot station </span>
+<span class="c1"># awk &#39;{print $2,$3}&#39; $station_tyn | gmt plot -Si0.075i -W0.4p,black -Gblue  </span>
+cat <span class="nv">$station_jmm</span> <span class="p">|</span> awk <span class="s1">&#39;{print $4,$3}&#39;</span> <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -Si0.075i -W0.4p,black -Gpurple
+
+<span class="c1"># plot city </span>
+<span class="nb">echo</span> 95.43 22.77 0.28 <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -Sh0.10i -W0.5p,black -Gyellow 
+<span class="nb">echo</span> 94.85 22.43 0.28 <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -Sh0.10i -W0.5p,black -Gyellow 
+
+<span class="c1"># Legend Begin !!! 绘制 legend 使用两种形式 gmt legend &amp; gmt text </span>
+<span class="c1"># plot colorbar </span>
+<span class="c1"># gmt colorbar -Dx3.0i/0.18i/0.5i/0.07ih -Ccolor.cpt -I -Bxa50f25+l&#34;km&#34; </span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 4p,Times-Roman,black <span class="c1"># 设置 colorbar 的字体；</span>
+gmt colorbar -Dx3.0i/0.18i/0.5i/0.07ih -Ccolor.cpt -I -Bxa50f25
+<span class="c1"># city legend </span>
+<span class="nb">echo</span> 98.0 16.39 0.3 <span class="p">|</span> gmt plot -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -Sh0.10i -W0.5p,black -Gyellow 
+
+<span class="c1"># legend for others </span>
+<span class="nv">C1</span><span class="o">=</span>204/153/102
+<span class="nv">C4</span><span class="o">=</span>219/214/169
+<span class="nv">C5</span><span class="o">=</span>162/200/185
+<span class="nv">C6</span><span class="o">=</span>204/204/204
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black 
+gmt legend -J<span class="nv">$JJ</span> -R<span class="nv">$RR</span> -DjBL+w1.25i/0.7i+l1.5+o0.01i/0.01i -C0.1i/0.05i -F+gazure4 &gt;&gt; <span class="nv">$fig</span> <span class="s">&lt;&lt; EOF
+</span><span class="s">S 0.05i -        0.18i black               1.0p,black                0.27i  Fault zones
+</span><span class="s">S 0.05i r        0.12i $C4@60              1.0p,$C4@60               0.27i  Indo-Burma Ranges
+</span><span class="s">S 0.05i r        0.12i $C5@60              1.0p,$C5@60               0.27i  Central Lowland
+</span><span class="s">S 0.05i r        0.12i $C1@60              1.0p,$C1@60               0.27i  Mogok Metamorphic belt
+</span><span class="s">S 0.05i r        0.12i $C6@60              1.0p,$C6@60               0.27i  Shan Plateau
+</span><span class="s">EOF</span>
+
+gmt end show 
+<span class="c1"># rm gmt.* </span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="修订历史">修订历史</h2>
+<ul>
+<li>初稿：2022-01-02；</li>
+<li>2022-02-02：添加 <code>GMT6</code> 版本绘制；</li>
 </ul>
 
     </div>
