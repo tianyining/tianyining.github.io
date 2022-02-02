@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 25 Jan 2022 20:56:45 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Jan 2022 20:45:25 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>QC_Version2</title>
+      <link>https://tianyining.github.io/post/QC_Version2/</link>
+      <pubDate>Fri, 28 Jan 2022 20:45:25 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/QC_Version2/</guid>
+      <description>本篇 blog 记录如何对 AFTAN 提取出的频散曲线进行质量控制，质量控制步骤主要包含两步：1) 传统频散曲线质量控制；2) 根据实际数据对频散数据点按偏离标准差</description>
+    </item>
+    
     <item>
       <title>Plot_period_raypath_version2</title>
       <link>https://tianyining.github.io/post/plot_period_raypath_version2/</link>
