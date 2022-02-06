@@ -50,7 +50,7 @@
 <meta itemprop="name" content="GMT_Slice_Version1">
 <meta itemprop="description" content="本篇 blog 尝试绘制 DSurfTomo 反演出的 3D 横波速度结构的深度切片，这里仅以 4km 深度为例进行绘制； 说明 本篇 blog 所用数据来自东北，并非自己的研究区域，origin from"><meta itemprop="datePublished" content="2022-01-12T17:13:14&#43;08:00" />
 <meta itemprop="dateModified" content="2022-01-12T17:13:14&#43;08:00" />
-<meta itemprop="wordCount" content="811">
+<meta itemprop="wordCount" content="1926">
 <meta itemprop="keywords" content="GMT," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="GMT_Slice_Version1"/>
 <meta name="twitter:description" content="本篇 blog 尝试绘制 DSurfTomo 反演出的 3D 横波速度结构的深度切片，这里仅以 4km 深度为例进行绘制； 说明 本篇 blog 所用数据来自东北，并非自己的研究区域，origin from"/>
@@ -135,8 +135,8 @@
         <div class="post-category">
             <a href="/categories/GMT/"> GMT </a>
             </div>
-          <span class="more-meta"> 约 811 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
+          <span class="more-meta"> 约 1926 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -147,9 +147,16 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#说明">说明</a></li>
-    <li><a href="#数据准备">数据准备</a></li>
+    <li><a href="#1-绘制-s-波绝对速度数据准备">1. 绘制 S 波绝对速度：数据准备</a></li>
     <li><a href="#绘图--结果展示">绘图 &amp; 结果展示</a></li>
     <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#2-绘制-s-波相对速度切片">2. 绘制 S 波相对速度切片</a>
+      <ul>
+        <li><a href="#1-relative_anomaly-反演结果绘制效果">1） <code>relative_anomaly</code> 反演结果绘制效果</a></li>
+        <li><a href="#2relative_anomaly_f-反演结果绘制效果">2）<code>relative_anomaly_f</code> 反演结果绘制效果</a></li>
+      </ul>
+    </li>
+    <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
   </div>
@@ -158,7 +165,7 @@
       <p><strong>本篇 <code>blog</code> 尝试绘制 <code>DSurfTomo</code> 反演出的 <code>3D</code> 横波速度结构的深度切片，这里仅以 <code>4km</code> 深度为例进行绘制；</strong></p>
 <h2 id="说明">说明</h2>
 <p><strong>本篇 <code>blog</code> 所用数据来自东北，并非自己的研究区域，<code>origin from Fan &amp; Hao</code></strong></p>
-<h2 id="数据准备">数据准备</h2>
+<h2 id="1-绘制-s-波绝对速度数据准备">1. 绘制 S 波绝对速度：数据准备</h2>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gyb0kxldyzj30iw04kaa7.jpg" alt="image-20220112172513483"></p>
 <p><strong>绘图需要用到的数据都存放在在 <code>InpFiles</code> 文件夹中：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gyb0lqhdixj30iz050aa9.jpg" alt="image-20220112172602610"></p>
@@ -370,6 +377,188 @@ gmt end show
 <ul>
 <li><a href="https://docs.generic-mapping-tools.org/latest/legend.html">plot legend</a></li>
 <li><a href="https://docs.gmt-china.org/latest/module/clip/">gmt clip</a></li>
+</ul>
+<h2 id="2-绘制-s-波相对速度切片">2. 绘制 S 波相对速度切片</h2>
+<p><strong>通常文章中展现结果时，都是用的相对速度，而非绝对速度，这是因为相对速度对比度更加明显，高低速会更加突出；</strong></p>
+<p><strong>下面的例子可以展现了两个不同的反演结果 <code>GMT</code> 绘制速度切片的实例，通过对比可发现，两个反演结果整体趋势一致，但是精细结构存在差异；对于同样的反演结果，在绘图时，生成的网格数据，网格大小的设置，也会一定程度上影响最终的结果展示。</strong></p>
+<p><strong>Attention</strong></p>
+<ul>
+<li><code>xyz2grd</code> 设置网格 <code>-I</code> ，设置网格越大，最终图像结果会显示更平滑，网格越精细，有可能会看到更小尺度的速度扰动；</li>
+<li><code>$R</code> 设置经纬度范围时，需要设置成 <code>-I</code> 最小网格的倍数，否则会 <code>warning</code>，但不影响最终绘图；</li>
+<li>下图的两个绘图结果，使用了不同的反演结果，细微处有差别，但是整体趋势一致；</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh
+</span><span class="cp"></span><span class="c1"># Date:2022-02-06 </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># relative_anomaly &amp; relative_anomaly_f 是两个不同输入文件，</span>
+<span class="c1"># 绘图脚本一致，使用不同的数据，绘制出的图像有些许不同，但整体趋势一致；</span>
+
+<span class="nv">inp3D</span><span class="o">=</span><span class="s2">&#34;./relative_anomaly&#34;</span> <span class="c1"># 使用该目录下的 relative_anomaly </span>
+<span class="c1"># inp3D=&#34;./relat_anomaly_f&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="s2">&#34;./Figs/Slice_tyn&#34;</span>
+<span class="nv">lon1</span><span class="o">=</span><span class="m">123</span>
+<span class="nv">lon2</span><span class="o">=</span>131.50
+<span class="c1"># lon2=130.75 </span>
+<span class="nv">lat1</span><span class="o">=</span><span class="m">40</span> 
+<span class="nv">lat2</span><span class="o">=</span>45.0
+<span class="nv">depth</span><span class="o">=</span>4.0
+<span class="nv">R</span><span class="o">=</span><span class="s2">&#34;-R&#34;</span><span class="nv">$lon1</span><span class="s2">&#34;/&#34;</span><span class="nv">$lon2</span><span class="s2">&#34;/&#34;</span><span class="nv">$lat1</span><span class="s2">&#34;/&#34;</span><span class="nv">$lat2</span>
+<span class="nv">J</span><span class="o">=</span><span class="s2">&#34;-JM3i&#34;</span> 
+<span class="nv">cpt</span><span class="o">=</span><span class="s2">&#34;./cpt&#34;</span>
+<span class="nv">clip_file</span><span class="o">=</span><span class="s2">&#34;./psclip.xy&#34;</span>
+<span class="nv">line</span><span class="o">=</span><span class="s2">&#34;../lines/&#34;</span>
+
+gmt begin <span class="nv">$fig_$depth</span> png 
+    gmt <span class="nb">set</span> MAP_FRAME_WIDTH 3p  <span class="c1"># width of fancy frame 边框宽度；</span>
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 0.025c  
+
+    gmt makecpt -Cblack,red,white,blue,purple -T-14/14/7 -H -Z   &gt; <span class="nv">$cpt</span><span class="s2">&#34;/velocity.cpt&#34;</span>
+    gmt basemap <span class="nv">$R</span> <span class="nv">$J</span> -Bya2f1 -Bxa2f1 -BWseN 
+    gmt makecpt -Cgray -T-7000/7000/1000 -H -Z &gt; <span class="nv">$cpt</span><span class="s2">&#34;/g.cpt&#34;</span>    <span class="c1">#cpt grey</span>
+
+    <span class="c1"># 绘制地形起伏 </span>
+    gmt grdimage @earth_relief_15s <span class="nv">$R</span> <span class="nv">$J</span> -C<span class="nv">$cpt</span><span class="s2">&#34;/g.cpt&#34;</span> -I+d 
+
+    <span class="c1"># 在 clip 出的区域，绘制成像结果；</span>
+    gmt clip <span class="nv">$clip_file</span> <span class="nv">$R</span> <span class="nv">$J</span> 
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$5}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;4.0&#34;</span> <span class="nv">$inp3D</span> &gt; tmp.dat <span class="c1"># relative_anomaly </span>
+    <span class="c1"># awk &#39;{if ($4==depth1) print $1,$2,$5}&#39; depth1=&#34;4.0&#34; $inp3D &gt; tmp.dat  # relat_anomaly_f</span>
+    <span class="c1"># gmt xyz2grd $R 的范围应该 0.25 的倍数；否则会 warning 但是不影响正常绘图；</span>
+    <span class="c1"># -I 生成的网格大，则成像结果会更平滑，网格设置小，则会得到更精细的结果；</span>
+    gmt xyz2grd tmp.dat <span class="nv">$R</span> <span class="nv">$J</span> -I0.25/0.25 -Gtmp.grd 
+    <span class="c1"># gmt xyz2grd tmp.dat $R $J -I0.5/0.5 -Gtmp.grd </span>
+    gmt grdimage tmp.grd  -C<span class="nv">$cpt</span><span class="s2">&#34;/velocity.cpt&#34;</span> <span class="nv">$R</span> <span class="nv">$J</span> -E720 -Q 
+    gmt clip -C 
+
+    <span class="c1"># 绘制海岸线</span>
+    gmt coast <span class="nv">$J</span> <span class="nv">$R</span> -N1/0.8p,black,- -W0.8p -A0/0/1 -Dh 
+
+    <span class="c1">## 绘制断裂带 &amp; 火山 使用 -S 选项，则仅在数据点所在位置绘制符号</span>
+    gmt plot <span class="s2">&#34;./Tanlu.xy&#34;</span> <span class="nv">$R</span> <span class="nv">$J</span> -W0.5p,black 
+    gmt plot <span class="s2">&#34;./suture.xy&#34;</span> <span class="nv">$R</span> <span class="nv">$J</span> -W1p,gray40,- 
+    gmt plot <span class="s2">&#34;./volcanoes.txt&#34;</span> <span class="nv">$R</span> <span class="nv">$J</span> -Skvolcano/8p -Gblack  
+    
+    <span class="c1"># 绘制 linea &amp; lineb </span>
+    gmt plot <span class="si">${</span><span class="nv">line</span><span class="si">}</span><span class="s2">&#34;linea&#34;</span> <span class="nv">$R</span> <span class="nv">$J</span> -W1.2p,brown  
+    gmt plot <span class="si">${</span><span class="nv">line</span><span class="si">}</span><span class="s2">&#34;lineb&#34;</span> <span class="nv">$R</span> <span class="nv">$J</span> -W1.2p,brown  
+
+    gmt <span class="nb">set</span> FONT_LABEL +10p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -C<span class="nv">$cpt</span><span class="s2">&#34;/velocity.cpt&#34;</span> -DJBC+e+mc  -Ba4f2,+l<span class="s2">&#34;Relative Velocity(km/s)&#34;</span> 
+
+    <span class="c1">## 添加 text 统一规定所有文本的字号为 10p(表示字体大小) 4号字体(表示不同字体) -a-10 表示顺时针旋转10° </span>
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman,black
+    <span class="c1"># gmt text &#34;./volcanoes.txt&#34; $R $J -F+f5p,37,red -D0.05i/-0.12i </span>
+    gmt text <span class="s2">&#34;./volcanoes.txt&#34;</span> <span class="nv">$R</span> <span class="nv">$J</span> -D0.05i/-0.12i 
+    <span class="nb">echo</span> <span class="m">126</span> 42.4432 A <span class="p">|</span> gmt text <span class="nv">$R</span> <span class="nv">$J</span> -F+f12p,4,orange  <span class="c1"># 绘制字母 A </span>
+    <span class="nb">echo</span> 128.50 42.0017 A<span class="se">\&#39;</span> <span class="p">|</span> gmt text <span class="nv">$R</span> <span class="nv">$J</span> -F+f12p,4,<span class="s1">&#39;#2ca25f&#39;</span>  <span class="c1"># 绘制字母 A&#39; </span>
+    <span class="nb">echo</span> 127.6 41.2 B <span class="p">|</span> gmt text <span class="nv">$R</span> <span class="nv">$J</span> -F+f12p,4,orange <span class="c1"># 绘制字母 B </span>
+    <span class="nb">echo</span> 128.65 44.2 B<span class="se">\&#39;</span> <span class="p">|</span> gmt text <span class="nv">$R</span> <span class="nv">$J</span> -F+f12p,4,<span class="s1">&#39;#2ca25f&#39;</span> <span class="c1"># 绘制字母 B&#39; </span>
+
+<span class="c1"># 绘制 legend </span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 12p,Helvetica FONT_LABEL 12p,Helvetica
+gmt legend <span class="nv">$R</span> <span class="nv">$J</span> -DjRB+w2.0c/0.5c -F+gwhite -t20 -C4p <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 4km
+</span><span class="s">EOF</span>
+
+gmt end show 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="1-relative_anomaly-反演结果绘制效果">1） <code>relative_anomaly</code> 反演结果绘制效果</h3>
+<p>**使用 <code>relative_anomaly</code> 反演结果绘制的图像，网格设置为 <code>0.25/0.25</code> **</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gz45kpxbrlj30rz0psq87.jpg" alt="image-20220206221924369"></p>
+<p><strong>如果把网格设置成 <code>-I0.5/0.5</code> ，结果会更平滑：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gz45ohd4wxj30rz0psgqt.jpg" alt="image-20220206222303034"></p>
+<h3 id="2relative_anomaly_f-反演结果绘制效果">2）<code>relative_anomaly_f</code> 反演结果绘制效果</h3>
+<p><strong>使用 <code>relative_anomaly_f</code> 反演结果进行切片绘制，网格设置为 <code>-I0.25/0.25</code></strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gz45m5i6a1j30rz0psgqz.jpg" alt="image-20220206222049399"></p>
+<p><strong>当网格设置为 <code>-I0.5/0.5</code> 的时候，绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gz45z2vzvtj30rz0ps79e.jpg" alt="image-20220206223314934"></p>
+<h2 id="修订历史">修订历史</h2>
+<ul>
+<li>初稿：2022-01-12：绘制 <code>S</code> 波绝对速度切片；</li>
+<li>2022-02-06：增加 <code>S</code> 波相对速度绘制切片的绘制；</li>
 </ul>
 
     </div>
