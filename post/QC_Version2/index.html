@@ -157,13 +157,7 @@
         <li><a href="#step5-merge-disp-files-after-traditional-qc">Step5 Merge Disp Files After Traditional QC</a></li>
         <li><a href="#step6-del-std">Step6 Del std</a></li>
         <li><a href="#step7-merge-disp-files-after-del-std--plot">Step7 Merge Disp Files After Del std &amp; Plot</a></li>
-      </ul>
-    </li>
-    <li><a href="#step8-sort-disp-in-period">Step8 Sort Disp in Period</a>
-      <ul>
-        <li><a href="#1-整合台站经纬度信息">1. 整合台站经纬度信息</a></li>
-        <li><a href="#2-计算互相关文件台站间距-dist">2. 计算互相关文件台站间距 <code>dist</code></a></li>
-        <li><a href="#3-sort-disp-files-final-version">3. Sort Disp Files Final Version</a></li>
+        <li><a href="#step8-sort-disp-in-period">Step8 Sort Disp in Period</a></li>
       </ul>
     </li>
   </ul>
@@ -1693,7 +1687,7 @@ gmt end show
 </div>
 </div><p><strong>经过质量控制后，相速度频散曲线最终绘制效果：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gyzh5r9v7wj316k0u077i.jpg" alt="image-20220202211225539"></p>
-<h2 id="step8-sort-disp-in-period">Step8 Sort Disp in Period</h2>
+<h3 id="step8-sort-disp-in-period">Step8 Sort Disp in Period</h3>
 <p><strong>将频散文件整理成以整数周期命名的格式：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1703,7 +1697,7 @@ gmt end show
 <pre class="chroma"><code class="language-shell" data-lang="shell">sta1 sta2 groupv phasev snr sta1_lon sta1_lat sta2_lon sta2_lat dist 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="1-整合台站经纬度信息">1. 整合台站经纬度信息</h3>
+</div><h4 id="1-整合台站经纬度信息">1. 整合台站经纬度信息</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1752,7 +1746,7 @@ gmt end show
 <span class="n">Sta_Info</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="2-计算互相关文件台站间距-dist">2. 计算互相关文件台站间距 <code>dist</code></h3>
+</div><h4 id="2-计算互相关文件台站间距-dist">2. 计算互相关文件台站间距 <code>dist</code></h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -1793,7 +1787,7 @@ gmt end show
 <span class="n">CCF_INFO</span> 
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="3-sort-disp-files-final-version">3. Sort Disp Files Final Version</h3>
+</div><h4 id="3-sort-disp-files-final-version">3. Sort Disp Files Final Version</h4>
 <p><strong>需要注意的是，由于程序写入文件的形式设定的是 <code>a</code> ，因此只能执行一次，否则会重复写入信息。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
