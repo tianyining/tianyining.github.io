@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图； 以 10s 周期为" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图 以 10s 周期为例" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -41,19 +41,19 @@
 
 
 <meta property="og:title" content="Plot_RayPaths_Myanmar_Version2" />
-<meta property="og:description" content="说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图； 以 10s 周期为" />
+<meta property="og:description" content="说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图 以 10s 周期为例" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version2/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-02-08T22:51:05&#43;08:00" />
 <meta property="article:modified_time" content="2022-02-08T22:51:05&#43;08:00" />
 
 <meta itemprop="name" content="Plot_RayPaths_Myanmar_Version2">
-<meta itemprop="description" content="说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图； 以 10s 周期为"><meta itemprop="datePublished" content="2022-02-08T22:51:05&#43;08:00" />
+<meta itemprop="description" content="说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图 以 10s 周期为例"><meta itemprop="datePublished" content="2022-02-08T22:51:05&#43;08:00" />
 <meta itemprop="dateModified" content="2022-02-08T22:51:05&#43;08:00" />
-<meta itemprop="wordCount" content="1009">
+<meta itemprop="wordCount" content="1005">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Plot_RayPaths_Myanmar_Version2"/>
-<meta name="twitter:description" content="说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图； 以 10s 周期为"/>
+<meta name="twitter:description" content="说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图 以 10s 周期为例"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 1009 字 </span>
+          <span class="more-meta"> 约 1005 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -157,11 +157,11 @@
 </div>
     <div class="post-content">
       <h2 id="说明">说明</h2>
-<p><strong>当完成频散曲线质量控制<a href="https://tianyining.github.io/post/QC_Version2/">QC_Version2</a>，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图；</strong></p>
+<p><strong>当完成频散曲线质量控制<a href="https://tianyining.github.io/post/QC_Version2/">QC_Version2</a>，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图</strong></p>
 <p><strong>以 10s 周期为例，绘制 10s 周期频散文件的射线路径分布图：本质是提取出频散曲线的台站对连线；</strong></p>
 <h2 id="step1-clean-phase-velocity-dataset">Step1 Clean Phase Velocity Dataset</h2>
-<p>**本身整数周期命名的频散文件，在之前的步骤中，已经剔除了 3 倍标准差以外的数据点，
-这里再次剔除 3*std 以外的数据点； **</p>
+<p><strong>本身整数周期命名的频散文件，在之前的步骤中，已经剔除了 3 倍标准差以外的数据点，
+这里再次剔除 3*std 以外的数据点。</strong>  </p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
