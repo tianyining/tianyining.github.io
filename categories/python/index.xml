@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 28 Jan 2022 20:45:25 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Feb 2022 22:51:05 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Plot_RayPaths_Myanmar_Version2</title>
+      <link>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version2/</link>
+      <pubDate>Tue, 08 Feb 2022 22:51:05 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version2/</guid>
+      <description>说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图； 以 10s 周期为</description>
+    </item>
+    
     <item>
       <title>QC_Version2</title>
       <link>https://tianyining.github.io/post/QC_Version2/</link>
