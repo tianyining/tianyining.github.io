@@ -50,7 +50,7 @@
 <meta itemprop="name" content="MM_Yiming">
 <meta itemprop="description" content="说明 本篇 blog 用于记录 Yiming Bai 在 Myanmar 的部分工作； Date:2021-11-11：拿到 Yiming Bai 的相速度频散曲线（手动挑选，仅缺少最后试错反演的质量控制） 1. Get"><meta itemprop="datePublished" content="2021-11-15T16:54:51&#43;08:00" />
 <meta itemprop="dateModified" content="2021-11-15T16:54:51&#43;08:00" />
-<meta itemprop="wordCount" content="1579">
+<meta itemprop="wordCount" content="2282">
 <meta itemprop="keywords" content="python,Myanmar Work," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MM_Yiming"/>
 <meta name="twitter:description" content="说明 本篇 blog 用于记录 Yiming Bai 在 Myanmar 的部分工作； Date:2021-11-11：拿到 Yiming Bai 的相速度频散曲线（手动挑选，仅缺少最后试错反演的质量控制） 1. Get"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/Myanmar-Work/"> Myanmar Work </a>
             </div>
-          <span class="more-meta"> 约 1579 字 </span>
-          <span class="more-meta"> 预计阅读 4 分钟 </span>
+          <span class="more-meta"> 约 2282 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -159,6 +159,7 @@
         <li><a href="#绘制相速度频散曲线">绘制相速度频散曲线</a></li>
       </ul>
     </li>
+    <li><a href="#plot_sta_yiming_v2">Plot_Sta_Yiming_V2</a></li>
     <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
@@ -754,9 +755,194 @@ gmt end show
 </div>
 </div><p><strong>绘制效果如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwfz6kwvh7j316b0u041w.jpg" alt="image-20211115174401436"></p>
+<h2 id="plot_sta_yiming_v2">Plot_Sta_Yiming_V2</h2>
+<p><strong>使用 <code>GMT6</code> 绘制 <code>Yiming</code> 台站分布图，添加构造线以及 <code>block</code>信息。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh
+</span><span class="cp"></span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Date:2022-02-09 </span>
+
+<span class="nv">fig</span><span class="o">=</span><span class="s2">&#34;../Figs/plot_Yiming_Sta&#34;</span>
+<span class="nv">info_path</span><span class="o">=</span><span class="s2">&#34;/home/edentian/Myanmar_ANT/Region/Yiming/Info/extra_gd&#34;</span>
+<span class="nv">topo</span><span class="o">=</span><span class="s2">&#34;/home/edentian/Myanmar_ANT/Region/Yiming/Info/extra_gd/Wangxi_Figure1/Block/my2.cpt&#34;</span>
+<span class="nv">sagaingfault</span><span class="o">=</span><span class="s2">&#34;/home/edentian/Myanmar_ANT/Region/Yiming/Info/extra_gd/Sagaingfault.dat&#34;</span>
+<span class="nv">kabawfault</span><span class="o">=</span><span class="s2">&#34;/home/edentian/Myanmar_ANT/Region/Yiming/Info/extra_gd/Kabawfault.dat&#34;</span>
+<span class="nv">KF_a</span><span class="o">=</span><span class="s2">&#34;/home/edentian/Myanmar_ANT/Region/Yiming/Info/extra_gd/KF_a&#34;</span>
+<span class="nv">KF_b</span><span class="o">=</span><span class="s2">&#34;/home/edentian/Myanmar_ANT/Region/Yiming/Info/extra_gd/KF_b&#34;</span>
+<span class="nv">DATA</span><span class="o">=</span><span class="s2">&#34;/home/edentian/Myanmar_ANT/Region/Yiming/Info/extra_gd/Wangxi_Figure1&#34;</span>
+<span class="nv">sta_whole</span><span class="o">=</span><span class="s2">&#34;../Sta/Yiming_Sta_Whole.lst&#34;</span>
+<span class="nv">sta_mm</span><span class="o">=</span><span class="s2">&#34;../Sta/MM_Sta.lst&#34;</span>
+<span class="nv">sta_iris</span><span class="o">=</span><span class="s2">&#34;../Sta/IRIS_Sta.txt&#34;</span>
+
+<span class="nv">R</span><span class="o">=</span>92.0/98.0/20.5/24.5 
+<span class="nv">J</span><span class="o">=</span>M9.0c
+
+gmt begin <span class="nv">$fig</span> png,pdf 
+    gmt <span class="nb">set</span> MAP_FRAME_WIDTH 2p  <span class="c1"># width of fancy frame 边框宽度； fancy type </span>
+    gmt <span class="nb">set</span> MAP_FRAME_PEN 2.0p <span class="c1"># pen width of plain frame plain type </span>
+    gmt <span class="nb">set</span> MAP_FRAME_TYPE plain <span class="c1"># 边框设置为 plain </span>
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman,black <span class="c1"># primary annotation font 边框注释字体大小;</span>
+    gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 0.05c <span class="c1"># Length of primary tick marks colorbar &amp; 边框刻度大小</span>
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,red <span class="c1"># colorbar 注释字体</span>
+    
+
+    <span class="c1"># 绘制地形图 </span>
+    gmt basemap -R<span class="nv">$R</span> -J<span class="nv">$J</span> -Bxa1f1WSen -Bya1f1WSen 
+    gmt grdimage @earth_relief_15s -R<span class="nv">$R</span> -J<span class="nv">$J</span> -C<span class="nv">$topo</span> <span class="c1"># 若 -I 则会起伏地形； </span>
+
+    <span class="c1"># -t 设置透明度，range 0~100 默认是0,为不透明；</span>
+    cat <span class="nv">$DATA</span>/Block/IndoBurma.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G#87CEEB -t60 <span class="c1"># 印缅山脉 蓝色</span>
+    cat <span class="nv">$DATA</span>/Block/CMB.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G219/214/169 -t60 <span class="c1"># 中部沉积盆地 黄色</span>
+    cat <span class="nv">$DATA</span>/Block/ShanTaiBlock.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G204/204/204 -t60 <span class="c1"># 掸邦高原 灰色 </span>
+    cat <span class="nv">$DATA</span>/Block/ST1.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G204/204/204 -t60
+    cat <span class="nv">$DATA</span>/Block/ST2.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G204/204/204 -t60
+    cat <span class="nv">$DATA</span>/Block/ST3.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G204/204/204 -t60 
+    cat <span class="nv">$DATA</span>/Block/ST4.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G204/204/204 -t60
+    cat <span class="nv">$DATA</span>/Block/MMB.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G204/153/102 -t60 <span class="c1"># 莫谷变质带；</span>
+    cat <span class="nv">$DATA</span>/Block/OphE.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G#A020F0 -t60 <span class="c1"># OphE 紫色</span>
+    cat <span class="nv">$DATA</span>/Block/OphW.txt <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -G#A020F0 -t60 <span class="c1"># OphW 紫色</span>
+
+    <span class="c1"># 绘制海岸线；</span>
+    gmt coast -J<span class="nv">$J</span> -R<span class="nv">$R</span> -W0.1p,black -I1/1p,<span class="s2">&#34;#87CEEB&#34;</span> -N1/0.25p,darkgray,  <span class="c1"># 绘制出永久的主要河流</span>
+
+    <span class="c1"># 绘制构造线 </span>
+    <span class="c1"># cat $extra_gd_path/Major_faults.gmt | gmt plot -J$JJ -R$RR -W1.0p </span>
+    cat <span class="nv">$sagaingfault</span> <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -Sf4/0.6+r+s+o0.9i -W0.8p,red 
+    <span class="c1"># gmt plot -J$J -R$R -W1.5p,blue $info_path&#34;/Myanmar_newfaults_CL.gmt&#34;</span>
+    gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -W0.8p,red -Gred -Sf0.5/0.05i+r+t <span class="nv">$kabawfault</span>
+    <span class="c1"># gmt plot -J$J -R$R -W0.8p,red -Gred -Sf0.5/0.05i+r+t $KF_b</span>
+    <span class="c1"># gmt plot -J$J -R$R -W0.8p,orange -Gorange -Sf0.5/0.05i+r+t $KF_a </span>
+
+<span class="c1"># gmt text </span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,red 
+gmt text -J<span class="nv">$J</span> -R<span class="nv">$R</span> -F+f+a+j -Gwhite -: &gt;&gt; <span class="nv">$fig</span> <span class="s">&lt;&lt; EOF
+</span><span class="s">22.5 96.16 6 89 1 Sagaing Fault
+</span><span class="s">23.05 93.9 6 77 1 Kabaw Fault
+</span><span class="s">EOF</span>
+
+<span class="c1"># plot station </span>
+<span class="c1"># awk &#39;{print $2,$3}&#39; $station_tyn | gmt plot -Si0.075i -W0.4p,black -Gblue  </span>
+cat <span class="nv">$sta_mm</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -Si0.075i -W0.4p,black -Gpurple 
+cat <span class="nv">$sta_iris</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot -J<span class="nv">$J</span> -R<span class="nv">$R</span> -Sd0.075i -W0.4p,black -G0/205/102
+
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 4p,Times-Roman,black <span class="c1"># 设置 colorbar 的字体；</span>
+<span class="nv">C1</span><span class="o">=</span><span class="s2">&#34;#87CEEB&#34;</span> <span class="c1"># indo burma range </span>
+<span class="nv">C2</span><span class="o">=</span>219/214/169 <span class="c1"># CMB </span>
+<span class="nv">C3</span><span class="o">=</span>204/204/204 <span class="c1"># 掸邦高原；</span>
+<span class="nv">C4</span><span class="o">=</span>204/153/102 <span class="c1"># mogu 变质带；</span>
+
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 4.0p,Times-Roman,black 
+gmt legend -J<span class="nv">$J</span> -R<span class="nv">$R</span> -DjBL+w1.15i/0.65i+l1.5+o0.01i/0.01i -C0.1i/0.05i -F+gwhite+pthin &gt;&gt; <span class="nv">$fig</span> <span class="s">&lt;&lt; EOF
+</span><span class="s">S 0.05i -        0.18i black               1.0p,red                  0.27i  Fault zones
+</span><span class="s">S 0.05i i        0.06i purple              0.4p,black                0.27i  CMGSMO 
+</span><span class="s">S 0.05i d        0.06i green               0.4p,black                0.27i  IRIS  
+</span><span class="s">S 0.05i r        0.10i $C1@60              1.0p,$C1@60               0.27i  Indo-Burma Ranges
+</span><span class="s">S 0.05i r        0.10i $C2@60              1.0p,$C2@60               0.27i  Central Lowland
+</span><span class="s">S 0.05i r        0.10i $C4@60              1.0p,$C4@60               0.27i  Mogok Metamorphic belt
+</span><span class="s">S 0.05i r        0.10i $C3@60              1.0p,$C3@60               0.27i  Shan Plateau
+</span><span class="s">EOF</span>
+
+gmt end show 
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p>![image-20220216123402754](/Users/edn-tian/Library/Application Support/typora-user-images/image-20220216123402754.png)</p>
 <h2 id="修订历史">修订历史</h2>
 <ul>
 <li>2021-11-15：首次撰写；</li>
+<li>2022-02-16：增加 <code>Yiming</code> 台站绘制图；</li>
 </ul>
 
     </div>
