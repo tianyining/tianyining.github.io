@@ -1018,7 +1018,7 @@ gmt end show
 </div>
 </div><h3 id="step2_15wavelength">Step2_1.5Wavelength</h3>
 <p><strong>根据远场假设，对频散曲线进行质量控制：</strong></p>
-<p><strong>按照 <code>1.5</code> 倍波长进行质量控制：<code>T &lt; dist/6</code>  如下</strong>  </p>
+<p><strong>按照 <code>1.5</code> 倍波长进行质量控制：<code>T &lt; dist/6</code>  如下</strong></p>
 <p><strong>首先读取所有互相关台站对之间的 <code>dist</code> 信息，并写入文件保存：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1854,7 +1854,7 @@ gmt end show
         <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&#34;rm -f &#34;</span> <span class="o">+</span> <span class="n">disp</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>将频散文件整合为含有信噪比信息的频散文件；</strong> </p>
+</div><p><strong>将频散文件整合为含有信噪比信息的频散文件；</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -2018,33 +2018,33 @@ gmt end show
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">&#39;&#39;&#39;
-对频散数据信噪比进行筛选，将 snr &lt; 10 的频散数据点删除，并重新保存为新的频散文件；
-&#39;&#39;&#39;
-import os
-import glob
-import pandas as pd
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">对频散数据信噪比进行筛选，将 snr &lt; 10 的频散数据点删除，并重新保存为新的频散文件；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 
-input_disp_dir = &#34;../Step3_YN_DISP_SNR_Merge/&#34;
-output_dir = &#34;../Step4_Del_SNR/&#34;
+<span class="n">input_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step3_YN_DISP_SNR_Merge/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step4_Del_SNR/&#34;</span>
 
-for disp in glob.glob(input_disp_dir + &#34;*&#34;):
-    disp_name = os.path.basename(disp)
-    namescol = [&#34;period&#34;, &#34;group_v&#34;, &#34;phase_v&#34;, &#34;snr&#34;]
+<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp_dir</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
+    <span class="n">disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
+    <span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;period&#34;</span><span class="p">,</span> <span class="s2">&#34;group_v&#34;</span><span class="p">,</span> <span class="s2">&#34;phase_v&#34;</span><span class="p">,</span> <span class="s2">&#34;snr&#34;</span><span class="p">]</span>
 
-    dataset = pd.read_csv(
-        disp,
-        names=namescol,
-        delim_whitespace=True,
-    )
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">disp</span><span class="p">,</span>
+        <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+        <span class="n">delim_whitespace</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="p">)</span>
 
-    dataset_new = dataset[dataset[&#34;snr&#34;] &gt; 10]
-    dataset_new.to_csv(
-        output_dir + &#34;Del_SNR_&#34; + disp_name[15:],
-        index=None,
-        header=None,
-        sep=&#34; &#34;,
-    )
+    <span class="n">dataset_new</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&#34;snr&#34;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+    <span class="n">dataset_new</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+        <span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Del_SNR_&#34;</span> <span class="o">+</span> <span class="n">disp_name</span><span class="p">[</span><span class="mi">15</span><span class="p">:],</span>
+        <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s2">&#34; &#34;</span><span class="p">,</span>
+    <span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>绘制剔除低信噪比数据点后的频散图：</strong></p>
