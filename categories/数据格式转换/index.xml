@@ -6,7 +6,16 @@
     <description>Recent content in 数据格式转换 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 23 Feb 2022 10:54:39 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Feb 2022 21:25:06 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSurfTomo频散文件数据格式转换_def_Version</title>
+      <link>https://tianyining.github.io/post/AFTAN_to_DSurfTomo_def/</link>
+      <pubDate>Fri, 25 Feb 2022 21:25:06 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/AFTAN_to_DSurfTomo_def/</guid>
+      <description>说明 本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式</description>
+    </item>
+    
     <item>
       <title>QC_Version3_Region</title>
       <link>https://tianyining.github.io/post/Disp_QualityControl_Region/</link>
