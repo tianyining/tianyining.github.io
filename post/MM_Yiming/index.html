@@ -50,7 +50,7 @@
 <meta itemprop="name" content="MM_Yiming">
 <meta itemprop="description" content="说明 本篇 blog 用于记录 Yiming Bai 在 Myanmar 的部分工作； Date:2021-11-11：拿到 Yiming Bai 的相速度频散曲线（手动挑选，仅缺少最后试错反演的质量控制） 1. Get"><meta itemprop="datePublished" content="2021-11-15T16:54:51&#43;08:00" />
 <meta itemprop="dateModified" content="2021-11-15T16:54:51&#43;08:00" />
-<meta itemprop="wordCount" content="2357">
+<meta itemprop="wordCount" content="2395">
 <meta itemprop="keywords" content="python,Myanmar Work," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="MM_Yiming"/>
 <meta name="twitter:description" content="说明 本篇 blog 用于记录 Yiming Bai 在 Myanmar 的部分工作； Date:2021-11-11：拿到 Yiming Bai 的相速度频散曲线（手动挑选，仅缺少最后试错反演的质量控制） 1. Get"/>
@@ -136,7 +136,7 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/Myanmar-Work/"> Myanmar Work </a>
             </div>
-          <span class="more-meta"> 约 2357 字 </span>
+          <span class="more-meta"> 约 2395 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -172,7 +172,60 @@
 <p><strong>Date:2021-11-11：拿到 <code>Yiming Bai</code> 的相速度频散曲线（手动挑选，仅缺少最后试错反演的质量控制）</strong></p>
 <h2 id="1-get-sta-info-from-cdisp-files">1. Get Sta Info from CDisp Files</h2>
 <p><strong>从 <code>CDisp</code> 中提取台站信息，并整理成台站信息文件（MM_Station_info &amp; IRIS_Station_info)，绘制 <code>Yiming Bai</code> 台站分布图。</strong></p>
-<p><strong>插曲😈：<code>Yiming Bai</code> 撤回了台站信息文件，下次 <code>Yiming Bai</code>发给我任何东西，应当以光速保存；做到不带感情色彩（愤怒），平静礼貌地与之交流，保持心态平和，尊重师兄。</strong></p>
+<p><strong>将 <code>Yiming Bai</code> 手动挑选的频散数据，整理成 <code>CDisp</code> 格式，为后续 <code>DSurfTomo</code> 反演做准备；
+将台站对频散文件整理成带有台站对经纬度信息 &amp; 相速度频散信息的格式；</strong></p>
+<p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../CDisp_Yiming/&#34;</span>
+<span class="n">output_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../CDisp/&#34;</span>
+
+<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp_dir</span> <span class="o">+</span> <span class="s2">&#34;CDisp*&#34;</span><span class="p">):</span>
+    <span class="n">disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
+    <span class="n">sta1_name</span> <span class="o">=</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">sta2_name</span> <span class="o">=</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">disp_name_new</span> <span class="o">=</span> <span class="s2">&#34;CDisp.&#34;</span> <span class="o">+</span> <span class="n">sta1_name</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span> <span class="o">+</span> <span class="n">sta2_name</span> <span class="o">+</span> <span class="s2">&#34;.dat&#34;</span>
+    <span class="n">rawdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span>
+        <span class="n">disp</span><span class="p">,</span>
+        <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;period&#34;</span><span class="p">,</span> <span class="s2">&#34;phasev&#34;</span><span class="p">]</span> 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">disp</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">)</span>
+    <span class="n">df_new</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>  <span class="c1"># pandas 剔除 phasev 中值为零的数据；</span>
+    <span class="c1"># 将重新生成的频散文件保存；</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">output_disp_dir</span> <span class="o">+</span> <span class="n">disp_name_new</span><span class="p">,</span> <span class="n">df_new</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">%.04f</span><span class="s2">&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>插曲😈：<code>Yiming Bai</code> 撤回了台站信息文件，下次 <code>Yiming Bai</code>发给我任何东西，应当以光速保存；做到不带感情色彩（愤怒），平静礼貌地与之交流，保持心态平和，尊重师兄。</strong></p>
 <p><strong>代码如下：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -203,64 +256,38 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
-</span><span class="s1"> Right Version 
-</span><span class="s1"> @Author:Yining Tian 
-</span><span class="s1"> @Date:2021-11-13 
-</span><span class="s1"> @Function:从 Yiming 拿去反演的相速度频散曲线文件中提取台站对的经纬度信息，并写成文件，
-</span><span class="s1"> 生成 Yiming Sta Info （Yiming 所用的台站经纬度信息）
-</span><span class="s1">&#39;&#39;&#39;</span>
-
-<span class="kn">import</span> <span class="nn">os</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../CDisp/&#34;</span>
-<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Sta_info_Yiming/&#34;</span>
-<span class="n">sta_ID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;sta_info.lst&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">disp_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*.txt&#34;</span><span class="p">):</span>
-    <span class="s1">&#39;&#39;&#39;
-</span><span class="s1">    读取 disp_file 中的 sta1 sta2 名字
-</span><span class="s1">    &#39;&#39;&#39;</span>
-    <span class="n">disp_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp_file</span><span class="p">)</span>
-    <span class="n">sta1</span> <span class="o">=</span> <span class="n">disp_file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
-        <span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;.&#34;</span> <span class="o">+</span> <span class="n">disp_file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">sta2</span> <span class="o">=</span> <span class="n">disp_file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="s1">&#39;&#39;&#39;
-</span><span class="s1">    读取 disp_file 中对应的 sta1 sta2 经纬度信息
-</span><span class="s1">    &#39;&#39;&#39;</span>
-    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">disp_file</span><span class="p">)</span>
-    <span class="n">data_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">lon_lat_info</span> <span class="o">=</span> <span class="n">data_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">input_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../CDisp/&#34;</span>
+<span class="n">output_sta_dir</span> <span class="o">=</span> <span class="s2">&#34;../STA_Yiming/&#34;</span>
 
-    <span class="n">sta2_lon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lon_lat_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">sta2_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lon_lat_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">sta1_lon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lon_lat_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">sta1_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lon_lat_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Sta_Yiming</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_sta_dir</span> <span class="o">+</span> <span class="s2">&#34;tmp&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp_dir</span> <span class="o">+</span> <span class="s2">&#34;CDisp*&#34;</span><span class="p">):</span>
+        <span class="n">disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
+        <span class="n">sta1</span> <span class="o">=</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;-&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sta2</span> <span class="o">=</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;-&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Sta_Yiming</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sta1</span><span class="p">)</span>
+        <span class="n">Sta_Yiming</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sta2</span><span class="p">)</span>
+        <span class="c1"># Sta_Yiming = sorted(list(set(Sta_Yiming)))</span>
 
-    <span class="n">sta_ID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;15s} {:&lt;15.6f} {:&lt;15.6f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">sta1</span><span class="p">,</span> <span class="n">sta1_lon</span><span class="p">,</span> <span class="n">sta1_lat</span><span class="p">))</span>
-    <span class="n">sta_ID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;15s} {:&lt;15.6f} {:&lt;15.6f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">sta2</span><span class="p">,</span> <span class="n">sta2_lon</span><span class="p">,</span> <span class="n">sta2_lat</span><span class="p">))</span>
-    <span class="n">sta_ID</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">sta_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">disp</span><span class="p">,</span> <span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">sta2_lon</span> <span class="o">=</span> <span class="n">sta_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sta2_lat</span> <span class="o">=</span> <span class="n">sta_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sta1_lon</span> <span class="o">=</span> <span class="n">sta_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sta1_lat</span> <span class="o">=</span> <span class="n">sta_data</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">sta1</span><span class="p">,</span> <span class="n">sta1_lon</span><span class="p">,</span> <span class="n">sta1_lat</span><span class="p">))</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">sta2</span><span class="p">,</span> <span class="n">sta2_lon</span><span class="p">,</span> <span class="n">sta2_lat</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>得到的 <code>sta_info.lst</code> 包含了重复信息，删掉重复信息，得到最终 <code>Yiming</code> 所用到的台站信息文件：</strong></p>
+</div><p><strong>得到的 <code>tmp</code> 包含了重复信息，删掉重复信息，得到最终 <code>Yiming</code> 所用到的台站信息文件：</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -277,37 +304,27 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
-</span><span class="s1"> Right Version 
-</span><span class="s1"> @Author:Yining Tian 
-</span><span class="s1"> @Date:2021-11-13 
-</span><span class="s1"> @Function:去除 sta_info.lst 中的重复信息，并重新写为新的文件
-</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
 
-<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../Sta_info_Yiming/&#34;</span>
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../STA_Yiming/&#34;</span>
 
-<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;sta_info.lst&#34;</span><span class="p">)</span>
+<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;tmp&#34;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
 <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="n">data_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">str_data_set</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
-<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;sta_info_Yiming.lst&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
+<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;Sta_Yiming&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">str_data_set</span><span class="p">:</span>
     <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
     <span class="n">fileID</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="绘制台站分布图">绘制台站分布图</h3>
+</div><p><strong>最终得到的 <code>Yiming Station</code> 如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzxqpxry4tj20hp0bhq3r.jpg" alt="image-20220304123220849"></p>
+<h3 id="绘制台站分布图">绘制台站分布图</h3>
 <p><strong>所用台站共 78 个，其中 <code>CMGSMO network</code> 台站共计 <code>70</code>个，以及 <code>IRIS</code>台站 <code>8</code>个：</strong></p>
 <p><strong>需要注意的是，<code>Yiming Bai</code> 缺少台站 <code>YGN</code> 的频散数据，<code>IRIS</code> 共 9 个台，但是只用到了 8 个：</strong></p>
 <div class="highlight"><div class="chroma">
