@@ -17,14 +17,49 @@
   
   <url>
     <loc>https://tianyining.github.io/</loc>
-    <lastmod>2022-03-04T12:34:18+08:00</lastmod>
+    <lastmod>2022-03-24T21:12:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://tianyining.github.io/categories/</loc>
-    <lastmod>2022-03-04T12:34:18+08:00</lastmod>
+    <lastmod>2022-03-24T21:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/GMT/</loc>
+    <lastmod>2022-03-24T21:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/categories/GMT/</loc>
+    <lastmod>2022-03-24T21:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/GMT_Slice_V2/</loc>
+    <lastmod>2022-03-24T21:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/post/</loc>
+    <lastmod>2022-03-24T21:12:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://tianyining.github.io/tags/</loc>
+    <lastmod>2022-03-24T21:12:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -45,20 +80,6 @@
   
   <url>
     <loc>https://tianyining.github.io/categories/Myanmar_Work/</loc>
-    <lastmod>2022-03-04T12:34:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/post/</loc>
-    <lastmod>2022-03-04T12:34:18+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/</loc>
     <lastmod>2022-03-04T12:34:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -158,20 +179,6 @@
   <url>
     <loc>https://tianyining.github.io/post/Pygmt_Test1/</loc>
     <lastmod>2022-01-19T10:36:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/tags/GMT/</loc>
-    <lastmod>2022-01-12T17:13:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://tianyining.github.io/categories/GMT/</loc>
-    <lastmod>2022-01-12T17:13:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
