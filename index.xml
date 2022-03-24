@@ -6,7 +6,7 @@
     <description>Recent content on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 24 Mar 2022 21:12:34 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Mar 2022 21:45:25 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -25,6 +25,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>GMT_Slice_Version3</title>
+      <link>https://tianyining.github.io/post/GMT_Slice_V3/</link>
+      <pubDate>Thu, 24 Mar 2022 21:45:25 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT_Slice_V3/</guid>
+      <description>本篇 blog 尝试绘制 DAzimSurfTomo 反演出的方位各向异性横波速度切片； Update 相较于 Version2 的提升： 1 2 3 * 添加了不同深度的方位各向异性信息； * 对于方位各向异性深度切片，对</description>
     </item>
     
     <item>

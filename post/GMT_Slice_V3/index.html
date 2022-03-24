@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>GMT_Slice_Version3 - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="本篇 blog 尝试绘制 DAzimSurfTomo 反演出的方位各向异性横波速度切片； Update 相较于 Version2 的提升： 1 2 3 * 添加了不同深度的方位各向异性信息； * 对于方位各向异性深度切片，对" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/GMT_Slice_V3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="GMT_Slice_Version3" />
+<meta property="og:description" content="本篇 blog 尝试绘制 DAzimSurfTomo 反演出的方位各向异性横波速度切片； Update 相较于 Version2 的提升： 1 2 3 * 添加了不同深度的方位各向异性信息； * 对于方位各向异性深度切片，对" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/GMT_Slice_V3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-24T21:45:25&#43;08:00" />
+<meta property="article:modified_time" content="2022-03-24T21:45:25&#43;08:00" />
+
+<meta itemprop="name" content="GMT_Slice_Version3">
+<meta itemprop="description" content="本篇 blog 尝试绘制 DAzimSurfTomo 反演出的方位各向异性横波速度切片； Update 相较于 Version2 的提升： 1 2 3 * 添加了不同深度的方位各向异性信息； * 对于方位各向异性深度切片，对"><meta itemprop="datePublished" content="2022-03-24T21:45:25&#43;08:00" />
+<meta itemprop="dateModified" content="2022-03-24T21:45:25&#43;08:00" />
+<meta itemprop="wordCount" content="5456">
+<meta itemprop="keywords" content="GMT," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GMT_Slice_Version3"/>
+<meta name="twitter:description" content="本篇 blog 尝试绘制 DAzimSurfTomo 反演出的方位各向异性横波速度切片； Update 相较于 Version2 的提升： 1 2 3 * 添加了不同深度的方位各向异性信息； * 对于方位各向异性深度切片，对"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">GMT_Slice_Version3</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-24 21:45 </span>
+        <div class="post-category">
+            <a href="/categories/GMT/"> GMT </a>
+            </div>
+          <span class="more-meta"> 约 5456 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#update">Update</a></li>
+    <li><a href="#说明">说明</a></li>
+    <li><a href="#code"><code>Code</code></a>
+      <ul>
+        <li><a href="#1-az_depth_grd2cpt_subplot">1. Az_Depth_grd2cpt_subplot</a></li>
+        <li><a href="#2-azi_depth_xyz2grd_subplot">2. Azi_Depth_xyz2grd_subplot</a></li>
+        <li><a href="#3-azi_period_xyz2grd_subplot">3. Azi_Period_xyz2grd_subplot</a></li>
+        <li><a href="#azi_period_surface_subplot">Azi_Period_Surface_subplot</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><strong>本篇 <code>blog</code> 尝试绘制 <code>DAzimSurfTomo</code> 反演出的方位各向异性横波速度切片；</strong></p>
+<h2 id="update">Update</h2>
+<p><strong>相较于 <code>Version2</code> 的提升：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown"><span class="k">*</span> 添加了不同深度的方位各向异性信息；
+<span class="k">*</span> 对于方位各向异性深度切片，对比使用 grd2cpt 生成色标以及在相同颜色阈值下对比不同深度的切片信息；
+<span class="k">*</span> 对于不同周期的方位各向异性切片，对比使用 surface <span class="err">&amp;</span> xyz2grd grdimage 绘制的效果；
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="说明">说明</h2>
+<p><strong>本篇 <code>blog</code> 使用的数据来自 <code>DAzimSurfTomo</code> 程序包中 <code>Yunnan</code> 实际数据的例子，主要目的是为总结 <code>GMT</code> 绘制速度切片的绘图技巧。</strong></p>
+<h2 id="code"><code>Code</code></h2>
+<h3 id="1-az_depth_grd2cpt_subplot">1. Az_Depth_grd2cpt_subplot</h3>
+<p><strong>使用 <code>grd2cpt</code> 的方式根据实际 <code>grd</code> 文件自动设置 <code>cpt</code> 的阈值，绘制不同深度切片方位各向异性速度信息：</strong></p>
+<p><strong>不同深度的速度切片用不同 <code>colorbar</code> 表示：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Date:2022-03-21 </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Funtion: Using grd2cpt plot Azimuthal anisotropy velocity slice for each depth </span>
+
+<span class="c1">#!/bin/zsh </span>
+
+<span class="nv">input_path</span><span class="o">=</span><span class="s2">&#34;./&#34;</span>
+<span class="nv">input_file</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Gc_Gs_model_reSmp.inv&#34;</span>
+<span class="c1"># input_file=$input_path&#34;Gc_Gs_model.inv&#34; </span>
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;./&#34;</span> 
+
+<span class="nv">tomo_cpt</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;BlueDarkRed18.cpt&#34;</span>
+<span class="nv">fault</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Fault_Yunnan.txt&#34;</span> 
+<span class="nv">vsclip</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;YN_clicp.txt&#34;</span>
+<span class="nv">azmclip</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Az_clicp.txt&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.2p
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 1p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_BACKGROUND 0/0/255 <span class="c1"># 数据Z值小于CPT文件中最小值时使用的背景色 [black]</span>
+gmt <span class="nb">set</span> COLOR_FOREGROUND 255/0/0 <span class="c1"># 数值 Z 值大于 CPT 文件中最大值时使用的背景色 </span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;Az_Depth_Slice_grd2cpt_Subplot&#34;</span>
+<span class="c1"># fig_name=&#34;Az_Depth_Slice_xyz2grd_Subplot_Origin&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="si">${</span><span class="nv">output_path</span><span class="si">}</span><span class="nv">$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png  
+    gmt subplot begin 2x3 -Fs9.75c/9.5c -B -BWeSn
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R98/107/21/29&#34;</span>
+    <span class="nv">J</span><span class="o">=</span><span class="s2">&#34;-Jm1.0c&#34;</span>
+    <span class="nv">T_range</span><span class="o">=</span>2.8/4.8 
+
+    gmt subplot <span class="nb">set</span> <span class="m">0</span> 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$4}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s1">&#39;10.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grd2cpt xyz.grd -Cseis -Z -H -D &gt; tmp.cpt 
+
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;10.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (a)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.5c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (a)
+</span><span class="s">EOF</span>
+    <span class="c1"># 5-10km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 5-10km
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp.cpt -DJBC+w5c/0.15c+e+mc  -Bxa0.1f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">1</span> 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$4}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s1">&#39;20.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grd2cpt xyz.grd -Cseis -Z -H -D &gt; tmp.cpt 
+
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;20.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (b)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.5c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (b)
+</span><span class="s">EOF</span>
+    <span class="c1"># 15-20km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 15-20km
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp.cpt -DJBC+w5c/0.15c+e+mc  -Bxa0.1f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">2</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$4}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s1">&#39;30.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grd2cpt xyz.grd -Cseis -Z -H -D &gt; tmp.cpt 
+
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;30.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (c)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.5c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (c)
+</span><span class="s">EOF</span>
+    <span class="c1"># 25-30km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 25-30km
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp.cpt -DJBC+w5c/0.15c+e+mc  -Bxa0.1f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">3</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$4}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s1">&#39;40.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grd2cpt xyz.grd -Cseis -Z -H -D &gt; tmp.cpt 
+
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;40.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (d)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.5c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (d)
+</span><span class="s">EOF</span>
+    <span class="c1"># 35-40km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 35-40km
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp.cpt -DJBC+w5c/0.15c+e+mc  -Bxa0.2f0.2 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">4</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$4}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s1">&#39;50.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grd2cpt xyz.grd -Cseis -Z -H -D &gt; tmp.cpt 
+
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;50.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (e)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.5c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (e)
+</span><span class="s">EOF</span>
+    <span class="c1"># 45-50km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 45-50km
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp.cpt -DJBC+w5c/0.15c+e+mc  -Bxa0.2f0.2 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">5</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$4}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s1">&#39;60.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grd2cpt xyz.grd -Cseis -Z -H -D &gt; tmp.cpt 
+
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;60.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (f)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.5c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (f)
+</span><span class="s">EOF</span>
+    <span class="c1"># 55-60km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 55-60km
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp.cpt -DJBC+w5c/0.15c+e+mc  -Bxa0.1f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot end 
+    
+gmt end show 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0lbwotkpxj219g0u015i.jpg" alt="image-20220324221327718"></p>
+<h3 id="2-azi_depth_xyz2grd_subplot">2. Azi_Depth_xyz2grd_subplot</h3>
+<p><strong>使用程序给定的色标，并指定 <code>-T</code> <code>colorbar</code> 阈值范围，在同一色标阈值范围内，绘制不同深度的方位各向异性速度结构：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Date:2022-03-20 </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Function : Using xyz2grd image tomography results &amp; subplot all the depths  </span>
+
+<span class="c1">#!/bin/zsh </span>
+
+<span class="nv">input_path</span><span class="o">=</span><span class="s2">&#34;./&#34;</span>
+<span class="nv">input_file</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Gc_Gs_model_reSmp.inv&#34;</span>
+<span class="c1"># input_file=$input_path&#34;Gc_Gs_model.inv&#34; </span>
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;./&#34;</span> 
+
+<span class="nv">tomo_cpt</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;BlueDarkRed18.cpt&#34;</span>
+<span class="nv">fault</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Fault_Yunnan.txt&#34;</span> 
+<span class="nv">vsclip</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;YN_clicp.txt&#34;</span>
+<span class="nv">azmclip</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Az_clicp.txt&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.2p
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 1p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_BACKGROUND 0/0/255 <span class="c1"># 数据Z值小于CPT文件中最小值时使用的背景色 [black]</span>
+gmt <span class="nb">set</span> COLOR_FOREGROUND 255/0/0 <span class="c1"># 数值 Z 值大于 CPT 文件中最大值时使用的背景色 </span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;Az_Depth_Slice_xyz2grd_Subplot&#34;</span>
+<span class="c1"># fig_name=&#34;Az_Depth_Slice_xyz2grd_Subplot_Origin&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="si">${</span><span class="nv">output_path</span><span class="si">}</span><span class="nv">$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png,pdf 
+    gmt subplot begin 2x3 -Fs9.75c/9.25c -B -BWSne  <span class="c1"># -Fs8c/8c 是 subplot 之间的间隔；</span>
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R98/107/21/29&#34;</span>
+    <span class="nv">J</span><span class="o">=</span><span class="s2">&#34;-Jm1.0c&#34;</span>
+    <span class="nv">T_range</span><span class="o">=</span>2.8/4.8 
+
+    gmt subplot  <span class="nb">set</span> <span class="m">0</span> 
+    gmt makecpt -C<span class="nv">$tomo_cpt</span> -I -T<span class="nv">$T_range</span> -H &gt; tmp.cpt 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$4}&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s1">&#39;10.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth1) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth1</span><span class="o">=</span><span class="s2">&#34;10.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W1.0p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (a)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (a)
+</span><span class="s">EOF</span>
+    <span class="c1"># 5-10km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 5-10km
+</span><span class="s">EOF</span>
+    <span class="c1">##### =============== subplot2 ===================== ################</span>
+    gmt subplot  <span class="nb">set</span> <span class="m">1</span>
+    gmt makecpt -C<span class="nv">$tomo_cpt</span> -I -T<span class="nv">$T_range</span> -H &gt; tmp.cpt 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$4}&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s1">&#39;20.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s2">&#34;20.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W1.0p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (b)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (b)
+</span><span class="s">EOF</span>
+    <span class="c1"># 15-20km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 15-20km
+</span><span class="s">EOF</span>
+    <span class="c1">## ======================== subplot3 =========================== ####</span>
+    gmt subplot  <span class="nb">set</span> <span class="m">2</span>
+    gmt makecpt -C<span class="nv">$tomo_cpt</span> -I -T<span class="nv">$T_range</span> -H &gt; tmp.cpt 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$4}&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s1">&#39;30.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s2">&#34;30.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W1.0p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (c)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (c)
+</span><span class="s">EOF</span>
+    <span class="c1"># 25-30km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 25-30km
+</span><span class="s">EOF</span>
+    <span class="c1">## ======================== subplot4 =========================== ####</span>
+    gmt subplot  <span class="nb">set</span> <span class="m">3</span>
+    gmt makecpt -C<span class="nv">$tomo_cpt</span> -I -T<span class="nv">$T_range</span> -H &gt; tmp.cpt 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$4}&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s1">&#39;40.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s2">&#34;40.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W1.0p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (d)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (d)
+</span><span class="s">EOF</span>
+    <span class="c1"># 35-40km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 35-40km
+</span><span class="s">EOF</span>
+
+    <span class="c1">## ======================== subplot5 =========================== ####</span>
+    gmt subplot  <span class="nb">set</span> <span class="m">4</span>
+    gmt makecpt -C<span class="nv">$tomo_cpt</span> -I -T<span class="nv">$T_range</span> -H &gt; tmp.cpt 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$4}&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s1">&#39;50.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s2">&#34;50.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W1.0p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (e)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (e)
+</span><span class="s">EOF</span>
+    <span class="c1"># 45-50km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 45-50km
+</span><span class="s">EOF</span>
+
+    <span class="c1">## ======================== subplot6 =========================== ####</span>
+    gmt subplot  <span class="nb">set</span> <span class="m">5</span>
+    gmt makecpt -C<span class="nv">$tomo_cpt</span> -I -T<span class="nv">$T_range</span> -H &gt; tmp.cpt 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWeSn 
+
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,-
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$4}&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s1">&#39;60.0&#39;</span> <span class="nv">$input_file</span> &gt; tmp.dat 
+    gmt xyz2grd tmp.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz.grd 
+    gmt grdimage xyz.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720 -Q <span class="c1"># 添加 -E720 就会得到和 surface 几乎一致的结果；</span>
+    gmt clip -C 
+
+    <span class="c1"># plot faults in YunNan Region </span>
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+
+    <span class="c1"># plot azimuthal anisotropy </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==depth2) print $1,$2,$5,$6*40 }&#39;</span> <span class="nv">depth2</span><span class="o">=</span><span class="s2">&#34;60.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W1.0p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (e)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (f)
+</span><span class="s">EOF</span>
+    <span class="c1"># 55-60km </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.3c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman 55-60km
+</span><span class="s">EOF</span>
+
+    gmt subplot end 
+    <span class="c1"># plot colorbar </span>
+    gmt colorbar -Ctmp.cpt -DJBC+w12c/0.5c+e+mc  -Bxa0.4f0.2 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+gmt end show 
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0lbzzx6c9j219b0u0n7m.jpg" alt="image-20220324221638882"></p>
+<p><strong>与 <code>1.Az_Depth_grd2cpt_subplot</code> 中所用数据完全一致，仅仅绘图方式不同， <code>2.Azi_Depth_xyz2grd_subplot</code>  在使用给定色标，并人为设置色标阈值范围，将不同深度速度切片绘制在同一色标阈值范围内。</strong></p>
+<h3 id="3-azi_period_xyz2grd_subplot">3. Azi_Period_xyz2grd_subplot</h3>
+<p><strong>绘制不同周期剪切波方位各向异性速度切片，对于不同深度，使用相对速度进行绘制：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh
+</span><span class="cp"></span><span class="c1"># Date:2022-03-21 </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Function : Plot Azimuthal Anisotropy in Period </span>
+
+<span class="nv">input_path</span><span class="o">=</span><span class="s2">&#34;./&#34;</span>
+<span class="nv">input_file</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Period_Azm_reSmp.inv&#34;</span>
+<span class="c1"># input_file=$input_path&#34;period_Azm_tomo.inv&#34;</span>
+
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;./&#34;</span>
+
+<span class="nv">tomo_cpt</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;BlueDarkRed18.cpt&#34;</span>
+<span class="nv">fault</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Fault_Yunnan.txt&#34;</span> 
+<span class="nv">vsclip</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;YN_clicp.txt&#34;</span>
+<span class="nv">azmclip</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Az_clicp.txt&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.2p
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 1p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_BACKGROUND 0/0/255 <span class="c1"># 数据Z值小于CPT文件中最小值时使用的背景色 [black]</span>
+gmt <span class="nb">set</span> COLOR_FOREGROUND 255/0/0 <span class="c1"># 数值 Z 值大于 CPT 文件中最大值时使用的背景色 </span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;Az_Period_xyz2grd_Clip&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="si">${</span><span class="nv">output_path</span><span class="si">}</span><span class="nv">$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png 
+    gmt subplot begin 2x2 -Fs9.75c/9.65c -B -BWSne  <span class="c1"># -Fs8c/8c 是 subplot 之间的间隔；</span>
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R98/107/21/29&#34;</span>
+    <span class="nv">J</span><span class="o">=</span><span class="s2">&#34;-Jm1c&#34;</span>
+    <span class="nv">T_range</span><span class="o">=</span>-8/8/0.01 
+
+    gmt subplot <span class="nb">set</span> <span class="m">0</span> 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWSne
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,- 
+    awk <span class="s1">&#39;{if($3==period1) print $1,$2,$4}&#39;</span> <span class="nv">period1</span><span class="o">=</span><span class="s2">&#34;10&#34;</span> <span class="nv">$input_file</span> &gt; tmp_period.dat 
+    gmt xyz2grd tmp_period.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz_period.grd 
+    gmt grd2cpt xyz_period.grd -Cseis -Z -H -D &gt; tmp_period.cpt 
+    gmt grdimage xyz_period.grd -Ctmp_period.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720
+    gmt clip -C 
+
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy results </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==pd1) print $1,$2,$6,$7*40 }&#39;</span> <span class="nv">pd1</span><span class="o">=</span><span class="s2">&#34;10.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (a)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (a)
+</span><span class="s">EOF</span>
+    <span class="c1"># T 10s </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman T 10s
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp_period.cpt -DJBC+e+mc  -Bxa1f1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">1</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWSne
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,- 
+    awk <span class="s1">&#39;{if($3==period1) print $1,$2,$4}&#39;</span> <span class="nv">period1</span><span class="o">=</span><span class="s2">&#34;20&#34;</span> <span class="nv">$input_file</span> &gt; tmp_period.dat 
+    gmt xyz2grd tmp_period.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz_period.grd 
+    gmt grd2cpt xyz_period.grd -Cseis -Z -H -D &gt; tmp_period.cpt 
+    gmt grdimage xyz_period.grd -Ctmp_period.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720
+    gmt clip -C 
+
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy results </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==pd1) print $1,$2,$6,$7*40 }&#39;</span> <span class="nv">pd1</span><span class="o">=</span><span class="s2">&#34;20.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (b)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (b)
+</span><span class="s">EOF</span>
+    <span class="c1"># T 20s </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman T 20s
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp_period.cpt -DJBC+e+mc  -Bxa1f1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">2</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWSne
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,- 
+    awk <span class="s1">&#39;{if($3==period1) print $1,$2,$4}&#39;</span> <span class="nv">period1</span><span class="o">=</span><span class="s2">&#34;30&#34;</span> <span class="nv">$input_file</span> &gt; tmp_period.dat 
+    gmt xyz2grd tmp_period.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz_period.grd 
+    gmt grd2cpt xyz_period.grd -Cseis -Z -H -D &gt; tmp_period.cpt 
+    gmt grdimage xyz_period.grd -Ctmp_period.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720
+    gmt clip -C 
+
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy results </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==pd1) print $1,$2,$6,$7*40 }&#39;</span> <span class="nv">pd1</span><span class="o">=</span><span class="s2">&#34;30.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (c)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (c)
+</span><span class="s">EOF</span>
+    <span class="c1"># T 30s </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman T 30s
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp_period.cpt -DJBC+e+mc  -Bxa1f1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">3</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWSne
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,- 
+    awk <span class="s1">&#39;{if($3==period1) print $1,$2,$4}&#39;</span> <span class="nv">period1</span><span class="o">=</span><span class="s2">&#34;40&#34;</span> <span class="nv">$input_file</span> &gt; tmp_period.dat 
+    gmt xyz2grd tmp_period.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz_period.grd 
+    gmt grd2cpt xyz_period.grd -Cseis -Z -H -D &gt; tmp_period.cpt 
+    gmt grdimage xyz_period.grd -Ctmp_period.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720
+    gmt clip -C 
+
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy results </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==pd1) print $1,$2,$6,$7*40 }&#39;</span> <span class="nv">pd1</span><span class="o">=</span><span class="s2">&#34;40.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (d)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (d)
+</span><span class="s">EOF</span>
+    <span class="c1"># T 40s </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman T 40s
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp_period.cpt -DJBC+e+mc  -Bxa1f1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot end 
+gmt end show 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0lcaohe85j20v90u0jzl.jpg" alt="image-20220324222654173"></p>
+<h3 id="azi_period_surface_subplot">Azi_Period_Surface_subplot</h3>
+<p><strong>对于同样的经过降采样处理后的不同周期方位各向异性横波速度结构，使用 <code>surface</code> 的绘制方法，绘制切片，对比绘制效果；</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh
+</span><span class="cp"></span><span class="c1"># Date:2022-03-21 </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Function : Plot Azimuthal Anisotropy in Period </span>
+
+<span class="nv">input_path</span><span class="o">=</span><span class="s2">&#34;./&#34;</span>
+<span class="nv">input_file</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Period_Azm_reSmp.inv&#34;</span>
+<span class="c1"># input_file=$input_path&#34;period_Azm_tomo.inv&#34;</span>
+
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;./&#34;</span>
+
+<span class="nv">tomo_cpt</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;BlueDarkRed18.cpt&#34;</span>
+<span class="nv">fault</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Fault_Yunnan.txt&#34;</span> 
+<span class="nv">vsclip</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;YN_clicp.txt&#34;</span>
+<span class="nv">azmclip</span><span class="o">=</span><span class="nv">$input_path</span><span class="s2">&#34;Az_clicp.txt&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.2p
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 1p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_BACKGROUND 0/0/255 <span class="c1"># 数据Z值小于CPT文件中最小值时使用的背景色 [black]</span>
+gmt <span class="nb">set</span> COLOR_FOREGROUND 255/0/0 <span class="c1"># 数值 Z 值大于 CPT 文件中最大值时使用的背景色 </span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;Az_Period_xyz2grd_Clip&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="si">${</span><span class="nv">output_path</span><span class="si">}</span><span class="nv">$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png 
+    gmt subplot begin 2x2 -Fs9.75c/9.65c -B -BWSne  <span class="c1"># -Fs8c/8c 是 subplot 之间的间隔；</span>
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R98/107/21/29&#34;</span>
+    <span class="nv">J</span><span class="o">=</span><span class="s2">&#34;-Jm1c&#34;</span>
+    <span class="nv">T_range</span><span class="o">=</span>-8/8/0.01 
+
+    gmt subplot <span class="nb">set</span> <span class="m">0</span> 
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWSne
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,- 
+    awk <span class="s1">&#39;{if($3==period1) print $1,$2,$4}&#39;</span> <span class="nv">period1</span><span class="o">=</span><span class="s2">&#34;10&#34;</span> <span class="nv">$input_file</span> &gt; tmp_period.dat 
+    gmt xyz2grd tmp_period.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz_period.grd 
+    gmt grd2cpt xyz_period.grd -Cseis -Z -H -D &gt; tmp_period.cpt 
+    gmt grdimage xyz_period.grd -Ctmp_period.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720
+    gmt clip -C 
+
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy results </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==pd1) print $1,$2,$6,$7*40 }&#39;</span> <span class="nv">pd1</span><span class="o">=</span><span class="s2">&#34;10.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (a)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (a)
+</span><span class="s">EOF</span>
+    <span class="c1"># T 10s </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman T 10s
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp_period.cpt -DJBC+e+mc  -Bxa1f1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">1</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWSne
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,- 
+    awk <span class="s1">&#39;{if($3==period1) print $1,$2,$4}&#39;</span> <span class="nv">period1</span><span class="o">=</span><span class="s2">&#34;20&#34;</span> <span class="nv">$input_file</span> &gt; tmp_period.dat 
+    gmt xyz2grd tmp_period.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz_period.grd 
+    gmt grd2cpt xyz_period.grd -Cseis -Z -H -D &gt; tmp_period.cpt 
+    gmt grdimage xyz_period.grd -Ctmp_period.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720
+    gmt clip -C 
+
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy results </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==pd1) print $1,$2,$6,$7*40 }&#39;</span> <span class="nv">pd1</span><span class="o">=</span><span class="s2">&#34;20.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (b)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (b)
+</span><span class="s">EOF</span>
+    <span class="c1"># T 20s </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman T 20s
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp_period.cpt -DJBC+e+mc  -Bxa1f1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">2</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWSne
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,- 
+    awk <span class="s1">&#39;{if($3==period1) print $1,$2,$4}&#39;</span> <span class="nv">period1</span><span class="o">=</span><span class="s2">&#34;30&#34;</span> <span class="nv">$input_file</span> &gt; tmp_period.dat 
+    gmt xyz2grd tmp_period.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz_period.grd 
+    gmt grd2cpt xyz_period.grd -Cseis -Z -H -D &gt; tmp_period.cpt 
+    gmt grdimage xyz_period.grd -Ctmp_period.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720
+    gmt clip -C 
+
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy results </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==pd1) print $1,$2,$6,$7*40 }&#39;</span> <span class="nv">pd1</span><span class="o">=</span><span class="s2">&#34;30.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (c)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (c)
+</span><span class="s">EOF</span>
+    <span class="c1"># T 30s </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman T 30s
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp_period.cpt -DJBC+e+mc  -Bxa1f1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot <span class="nb">set</span> <span class="m">3</span>
+    gmt basemap <span class="nv">$J</span> <span class="nv">$R_tomo</span> -Bxa2f2 -Bya2f2 -BWSne
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$vsclip</span> -W0.5p,black,- 
+    awk <span class="s1">&#39;{if($3==period1) print $1,$2,$4}&#39;</span> <span class="nv">period1</span><span class="o">=</span><span class="s2">&#34;40&#34;</span> <span class="nv">$input_file</span> &gt; tmp_period.dat 
+    gmt xyz2grd tmp_period.dat <span class="nv">$R_tomo</span> <span class="nv">$J</span> -I0.5/0.5 -Gxyz_period.grd 
+    gmt grd2cpt xyz_period.grd -Cseis -Z -H -D &gt; tmp_period.cpt 
+    gmt grdimage xyz_period.grd -Ctmp_period.cpt <span class="nv">$R_tomo</span> <span class="nv">$J</span> -E720
+    gmt clip -C 
+
+    <span class="nv">color</span><span class="o">=</span>105/105/105 
+    gmt plot <span class="nv">$fault</span> <span class="nv">$R_tomo</span> <span class="nv">$J</span> -W1.0p,<span class="nv">$color</span> 
+    <span class="c1"># plot azimuthal anisotropy results </span>
+    gmt clip <span class="nv">$R_tomo</span> <span class="nv">$J</span> <span class="nv">$azmclip</span> 
+    awk <span class="s1">&#39;{if($3==pd1) print $1,$2,$6,$7*40 }&#39;</span> <span class="nv">pd1</span><span class="o">=</span><span class="s2">&#34;40.0&#34;</span> <span class="nv">$input_file</span> <span class="p">|</span> gmt plot <span class="nv">$J</span> <span class="nv">$R_tomo</span> -SV0.2c+jc -W0.8p,black -Gred 
+    gmt clip -C 
+
+    <span class="c1"># plot legend </span>
+    <span class="c1"># -1% </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRB+w0.8c+o0.1c/0.1c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF 
+</span><span class="s">H 10p,Times-Roman -1%
+</span><span class="s">EOF</span>
+    <span class="c1"># (d)</span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjLT+w0.6c+o0.05c/0.05c -F+gwhite+p0.35p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman (d)
+</span><span class="s">EOF</span>
+    <span class="c1"># T 40s </span>
+    gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 10p,Times-Roman T 40s
+</span><span class="s">EOF</span>
+    gmt colorbar -Ctmp_period.cpt -DJBC+e+mc  -Bxa1f1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+
+    gmt subplot end 
+gmt end show 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0lceyqx8tj20v90u0n51.jpg" alt="image-20220324223102261"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-03-24 21:45
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/GMT/">GMT</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/GMT_Slice_V2/">
+            <span class="next-text nav-default">GMT_Slice_Version2</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
