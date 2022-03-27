@@ -50,7 +50,7 @@
 <meta itemprop="name" content="DSurfTomo频散文件数据格式转换 &amp; 反演初始速度模型">
 <meta itemprop="description" content="说明 本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式"><meta itemprop="datePublished" content="2022-02-25T21:25:06&#43;08:00" />
 <meta itemprop="dateModified" content="2022-02-25T21:25:06&#43;08:00" />
-<meta itemprop="wordCount" content="4180">
+<meta itemprop="wordCount" content="5248">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DSurfTomo频散文件数据格式转换 &amp; 反演初始速度模型"/>
 <meta name="twitter:description" content="说明 本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 4180 字 </span>
-          <span class="more-meta"> 预计阅读 9 分钟 </span>
+          <span class="more-meta"> 约 5248 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -161,7 +161,7 @@
     <li><a href="#generate-init-mod-for-dsurftomo-inversion">Generate Init MOD for DSurfTomo Inversion</a>
       <ul>
         <li><a href="#step1-sort-disp-files">Step1 Sort Disp Files</a></li>
-        <li><a href="#step2-init-mod">Step2 Init MOD</a></li>
+        <li><a href="#step2-transformationphase-velocity-curves-to-1d-vs-model">Step2 Transformation(phase velocity curves to 1D Vs model)</a></li>
         <li><a href="#step3-plot-init-mod">Step3 Plot Init MOD</a></li>
         <li><a href="#step4-calculate-average-s-velocity-in-different-depth">Step4 Calculate Average S Velocity in Different Depth</a></li>
       </ul>
@@ -643,8 +643,9 @@
 </div><p><strong>最终整合反演所需频散文件格式如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzqzlzwrb6j20ho0bc75g.jpg" alt="image-20220226162102370"></p>
 <h2 id="generate-init-mod-for-dsurftomo-inversion">Generate Init MOD for DSurfTomo Inversion</h2>
-<p><strong>根据实际相速度频散数据，生成 <code>DSurfTomo</code> 反演所需的初始速度模型，这里仅以 <code>Myanmar</code> 地区为例：</strong></p>
+<p><strong>根据实际相速度频散数据，生成 <code>DSurfTomo</code> 反演所需的初始速度模型，这里仅以  <code>Yiming Myanmar</code> 地区为例：</strong></p>
 <h3 id="step1-sort-disp-files">Step1 Sort Disp Files</h3>
+<p><strong>将白一鸣手动挑选的相速度频散文件，整理成仅包含两列信息的格式：<code>period</code> <code>phaseV</code> 。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -662,27 +663,49 @@
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
-</span><span class="s1"> 将经过分区 &amp; 质量控制后的 Myanmar 地区的频散曲线，整理成仅包含两列信息的格式：period &amp; phasev 
-</span><span class="s1">&#39;&#39;&#39;</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 将白一鸣手动挑选的频散曲线，整理成仅包含两列信息的格式：period phaseV </span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="n">input_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../CDisp/&#34;</span>
-<span class="n">output_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step1_SortDisp/&#34;</span>
+<span class="n">output_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../disp/&#34;</span>
 
-<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp_dir</span> <span class="o">+</span> <span class="s2">&#34;CDisp*&#34;</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp_dir</span> <span class="o">+</span> <span class="s2">&#34;*.SAC.txt&#34;</span><span class="p">):</span>
     <span class="n">disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
-    <span class="n">rawdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">rawdata</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">output_disp_dir</span> <span class="o">+</span> <span class="n">disp_name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">%.04f</span><span class="s2">&#34;</span><span class="p">)</span>
+    <span class="n">sta1</span> <span class="o">=</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">sta2</span> <span class="o">=</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">disp_name_new</span> <span class="o">=</span> <span class="s2">&#34;CDisp&#34;</span> <span class="o">+</span> <span class="s2">&#34;.&#34;</span> <span class="o">+</span> <span class="n">sta1</span> <span class="o">+</span> <span class="s2">&#34;-&#34;</span> <span class="o">+</span> <span class="n">sta2</span> <span class="o">+</span> <span class="s2">&#34;.dat&#34;</span>
+
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">disp</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+    <span class="n">tmpinfo</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">tmpinfo</span> <span class="o">=</span> <span class="n">tmpinfo</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_disp_dir</span> <span class="o">+</span> <span class="n">disp_name_new</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tmpinfo</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">phasev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">phasev</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;15.4f}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">phasev</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="step2-init-mod">Step2 Init MOD</h3>
+</div><h3 id="step2-transformationphase-velocity-curves-to-1d-vs-model">Step2 Transformation(phase velocity curves to 1D Vs model)</h3>
 <p><strong>将测量出的频散文件，转换成随深度变化的  <code>S</code>  波速度结构；</strong></p>
+<p>**将相速度频散文件，转换成随深度变化的 S 波速度结构：
+1.1<em>phasev  (phasev</em>period)/3 **</p>
 <p><strong>Transformation of all interstation Rayleigh wave phase velocity dispersion curves measured from the ambient noise cross-correlation method (Huang <em>et al.</em><a href="">2010</a>) to a depth-shear wave speed approximation profile. For each Rayleigh wave phase velocity measurement, we replace period with 1/3 of the corresponding wavelength (phase velocity times period) at the vertical axis and replace phase velocity with the approximated shear wave speed (1.1 times phase velocity) at the horizontal axis. The average wave speed model from this profile (blue line) is used as the initial reference shear wave speed model in the inversion.</strong></p>
 <p><strong>文章中的示例如下，这里我们使用 <code>Myanmar</code> 地区的数据进行复现：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzsct4h1ufj21040suwii.jpg" alt="ggv080fig4.jpeg (1300×1038)"></p>
@@ -711,30 +734,28 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 
-<span class="n">input_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step1_SortDisp/&#34;</span>
-<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step2_InitMOD/&#34;</span>
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../disp/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../MOD/&#34;</span>
 
-<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp_dir</span> <span class="o">+</span> <span class="s2">&#34;CDisp*&#34;</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*.dat&#34;</span><span class="p">):</span>
     <span class="n">disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
 
     <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">disp</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
     <span class="n">tmpinfo</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
     <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">disp_name</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tmpinfo</span><span class="p">:</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
             <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">phasev</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-            <span class="n">x</span> <span class="o">=</span> <span class="mf">1.1</span> <span class="o">*</span> <span class="n">phasev</span>  <span class="c1"># shear wave velocity</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">period</span> <span class="o">*</span> <span class="n">phasev</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>  <span class="c1"># depth</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="mf">1.1</span> <span class="o">*</span> <span class="n">phasev</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">period</span> <span class="o">*</span> <span class="n">phasev</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
 
             <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;15.4f}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 </code></pre></td></tr></table>
@@ -847,6 +868,139 @@
 </div>
 </div><p><strong>绘制效果如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzsc764s28j20o00g0q54.jpg" alt="image-20220227202205380"></p>
+<p><strong>白一鸣频散数据转换后如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">as</span> <span class="nn">font_manager</span>
+<span class="kn">from</span> <span class="nn">jupyterthemes</span> <span class="kn">import</span> <span class="n">jtplot</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;axes.linewidth&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 图框宽度；</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;figure.dpi&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">720</span>  <span class="c1">#</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.title_fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;20&#39;</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../MOD/&#34;</span>
+<span class="c1"># input_dir = &#34;../test/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Figs/&#34;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;Shear Wavespeed (km/s)&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># plt.axis([min(x), max(x), max(y), min(y)])</span>
+<span class="c1"># plt.axis(0, 5, 70, 0)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;Depth (km)&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&#34;--&#34;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&#34;grey&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
+    <span class="n">disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
+    <span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;vs&#34;</span><span class="p">,</span> <span class="s2">&#34;depth&#34;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+        <span class="n">disp</span><span class="p">,</span>
+        <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">vs</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">depth</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+        <span class="s2">&#34;Init MOD&#34;</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">vs</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;darkviolet&#34;</span><span class="p">,</span>
+        <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>  <span class="c1"># 将 y 轴反转；</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="s2">&#34;../Figs/Init_MOD.pdf&#34;</span><span class="p">,</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0om7yw80cj20o00g0wh3.jpg" alt="image-20220327182657583"> </p>
 <h3 id="step4-calculate-average-s-velocity-in-different-depth">Step4 Calculate Average S Velocity in Different Depth</h3>
 <p><strong>将频散数据进行深度转换后散点，每个深度求平均剪切波速度，最终得到反演所需的初始速度模型；</strong></p>
 <p><strong>1. Interp Depth</strong></p>
@@ -1081,6 +1235,8 @@
 </div>
 </div><p><strong>绘制效果如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzscd783pfj20o00g0gns.jpg" alt="image-20220227202755706"></p>
+<p><strong>同理，将 <code>Yiming Bai</code> 经过深度转换后的频散数据，深度进行插值并绘图，效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0omckd1a9j20o00g00v1.jpg" alt="image-20220327183124552"></p>
 <p><strong>3. Sort Interp MOD Named Depth</strong></p>
 <p><strong>将插值处理后的 <code>Depth Vs</code>  信息整理成以整数 <code>depth</code> 命名的格式，为后续计算不同深度的平均 <code>Vs</code> 做准备；
 其中包含 <code>Vs</code> 信息；
@@ -1687,6 +1843,167 @@
 </div>
 </div><p><strong>绘制效果如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzscq26gp6j20o00g0q56.jpg" alt="image-20220227204017855"></p>
+<p><strong>最终 <code>Myanamr</code> 地区选择的初始速度模型是 <code>Yiming Bai</code> 手动拾取的频散：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0omeo981zj20o00g040v.jpg" alt="image-20220327183326045"></p>
+<p><strong>7. Generate InitMOD for DSurfTomo Inversion</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown"><span class="k">1.</span> 参照 Step1~4 的步骤：根据 Yiming Bai 手动挑选出的频散曲线，根据面波频散敏感深度范围，将不同台站对频散文件
+转换成随深度变化的 S 波速度结构；并计算1D平均 S 波速度模型；
+<span class="k">2.</span> 将计算出的随深度变化的一维 S 波速度模型，转化成 DSurfTomo 线性反演所需的初始速度模型 MOD 格式
+生成 MOD_Yiming ：根据 Yiming Bai 手动挑选的频散生成的初始速度模型；
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 首先需要确定反演的深度格点 nz </span>
+<span class="n">Depth_Invert</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">Depth_Invert</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">70</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">Depth_Invert</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">Depth_Invert</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">Depth_Invert</span><span class="p">))</span>
+<span class="n">Depth_Invert</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>制作 <code>DSurfTomo</code> 反演所需的初始速度模型（3D MOD 形式）</strong> </p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1">Right Version 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;../AverageVs_Depth/Ave_Dep&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+<span class="n">tmpinfo</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">Depth_Vs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tmpinfo</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">vs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">Depth_Vs</span><span class="p">[</span><span class="n">depth</span><span class="p">]</span> <span class="o">=</span> <span class="n">vs</span>
+<span class="n">Depth_Vs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.75</span>
+<span class="n">Depth_Vs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Depth_Vs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">Depth_Vs</span>
+<span class="c1"># 生成 MOD 的深度：</span>
+<span class="n">Depth_Yiming</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">Depth_Yiming</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Depth_Vs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">Depth_Yiming</span>
+
+<span class="c1"># 设置初始速度模型网格点，比反演的网格格点大一圈 0.2 防止射线弯曲溢出；</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># lat 格点数目；</span>
+<span class="n">ny</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># lon 格点数目；</span>
+
+<span class="n">MOD</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">Depth_Yiming</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">dep_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">index</span><span class="p">)])</span>
+
+    <span class="n">nz</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#</span>
+    <span class="n">mod_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">nz</span> <span class="o">*</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span><span class="p">),</span> <span class="n">Depth_Yiming</span><span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">dep_index</span><span class="p">)])</span>
+    <span class="n">MOD</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mod_index</span><span class="p">)</span>
+<span class="n">MOD</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;../MOD_Yiming&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="c1"># write depth</span>
+    <span class="c1">#     for i in range(0, 70 + 1, 1):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Depth_Invert</span><span class="p">:</span>
+
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:5.1f}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">MOD</span><span class="p">)):</span>
+        <span class="n">sgl_array</span> <span class="o">=</span> <span class="n">MOD</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ny</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
+                    <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%7.3f</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">sgl_array</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">ny</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Tips</strong></p>
+<p><strong>需要注意的是，反演初始速度模型的设置 <code>MOD</code> 比实际反演的区域要大，比如，初始速度模型 <code>MOD</code> 的 <code>nx</code> <code>ny</code> <code>nz</code>分别为 30、50、21，意味着 <code>lat lon depth</code> 上分别设置 30、50、21 个网格点，而实际反演中，反演配置文件 <code>DSurfTomo.in</code> 文件中设置反演的启始点为 (24.6,93.0) ，<code>lat lon depth</code> 方向上的网格点数分别为：<code>18 26 21</code> 水平方向上网格间距为 <code>0.2/0.2</code> ，可以明显看出，实际反演中网格的设置范围，小于初始速度模型的网格大小，可理解为实际反演区域嵌套于初始速度网格中。</strong></p>
 <h2 id="修订历史">修订历史</h2>
 <ul>
 <li>
