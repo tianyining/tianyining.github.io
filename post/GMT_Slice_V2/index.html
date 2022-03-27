@@ -50,7 +50,7 @@
 <meta itemprop="name" content="GMT_Slice_Version2">
 <meta itemprop="description" content="本篇 blog 尝试绘制 DSurfTomo 反演出的剪切波速度深度切片； Update 相较于 Version1 的提升： 1 2 3 * 使用 subplot 同时绘制多个深度的速度结构； * 使用 gmt info 自动提取反演区域 -R 的绘制范"><meta itemprop="datePublished" content="2022-03-24T21:12:34&#43;08:00" />
 <meta itemprop="dateModified" content="2022-03-24T21:12:34&#43;08:00" />
-<meta itemprop="wordCount" content="1423">
+<meta itemprop="wordCount" content="1511">
 <meta itemprop="keywords" content="GMT," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="GMT_Slice_Version2"/>
 <meta name="twitter:description" content="本篇 blog 尝试绘制 DSurfTomo 反演出的剪切波速度深度切片； Update 相较于 Version1 的提升： 1 2 3 * 使用 subplot 同时绘制多个深度的速度结构； * 使用 gmt info 自动提取反演区域 -R 的绘制范"/>
@@ -135,8 +135,8 @@
         <div class="post-category">
             <a href="/categories/GMT/"> GMT </a>
             </div>
-          <span class="more-meta"> 约 1423 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
+          <span class="more-meta"> 约 1511 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -149,6 +149,7 @@
     <li><a href="#update"><code>Update</code></a></li>
     <li><a href="#说明">说明</a></li>
     <li><a href="#code"><code>Code</code></a></li>
+    <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
   </div>
@@ -343,11 +344,13 @@
 </span><span class="lnt">167
 </span><span class="lnt">168
 </span><span class="lnt">169
+</span><span class="lnt">170
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Date:2022-03-24</span>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Date:2022-03-27</span>
 <span class="c1"># Author:Yining Tian </span>
 <span class="c1"># Funtion: Using grd2cpt plot Taipei isotropic velocity slice for every depth </span>
+<span class="c1"># Modified: Add $RMAP $J to gmt colorbar function 否则 colorbar 与图片没有对齐；</span>
 
 <span class="c1">#!/bin/zsh </span>
 
@@ -391,7 +394,7 @@ gmt begin <span class="nv">$fig</span> png
     gmt legend <span class="nv">$RMAP</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10p,Times-Roman 0km 
 </span><span class="s">EOF</span>
-    gmt colorbar -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+    gmt colorbar -Ctmp.cpt <span class="nv">$RMAP</span> <span class="nv">$J</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
 
     gmt subplot <span class="nb">set</span> <span class="m">1</span> 
     <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>gmt info -C <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
@@ -408,7 +411,7 @@ gmt begin <span class="nv">$fig</span> png
     gmt legend <span class="nv">$RMAP</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10p,Times-Roman 0.2km 
 </span><span class="s">EOF</span>
-    gmt colorbar -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+    gmt colorbar -Ctmp.cpt <span class="nv">$RMAP</span> <span class="nv">$J</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
 
     gmt subplot <span class="nb">set</span> <span class="m">2</span>  
     <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>gmt info -C <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
@@ -425,7 +428,7 @@ gmt begin <span class="nv">$fig</span> png
     gmt legend <span class="nv">$RMAP</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10p,Times-Roman 0.4km 
 </span><span class="s">EOF</span>
-    gmt colorbar -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+    gmt colorbar -Ctmp.cpt <span class="nv">$RMAP</span> <span class="nv">$J</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
 
     gmt subplot <span class="nb">set</span> <span class="m">3</span>
     <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>gmt info -C <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
@@ -442,7 +445,7 @@ gmt begin <span class="nv">$fig</span> png
     gmt legend <span class="nv">$RMAP</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10p,Times-Roman 0.6km 
 </span><span class="s">EOF</span>
-    gmt colorbar -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+    gmt colorbar -Ctmp.cpt <span class="nv">$RMAP</span> <span class="nv">$J</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
 
     gmt subplot <span class="nb">set</span> <span class="m">4</span>
     <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>gmt info -C <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
@@ -459,7 +462,7 @@ gmt begin <span class="nv">$fig</span> png
     gmt legend <span class="nv">$RMAP</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10p,Times-Roman 0.8km 
 </span><span class="s">EOF</span>
-    gmt colorbar -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+    gmt colorbar -Ctmp.cpt <span class="nv">$RMAP</span> <span class="nv">$J</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
 
     gmt subplot <span class="nb">set</span> <span class="m">5</span> 
     <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>gmt info -C <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
@@ -476,7 +479,7 @@ gmt begin <span class="nv">$fig</span> png
     gmt legend <span class="nv">$RMAP</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10p,Times-Roman 1.1km 
 </span><span class="s">EOF</span>
-    gmt colorbar -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+    gmt colorbar -Ctmp.cpt <span class="nv">$RMAP</span> <span class="nv">$J</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
 
     gmt subplot <span class="nb">set</span> <span class="m">6</span>
     <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>gmt info -C <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
@@ -493,7 +496,7 @@ gmt begin <span class="nv">$fig</span> png
     gmt legend <span class="nv">$RMAP</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10p,Times-Roman 1.4km 
 </span><span class="s">EOF</span>
-    gmt colorbar -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+    gmt colorbar -Ctmp.cpt <span class="nv">$RMAP</span> <span class="nv">$J</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
 
     gmt subplot <span class="nb">set</span> <span class="m">7</span>
     <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>gmt info -C <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
@@ -510,14 +513,19 @@ gmt begin <span class="nv">$fig</span> png
     gmt legend <span class="nv">$RMAP</span> <span class="nv">$J</span> -DjRT+w1.2c+o0.05c/0.05c -F+gwhite+p0.4p -t20 <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10p,Times-Roman 1.8km 
 </span><span class="s">EOF</span>
-    gmt colorbar -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
+    gmt colorbar <span class="nv">$RMAP</span> <span class="nv">$J</span> -Ctmp.cpt -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1 -By+l<span class="s2">&#34;Vs (km/s)&#34;</span> 
 
     gmt subplot end 
 gmt end show 
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>绘图效果如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0lah7zhp2j20vj0u0gru.jpg" alt="image-20220324212402223"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0onaop9etj20v60u044j.jpg" alt="image-20220327190412176"></p>
+<h2 id="修订历史">修订历史</h2>
+<ul>
+<li>2022-03-24：初稿</li>
+<li>2022-03-27：在 <code>gmt colorbar</code> 部分添加 <code>$RAMP $J</code> 解决 <code>colorbar</code> 与速度切片不对齐的问题</li>
+</ul>
 
     </div>
 
