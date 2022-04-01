@@ -125,117 +125,115 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/Pygmt_install/">Pygmt ubuntu18.04</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/Ubuntu18.04-fftw3.8.3-%E5%AE%89%E8%A3%85/">Ubuntu18.04 fftw3.8.3 安装</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-07-01 11:04 </span>
+      <span class="post-time"> 2021-03-26 15:53 </span>
       <div class="post-category">
-          <a href="/categories/pygmt/"> pygmt </a>
-          <a href="/categories/%E7%A7%91%E7%A0%94-Ubuntu_%E7%96%91%E6%83%91/"> 科研-Ubuntu_疑惑 </a>
+          <a href="/categories/fftw-3.3.8/"> fftw-3.3.8 </a>
           </div>
-        <span class="more-meta"> 约 488 字 </span>
+        <span class="more-meta"> 约 162 字 </span>
         <span class="more-meta"> 预计阅读 1 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Pygmt 安装流程 在 Ubuntu18.04 上安装 pygmt 流程： 1 2 3 4 5 6 7 8 9 10 11 $ conda config --prepend channels conda-forge $ conda create --name pygmt python=3.9 numpy pandas xarray netcdf4 packaging gmt $ conda activate pygmt $ conda activate pygmt $ conda install pygmt $ conda update pygmt 安装成功之后，还可以安
+      前提条件 所用系统为 Ubuntu18.04 ，科研需要安装必要的依赖包（重复安装无影响）。 1 2 3 4 $ sudo apt-get install gcc $ sudo apt-get install g++ $ sudo apt-get install gfortran $ sudo apt-get install make 安装fftw 1 2 3 4 5 $ cd
     </div>
     <div class="read-more">
-      <a href="/post/Pygmt_install/" class="read-more-link">阅读更多</a>
+      <a href="/post/Ubuntu18.04-fftw3.8.3-%E5%AE%89%E8%A3%85/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/Compile_install/">Ubuntu20.04编译问题汇总</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/github_config/">Github clone 超时解决办法</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-06-27 17:39 </span>
+      <span class="post-time"> 2021-03-15 18:02 </span>
       <div class="post-category">
-          <a href="/categories/Ubuntu%E7%BC%96%E8%AF%91/"> Ubuntu编译 </a>
+          <a href="/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> Mac奇技淫巧 </a>
           </div>
-        <span class="more-meta"> 约 447 字 </span>
+        <span class="more-meta"> 约 601 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      说明 本篇 bog 用于记录在自己的 MAC Air 上面提交 Github 代码时遇到的问题及解决方案，本文不断更新ing (⊙o⊙)… 问题一 我今天使用git push origin master的时
+    </div>
+    <div class="read-more">
+      <a href="/post/github_config/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/Mac_oh-my-zsh/">Mac安装并配置 oh-My-Zsh</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-03-15 17:17 </span>
+      <div class="post-category">
+          <a href="/categories/Mac%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> Mac奇技淫巧 </a>
+          </div>
+        <span class="more-meta"> 约 818 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      第一步，安装 Homebrew 作为 macOS 必备的包管理工具，相信大家肯定已经很熟悉了，没安装的朋友可以执行下面命令装一下，安装过的可以执行下面命令可以进行更新。 1
+    </div>
+    <div class="read-more">
+      <a href="/post/Mac_oh-my-zsh/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/anaconda-env/">Anaconda创建自己的虚拟环境</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-03-15 15:32 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%AD%E6%96%87/"> 中文 </a>
+          </div>
+        <span class="more-meta"> 约 522 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      什么是 Jupyter Notebook? 详细内容请参考：geting started with conda Jupyter Notebook 之前被叫做 IPython Notebook，是基于 Python 环境下的一套集成了代码执行，富文本编辑，数学符号，以及
+    </div>
+    <div class="read-more">
+      <a href="/post/anaconda-env/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/pycharm/">Pycharm的安装及配置</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-03-14 16:11 </span>
+      <div class="post-category">
+          <a href="/categories/python/"> python </a>
+          </div>
+        <span class="more-meta"> 约 198 字 </span>
         <span class="more-meta"> 预计阅读 1 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      说明 这是一篇关于在Ubuntu20.04下编译问题汇总的 blog，不断更新ing。 Question1 How can I install libgfortran3 in Ubuntu/Lubuntu 20.04? Ubuntu20.04 下 run tomoDD 的程序，发现报错，尝试安装 libgfortran3 报错
+      引言 Pycharm 是一款功能十分强大的 IDE，Ubuntu18.04 在安装 Pycharm 过程中遇到了一些问题，特此记录。 Ubuntu18.04 安装 pycharm 解决安装界面卡死问题 最初 Ubuntu18.04 安装 pycharm 时，
     </div>
     <div class="read-more">
-      <a href="/post/Compile_install/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/matlab2017_install/">Ubuntu20.04安装Matlab2017</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-06-24 19:20 </span>
-      <div class="post-category">
-          <a href="/categories/matlab/"> matlab </a>
-          </div>
-        <span class="more-meta"> 约 209 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      解压文件 1 2 3 $ sudo apt-get update $ sudo apt-get install unrar $ sudo unrar x MATLABR2017b_Linux_Crack.rar 包含三部分：iso镜像、Crack、key.txt 正式安装 解压任务完成后，开始正式安装： 挂载镜像文
-    </div>
-    <div class="read-more">
-      <a href="/post/matlab2017_install/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/GFW/">机场汇总</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-06-18 10:14 </span>
-      <div class="post-category">
-          <a href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> 奇技淫巧 </a>
-          </div>
-        <span class="more-meta"> 约 1321 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      本文主要汇总并记录我目前使用的的机场，以及曾经使用过的机场，可能会涉及到一些简单的配置，但是重点在于记录和整理，配置细节不做过多赘述。 接触新
-    </div>
-    <div class="read-more">
-      <a href="/post/GFW/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/Y7000p_Ubuntu20.04_install/">联想拯救者Y7000P安装双系统win10&#43;ubuntu20.04</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-06-14 10:37 </span>
-      <div class="post-category">
-          <a href="/categories/Windows/"> Windows </a>
-          <a href="/categories/Ubuntu/"> Ubuntu </a>
-          </div>
-        <span class="more-meta"> 约 2787 字 </span>
-        <span class="more-meta"> 预计阅读 6 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      前言 2021-06-12 线下入手联想拯救者 Y7000p 2020款新机，官方标配以及升级配置如下： **官方标配：**i7-10875H，8 核 16 线程，32G 内存，512G 固
-    </div>
-    <div class="read-more">
-      <a href="/post/Y7000p_Ubuntu20.04_install/" class="read-more-link">阅读更多</a>
+      <a href="/post/pycharm/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

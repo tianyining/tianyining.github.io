@@ -125,120 +125,118 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/Myanmar_Disp_Statistics/">Myanmar_Disp_Statistics</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/Merge_DISPandSNR/">Merge_DISP and SNR_interp_Version1</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-12-28 10:12 </span>
+      <span class="post-time"> 2021-10-28 13:35 </span>
       <div class="post-category">
           <a href="/categories/python/"> python </a>
           <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
           </div>
-        <span class="more-meta"> 约 3679 字 </span>
-        <span class="more-meta"> 预计阅读 8 分钟 </span>
+        <span class="more-meta"> 约 642 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      说明 利用 AFTAN 提取出频散曲线后，经过前两步质量控制后：1) 剔除挑错支的频散； 2) 剔除掉低信噪比的相速度数据点。对于频散数据的离群点需要进一步剔除，
+      说明 本篇 blog 记录利用 python 实现将 AFTAN 提取出的原始频散文件和计算出的信噪比文件（包括插值部分）合并整理成以台站对命名的频散文件，每个频散文件包含三列信
     </div>
     <div class="read-more">
-      <a href="/post/Myanmar_Disp_Statistics/" class="read-more-link">阅读更多</a>
+      <a href="/post/Merge_DISPandSNR/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/Box_Del_Outlier_Myanmar/">使用箱型图的方法对频散文件中的异常值分析处理及可视化</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/1D_Interpolate_disp&#43;snr_Version2/">1D_Interpolate_disp&#43;snr_Version2</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-12-26 15:59 </span>
+      <span class="post-time"> 2021-10-26 14:45 </span>
       <div class="post-category">
           <a href="/categories/python/"> python </a>
           <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
           </div>
-        <span class="more-meta"> 约 1862 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      说明 在频散曲线质量控制时，最初采用计算不同整数周期相速度平均值以及标准差的方法，将偏离 2~3 倍标准差以外的数据点剔除。但是这种判别处理的原理及方
-    </div>
-    <div class="read-more">
-      <a href="/post/Box_Del_Outlier_Myanmar/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/Seperate_Disp_Period_Myanmar/">将频散文件(After_DEL_SNR)整理成以整数周期命名的多个频散文件</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-12-25 20:55 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> python </a>
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
-          </div>
-        <span class="more-meta"> 约 1054 字 </span>
+        <span class="more-meta"> 约 1005 字 </span>
         <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      说明 实现 python 批量处理，将两步质量控制后的台站对频散文件（剔除挑错支 &amp; 低信噪比数据点），整理成分别以整数周期命名的多个频散文件，其中整理后的每个
+      本篇 blog 记录利用 python，根据 AFTAN 提取的频散文件中的周期，对相应台站对的信噪比文件进行插值，并最终将不同台站对的频散文件整理成包含三列数据的
     </div>
     <div class="read-more">
-      <a href="/post/Seperate_Disp_Period_Myanmar/" class="read-more-link">阅读更多</a>
+      <a href="/post/1D_Interpolate_disp&#43;snr_Version2/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/pygmt_Seismic_Station_Practice2/">Pygmt_Seismic_Station_Practice2</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/1D_Interpolate_disp&#43;snr_Version1/">1D_Interpolate_disp&#43;snr_Version1</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2021-12-01 13:11 </span>
-      <div class="post-category">
-          <a href="/categories/pygmt/"> pygmt </a>
-          <a href="/categories/GMT/"> GMT </a>
-          </div>
-        <span class="more-meta"> 约 1046 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      本篇 blog 用于记录使用 pygmt 练习绘制地震台站分布图。 注明：本篇 blog 并非原创，主要借鉴的是下面的 github 示例，仅作为自我学习目的，侵权必删。 参考链接：http
-    </div>
-    <div class="read-more">
-      <a href="/post/pygmt_Seismic_Station_Practice2/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/AFTAN_Interp_Format_DISP/">Merge_DISP and SNR_interp_Version2</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-11-30 21:34 </span>
+      <span class="post-time"> 2021-10-26 13:19 </span>
       <div class="post-category">
           <a href="/categories/python/"> python </a>
           <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
           </div>
-        <span class="more-meta"> 约 1433 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span class="more-meta"> 约 685 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      说明 本篇 blog 记录利用 python 实现将 AFTAN 提取出的原始频散文件，利用样条插值，整合计算出的信噪比文件（包括插值部分），合并整理成以台站对命名的频散文件，最
+      本篇 blog 记录利用 python根据单一频散文件 COR_H1250_H1530.SAC_s_2_DISP.1 中的周期，对计算出来的信噪比 COR_H1250_H1530.SAC_s_snr.txt文件进行插
     </div>
     <div class="read-more">
-      <a href="/post/AFTAN_Interp_Format_DISP/" class="read-more-link">阅读更多</a>
+      <a href="/post/1D_Interpolate_disp&#43;snr_Version1/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/Plot_phV_Disp_all/">Plot_phV_all</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-10-25 17:22 </span>
+      <div class="post-category">
+          <a href="/categories/python/"> python </a>
+          </div>
+        <span class="more-meta"> 约 614 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      说明 本篇 blog 记录在背景噪声互相关处理中，利用 AFTAN 提取频散曲线后，将所有台站对间提取出来的相速度频散曲线绘制在一张图上。 本篇 blog 使用的数据来自 PKU Su
+    </div>
+    <div class="read-more">
+      <a href="/post/Plot_phV_Disp_all/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/Plot_phV_disp_subplot_all/">Plot_phV_disp_subplot_all_Version1</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-10-25 17:13 </span>
+      <div class="post-category">
+          <a href="/categories/python/"> python </a>
+          </div>
+        <span class="more-meta"> 约 368 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      说明 本篇 blog 记录在背景噪声互相关处理中，利用 AFTAN 提取频散曲线后，python 批量绘图（10张），将每一个台站对间的频散曲线都画出来，共计 10 幅图。
+    </div>
+    <div class="read-more">
+      <a href="/post/Plot_phV_disp_subplot_all/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
