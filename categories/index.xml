@@ -44,24 +44,6 @@
     </item>
     
     <item>
-      <title>GMT</title>
-      <link>https://tianyining.github.io/categories/GMT/</link>
-      <pubDate>Wed, 01 Dec 2021 13:11:29 +0800</pubDate>
-      
-      <guid>https://tianyining.github.io/categories/GMT/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>pygmt</title>
-      <link>https://tianyining.github.io/categories/pygmt/</link>
-      <pubDate>Wed, 01 Dec 2021 13:11:29 +0800</pubDate>
-      
-      <guid>https://tianyining.github.io/categories/pygmt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Beauty_Plot</title>
       <link>https://tianyining.github.io/categories/Beauty_Plot/</link>
       <pubDate>Mon, 29 Nov 2021 16:13:31 +0800</pubDate>
@@ -71,11 +53,20 @@
     </item>
     
     <item>
-      <title>Myanmar Work</title>
-      <link>https://tianyining.github.io/categories/Myanmar-Work/</link>
-      <pubDate>Mon, 15 Nov 2021 16:54:51 +0800</pubDate>
+      <title>GMT</title>
+      <link>https://tianyining.github.io/categories/GMT/</link>
+      <pubDate>Mon, 11 Oct 2021 18:06:47 +0800</pubDate>
       
-      <guid>https://tianyining.github.io/categories/Myanmar-Work/</guid>
+      <guid>https://tianyining.github.io/categories/GMT/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pygmt</title>
+      <link>https://tianyining.github.io/categories/pygmt/</link>
+      <pubDate>Fri, 01 Oct 2021 15:24:18 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/categories/pygmt/</guid>
       <description></description>
     </item>
     
