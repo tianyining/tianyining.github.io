@@ -6,7 +6,25 @@
     <description>Recent content in pygmt on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 01 Oct 2021 15:24:18 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/pygmt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jan 2022 10:36:46 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/pygmt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pygmt Blockmean Test</title>
+      <link>https://tianyining.github.io/post/Pygmt_Test1/</link>
+      <pubDate>Wed, 19 Jan 2022 10:36:46 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Pygmt_Test1/</guid>
+      <description>说明 blockmean 模块计算不同块体内部的数量，其中块体尺寸大小是按照空间距离等距离划分的，下面的两个例子，分别展示了如何使用 blockmean 模块计算每个 block 内部地震事件</description>
+    </item>
+    
+    <item>
+      <title>Myanmar_Seismic_Stations_Maps_Version3</title>
+      <link>https://tianyining.github.io/post/Myanmar_Seismic_Stations_Maps_Version3/</link>
+      <pubDate>Sun, 02 Jan 2022 12:57:17 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Myanmar_Seismic_Stations_Maps_Version3/</guid>
+      <description>本篇 blog 记录使用 pygmt 绘制研究区域地震台站分布图。 1. 相较于 Version2 的提升 Version2 相较于 Version2 ，本篇 blog 添加板块俯冲边界、断层走滑方向等构造信息； 使用 topo.cpt 绘制底图； 添加</description>
+    </item>
+    
     <item>
       <title>Myanmar Seismic Stations Maps_Version2</title>
       <link>https://tianyining.github.io/post/Seismic_Station_Plot_Myanmar/</link>

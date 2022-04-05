@@ -26,6 +26,51 @@
     </item>
     
     <item>
+      <title>QC_Version3_Region</title>
+      <link>https://tianyining.github.io/post/Disp_QualityControl_Region/</link>
+      <pubDate>Wed, 23 Feb 2022 10:54:39 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Disp_QualityControl_Region/</guid>
+      <description>本篇 blog 记录对研究区域按照构造特征进行分区，再分区提取频散曲线和对频散曲线质量控制，粗略分区标准： 1 2 3 1) Both sations in Myanmar; 2) Both stations in Yunnan; 3) Cross Region; Update 相较于 QC_Version2 的</description>
+    </item>
+    
+    <item>
+      <title>Plot_RayPaths_Myanmar_Version2</title>
+      <link>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version2/</link>
+      <pubDate>Tue, 08 Feb 2022 22:51:05 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version2/</guid>
+      <description>说明 当完成频散曲线质量控制QC_Version2，并将频散数据整理成以整数周期命名的形式，接下来可以绘制不同周期的射线路径分布图 以 10s 周期为例</description>
+    </item>
+    
+    <item>
+      <title>QC_Version2</title>
+      <link>https://tianyining.github.io/post/QC_Version2/</link>
+      <pubDate>Fri, 28 Jan 2022 20:45:25 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/QC_Version2/</guid>
+      <description>本篇 blog 记录如何对 AFTAN 提取出的频散曲线进行质量控制，质量控制步骤主要包含两步：1) 传统频散曲线质量控制；2) 根据实际数据对频散数据点按偏离标准差</description>
+    </item>
+    
+    <item>
+      <title>Plot_period_raypath_version2</title>
+      <link>https://tianyining.github.io/post/plot_period_raypath_version2/</link>
+      <pubDate>Tue, 25 Jan 2022 20:56:45 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/plot_period_raypath_version2/</guid>
+      <description>说明 本篇 blog 记录如何利用 AFTAN 从互相关对称分量中提取频散文件，计算不同周期的射线路径，并最终绘制绘制不同周期的台站对射线路径分布图； Here we will calculate the paths. In</description>
+    </item>
+    
+    <item>
+      <title>Plot_RayPaths_Myanmar_Version1</title>
+      <link>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version1/</link>
+      <pubDate>Sun, 09 Jan 2022 12:13:28 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Plot_RayPaths_Myanmar_Version1/</guid>
+      <description>Making a 2-D map of surface wave velocities There are two further steps to go from a set of dispersion curves to a 3-D map of the subsurface. The first step is to make a 2-D period map. When we measure a dispersion curve between two stations. We are observing the effects of the subsurface over the entire distance along these two stations. The purpose of the 2-D period map</description>
+    </item>
+    
+    <item>
       <title>Myanmar_Disp_Statistics</title>
       <link>https://tianyining.github.io/post/Myanmar_Disp_Statistics/</link>
       <pubDate>Tue, 28 Dec 2021 10:12:19 +0800</pubDate>
