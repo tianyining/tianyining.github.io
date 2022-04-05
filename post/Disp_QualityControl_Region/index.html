@@ -50,7 +50,7 @@
 <meta itemprop="name" content="QC_Version3_Region">
 <meta itemprop="description" content="本篇 blog 记录对研究区域按照构造特征进行分区，再分区提取频散曲线和对频散曲线质量控制，粗略分区标准： 1 2 3 1) Both sations in Myanmar; 2) Both stations in Yunnan; 3) Cross Region; Update 相较于 QC_Version2 的"><meta itemprop="datePublished" content="2022-02-23T10:54:39&#43;08:00" />
 <meta itemprop="dateModified" content="2022-02-23T10:54:39&#43;08:00" />
-<meta itemprop="wordCount" content="11793">
+<meta itemprop="wordCount" content="12875">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="QC_Version3_Region"/>
 <meta name="twitter:description" content="本篇 blog 记录对研究区域按照构造特征进行分区，再分区提取频散曲线和对频散曲线质量控制，粗略分区标准： 1 2 3 1) Both sations in Myanmar; 2) Both stations in Yunnan; 3) Cross Region; Update 相较于 QC_Version2 的"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 11793 字 </span>
-          <span class="more-meta"> 预计阅读 24 分钟 </span>
+          <span class="more-meta"> 约 12875 字 </span>
+          <span class="more-meta"> 预计阅读 26 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -163,6 +163,7 @@
         <li><a href="#step8-sort-disp-in-period">Step8 Sort Disp in Period</a></li>
         <li><a href="#step9_format_statistics_phasev_densitynumber_wholeregion">Step9_Format_Statistics_PhaseV_Density&amp;Number_WholeRegion</a></li>
         <li><a href="#step10_statistics_phasev_scatter_density_map">Step10_Statistics_PhaseV_Scatter_Density_Map</a></li>
+        <li><a href="#step11-plot-wholeregion-raypath-density-05s">Step11 Plot WholeRegion Raypath Density 05s</a></li>
       </ul>
     </li>
     <li><a href="#修订历史">修订历史</a></li>
@@ -5128,6 +5129,537 @@ gmt end show
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yzk67udyj217d0u0dl7.jpg" alt="image-20220405174408885"></p>
+<h3 id="step11-plot-wholeregion-raypath-density-05s">Step11 Plot WholeRegion Raypath Density 05s</h3>
+<p><strong>完成频散曲线质量控制以及各种步骤绘图后，接下来绘制射线路径覆盖图 &amp; 射线密度图；</strong></p>
+<p><strong>首先需要读取整数周期的频散文件（包含各种信息）</strong></p>
+<p><strong>Read Disp Curves File</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 读取整数周期的频散文件</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../../../Step7_Period_Disp/&#34;</span>
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&#34;source_name&#34;</span><span class="p">,</span> <span class="s2">&#34;receiver_name&#34;</span><span class="p">,</span> <span class="s2">&#34;group_velocity&#34;</span><span class="p">,</span> <span class="s2">&#34;phase_velocity&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;signal2noise_ratio&#34;</span><span class="p">,</span> <span class="s2">&#34;source_lon&#34;</span><span class="p">,</span> <span class="s2">&#34;source_lat&#34;</span><span class="p">,</span> <span class="s2">&#34;receiver_lon&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;receiver_lat&#34;</span><span class="p">,</span> <span class="s2">&#34;inter-station_distance&#34;</span>
+<span class="p">]</span>
+<span class="n">disp_curves</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;5.dat&#34;</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+    <span class="n">delim_whitespace</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Setup the inversion grid &amp; Calculate Raypaths &amp; Plot</strong></p>
+<p><strong>需要注意的是，该部分全部在 <code>roses-2021-unit03</code> 中进行计算：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pysismo.pstomo</span> <span class="kn">import</span> <span class="n">Grid</span> 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Modified from seismic-noise-tomgraphy</span>
+
+<span class="c1"># Setup the inversion grid</span>
+<span class="c1"># --------------------------------------------------------------------------------------------------------------- #</span>
+<span class="n">tol</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">lonstep</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">latstep</span> <span class="o">=</span> <span class="mf">0.25</span>
+
+<span class="c1"># Get the smallest longitude</span>
+<span class="c1"># ---------------------------------------------- #</span>
+<span class="n">min_rcv_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;receiver_lon&#34;</span><span class="p">])</span>
+<span class="n">min_src_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;source_lon&#34;</span><span class="p">])</span>
+<span class="n">min_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">min_rcv_lon</span><span class="p">,</span> <span class="n">min_src_lon</span><span class="p">])</span> <span class="o">-</span> <span class="n">tol</span>
+<span class="c1"># ---------------------------------------------- #</span>
+
+<span class="c1"># Get the smallest latitude</span>
+<span class="c1"># ---------------------------------------------- #</span>
+<span class="n">min_rcv_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;receiver_lat&#34;</span><span class="p">])</span>
+<span class="n">min_src_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;source_lat&#34;</span><span class="p">])</span>
+<span class="n">min_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">min_rcv_lat</span><span class="p">,</span> <span class="n">min_src_lat</span><span class="p">])</span> <span class="o">-</span> <span class="n">tol</span>
+<span class="c1"># ---------------------------------------------- #</span>
+
+<span class="c1"># Get the largest longitude</span>
+<span class="c1"># ---------------------------------------------- #</span>
+<span class="n">max_rcv_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;receiver_lon&#34;</span><span class="p">])</span>
+<span class="n">max_src_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;source_lon&#34;</span><span class="p">])</span>
+<span class="n">max_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">max_rcv_lon</span><span class="p">,</span> <span class="n">max_src_lon</span><span class="p">])</span>
+<span class="c1"># ---------------------------------------------- #</span>
+
+<span class="c1"># Get the largest latitude</span>
+<span class="c1"># ---------------------------------------------- #</span>
+<span class="n">max_rcv_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;receiver_lat&#34;</span><span class="p">])</span>
+<span class="n">max_src_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;source_lat&#34;</span><span class="p">])</span>
+<span class="n">max_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">max_rcv_lat</span><span class="p">,</span> <span class="n">max_src_lat</span><span class="p">])</span>
+<span class="c1"># ---------------------------------------------- #</span>
+
+<span class="n">nlon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">max_lon</span> <span class="o">+</span> <span class="n">tol</span> <span class="o">-</span> <span class="n">min_lon</span><span class="p">)</span> <span class="o">/</span> <span class="n">lonstep</span><span class="p">)</span>
+<span class="n">nlat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">max_lat</span> <span class="o">+</span> <span class="n">tol</span> <span class="o">-</span> <span class="n">min_lat</span><span class="p">)</span> <span class="o">/</span> <span class="n">latstep</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Number of nodes in longitude direction: {int(nlon):d}&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;Number of nodes in latitude direction: {int(nlat):d}&#34;</span><span class="p">)</span>
+
+<span class="c1"># Create a grid object, from pysismo</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">min_lon</span><span class="p">,</span> <span class="n">lonstep</span><span class="p">,</span> <span class="n">nlon</span><span class="p">,</span> <span class="n">min_lat</span><span class="p">,</span> <span class="n">latstep</span><span class="p">,</span> <span class="n">nlat</span><span class="p">)</span>
+<span class="c1"># --------------------------------------------------------------------------------------------------------------- # </span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pysismo</span> <span class="kn">import</span> <span class="n">psutils</span> 
+
+<span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">disp_curves</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">psutils</span><span class="o">.</span><span class="n">dist</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">source_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">source_lat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">receiver_lon</span><span class="p">,</span>
+                        <span class="n">row</span><span class="o">.</span><span class="n">receiver_lat</span><span class="p">)</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">])</span>  <span class="c1"># dist 向上取整 + 1000</span>
+    <span class="n">source_coords</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">source_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">source_lat</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">source_coords</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source_coords</span><span class="p">)</span>
+    <span class="n">receiver_coords</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">receiver_lon</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">receiver_lat</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">receiver_coords</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+        <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">receiver_coords</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">psutils</span><span class="o">.</span><span class="n">geodesic</span><span class="p">(</span><span class="n">source_coords</span><span class="p">,</span> <span class="n">receiver_coords</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span>
+    <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">dists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dists</span><span class="p">)</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&#34;object&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>采用面向对象的方式绘制射线覆盖图：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 使用面向对象的编程绘图方式； 以 10s 周期为例，绘制提取出频散数据的台站对射线分布图； 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">as</span> <span class="nn">font_manager</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&#34;v&#34;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;yellow&#34;</span><span class="p">,</span>
+        <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Create custom legend
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">font</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+                                   <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+                                   <span class="n">style</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+                                   <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">my_legend</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Raypath&#34;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">Line2D</span><span class="p">(</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;yellow&#34;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&#34;v&#34;</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span>
+        <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># 横线的粗细，lw=0 时没有横线显示；</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Station&#34;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">handles</span><span class="o">=</span><span class="n">my_legend</span><span class="p">,</span>
+    <span class="n">prop</span><span class="o">=</span><span class="n">font</span><span class="p">,</span>
+    <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span>
+    <span class="s2">&#34;Longitude&#34;</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s2">&#34;Times New Roman&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span>
+    <span class="s2">&#34;Latitude&#34;</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s2">&#34;Times New Roman&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s2">&#34;Station Geometry&#34;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s2">&#34;Times New Roman&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">103.75</span><span class="p">,</span>
+         <span class="mf">16.75</span><span class="p">,</span>
+         <span class="s1">&#39;5s&#39;</span><span class="p">,</span>
+         <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">,</span>
+         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+             <span class="n">boxstyle</span><span class="o">=</span><span class="s2">&#34;round&#34;</span><span class="p">,</span>
+             <span class="n">ec</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+             <span class="n">fc</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
+         <span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yzumz507j20u00unwj5.jpg" alt="image-20220405175411788"></p>
+<p><strong>Calculate Raypath Density &amp; Plot</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Modified from seismic-noise-tomography</span>
+<span class="kn">from</span> <span class="nn">pysismo</span> <span class="kn">import</span> <span class="n">rosesutils</span>
+
+<span class="n">vels</span> <span class="o">=</span> <span class="n">disp_curves</span><span class="p">[</span><span class="s2">&#34;phase_velocity&#34;</span><span class="p">]</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">dists</span> <span class="o">/</span> <span class="n">vels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">dists</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">s</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">rosesutils</span><span class="o">.</span><span class="n">make_G</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">v0</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Modified from seismic-noise-tomgraphy</span>
+
+<span class="n">dobs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">dists</span> <span class="o">/</span> <span class="n">vels</span> <span class="o">-</span> <span class="n">dists</span> <span class="o">/</span> <span class="n">v0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">density</span> <span class="o">=</span> <span class="n">rosesutils</span><span class="o">.</span><span class="n">path_density</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span>
+    <span class="n">lonstep</span><span class="p">,</span> <span class="n">latstep</span><span class="p">))</span>  <span class="c1"># Calculate raypath density</span>
+<span class="c1"># Reshape the density into an M x N matrix</span>
+<span class="n">path_density</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">to_2D_array</span><span class="p">(</span><span class="n">density</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Modified from seismic-noise-tomgraphy</span>
+
+<span class="n">dobs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">dists</span> <span class="o">/</span> <span class="n">vels</span> <span class="o">-</span> <span class="n">dists</span> <span class="o">/</span> <span class="n">v0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">density</span> <span class="o">=</span> <span class="n">rosesutils</span><span class="o">.</span><span class="n">path_density</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span>
+    <span class="n">lonstep</span><span class="p">,</span> <span class="n">latstep</span><span class="p">))</span>  <span class="c1"># Calculate raypath density</span>
+<span class="c1"># Reshape the density into an M x N matrix</span>
+<span class="n">path_density</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">to_2D_array</span><span class="p">(</span><span class="n">density</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>采用面向对象的方式绘制射线密度图：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">as</span> <span class="nn">font_manager</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../../../Figs/&#34;</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">xmin</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">get_xmax</span><span class="p">(),</span> <span class="n">grid</span><span class="o">.</span><span class="n">ymin</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">get_ymax</span><span class="p">())</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">path_density</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&#34;lower&#34;</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.040</span><span class="p">)</span>  <span class="c1"># fraction 调节 colorbar 大小；</span>
+<span class="c1"># cbar.set_label(&#34;# Ray Paths&#34;, size=15, font=&#34;Times New Roman&#34;)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span>
+    <span class="s2">&#34;Longitude&#34;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s2">&#34;Times New Roman&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span>
+    <span class="s2">&#34;Latitude&#34;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s2">&#34;Times New Roman&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s2">&#34;Station Geometry&#34;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">font</span><span class="o">=</span><span class="s2">&#34;Times New Roman&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">font</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;# Ray Paths&#39;</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>  <span class="c1"># 设置colorbar的标签字体及其大小</span>
+
+<span class="c1"># Add legend 10s</span>
+<span class="n">font</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+                                   <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+                                   <span class="n">style</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+                                   <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">103.65</span><span class="p">,</span>
+         <span class="mf">16.9</span><span class="p">,</span>
+         <span class="s1">&#39;5s&#39;</span><span class="p">,</span>
+         <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">,</span>
+         <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+             <span class="n">boxstyle</span><span class="o">=</span><span class="s2">&#34;round&#34;</span><span class="p">,</span>
+             <span class="n">ec</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+             <span class="n">fc</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
+         <span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Raypath_Density_Plot_05s.pdf&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yzwq3gd0j210n0u0ju6.jpg" alt="image-20220405175612719"></p>
 <h2 id="修订历史">修订历史</h2>
 <ul>
 <li>2022-02-23：初稿；</li>
