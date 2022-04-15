@@ -50,7 +50,7 @@
 <meta itemprop="name" content="DSurfTomo频散文件数据格式转换 &amp; 反演初始速度模型">
 <meta itemprop="description" content="说明 本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式"><meta itemprop="datePublished" content="2022-02-25T21:25:06&#43;08:00" />
 <meta itemprop="dateModified" content="2022-02-25T21:25:06&#43;08:00" />
-<meta itemprop="wordCount" content="5276">
+<meta itemprop="wordCount" content="5286">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DSurfTomo频散文件数据格式转换 &amp; 反演初始速度模型"/>
 <meta name="twitter:description" content="说明 本篇 blog 记录利用 python 定义函数的形式，实现将 AFTAN 计算出来的多个单一频散文件（原始未经任何处理）整理成 DSurfTomo 反演所需的文件数据格式，实现批量处理，格式"/>
@@ -136,7 +136,7 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 5276 字 </span>
+          <span class="more-meta"> 约 5286 字 </span>
           <span class="more-meta"> 预计阅读 11 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -703,9 +703,9 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="step2-transformationphase-velocity-curves-to-1d-vs-model">Step2 Transformation(phase velocity curves to 1D Vs model)</h3>
-<p><strong>将测量出的频散文件，转换成随深度变化的  <code>S</code>  波速度结构；</strong></p>
+<p><strong>将测量出的频散文件，转换成随深度变化的  <code>S</code>  波速度结构；</strong> </p>
 <p>**将相速度频散文件，转换成随深度变化的 S 波速度结构：
-1.1<em>phasev  (phasev</em>period)/3 **</p>
+1.1✖️phasev  (phasev*period)/3 **</p>
 <p><strong>Transformation of all interstation Rayleigh wave phase velocity dispersion curves measured from the ambient noise cross-correlation method (Huang <em>et al.</em><a href="">2010</a>) to a depth-shear wave speed approximation profile. For each Rayleigh wave phase velocity measurement, we replace period with 1/3 of the corresponding wavelength (phase velocity times period) at the vertical axis and replace phase velocity with the approximated shear wave speed (1.1 times phase velocity) at the horizontal axis. The average wave speed model from this profile (blue line) is used as the initial reference shear wave speed model in the inversion.</strong></p>
 <p><strong>文章中的示例如下，这里我们使用 <code>Myanmar</code> 地区的数据进行复现：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzsct4h1ufj21040suwii.jpg" alt="ggv080fig4.jpeg (1300×1038)"></p>
@@ -1000,7 +1000,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>结果如下：</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0om7yw80cj20o00g0wh3.jpg" alt="image-20220327182657583"> </p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0om7yw80cj20o00g0wh3.jpg" alt="image-20220327182657583"></p>
 <h3 id="step4-calculate-average-s-velocity-in-different-depth">Step4 Calculate Average S Velocity in Different Depth</h3>
 <p><strong>将频散数据进行深度转换后散点，每个深度求平均剪切波速度，最终得到反演所需的初始速度模型；</strong></p>
 <p><strong>1. Interp Depth</strong></p>
@@ -1885,7 +1885,7 @@
 <span class="n">Depth_Invert</span> 
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>制作 <code>DSurfTomo</code> 反演所需的初始速度模型（3D MOD 形式）</strong> </p>
+</div><p><strong>制作 <code>DSurfTomo</code> 反演所需的初始速度模型（3D MOD 形式）</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1

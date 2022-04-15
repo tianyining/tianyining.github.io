@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 27 Mar 2022 19:15:06 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Apr 2022 15:56:56 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>DSurfTomo_InitMOD</title>
+      <link>https://tianyining.github.io/post/DSurfTomo_InitMOD/</link>
+      <pubDate>Fri, 15 Apr 2022 15:56:56 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/DSurfTomo_InitMOD/</guid>
+      <description>说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生层 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的</description>
     </item>
     
     <item>
