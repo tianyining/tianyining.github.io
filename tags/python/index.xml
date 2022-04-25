@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 15 Apr 2022 15:56:56 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Apr 2022 15:58:11 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSurfTomo_CheckboardTest</title>
+      <link>https://tianyining.github.io/post/DSurfTomo_CheckboardTest/</link>
+      <pubDate>Mon, 25 Apr 2022 15:58:11 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/DSurfTomo_CheckboardTest/</guid>
+      <description>说明 本篇 blog 用于记录如何使用 DSurfTomo 进行检测板恢复测试，主要包含如何设计棋盘网格的速度异常尺寸，生成棋盘网格模型，以及 Synthetic Test 恢复性测试。本篇 blog 使用的测</description>
+    </item>
+    
     <item>
       <title>DSurfTomo_InitMOD</title>
       <link>https://tianyining.github.io/post/DSurfTomo_InitMOD/</link>
