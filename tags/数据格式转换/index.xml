@@ -6,7 +6,16 @@
     <description>Recent content in 数据格式转换 on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 25 Apr 2022 15:58:11 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 May 2022 11:34:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GMT_profile</title>
+      <link>https://tianyining.github.io/post/GMT_profile/</link>
+      <pubDate>Mon, 02 May 2022 11:34:41 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT_profile/</guid>
+      <description>说明 本篇 blog 用于记录如何使用 GMT 绘制一些剖面，本篇 blog 仅展示如何绘制海拔剖面、层析成像速度剖面，未完待续。 本次绘制剖面使用数据为 ZGL-2021_EPSL （速度模型未公开</description>
+    </item>
+    
     <item>
       <title>DSurfTomo_CheckboardTest</title>
       <link>https://tianyining.github.io/post/DSurfTomo_CheckboardTest/</link>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>GMT_profile - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 blog 用于记录如何使用 GMT 绘制一些剖面，本篇 blog 仅展示如何绘制海拔剖面、层析成像速度剖面，未完待续。 本次绘制剖面使用数据为 ZGL-2021_EPSL （速度模型未公开" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/GMT_profile/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="GMT_profile" />
+<meta property="og:description" content="说明 本篇 blog 用于记录如何使用 GMT 绘制一些剖面，本篇 blog 仅展示如何绘制海拔剖面、层析成像速度剖面，未完待续。 本次绘制剖面使用数据为 ZGL-2021_EPSL （速度模型未公开" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/GMT_profile/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-02T11:34:41&#43;08:00" />
+<meta property="article:modified_time" content="2022-05-02T11:34:41&#43;08:00" />
+
+<meta itemprop="name" content="GMT_profile">
+<meta itemprop="description" content="说明 本篇 blog 用于记录如何使用 GMT 绘制一些剖面，本篇 blog 仅展示如何绘制海拔剖面、层析成像速度剖面，未完待续。 本次绘制剖面使用数据为 ZGL-2021_EPSL （速度模型未公开"><meta itemprop="datePublished" content="2022-05-02T11:34:41&#43;08:00" />
+<meta itemprop="dateModified" content="2022-05-02T11:34:41&#43;08:00" />
+<meta itemprop="wordCount" content="909">
+<meta itemprop="keywords" content="数据格式转换,python,GMT," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GMT_profile"/>
+<meta name="twitter:description" content="说明 本篇 blog 用于记录如何使用 GMT 绘制一些剖面，本篇 blog 仅展示如何绘制海拔剖面、层析成像速度剖面，未完待续。 本次绘制剖面使用数据为 ZGL-2021_EPSL （速度模型未公开"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">GMT_profile</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-02 11:34 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
+            <a href="/categories/GMT/"> GMT </a>
+            </div>
+          <span class="more-meta"> 约 909 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#说明">说明</a></li>
+    <li><a href="#step1-sort-data">Step1 Sort Data</a></li>
+    <li><a href="#step2-plot-velocity-profile">Step2 Plot Velocity Profile</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="说明">说明</h2>
+<p><strong>本篇 <code>blog</code> 用于记录如何使用 <code>GMT</code> 绘制一些剖面，本篇 <code>blog</code> 仅展示如何绘制海拔剖面、层析成像速度剖面，未完待续。</strong></p>
+<p><strong>本次绘制剖面使用数据为 <code>ZGL-2021_EPSL</code>  （速度模型未公开）；</strong></p>
+<p><strong>感谢 <code>ys</code> 师兄的帮助 ~</strong></p>
+<h2 id="step1-sort-data">Step1 Sort Data</h2>
+<p><strong>首先需要将层析成像结果进行适当整理，方便后续 <code>GMT</code> 绘图使用；</strong></p>
+<p><strong>层析成像原始速度文件格式如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown"><span class="k">*</span> lon <span class="ge">* lat *</span> depth * Vp(velocity)
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h1txd2tbs1j20hq0bemyq.jpg" alt="image-20220502120037858"></p>
+<p><strong>将数据整理成以不同深度为单位的格式，每个文件为同一深度不同格点对应的速度结构：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown"><span class="k">*</span> named as imagep1.lyrN (N 代表不同深度，共计 11 个深度值)
+<span class="k">*</span> 每个文件包含以下四列信息：lon lat Vp Vp(repeat)
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">file_path</span> <span class="o">=</span> <span class="s2">&#34;./data/ZGL_P_velocity&#34;</span>
+<span class="n">output_dir_path</span> <span class="o">=</span> <span class="s2">&#34;./output_TYN/&#34;</span>
+
+<span class="c1"># load the data</span>
+<span class="n">data_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_dir_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir_path</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;output_TYN already exist !!!&#34;</span><span class="p">)</span>
+
+<span class="n">lon_unique_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data_arr</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">lon_unique_arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="n">lat_unique_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data_arr</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">lat_unique_arr</span>
+
+<span class="n">vel_arr</span> <span class="o">=</span> <span class="n">data_arr</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">depth_unique_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data_arr</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">depth_unique_arr</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Longitude range:&#34;</span> <span class="o">+</span>
+      <span class="s1">&#39;{:&lt;} {:&lt;}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">lon_unique_arr</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">lon_unique_arr</span><span class="p">)))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Latitude range:&#34;</span> <span class="o">+</span>
+      <span class="s1">&#39;{:&lt;} {:&lt;}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">lat_unique_arr</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">lat_unique_arr</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Vp range:&#34;</span> <span class="o">+</span> <span class="s1">&#39;{:&lt;} {:&lt;}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">vel_arr</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">vel_arr</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Depth range:&#34;</span> <span class="o">+</span>
+      <span class="s1">&#39;{:&lt;} {:&lt;}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">depth_unique_arr</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">depth_unique_arr</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">depth_unique_arr</span><span class="p">)):</span>  <span class="c1"># 共计 11 个 depth</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">depth_unique_arr</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">depth_unique_arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">index_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data_arr</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">depth</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">target_data_arr</span> <span class="o">=</span> <span class="n">data_arr</span><span class="p">[</span><span class="n">index_arr</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1"># 提取特定深度的信息</span>
+    <span class="n">new_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">target_data_arr</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">target_data_arr</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> 
+                       <span class="n">target_data_arr</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">target_data_arr</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]])</span>
+    <span class="n">new_arr</span> <span class="o">=</span> <span class="n">new_arr</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">new_arr</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">new_arr</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">out_file_path</span> <span class="o">=</span> <span class="n">output_dir_path</span> <span class="o">+</span> <span class="s2">&#34;imagep1.lyr{:&lt;}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span> 
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">out_file_path</span><span class="p">,</span> <span class="n">new_arr</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">%8.4f</span><span class="s2"> </span><span class="si">%7.4f</span><span class="s2"> </span><span class="si">%8.4f</span><span class="s2"> </span><span class="si">%8.4f</span><span class="s2">&#34;</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>整理结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h1txiiheuqj20le0c5aay.jpg" alt="image-20220502120542490"></p>
+<h2 id="step2-plot-velocity-profile">Step2 Plot Velocity Profile</h2>
+<p><strong>绘制 <code>22.65°N</code>  <code>93° ~96°</code> 经度范围内，研究区域内的海拔剖面 <code>+</code> 速度剖面：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh 
+</span><span class="cp"></span>
+<span class="c1"># Date:2022-05-02 </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Functions: Try to plot Vp velocity profile &amp; topo together  </span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> FONT Times-Roman
+gmt <span class="nb">set</span> <span class="nv">FONT_ANNOT</span><span class="o">=</span>8p
+gmt <span class="nb">set</span> <span class="nv">FONT_LABEL</span><span class="o">=</span>12p
+gmt <span class="nb">set</span> <span class="nv">MAP_FRAME_TYPE</span><span class="o">=</span>plain
+gmt <span class="nb">set</span> <span class="nv">MAP_TICK_LENGTH_PRIMARY</span><span class="o">=</span>0.02i
+gmt <span class="nb">set</span> <span class="nv">MAP_TICK_PEN_PRIMARY</span><span class="o">=</span>0.01i
+gmt <span class="nb">set</span> <span class="nv">MAP_FRAME_PEN</span><span class="o">=</span>0.02i
+
+
+<span class="c1">## Fig a topo profile </span>
+<span class="nv">J</span><span class="o">=</span><span class="s2">&#34;-JX7.5i/1.6i&#34;</span>
+<span class="nv">R_project</span><span class="o">=</span><span class="s2">&#34;-R93/96/22/24&#34;</span> 
+<span class="nv">RMAP</span><span class="o">=</span><span class="s2">&#34;-R93/96/0/2500&#34;</span>
+gmt begin ZGL_Profile_FINAL png 
+
+    <span class="c1"># grdtrack topo data </span>
+    gmt basemap <span class="nv">$RMAP</span> <span class="nv">$J</span> -Bxa1f0.5 -Bya500f1000+l<span class="s2">&#34;Elevation (m)&#34;</span> -BWesn
+    gmt grdcut @earth_relief_15s <span class="nv">$R_project</span> <span class="nv">$J</span> -Gtopo_Myanmar.grd 
+    gmt project -C93/22.65 -E96/22.65 -G0.01 <span class="p">|</span> gmt grdtrack -Gtopo_Myanmar.grd  &gt; elevationproject_ZGL.tmp
+    <span class="c1"># 否则 -Ggray 会切一刀； </span>
+    <span class="nb">echo</span> <span class="s2">&#34;96    0       0       0
+</span><span class="s2">    93      0       0       0
+</span><span class="s2">    93      23      0       1073&#34;</span> &gt;&gt; elevationproject_ZGL.tmp 
+
+    awk <span class="s1">&#39;{print $1,$4}&#39;</span> elevationproject_ZGL.tmp <span class="p">|</span> gmt plot  <span class="nv">$RMAP</span> <span class="nv">$J</span> -W0.5p,black  -Ggray 
+
+    <span class="c1"># 绘制虚线 </span>
+    gmt plot -W1p,black,- <span class="s">&lt;&lt; EOF
+</span><span class="s">    94.03 0
+</span><span class="s">    94.03 2200
+</span><span class="s">EOF</span>
+    gmt text -N -F+f17p,blue <span class="s">&lt;&lt;EOF
+</span><span class="s">    93.25 1750 IBR
+</span><span class="s">    95 650 CB
+</span><span class="s">EOF</span>
+<span class="c1">#     gmt text -N -F+f15p,cyan &lt;&lt;EOF</span>
+<span class="c1">#     92.82 2450 a</span>
+<span class="c1"># EOF</span>
+
+
+    <span class="c1">## Fig b Vp profile 22.5°N </span>
+    <span class="nv">R_big</span><span class="o">=</span>93/96/21/25
+    <span class="nv">R</span><span class="o">=</span>93/96/0/100
+    <span class="c1"># J=X6c/-1.8c</span>
+    <span class="nv">J</span><span class="o">=</span>X7.5i/-1.8i
+    <span class="nv">cpt</span><span class="o">=</span><span class="s2">&#34;rgb_TYN.cpt&#34;</span>
+    <span class="nv">cpt_file</span><span class="o">=</span><span class="s2">&#34;./cpt_files/&#34;</span>
+    <span class="nv">NDEP</span><span class="o">=</span><span class="m">11</span>
+    <span class="nv">DDEP</span><span class="o">=</span><span class="m">10</span> 
+    <span class="nv">layer</span><span class="o">=</span><span class="m">1</span>
+    <span class="nv">DEG1</span><span class="o">=</span>0.1
+    <span class="nv">DEG2</span><span class="o">=</span>0.01
+
+    gmt makecpt -C<span class="nv">$cpt_file</span><span class="s2">&#34;seis.cpt&#34;</span> -T3/9/0.01 -H &gt; <span class="nv">$cpt</span> 
+    gmt project -C93.0/22.65 -E96.0/22.65 -G<span class="nv">$DEG2</span> &gt; gc_ZGL.xyt
+    cat gc_ZGL.xyt <span class="p">|</span> awk <span class="s1">&#39;{ if ($1 &lt; 0) { print 360.+$1,$2 } else {print $1, $2 }}&#39;</span> <span class="p">|</span> cat &gt; gc_ZGL.xy
+    <span class="nv">layer</span><span class="o">=</span><span class="m">1</span>
+	<span class="k">while</span> <span class="o">[</span> <span class="nv">$layer</span> -le <span class="nv">$NDEP</span> <span class="o">]</span>
+	<span class="k">do</span>
+		<span class="nv">depth</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$NDEP</span> <span class="nv">$layer</span> <span class="nv">$DDEP</span> <span class="p">|</span> awk <span class="s1">&#39; { printf(&#34;%10.5f\n&#34;,($1-$2)*$3+5) } &#39;</span><span class="sb">`</span>
+		<span class="nb">echo</span> <span class="nv">$depth</span>
+		gmt surface output_TYN/imagep1.lyr<span class="nv">$layer</span> -Gslicep.grd -I0.1/0.1 -R<span class="nv">$R_big</span> -T0.1
+		gmt grdtrack gc_ZGL.xy -Gslicep.grd &gt; slicep.gc <span class="c1"># 需要生成 gc.xy </span>
+		paste gc_ZGL.xyt slicep.gc <span class="p">|</span> awk -vd<span class="o">=</span><span class="s2">&#34;</span><span class="nv">$depth</span><span class="s2">&#34;</span> <span class="s1">&#39;{print $1, d, $6}&#39;</span> &gt;&gt; slicep.out <span class="c1"># 需要生成 gc.xyt </span>
+		<span class="nv">layer</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$layer</span> + 1<span class="sb">`</span>
+	<span class="k">done</span>
+
+    gmt surface slicep.out -Gslicep.grd -R<span class="nv">$R</span> -I0.01/0.5
+    gmt grdimage slicep.grd -Bxa1f0.5+u<span class="s2">&#34;\260&#34;</span>+l<span class="s2">&#34;Longitude&#34;</span> -Bya20f10+l<span class="s2">&#34;Depth (km)&#34;</span> -BnSWe -C<span class="nv">$cpt</span> -J<span class="nv">$J</span> -R<span class="nv">$R</span> -Y-5.0
+    gmt colorbar -J<span class="nv">$J</span> -R<span class="nv">$R_big</span> -C<span class="nv">$cpt</span> -DJBC+w8c/0.35c+e+mc  -Bxa1f1+l<span class="s2">&#34;Vp (km/s)&#34;</span> -By
+    <span class="c1"># echo 92.9 0 &#39;(b)&#39; | gmt text -J$J -R$R -F+f10p,4,red </span>
+gmt end show 
+
+rm gmt* *.cpt slicep* gc* 
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h1txmxe8kqj21gw0u0431.jpg" alt="image-20220502121007604"></p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://github.com/gmt-china/GMT_docs/issues/449">https://github.com/gmt-china/GMT_docs/issues/449</a> (目前 <code>GMT</code> 中文社区删除了绘制地震剖面的示例)</li>
+<li><a href="https://researchdata.ntu.edu.sg/dataset.xhtml?persistentId=doi:10.21979/N9/EMYOEP">https://researchdata.ntu.edu.sg/dataset.xhtml?persistentId=doi:10.21979/N9/EMYOEP</a> (Yao et al.,2021, JGR 公开速度模型 &amp; 层析成像绘图示例)</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-05-02 11:34
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">数据格式转换</a>
+          <a href="/tags/python/">python</a>
+          <a href="/tags/GMT/">GMT</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/DSurfTomo_CheckboardTest/">
+            <span class="next-text nav-default">DSurfTomo_CheckboardTest</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
