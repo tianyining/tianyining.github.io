@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>GMT_misfit - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 blog 用于记录如何使用 GMT 绘制反演结果之间的差异，包含数据格式整理，以及 GMT 绘图代码。 Sort Inversion Data depth &amp;amp; grid 对于反演结果，首先需要将最终的反演结果，整" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/GMT_misfit/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="GMT_misfit" />
+<meta property="og:description" content="说明 本篇 blog 用于记录如何使用 GMT 绘制反演结果之间的差异，包含数据格式整理，以及 GMT 绘图代码。 Sort Inversion Data depth &amp; grid 对于反演结果，首先需要将最终的反演结果，整" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/GMT_misfit/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-11T14:33:33&#43;08:00" />
+<meta property="article:modified_time" content="2022-05-11T14:33:33&#43;08:00" />
+
+<meta itemprop="name" content="GMT_misfit">
+<meta itemprop="description" content="说明 本篇 blog 用于记录如何使用 GMT 绘制反演结果之间的差异，包含数据格式整理，以及 GMT 绘图代码。 Sort Inversion Data depth &amp; grid 对于反演结果，首先需要将最终的反演结果，整"><meta itemprop="datePublished" content="2022-05-11T14:33:33&#43;08:00" />
+<meta itemprop="dateModified" content="2022-05-11T14:33:33&#43;08:00" />
+<meta itemprop="wordCount" content="2601">
+<meta itemprop="keywords" content="数据格式转换,python,GMT," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GMT_misfit"/>
+<meta name="twitter:description" content="说明 本篇 blog 用于记录如何使用 GMT 绘制反演结果之间的差异，包含数据格式整理，以及 GMT 绘图代码。 Sort Inversion Data depth &amp; grid 对于反演结果，首先需要将最终的反演结果，整"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">GMT_misfit</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-11 14:33 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
+            <a href="/categories/GMT/"> GMT </a>
+            </div>
+          <span class="more-meta"> 约 2601 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#说明">说明</a></li>
+    <li><a href="#sort-inversion-data-depth--grid">Sort Inversion Data depth &amp; grid</a>
+      <ul>
+        <li><a href="#step1-sort-model-named-depth">Step1 Sort Model Named Depth</a></li>
+        <li><a href="#step2-sort-named-grid">Step2 Sort Named grid</a></li>
+        <li><a href="#step3-establish-dict-to-save-inversion-infos--comparison">Step3 Establish dict to save inversion infos &amp; Comparison</a></li>
+        <li><a href="#step4-gmt-plot">Step4 GMT Plot</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="说明">说明</h2>
+<p><strong>本篇 <code>blog</code> 用于记录如何使用 <code>GMT</code> 绘制反演结果之间的差异，包含数据格式整理，以及 <code>GMT</code> 绘图代码。</strong></p>
+<h2 id="sort-inversion-data-depth--grid">Sort Inversion Data depth &amp; grid</h2>
+<p><strong>对于反演结果，首先需要将最终的反演结果，整理成以深度命名的文件格式，以及以反演网格点经纬度坐标命名的形式，方便后续比较不同反演结果的差异，为后续 <code>GMT</code> 绘图做准备。</strong></p>
+<h3 id="step1-sort-model-named-depth">Step1 Sort Model Named Depth</h3>
+<p><strong>将 <code>Yiming Bai</code>  &amp;  <code>Yining Tian</code> 的反演结果，整理成以深度命名的文件格式；</strong></p>
+<h4 id="sort-dsurftomo-inversion-results-named-depth">Sort DSurfTomo Inversion Results Named Depth</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;../DSurfTomo.inMeasure.dat&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../DSurfTomo_Results/Named_Depth/&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;vs&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,)</span>
+
+<span class="k">for</span> <span class="n">depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">56</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;depth&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">depth</span><span class="p">]</span>
+
+    <span class="n">test_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;.0&#34;</span><span class="p">,</span>
+                     <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,)</span>  <span class="c1"># header=None,</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="sort-jointinversion-results-named-depth">Sort JointInversion Results Named Depth</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;../Vs_model_TP.dat&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../JointInversion_Results/Named_Depth/&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Vs&#39;</span><span class="p">,</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="s1">&#39;Vp&#39;</span><span class="p">,</span> <span class="s1">&#39;rho&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="s1">&#39;Vs&#39;</span><span class="p">,</span> <span class="s1">&#39;Vp&#39;</span><span class="p">,</span> <span class="s1">&#39;rho&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">80</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Depth&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">depth</span><span class="p">]</span>
+    <span class="c1"># 仅选择 lon lat depth vs 四列</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="s1">&#39;Vs&#39;</span><span class="p">])</span>
+
+    <span class="n">test_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;.0&#34;</span><span class="p">,</span>
+                     <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,)</span>  <span class="c1"># header=None,</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="step2-sort-named-grid">Step2 Sort Named grid</h3>
+<p><strong>将 <code>Yiming Bai</code> 与 <code>DSurfTomo</code> 的反演结果，不同深度，按照网格点经纬度进行分类； 文件名为格点 <code>lon_lat</code>
+程序仅能执行一次 !</strong></p>
+<h4 id="dsurftomo-sort-named-grid">DSurfTomo Sort Named grid</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;../DSurfTomo.inMeasure.dat&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../DSurfTomo_Results/Named_grid/&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;vs&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">input_file</span><span class="p">,</span>
+    <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span>
+    <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">lon</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">vs</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;5.1f}</span><span class="se">\t</span><span class="s2">{:&lt;10.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">depth</span><span class="p">,</span> <span class="n">vs</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="joint-inversion-sort-named-grid">Joint Inversion Sort Named grid</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;../Vs_model_TP.dat&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../JointInversion_Results/Named_grid/&#34;</span>
+
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">lon</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">vs</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;5.1f}</span><span class="se">\t</span><span class="s2">{:&lt;10.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">depth</span><span class="p">,</span> <span class="n">vs</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="step3-establish-dict-to-save-inversion-infos--comparison">Step3 Establish dict to save inversion infos &amp; Comparison</h3>
+<p><strong>将不同人的反演结果整理成深度形式、格点形式后，以建立字典的形式，分别存储不同的反演结果，这里的字典是二维字典，<code>key1</code> 为深度，<code>value1</code> 本身为字典形式，<code>lon_lat</code> <code>:</code> <code>Vs</code> ；</strong></p>
+<h4 id="dsurftomo-dict-to-save-infos">DSurfTomo dict to save infos</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../DSurfTomo_Results/Named_Depth/&#34;</span>
+<span class="n">DSurfTomo_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">depth_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">depth_file</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="n">depth</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">tmp_d</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> 
+        <span class="n">lon_depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">lat_depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">vs_depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">lon_depth</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat_depth</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">vs_depth</span>
+
+        <span class="n">tmp_d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="n">tmp_dict</span> <span class="o">=</span> <span class="p">{</span><span class="nb">float</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span> <span class="n">tmp_d</span><span class="p">}</span>
+    <span class="n">DSurfTomo_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tmp_dict</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="joint-inversion-dict-to-save-infos">Joint Inversion dict to save infos</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../JointInversion_Results/Named_Depth/&#34;</span>
+<span class="n">JointInversion_dict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># 定义一个空字典；</span>
+<span class="k">for</span> <span class="n">depth_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">depth_file</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="n">depth</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">tmp_d</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">lon_depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">lat_depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">vs_depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">lon_depth</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat_depth</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">vs_depth</span>
+
+        <span class="n">tmp_d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="n">tmp_dict</span> <span class="o">=</span> <span class="p">{</span><span class="nb">float</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span> <span class="n">tmp_d</span><span class="p">}</span>
+    <span class="n">JointInversion_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tmp_dict</span><span class="p">)</span> <span class="c1"># 将不同深度的字典信息，合并为一个字典；</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="comparisions--compare-the-same-grid-vs-value-in-the-same-depth">Comparisions : Compare the same grid Vs value in the same depth</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown">将不同深度的 Yining Tian 的反演结果和 Yiming Bai 的反演结果，按照对应反演网格格点，整理在一起，计算不同反演得到的对应深度格点的速度差异，以及差异的绝对值，方便后续 GMT 绘图使用;
+
+ <span class="k">*</span> file_name : depth 
+ <span class="k">*</span> contents : lon lat Yining_vs Yiming_vs minus abs_minus 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Right Version</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">DSurfTomo_dir</span> <span class="o">=</span> <span class="s2">&#34;../DSurfTomo_Results/Named_Depth/&#34;</span>
+<span class="n">JointInversion_dir</span> <span class="o">=</span> <span class="s2">&#34;../JointInversion_Results/Named_Depth/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Inversion_Same_Grid/&#34;</span>
+
+<span class="k">for</span> <span class="n">depth_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">JointInversion_dir</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">depth_file</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">DSurfTomo_dir</span> <span class="o">+</span> <span class="n">file_name</span><span class="p">):</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">DSurfTomo_dict</span><span class="p">[</span><span class="n">file_name</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">JointInversion_dict</span><span class="p">[</span><span class="n">file_name</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="c1">#                     print(key)  # 共同的 grid</span>
+
+                    <span class="n">lon</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">lat</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+                    <span class="n">Yining_vs</span> <span class="o">=</span> <span class="n">DSurfTomo_dict</span><span class="p">[</span><span class="n">file_name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+                    <span class="n">Yiming_vs</span> <span class="o">=</span> <span class="n">JointInversion_dict</span><span class="p">[</span><span class="n">file_name</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+                    <span class="n">minus</span> <span class="o">=</span> <span class="n">Yining_vs</span> <span class="o">-</span> <span class="n">Yiming_vs</span>
+                    <span class="n">abs_minus</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">minus</span><span class="p">)</span> 
+
+                    <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;s}</span><span class="se">\t</span><span class="s2">{:&lt;s}</span><span class="se">\t</span><span class="s2">{:&lt;8.4f}</span><span class="se">\t</span><span class="s2">{:&lt;8.4f}</span><span class="se">\t</span><span class="s2">{:&lt;8.4f}</span><span class="se">\t</span><span class="s2">{:&lt;8.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">Yining_vs</span><span class="p">,</span> <span class="n">Yiming_vs</span><span class="p">,</span> <span class="n">minus</span><span class="p">,</span><span class="n">abs_minus</span><span class="p">))</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>以 <code>10</code> 公里为例，最终格式如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24h800fddj20hs0bjjt0.jpg" alt="image-20220511150322026"></p>
+<h3 id="step4-gmt-plot">Step4 GMT Plot</h3>
+<p><strong>使用 <code>GMT</code> 将不同反演结果的速度差异绘制出，这里仅选取一些深度进行绘制示意：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/zsh 
+</span><span class="cp"></span>
+<span class="c1"># Date:2022-05-08 </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Function : 绘制 10km 深度 Yining Tian 和 Yiming Bai 反演结果的差异性； </span>
+
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;../Figs/&#34;</span>
+<span class="nv">Sta_Info</span><span class="o">=</span><span class="s2">&#34;../Geo_Infos/STA_Yiming/Sta_Yiming_right&#34;</span>
+<span class="nv">Volcanoes</span><span class="o">=</span><span class="s2">&#34;../Geo_Infos/volcanoes.lst&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain 
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.0p 
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 0.5p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;Inversion_difference_Subplot1&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="nv">$output_path$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png 
+    gmt subplot begin 2x4 -Fs6c -B -BWeSn  
+    <span class="nv">J_tomo</span><span class="o">=</span><span class="s2">&#34;-JM2i&#34;</span>
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R92.75/97.5/20.75/24.5&#34;</span> <span class="c1"># 比实际 tomo 区域大； </span>
+    gmt subplot <span class="nb">set</span> <span class="m">0</span> 
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Inversion_Same_Grid/2.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba1f0.5 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$6}&#39;</span> &gt; difference_10.dat 
+
+    gmt xyz2grd difference_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -Gdifference_10.grd 
+    gmt makecpt -Cgray -T0/0.6/0.01 -H -D -I -Z &gt; difference_10.cpt 
+    gmt grdimage difference_10.grd -Cdifference_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    cat <span class="nv">$Sta_Info</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot <span class="nv">$J_tomo</span> <span class="nv">$R_tomo</span> -Si0.035i -W0.2p,black -Gpurple 
+    gmt plot <span class="nv">$Volcanoes</span> <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Skvolcano/5.5p -W0.2p,black -Ggreen 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Cdifference_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs Misfit (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRT+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 2km 
+</span><span class="s">EOF</span>
+
+    gmt subplot <span class="nb">set</span> <span class="m">1</span> 
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Inversion_Same_Grid/4.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba1f0.5 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$6}&#39;</span> &gt; difference_10.dat 
+
+    gmt xyz2grd difference_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -Gdifference_10.grd 
+    gmt makecpt -Cgray -T0/0.6/0.01 -H -D -I -Z &gt; difference_10.cpt 
+    gmt grdimage difference_10.grd -Cdifference_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    cat <span class="nv">$Sta_Info</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot <span class="nv">$J_tomo</span> <span class="nv">$R_tomo</span> -Si0.035i -W0.2p,black -Gpurple 
+    gmt plot <span class="nv">$Volcanoes</span> <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Skvolcano/5.5p -W0.2p,black -Ggreen 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Cdifference_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs Misfit (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRT+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 4km 
+</span><span class="s">EOF</span>
+
+    gmt subplot <span class="nb">set</span> <span class="m">2</span>  
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Inversion_Same_Grid/6.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba1f0.5 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$6}&#39;</span> &gt; difference_10.dat 
+
+    gmt xyz2grd difference_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -Gdifference_10.grd 
+    gmt makecpt -Cgray -T0/0.6/0.01 -H -D -I -Z &gt; difference_10.cpt 
+    gmt grdimage difference_10.grd -Cdifference_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    cat <span class="nv">$Sta_Info</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot <span class="nv">$J_tomo</span> <span class="nv">$R_tomo</span> -Si0.035i -W0.2p,black -Gpurple 
+    gmt plot <span class="nv">$Volcanoes</span> <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Skvolcano/5.5p -W0.2p,black -Ggreen 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Cdifference_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs Misfit (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRT+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 6km 
+</span><span class="s">EOF</span>
+
+    gmt subplot <span class="nb">set</span> <span class="m">3</span>  
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Inversion_Same_Grid/8.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba1f0.5 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$6}&#39;</span> &gt; difference_10.dat 
+
+    gmt xyz2grd difference_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -Gdifference_10.grd 
+    gmt makecpt -Cgray -T0/0.6/0.01 -H -D -I -Z &gt; difference_10.cpt 
+    gmt grdimage difference_10.grd -Cdifference_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    cat <span class="nv">$Sta_Info</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot <span class="nv">$J_tomo</span> <span class="nv">$R_tomo</span> -Si0.035i -W0.2p,black -Gpurple 
+    gmt plot <span class="nv">$Volcanoes</span> <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Skvolcano/5.5p -W0.2p,black -Ggreen 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Cdifference_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs Misfit (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRT+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 8km 
+</span><span class="s">EOF</span>
+
+    gmt subplot <span class="nb">set</span> <span class="m">4</span> 
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Inversion_Same_Grid/10.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba1f0.5 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$6}&#39;</span> &gt; difference_10.dat 
+
+    gmt xyz2grd difference_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -Gdifference_10.grd 
+    gmt makecpt -Cgray -T0/0.6/0.01 -H -D -I -Z &gt; difference_10.cpt 
+    gmt grdimage difference_10.grd -Cdifference_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    cat <span class="nv">$Sta_Info</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot <span class="nv">$J_tomo</span> <span class="nv">$R_tomo</span> -Si0.035i -W0.2p,black -Gpurple 
+    gmt plot <span class="nv">$Volcanoes</span> <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Skvolcano/5.5p -W0.2p,black -Ggreen 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Cdifference_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs Misfit (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRT+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 10km 
+</span><span class="s">EOF</span>
+
+    gmt subplot <span class="nb">set</span> <span class="m">5</span> 
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Inversion_Same_Grid/12.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba1f0.5 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$6}&#39;</span> &gt; difference_10.dat 
+
+    gmt xyz2grd difference_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -Gdifference_10.grd 
+    gmt makecpt -Cgray -T0/0.6/0.01 -H -D -I -Z &gt; difference_10.cpt 
+    gmt grdimage difference_10.grd -Cdifference_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    cat <span class="nv">$Sta_Info</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot <span class="nv">$J_tomo</span> <span class="nv">$R_tomo</span> -Si0.035i -W0.2p,black -Gpurple 
+    gmt plot <span class="nv">$Volcanoes</span> <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Skvolcano/5.5p -W0.2p,black -Ggreen 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Cdifference_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs Misfit (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRT+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 12km 
+</span><span class="s">EOF</span>
+
+    gmt subplot <span class="nb">set</span> <span class="m">6</span> 
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Inversion_Same_Grid/14.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba1f0.5 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$6}&#39;</span> &gt; difference_10.dat 
+
+    gmt xyz2grd difference_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -Gdifference_10.grd 
+    gmt makecpt -Cgray -T0/0.6/0.01 -H -D -I -Z &gt; difference_10.cpt 
+    gmt grdimage difference_10.grd -Cdifference_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    cat <span class="nv">$Sta_Info</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot <span class="nv">$J_tomo</span> <span class="nv">$R_tomo</span> -Si0.035i -W0.2p,black -Gpurple 
+    gmt plot <span class="nv">$Volcanoes</span> <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Skvolcano/5.5p -W0.2p,black -Ggreen 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Cdifference_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs Misfit (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRT+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 14km 
+</span><span class="s">EOF</span>
+
+    gmt subplot <span class="nb">set</span> <span class="m">7</span> 
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Inversion_Same_Grid/16.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba1f0.5 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$6}&#39;</span> &gt; difference_10.dat 
+
+    gmt xyz2grd difference_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -Gdifference_10.grd 
+    gmt makecpt -Cgray -T0/0.6/0.01 -H -D -I -Z &gt; difference_10.cpt 
+    gmt grdimage difference_10.grd -Cdifference_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    cat <span class="nv">$Sta_Info</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2,$3}&#39;</span> <span class="p">|</span> gmt plot <span class="nv">$J_tomo</span> <span class="nv">$R_tomo</span> -Si0.035i -W0.2p,black -Gpurple 
+    gmt plot <span class="nv">$Volcanoes</span> <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Skvolcano/5.5p -W0.2p,black -Ggreen 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Cdifference_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs Misfit (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRT+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 16km 
+</span><span class="s">EOF</span>
+
+gmt subplot end 
+gmt end show 
+
+rm gmt* *.cpt *.grd *.dat
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24hb2lghyj21pn0u0dog.jpg" alt="image-20220511150621164"></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-05-11 14:33
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">数据格式转换</a>
+          <a href="/tags/python/">python</a>
+          <a href="/tags/GMT/">GMT</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/GMT_profile/">
+            <span class="next-text nav-default">GMT_profile</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

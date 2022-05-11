@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 02 May 2022 11:34:41 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 May 2022 14:33:33 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GMT_misfit</title>
+      <link>https://tianyining.github.io/post/GMT_misfit/</link>
+      <pubDate>Wed, 11 May 2022 14:33:33 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/GMT_misfit/</guid>
+      <description>说明 本篇 blog 用于记录如何使用 GMT 绘制反演结果之间的差异，包含数据格式整理，以及 GMT 绘图代码。 Sort Inversion Data depth &amp;amp; grid 对于反演结果，首先需要将最终的反演结果，整</description>
+    </item>
+    
     <item>
       <title>GMT_profile</title>
       <link>https://tianyining.github.io/post/GMT_profile/</link>
