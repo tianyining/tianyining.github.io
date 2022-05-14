@@ -50,7 +50,7 @@
 <meta itemprop="name" content="QC_Version2">
 <meta itemprop="description" content="本篇 blog 记录如何对 AFTAN 提取出的频散曲线进行质量控制，质量控制步骤主要包含两步：1) 传统频散曲线质量控制；2) 根据实际数据对频散数据点按偏离标准差"><meta itemprop="datePublished" content="2022-01-28T20:45:25&#43;08:00" />
 <meta itemprop="dateModified" content="2022-01-28T20:45:25&#43;08:00" />
-<meta itemprop="wordCount" content="4446">
+<meta itemprop="wordCount" content="6259">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="QC_Version2"/>
 <meta name="twitter:description" content="本篇 blog 记录如何对 AFTAN 提取出的频散曲线进行质量控制，质量控制步骤主要包含两步：1) 传统频散曲线质量控制；2) 根据实际数据对频散数据点按偏离标准差"/>
@@ -136,8 +136,8 @@
             <a href="/categories/python/"> python </a>
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             </div>
-          <span class="more-meta"> 约 4446 字 </span>
-          <span class="more-meta"> 预计阅读 9 分钟 </span>
+          <span class="more-meta"> 约 6259 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
     </header>
@@ -160,6 +160,18 @@
         <li><a href="#step8-sort-disp-in-period">Step8 Sort Disp in Period</a></li>
       </ul>
     </li>
+    <li><a href="#workflow2"><code>Workflow2</code></a>
+      <ul>
+        <li><a href="#update-1">Update</a></li>
+        <li><a href="#step1_calculate_period_snr">Step1_Calculate_Period_SNR</a></li>
+        <li><a href="#step2_sort_snr">Step2_Sort_SNR</a></li>
+        <li><a href="#step3_get_aftan">Step3_get_AFTAN</a></li>
+        <li><a href="#step4_cross_region_disp_interp">Step4_Cross_Region_Disp_Interp</a></li>
+        <li><a href="#step5_merge_aftan_disp_files_with_snr_infos">Step5_Merge_AFTAN_Disp_Files_with_SNR_Infos</a></li>
+      </ul>
+    </li>
+    <li><a href="#amp_plot"><code>AMP_Plot</code></a></li>
+    <li><a href="#修订历史">修订历史</a></li>
   </ul>
 </nav>
   </div>
@@ -1943,6 +1955,722 @@ gmt end show
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gz6hmj0jlbj30lb0c50tl.jpg" alt="image-20220208224727572"></p>
 <p><strong>每个频散文件包含 <code>10</code> 列信息</strong></p>
 <p><strong>完成频散曲线的质量控制后，接下来绘制不同周期的射线路径分布图。</strong></p>
+<h2 id="workflow2"><code>Workflow2</code></h2>
+<h3 id="update-1">Update</h3>
+<p><strong>该版本的提升：在计算对称互相关信噪比时，计算指定整数周期的互相关分量信噪比，并实现将信噪比信息整合到对应的频散文件中；</strong></p>
+<h3 id="step1_calculate_period_snr">Step1_Calculate_Period_SNR</h3>
+<p><strong>首先计算指定周期的信噪比：</strong></p>
+<p><strong>计算出不同整数周期的信噪比文件格式为 <code>SNR_period</code> 内容为 <code>COR_XXX_XXX.SAC</code>   <code>0</code>   <code>0</code>     <code>SNR_s</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 首先建立需要计算信噪比的整数周期列表 period list </span>
+<span class="n">Period_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>  
+    <span class="n">Period_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">readConfig</span>
+
+<span class="n">myConfig</span> <span class="o">=</span> <span class="n">readConfig</span><span class="o">.</span><span class="n">config</span><span class="p">()</span>
+<span class="n">myConfig</span><span class="o">.</span><span class="n">readConfig</span><span class="p">(</span><span class="s2">&#34;Config&#34;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">myConfig</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">+</span> <span class="s2">&#34;/YN_Myanmar_CCFs_Invert&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 将需要计算信噪比的周期参数写成 period 文件；</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;period&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">Period_list</span><span class="p">:</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&#34;cp -f ./period ../&#34;</span><span class="p">)</span> 
+
+<span class="c1"># 记录互相关文件名，将 .dat 文件作为参数，执行 spectral_snr_f_V2 程序，计算对称分量的互相关信噪比；</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&#34;ls *_s &gt; file_s.dat&#34;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">myConfig</span><span class="o">.</span><span class="n">code_dir</span> <span class="o">+</span>
+          <span class="s2">&#34;/SPECTRAL_SNR/lin_rms/spectral_snr_f_V2 file_s.dat&#34;</span><span class="p">)</span> 
+
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 对于特定周期，执行 find_rms_per_w 程序，将结果存于 SNR_* 文件中；</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;period&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">Pfile</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">per</span> <span class="ow">in</span> <span class="n">Pfile</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">per</span> <span class="o">=</span> <span class="n">per</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">myConfig</span><span class="o">.</span><span class="n">code_dir</span> <span class="o">+</span> <span class="s2">&#34;/SPECTRAL_SNR/find_rms_per_v2 &#34;</span> <span class="o">+</span>
+                      <span class="n">per</span> <span class="o">+</span> <span class="s2">&#34; file_s.dat SNR_&#34;</span> <span class="o">+</span> <span class="n">per</span> <span class="o">+</span> <span class="s2">&#34;.dat&#34;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">break</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>文件格式如下（需要注意的是，文件并非 <code>Cross Region</code> 实例，仅展现格式：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h287xgyc9xj20hk04lt95.jpg" alt="image-20220514204408000"></p>
+<h3 id="step2_sort_snr">Step2_Sort_SNR</h3>
+<p><strong>将计算出来的 <code>SNR_period</code> 文件整理成以对称互相关文件名命名的格式，内容为该对称分量不同周期对应的信噪比：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 首先建立需要计算信噪比的整数周期列表 period list </span>
+<span class="n">Period_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>  
+    <span class="n">Period_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">readConfig</span>
+
+<span class="n">myConfig</span> <span class="o">=</span> <span class="n">readConfig</span><span class="o">.</span><span class="n">config</span><span class="p">()</span>
+<span class="n">myConfig</span><span class="o">.</span><span class="n">readConfig</span><span class="p">(</span><span class="s2">&#34;Config&#34;</span><span class="p">)</span> 
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="n">myConfig</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">+</span> <span class="s2">&#34;/YN_Myanmar_CCFs_Invert/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">myConfig</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">+</span> <span class="s2">&#34;/YN_Myanmar_CCFs_Invert/YN_Myanmar_CCFs_SNR/&#34;</span>
+<span class="n">SNR_Dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">snr_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;SNR_*&#34;</span><span class="p">):</span>
+    <span class="n">snr_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">snr_file</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">snr_file_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;COR_Name&#34;</span><span class="p">,</span> <span class="s2">&#34;nan1&#34;</span><span class="p">,</span> <span class="s2">&#34;nan2&#34;</span><span class="p">,</span> <span class="s2">&#34;SNR_s&#34;</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">snr_file</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">)</span>
+
+    <span class="n">tmp_d</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;COR_Name&#34;</span><span class="p">])):</span>
+        <span class="n">tmp_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;COR_Name&#34;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">tmp_snr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;SNR_s&#34;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">tmp_d</span><span class="p">[</span><span class="n">tmp_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_snr</span>
+    <span class="n">tmp_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">period</span><span class="p">:</span> <span class="n">tmp_d</span><span class="p">}</span>
+    <span class="n">SNR_Dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">tmp_dict</span><span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 遍历所有 COR_XXX_XXX.SAC 文件；</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">readConfig</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">myConfig</span> <span class="o">=</span> <span class="n">readConfig</span><span class="o">.</span><span class="n">config</span><span class="p">()</span>
+<span class="n">myConfig</span><span class="o">.</span><span class="n">readConfig</span><span class="p">(</span><span class="s2">&#34;Config&#34;</span><span class="p">)</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="n">myConfig</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">+</span> <span class="s2">&#34;/YN_Myanmar_CCFs_Invert/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">myConfig</span><span class="o">.</span><span class="n">main_dir</span> <span class="o">+</span> <span class="s2">&#34;/YN_Myanmar_CCFs_Invert/YN_Myanmar_CCFs_SNR/&#34;</span>
+
+<span class="n">COR_Dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">COR</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*.SAC_s&#34;</span><span class="p">):</span>
+    <span class="n">COR_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">COR</span><span class="p">)</span>
+
+    <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">Period_list</span><span class="p">:</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+        <span class="n">snr</span> <span class="o">=</span> <span class="n">SNR_Dict</span><span class="p">[</span><span class="n">period</span><span class="p">][</span><span class="n">COR_name</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]]</span>
+        <span class="nb">dict</span><span class="p">[</span><span class="n">period</span><span class="p">]</span> <span class="o">=</span> <span class="n">snr</span>
+    <span class="n">COR_Dict_tmp</span> <span class="o">=</span> <span class="p">{</span><span class="n">COR_name</span><span class="p">:</span> <span class="nb">dict</span><span class="p">}</span>
+
+    <span class="n">COR_Dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">COR_Dict_tmp</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 尝试将二维字典写入文件形式，文件名为 COR_XXX_XXX.SAC</span>
+<span class="k">for</span> <span class="n">ccf</span> <span class="ow">in</span> <span class="n">COR_Dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">ccf</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">ccf</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">Period_list</span><span class="p">:</span>
+            <span class="n">period</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+            <span class="n">snr</span> <span class="o">=</span> <span class="n">COR_Dict</span><span class="p">[</span><span class="n">ccf</span><span class="p">][</span><span class="n">period</span><span class="p">]</span>
+            <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;}</span><span class="se">\t</span><span class="s2">{:&lt;}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">period</span><span class="p">,</span> <span class="n">snr</span><span class="p">))</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>示例如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h287qxelssj20dy0bgdg5.jpg" alt="image-20220514203743737"></p>
+<h3 id="step3_get_aftan">Step3_get_AFTAN</h3>
+<h3 id="step4_cross_region_disp_interp">Step4_Cross_Region_Disp_Interp</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 首先建立字典，储存台站信息：
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="n">Sta_Info</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;../Station_Cross_Region_Invert&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tmp</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">sta_name</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sta_lon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">sta_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">Sta_Info</span><span class="p">[</span><span class="n">sta_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;sta_lon&#34;</span><span class="p">:</span> <span class="n">sta_lon</span><span class="p">,</span> <span class="s2">&#34;sta_lat&#34;</span><span class="p">:</span> <span class="n">sta_lat</span><span class="p">}</span>
+<span class="n">Sta_Info</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">Sta_Info</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>对 <code>AFTAN</code> 提取出的 <code>disp</code> 进行插值，将观测周期插值成整数周期，以及得到插值整数周期对应的群速度、相速度值；</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span>
+
+<span class="n">input_disp</span> <span class="o">=</span> <span class="s2">&#34;../Cross_Region_QC/Step1_DISP_2/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Cross_Region_QC/Step1_Cross_Region_Interp/&#34;</span>
+<span class="n">fmt</span> <span class="o">=</span> <span class="s2">&#34;{:&lt;f}</span><span class="se">\t</span><span class="s2">{:&lt;15.6f}</span><span class="se">\t</span><span class="s2">{:&lt;15.6f}</span><span class="se">\n</span><span class="s2">&#34;</span>
+
+<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp</span> <span class="o">+</span> <span class="s2">&#34;*.SAC_s_2_DISP.1&#34;</span><span class="p">):</span>
+    <span class="n">disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span> 
+
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">disp</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+    <span class="n">tmp_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">observe_period</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Group_V</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Phase_V</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_info</span><span class="p">)):</span>
+        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">tmp_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">group_v</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">phase_v</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">4</span><span class="p">])</span>
+
+        <span class="n">observe_period</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+        <span class="n">Group_V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group_v</span><span class="p">)</span>
+        <span class="n">Phase_V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phase_v</span><span class="p">)</span>
+
+    <span class="c1"># 建立 int_period_list</span>
+    <span class="n">period_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">observe_period</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">item_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="c1">#     print(item_int)</span>
+        <span class="n">period_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item_int</span><span class="p">)</span>
+    <span class="n">period_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">observe_period</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">period_set</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">period_list</span><span class="p">))</span>
+
+    <span class="c1"># Interpolate Begin</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">observe_period</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">Group_V</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">Phase_V</span>
+
+    <span class="c1"># 定义插值函数 f</span>
+    <span class="n">f_groupv</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>
+                                    <span class="n">y</span><span class="p">,</span>
+                                    <span class="n">kind</span><span class="o">=</span><span class="s2">&#34;linear&#34;</span><span class="p">,</span>
+                                    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&#34;extrapolate&#34;</span><span class="p">)</span>
+    <span class="n">f_phasev</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>
+                                    <span class="n">z</span><span class="p">,</span>
+                                    <span class="n">kind</span><span class="o">=</span><span class="s2">&#34;linear&#34;</span><span class="p">,</span>
+                                    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&#34;extrapolate&#34;</span><span class="p">)</span>
+
+    <span class="n">x_new</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">period_set</span><span class="p">)</span> 
+    <span class="n">int_Group_V</span> <span class="o">=</span> <span class="n">f_groupv</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+    <span class="n">int_Phase_V</span> <span class="o">=</span> <span class="n">f_phasev</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span> 
+    
+    <span class="s1">&#39;&#39;&#39;
+</span><span class="s1">    将一维线性插值后的结果，重新保存为新的频散文件；
+</span><span class="s1">    &#39;&#39;&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;interp_&#34;</span> <span class="o">+</span> <span class="n">disp_name</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_new</span><span class="p">)):</span>
+            <span class="n">int_period</span> <span class="o">=</span> <span class="n">x_new</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+            <span class="n">interp_groupv</span> <span class="o">=</span> <span class="n">int_Group_V</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+            <span class="n">interp_phasev</span> <span class="o">=</span> <span class="n">int_Phase_V</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+            <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">int_period</span><span class="p">,</span> <span class="n">interp_groupv</span><span class="p">,</span> <span class="n">interp_phasev</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="step5_merge_aftan_disp_files_with_snr_infos">Step5_Merge_AFTAN_Disp_Files_with_SNR_Infos</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown"> <span class="k">*</span> 将 AFTAN 提取出的 Disp Files 和 计算出的对称分量互相关文件整合； 
+ <span class="k">*</span> 需要注意的是，所有的对称互相关都可以计算不同周期的信噪比 SNR 但是并非所有的对称分量互相关都能成功        
+ <span class="k">*</span> AFTAN 提取频散曲线； 
+ <span class="k">1.</span> 有多少个互相关对称分量 ： 2756 就有多少个 SNR 文件
+ <span class="k">2.</span> 但是并非所有互相关都能成功 AFTAN 提频散：1443 个频散文件；
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_disp_dir</span> <span class="o">=</span> <span class="s2">&#34;../Cross_Region_QC/Step1_Cross_Region_Interp/&#34;</span>
+<span class="n">input_snr_dir</span> <span class="o">=</span> <span class="s2">&#34;../Cross_Region_QC/YN_Myanmar_CCFs_SNR/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Cross_Region_QC/Step2_Merge_Disp_SNR/&#34;</span>
+
+<span class="k">for</span> <span class="n">disp</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_disp_dir</span> <span class="o">+</span> <span class="s2">&#34;*.SAC_s_2_DISP.1&#34;</span><span class="p">):</span>
+    <span class="n">disp_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span>
+    <span class="n">snr_name</span> <span class="o">=</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+        <span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="n">disp_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;_s&#34;</span>
+
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">disp</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+    <span class="n">disp_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">Period_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">disp_info</span><span class="p">)):</span>
+        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">disp_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">group_v</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">phase_v</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">Period_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_snr_dir</span> <span class="o">+</span> <span class="n">snr_name</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+    <span class="n">snr_info</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">snr_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">snr_info</span><span class="p">)):</span>
+        <span class="n">sgl_line</span> <span class="o">=</span> <span class="n">snr_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">snr_period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\t</span><span class="s2">&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">snr_s</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sgl_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\t</span><span class="s2">&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># 建立 snr_dict</span>
+        <span class="k">if</span> <span class="n">snr_period</span> <span class="ow">in</span> <span class="n">Period_list</span><span class="p">:</span>
+            <span class="n">snr_dict</span><span class="p">[</span><span class="n">snr_period</span><span class="p">]</span> <span class="o">=</span> <span class="n">snr_s</span>
+
+    <span class="c1"># 将 disp_info 和 snr 整合；</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Merge_&#34;</span> <span class="o">+</span> <span class="n">snr_name</span> <span class="o">+</span> <span class="s2">&#34;_SNR&#34;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">disp_info</span><span class="p">)):</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">disp_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">period</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">group_v</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">phase_v</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">tmp_snr</span> <span class="o">=</span> <span class="n">snr_dict</span><span class="p">[</span><span class="n">period</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">period</span> <span class="ow">in</span> <span class="n">Period_list</span><span class="p">:</span>
+                <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                    <span class="s2">&#34;{:&lt;15.4f}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\t</span><span class="s2">{:&lt;15.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">period</span><span class="p">,</span> <span class="n">group_v</span><span class="p">,</span> <span class="n">phase_v</span><span class="p">,</span> <span class="n">tmp_snr</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>以其中一个整合了信噪比信息的频散文件为例：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h2884idksfj20ho0al757.jpg" alt="image-20220514205053882"></p>
+<p><strong>接下来的步骤与 <a href="https://tianyining.github.io/post/Disp_QualityControl_Region/">QC_Version3_Region</a> 一致。</strong></p>
+<h2 id="amp_plot"><code>AMP_Plot</code></h2>
+<p><strong>需要准备的文件如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown"><span class="k">*</span> *.SAC_s_AMP
+<span class="k">*</span> *.SAC_s_2_DISP.1
+<span class="k">*</span> *.SAC_PRED
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h288b88vszj20lf0c1wf9.jpg" alt="image-20220514205717541"></p>
+<p><strong>绘图代码如下：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh 
+</span><span class="cp"></span>
+<span class="c1"># Date:2022-05-14 </span>
+<span class="c1"># Author:Yining Tian </span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.9p
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> <span class="nv">FONT_ANNOT</span><span class="o">=</span>8p
+gmt <span class="nb">set</span> <span class="nv">FONT_LABEL</span><span class="o">=</span>12p
+gmt <span class="nb">set</span> <span class="nv">MAP_FRAME_TYPE</span><span class="o">=</span>plain
+gmt <span class="nb">set</span> <span class="nv">MAP_TICK_LENGTH_PRIMARY</span><span class="o">=</span>0.02i
+gmt <span class="nb">set</span> <span class="nv">MAP_TICK_PEN_PRIMARY</span><span class="o">=</span>0.01i
+gmt <span class="nb">set</span> <span class="nv">MAP_FRAME_PEN</span><span class="o">=</span>0.02i
+
+<span class="nv">STA1</span><span class="o">=</span>M00 
+<span class="nv">STA2</span><span class="o">=</span>YUM 
+<span class="nv">border</span><span class="o">=</span>8/50/1.5/5.0
+<span class="c1"># size=8/6.3</span>
+
+<span class="nv">input_dir</span><span class="o">=</span><span class="s2">&#34;./&#34;</span>
+<span class="nv">output_dir</span><span class="o">=</span><span class="s2">&#34;./&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="s2">&#34;AMP_Plot&#34;</span>
+
+<span class="nv">ampfile</span><span class="o">=</span><span class="si">${</span><span class="nv">input_dir</span><span class="si">}</span><span class="s2">&#34;COR_</span><span class="si">${</span><span class="nv">STA1</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">STA2</span><span class="si">}</span><span class="s2">.SAC_s_2_AMP&#34;</span> 
+<span class="nv">title</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$STA1_$STA2_AMP_Plot</span><span class="s2">&#34;</span>
+<span class="nb">echo</span> <span class="nv">$ampfile</span> <span class="nv">$STA1</span> <span class="nv">$STA2</span>
+<span class="nv">dispfile</span><span class="o">=</span><span class="si">${</span><span class="nv">input_dir</span><span class="si">}</span><span class="s2">&#34;COR_</span><span class="si">${</span><span class="nv">STA1</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">STA2</span><span class="si">}</span><span class="s2">.SAC_s_2_DISP.1&#34;</span>
+<span class="nv">preddisp</span><span class="o">=</span><span class="si">${</span><span class="nv">input_dir</span><span class="si">}</span><span class="s2">&#34;COR_</span><span class="si">${</span><span class="nv">STA2</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">STA1</span><span class="si">}</span><span class="s2">.SAC_PRED&#34;</span> 
+<span class="nb">echo</span> <span class="nv">$dispfile</span> <span class="nv">$preddisp</span> 
+
+gmt begin <span class="nv">$fig</span> png 
+gmt triangulate <span class="nv">$ampfile</span> -R<span class="nv">$border</span> -I0.5/0.1 -Gampfile.grd
+gmt grdsample ampfile.grd -Gampfile_sample.grd -I0.01/0.01
+gmt grd2cpt ampfile_sample.grd -Cseis -I -H -Z &gt; tmp.cpt 
+<span class="nb">echo</span> B  <span class="m">0</span>  <span class="m">36</span>  <span class="m">227</span>  &gt;&gt; tmp.cpt
+<span class="nb">echo</span> N  <span class="m">255</span>  <span class="m">255</span> <span class="m">255</span> &gt;&gt; tmp.cpt
+gmt basemap -JX8/6.3 -R<span class="nv">$border</span>  -Bxa5f10+l<span class="s2">&#34;period (s)&#34;</span> -Bya1f1+l<span class="s2">&#34;Group velocity (km/s)&#34;</span>  -BWSne+t<span class="s2">&#34;</span><span class="si">${</span><span class="nv">STA1</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">STA2</span><span class="si">}</span><span class="s2">_AMP_Plot&#34;</span>+glightblue 
+
+gmt grdimage ampfile_sample.grd -Ctmp.cpt -E180/90 -JX8/6.3 -R<span class="nv">$border</span>
+awk <span class="s1">&#39;{print $3,$4}&#39;</span> <span class="nv">$dispfile</span> <span class="p">|</span>gmt plot -W1.0p,blue 
+awk <span class="s1">&#39;{print $1,$2}&#39;</span> <span class="nv">$preddisp</span> <span class="p">|</span>gmt plot -h1 -W1.0p,black
+
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 4p,Times-Roman,black <span class="c1"># 设置 colorbar 的字体；</span>
+<span class="nv">C1</span><span class="o">=</span><span class="s2">&#34;blue&#34;</span> <span class="c1"># group velocity </span>
+<span class="nv">C2</span><span class="o">=</span><span class="s2">&#34;black&#34;</span> <span class="c1"># pred_disp </span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 8.0p,Times-Roman,black <span class="c1"># the height of the symbols should be the same as the label text </span>
+gmt legend -JX8/6.3 -R<span class="nv">$border</span> -DjTR+w1.2i/0.4i+l1.5+o0.05i/0.05i -C0.1i/0.05i -F+gwhite+pthin -t30  &gt;&gt; <span class="nv">$fig</span> <span class="s">&lt;&lt; EOF
+</span><span class="s">S 0.05i -        0.20i $C1              1.0p,$C1               0.27i  Group Velocity
+</span><span class="s">S 0.05i -        0.20i $C2              1.0p,$C2               0.27i  Pred Disp
+</span><span class="s">EOF</span>
+
+gmt end show 
+
+rm *.grd *.cpt gmt* AMP_Plot 
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h288d9hgs3j20tp0p1n0l.jpg" alt="image-20220514205918257"></p>
+<h2 id="修订历史">修订历史</h2>
+<ul>
+<li>2022-01-28：初稿；</li>
+<li>2022&ndash;5-14：简化流程，计算不同周期对称分量互相关的信噪比，并将信噪比信息整合到频散文件中；绘制 <code>AMP_Plot</code> ；</li>
+</ul>
 
     </div>
 
