@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 11 May 2022 14:33:33 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 May 2022 21:06:18 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme preview</title>
       <link>https://tianyining.github.io/post/even-preview/</link>
@@ -14,6 +14,15 @@
       
       <guid>https://tianyining.github.io/post/even-preview/</guid>
       <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>Extract_1D_Mod</title>
+      <link>https://tianyining.github.io/post/Extract_1D_Mod/</link>
+      <pubDate>Wed, 25 May 2022 21:06:18 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Extract_1D_Mod/</guid>
+      <description>本篇 blog 记录如何从 3D 速度结构中抽取研究区域所包含的结构信息，计算研究区域 1D 平均速度结构，并绘制图像。 说明 本篇 blog 选择 Shen et al.,2016 的速度模型进行抽取，模</description>
     </item>
     
     <item>

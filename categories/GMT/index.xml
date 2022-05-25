@@ -6,7 +6,16 @@
     <description>Recent content in GMT on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 11 May 2022 14:33:33 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/GMT/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 May 2022 21:06:18 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/categories/GMT/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Extract_1D_Mod</title>
+      <link>https://tianyining.github.io/post/Extract_1D_Mod/</link>
+      <pubDate>Wed, 25 May 2022 21:06:18 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/Extract_1D_Mod/</guid>
+      <description>本篇 blog 记录如何从 3D 速度结构中抽取研究区域所包含的结构信息，计算研究区域 1D 平均速度结构，并绘制图像。 说明 本篇 blog 选择 Shen et al.,2016 的速度模型进行抽取，模</description>
+    </item>
+    
     <item>
       <title>GMT_misfit</title>
       <link>https://tianyining.github.io/post/GMT_misfit/</link>
