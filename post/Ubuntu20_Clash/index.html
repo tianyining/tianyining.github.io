@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Ubuntu20_Clash - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="问题说明 2022-05-28，Ubuntu20.04 无法使用购买的节点，通过手机端重新连接以及导入更新节点，发现并不是机场跑路或者节点损坏造" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/Ubuntu20_Clash/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="Ubuntu20_Clash" />
+<meta property="og:description" content="问题说明 2022-05-28，Ubuntu20.04 无法使用购买的节点，通过手机端重新连接以及导入更新节点，发现并不是机场跑路或者节点损坏造" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/Ubuntu20_Clash/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-28T14:48:06&#43;08:00" />
+<meta property="article:modified_time" content="2022-05-28T14:48:06&#43;08:00" />
+
+<meta itemprop="name" content="Ubuntu20_Clash">
+<meta itemprop="description" content="问题说明 2022-05-28，Ubuntu20.04 无法使用购买的节点，通过手机端重新连接以及导入更新节点，发现并不是机场跑路或者节点损坏造"><meta itemprop="datePublished" content="2022-05-28T14:48:06&#43;08:00" />
+<meta itemprop="dateModified" content="2022-05-28T14:48:06&#43;08:00" />
+<meta itemprop="wordCount" content="605">
+<meta itemprop="keywords" content="Clash," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ubuntu20_Clash"/>
+<meta name="twitter:description" content="问题说明 2022-05-28，Ubuntu20.04 无法使用购买的节点，通过手机端重新连接以及导入更新节点，发现并不是机场跑路或者节点损坏造"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Ubuntu20_Clash</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-05-28 14:48 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"> 奇技淫巧 </a>
+            </div>
+          <span class="more-meta"> 约 605 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题说明">问题说明</a></li>
+    <li><a href="#ubuntu20-下安装使用-clash-for-windows">Ubuntu20 下安装使用 clash for windows</a>
+      <ul>
+        <li><a href="#安装步骤">安装步骤</a></li>
+        <li><a href="#导入订阅">导入订阅</a></li>
+        <li><a href="#解决方案手动设置linux系统代理ip和端口">解决方案：手动设置Linux系统代理ip和端口</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="问题说明">问题说明</h2>
+<p><strong>2022-05-28，<code>Ubuntu20.04</code> 无法使用购买的节点，通过手机端重新连接以及导入更新节点，发现并不是机场跑路或者节点损坏造成的无法科学上网。<code>Qv2ray</code> 2021 年 8 月之前一直有团队维护，是 <code>Ubuntu</code> 下很好用的客户端，但是 <code>2021 年 8 月</code> 后开发者内部矛盾，该项目停止维护，在正常使用将近一年的时间后，目前看 <code>Qv2ray</code> 终究还是挂掉了，逼不得已，需要寻找下一个可在 <code>Ubuntu</code> 下使用的科学上网客户端。</strong></p>
+<h2 id="ubuntu20-下安装使用-clash-for-windows">Ubuntu20 下安装使用 clash for windows</h2>
+<p><strong>目前，<code>Windows</code> <code>Macos</code> 系统下，我均使用 <code>Clash</code> 作为代理客户端，自然 <code>Ubuntu</code> 下也是时候尝试使用 <code>Clash</code> 了。</strong></p>
+<h3 id="安装步骤">安装步骤</h3>
+<p><strong>安装包下载链接： <a href="https://github.com/Fndroid/clash_for_windows_pkg/releases">https://github.com/Fndroid/clash_for_windows_pkg/releases</a></strong></p>
+<p><strong>下载 <code>release</code> 界面，如下所示：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h2o4liwyknj214m0gu0wl.jpg" alt="img"></p>
+<p><strong>将下载的 <code>linux</code> 版本的 <code>clash</code> 压缩文件解压，解压命令如下：</strong></p>
+<p><strong>之后 <code>cd</code> 到解压后的目录,赋予 <code>cfw</code> 文件执行权限：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ chmod +x ./cfw 
+$ ./cfw 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>即可看到 <code>clash</code> 的图形化界面：</strong></p>
+<h3 id="导入订阅">导入订阅</h3>
+<p><strong>不同订阅导入方式大同小异：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h2o4ok75nlj213x0n4jvh.jpg" alt="img"></p>
+<p><strong>将复制的订阅链接粘贴到clash左侧的【配置】选项卡的上方URL处，再点击【下载】，将配置文件导入到Clash中。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h2o4p02cdkj211x0hdq64.jpg" alt="img"></p>
+<p><strong>之后选择节点，开启科学上网，<code>but fail</code> .</strong></p>
+<h3 id="解决方案手动设置linux系统代理ip和端口">解决方案：手动设置Linux系统代理ip和端口</h3>
+<p><strong>不知道是不是因为权限的原因，<code>clash</code> 在 <code>linux</code> 上面无法自动打开代理端口，需要手动进行设置，设置方法如下：</strong></p>
+<p><strong>首先查看 <code>clash</code> 的默认代理端口是 <code>7890</code>；</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h2o4ueqifbj21450gwjui.jpg" alt="img"></p>
+<p><strong>打开 <code>Linux</code> 的设置-网络，点击代理后面的设置，将 <code>Network Proxy</code> 设置为 <code>Manual</code> ；照着下图设置 <code>http</code>，<code>https</code>，<code>socks</code> 都设置为 <code>ip</code> 是 <code>127.0.0.1</code>，端口 <code>7890</code> ，如图所示：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h2o4wym2elj21410lxwhm.jpg" alt="img"></p>
+<p><strong>此时理论上可以正常科学上网。</strong></p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://mahongfei.com/1776.html">https://mahongfei.com/1776.html</a></li>
+<li><a href="https://www.cnblogs.com/Jiang13537/p/15571504.html">https://www.cnblogs.com/Jiang13537/p/15571504.html</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-05-28 14:48
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Clash/">Clash</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Extract_1D_Mod/">
+            <span class="next-text nav-default">Extract_1D_Mod</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
