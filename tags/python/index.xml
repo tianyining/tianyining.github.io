@@ -6,7 +6,16 @@
     <description>Recent content in python on Brave New World</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 25 May 2022 21:06:18 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Jun 2022 15:22:33 +0800</lastBuildDate><atom:link href="https://tianyining.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSurfTomo_3DInitMOD_Workflow</title>
+      <link>https://tianyining.github.io/post/DSurfTomo_Init3DMOD/</link>
+      <pubDate>Wed, 15 Jun 2022 15:22:33 +0800</pubDate>
+      
+      <guid>https://tianyining.github.io/post/DSurfTomo_Init3DMOD/</guid>
+      <description>说明 本篇 blog 用于记录在研究区域内，如何利用已有的初始速度模型（三维），通过插值等方式，生成 Whole Region 的反演初始速度模型。 本篇 blog 仅以 12km 深度切片为例进行</description>
+    </item>
+    
     <item>
       <title>Extract_1D_Mod</title>
       <link>https://tianyining.github.io/post/Extract_1D_Mod/</link>
@@ -49,7 +58,7 @@
       <pubDate>Fri, 15 Apr 2022 15:56:56 +0800</pubDate>
       
       <guid>https://tianyining.github.io/post/DSurfTomo_InitMOD/</guid>
-      <description>说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生层 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的</description>
+      <description>说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生成 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的</description>
     </item>
     
     <item>

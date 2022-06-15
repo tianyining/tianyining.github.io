@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>DSurfTomo_3DInitMOD_Workflow - Brave New World</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 blog 用于记录在研究区域内，如何利用已有的初始速度模型（三维），通过插值等方式，生成 Whole Region 的反演初始速度模型。 本篇 blog 仅以 12km 深度切片为例进行" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
+
+
+<link rel="canonical" href="https://tianyining.github.io/post/DSurfTomo_Init3DMOD/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.08e0708eca455a140b204891cafe5cbc24963361a814303009bf0a08751b7855.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/reset-even.css">
+
+
+<meta property="og:title" content="DSurfTomo_3DInitMOD_Workflow" />
+<meta property="og:description" content="说明 本篇 blog 用于记录在研究区域内，如何利用已有的初始速度模型（三维），通过插值等方式，生成 Whole Region 的反演初始速度模型。 本篇 blog 仅以 12km 深度切片为例进行" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://tianyining.github.io/post/DSurfTomo_Init3DMOD/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-15T15:22:33&#43;08:00" />
+<meta property="article:modified_time" content="2022-06-15T15:22:33&#43;08:00" />
+
+<meta itemprop="name" content="DSurfTomo_3DInitMOD_Workflow">
+<meta itemprop="description" content="说明 本篇 blog 用于记录在研究区域内，如何利用已有的初始速度模型（三维），通过插值等方式，生成 Whole Region 的反演初始速度模型。 本篇 blog 仅以 12km 深度切片为例进行"><meta itemprop="datePublished" content="2022-06-15T15:22:33&#43;08:00" />
+<meta itemprop="dateModified" content="2022-06-15T15:22:33&#43;08:00" />
+<meta itemprop="wordCount" content="4163">
+<meta itemprop="keywords" content="数据格式转换,python,GMT," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DSurfTomo_3DInitMOD_Workflow"/>
+<meta name="twitter:description" content="说明 本篇 blog 用于记录在研究区域内，如何利用已有的初始速度模型（三维），通过插值等方式，生成 Whole Region 的反演初始速度模型。 本篇 blog 仅以 12km 深度切片为例进行"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Brave New World</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于我</li>
+      </a><a href="https://github.com/nusr/reading-list/">
+        <li class="mobile-menu-item">阅读清单</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Brave New World</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于我</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://github.com/nusr/reading-list/">阅读清单</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">DSurfTomo_3DInitMOD_Workflow</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-06-15 15:22 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> python </a>
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
+            <a href="/categories/GMT/"> GMT </a>
+            </div>
+          <span class="more-meta"> 约 4163 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#说明">说明</a></li>
+    <li><a href="#step1_select_studyregion_mod">Step1_Select_StudyRegion_Mod</a></li>
+    <li><a href="#step2_merge_sort_yn_mod_depthly">Step2_Merge_Sort_YN_mod_Depthly</a>
+      <ul>
+        <li><a href="#merge-shen-surf-results-to-one-file">Merge Shen Surf Results to one File</a></li>
+        <li><a href="#sort-shen-model-depthly">Sort Shen model Depthly</a></li>
+      </ul>
+    </li>
+    <li><a href="#step3_sort_yiming_model_depthly_gridly">Step3_Sort_Yiming_Model_Depthly_Gridly</a>
+      <ul>
+        <li><a href="#depthly">Depthly</a></li>
+        <li><a href="#gridly">Gridly</a></li>
+      </ul>
+    </li>
+    <li><a href="#step4_merge_whole_region_yiming_yn_mod">Step4_Merge_Whole_Region_Yiming_YN_mod</a></li>
+    <li><a href="#step5_gmt_plot">Step5_GMT_Plot</a>
+      <ul>
+        <li><a href="#yn-shen-model">YN Shen Model</a></li>
+        <li><a href="#myanmar-yiming-model">Myanmar Yiming Model</a></li>
+        <li><a href="#plot-yn--myanmar-inversion-results-simultaneously">Plot YN &amp; Myanmar Inversion Results simultaneously</a></li>
+      </ul>
+    </li>
+    <li><a href="#step6_interp_wholeregion_mod">Step6_Interp_WholeRegion_mod</a>
+      <ul>
+        <li><a href="#plot-whole-region-12km-model-inversion-resultyiming--shen">Plot Whole Region 12km model Inversion result(Yiming &amp; Shen)</a></li>
+        <li><a href="#make-whole-region-regular-grid">Make Whole Region Regular Grid</a></li>
+        <li><a href="#interpolation-with-radial-basis-function">Interpolation with radial basis function</a></li>
+        <li><a href="#statistics-infos">Statistics Infos</a></li>
+        <li><a href="#save-whole-region-grid-interp-results">Save Whole Region grid Interp Results</a></li>
+        <li><a href="#verify--check">Verify &amp; Check</a></li>
+        <li><a href="#plot-whole-region-interp-result">Plot Whole Region Interp Result</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="说明">说明</h2>
+<p><strong>本篇 <code>blog</code> 用于记录在研究区域内，如何利用已有的初始速度模型（三维），通过插值等方式，生成 <code>Whole Region</code> 的反演初始速度模型。</strong></p>
+<p><strong>本篇 <code>blog</code> 仅以 <code>12km</code> 深度切片为例进行演示。</strong></p>
+<h2 id="step1_select_studyregion_mod">Step1_Select_StudyRegion_Mod</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 根据 Whole Region 反演的网格，筛选出 Shen 模型中，在研究区域反演网格范围内的 mod 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../Shen_China_2015_Vs_v1.0/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step1_StudyRegion_mod/&#34;</span>
+
+<span class="n">lon1</span><span class="p">,</span> <span class="n">lon2</span> <span class="o">=</span> <span class="mf">92.5</span><span class="p">,</span> <span class="mf">105.5</span>
+<span class="n">lat1</span><span class="p">,</span> <span class="n">lat2</span> <span class="o">=</span> <span class="mf">19.25</span><span class="p">,</span> <span class="mi">29</span>
+
+<span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*.mod&#34;</span><span class="p">):</span>
+    <span class="n">mod_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+    <span class="n">lon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mod_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mod_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">lon1</span> <span class="o">&lt;</span> <span class="n">lon</span> <span class="o">&lt;</span> <span class="n">lon2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lat1</span> <span class="o">&lt;</span> <span class="n">lat</span> <span class="o">&lt;</span> <span class="n">lat2</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">mod_name</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&#34;cp &#34;</span> <span class="o">+</span> <span class="n">mod</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="n">output_dir</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step2_merge_sort_yn_mod_depthly">Step2_Merge_Sort_YN_mod_Depthly</h2>
+<h3 id="merge-shen-surf-results-to-one-file">Merge Shen Surf Results to one File</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将筛选出的位于研究区域内部的 Shen 的 mod 首先整合成类似 SurfTomo 的格式：
+</span><span class="s1"> lon lat depth vs 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step1_StudyRegion_mod/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step2_Sort_StudyRegion_mod_Depthly/Shen_Surf_dat/&#34;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&#34;Shen_Surf_Model.dat&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s2">&#34;*.mod&#34;</span><span class="p">):</span>
+        <span class="n">mod_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mod_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mod_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;_&#34;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+
+        <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+        <span class="n">tmpinfos</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tmpinfos</span><span class="p">)):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">tmpinfos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;}</span><span class="se">\t</span><span class="s2">{:&lt;}</span><span class="se">\t</span><span class="s2">{:&lt;}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span>
+            
+<span class="c1"># 按照 depth 进行排序，并重新保存文件 Shen_Surf_Model_final.dat</span>
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;../Step2_Sort_StudyRegion_mod_Depthly/Shen_Surf_dat/Shen_Surf_Model.dat&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;lon&#34;</span><span class="p">,</span> <span class="s2">&#34;lat&#34;</span><span class="p">,</span> <span class="s2">&#34;depth&#34;</span><span class="p">,</span> <span class="s2">&#34;vs&#34;</span><span class="p">,</span> <span class="s2">&#34;Uncertainty&#34;</span><span class="p">]</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">)</span> 
+<span class="n">data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;depth&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+<span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s1">&#39;Shen_Surf_Model_final.dat&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="sort-shen-model-depthly">Sort Shen model Depthly</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;../Step2_Sort_StudyRegion_mod_Depthly/Shen_Surf_dat/Shen_Surf_Model_final.dat&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step2_Sort_StudyRegion_mod_Depthly/Shen_mod_Depthly/&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="s1">&#39;Vs&#39;</span><span class="p">,</span> <span class="s1">&#39;Uncertainty&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">)</span>
+<span class="c1"># order = [&#39;lon&#39;, &#39;lat&#39;, &#39;Depth&#39;, &#39;Vs&#39;, &#39;Vp&#39;, &#39;rho&#39;]</span>
+<span class="c1"># data = data[order]</span>
+
+<span class="k">for</span> <span class="n">depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Depth&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">depth</span><span class="p">]</span>
+    <span class="c1"># 仅选择 lon lat depth vs 四列</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="s1">&#39;Vs&#39;</span><span class="p">])</span>
+
+    <span class="n">test_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+        <span class="n">output_dir</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;.0&#34;</span><span class="p">,</span>
+        <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+    <span class="p">)</span>  <span class="c1"># header=None,</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step3_sort_yiming_model_depthly_gridly">Step3_Sort_Yiming_Model_Depthly_Gridly</h2>
+<h3 id="depthly">Depthly</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将白一鸣在 Myanmar 的反演结果整理成 Depth 命名，以及格点命名的形式；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;../Yiming_Myanmar_Vs_model/Vs_model_TP.dat&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step3_Myanmar_Yiming_mod/Named_Depth/&#34;</span>
+
+<span class="n">namescol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Vs&#39;</span><span class="p">,</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="s1">&#39;Vp&#39;</span><span class="p">,</span> <span class="s1">&#39;rho&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">namescol</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;\s+&#34;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="s1">&#39;Vs&#39;</span><span class="p">,</span> <span class="s1">&#39;Vp&#39;</span><span class="p">,</span> <span class="s1">&#39;rho&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">80</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Depth&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">depth</span><span class="p">]</span>
+    <span class="c1"># 仅选择 lon lat depth vs 四列</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Depth&#39;</span><span class="p">,</span> <span class="s1">&#39;Vs&#39;</span><span class="p">])</span>
+
+    <span class="n">test_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;.0&#34;</span><span class="p">,</span>
+                     <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,)</span>  <span class="c1"># header=None,</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="gridly">Gridly</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 程序仅能执行一次，重复执行需要将结果删除，否则会重复写入 ！！！！！！！
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">input_file</span> <span class="o">=</span> <span class="s2">&#34;../Yiming_Myanmar_Vs_model/Vs_model_TP.dat&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step3_Myanmar_Yiming_mod/Named_grid/&#34;</span>
+
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">test_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">lon</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">vs</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lat</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fileID</span><span class="p">:</span>
+        <span class="n">fileID</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&#34;{:&lt;5.1f}</span><span class="se">\t</span><span class="s2">{:&lt;10.4f}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">depth</span><span class="p">,</span> <span class="n">vs</span><span class="p">))</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step4_merge_whole_region_yiming_yn_mod">Step4_Merge_Whole_Region_Yiming_YN_mod</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将 Yiming Bai &amp; Shen 反演的不同深度的结果，整合到不同深度的文件内，文件名为 depth 其中包含两个子区域的反演结果；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">Yiming_input</span> <span class="o">=</span> <span class="s2">&#34;../Step3_Myanmar_Yiming_mod/Named_Depth/&#34;</span>
+<span class="n">Shen_input</span> <span class="o">=</span> <span class="s2">&#34;../Step2_Sort_StudyRegion_Shen_mod_Depthly/Shen_mod_Depthly/&#34;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step4_Merge_mod_WholeRegion/Whole_Region_mod_depthly/&#34;</span>
+
+<span class="k">for</span> <span class="n">depth</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">Yiming_input</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
+    <span class="n">depth_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span>
+    <span class="c1">#     print(&#34;depth1:&#34;,depth_name)</span>
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">Yiming_input</span> <span class="o">+</span> <span class="n">depth_name</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+    <span class="n">tmpinfo_Yiming</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">fileID</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">Shen_input</span> <span class="o">+</span> <span class="n">depth_name</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span>
+    <span class="n">tmpinfo_Shen</span> <span class="o">=</span> <span class="n">fileID</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">fileID</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">tmpinfo</span> <span class="o">=</span> <span class="n">tmpinfo_Yiming</span> <span class="o">+</span> <span class="n">tmpinfo_Shen</span>
+    <span class="c1">#     print(&#39;depth2:&#39;,depth_name)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="n">depth_name</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">tmpinfo</span><span class="p">)</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step5_gmt_plot">Step5_GMT_Plot</h2>
+<p><strong>使用 <code>GMT</code> 将上述步骤中整理好的不同深度 <code>Myanmar</code> 地区、<code>YN</code> 地区已有的反演结果，绘制出</strong></p>
+<h3 id="yn-shen-model">YN Shen Model</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh 
+</span><span class="cp"></span>
+<span class="c1"># Date:2022-06-10  </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Function : 绘制 10km 深度 Shen 2016 的 Vs 反演结果；</span>
+
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;../Figs/&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain 
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.0p 
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 0.5p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;Shen_Vs_10&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="nv">$output_path$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png 
+    gmt subplot begin 2x4 -Fs6c -B -BWeSn  
+    <span class="nv">J_tomo</span><span class="o">=</span><span class="s2">&#34;-JM2i&#34;</span>
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R92.5/105.5/19.0/29.0&#34;</span> <span class="c1"># 比实际 tomo 区域大； </span>
+    gmt subplot <span class="nb">set</span> <span class="m">0</span> 
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Step2_Sort_StudyRegion_mod_Depthly/Shen_mod_Depthly/10.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba4f1 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$4}&#39;</span> &gt; Vs_10.dat 
+
+    gmt xyz2grd Vs_10.dat <span class="nv">$R_tomo</span> -I0.5/0.5 -GVs_10.grd 
+    gmt grdsample Vs_10.grd -GVs_10.grd  -I0.1/0.1 
+    gmt grd2cpt Vs_10.grd  -Cseis -Z -H -D &gt; Vs_10.cpt 
+    gmt grdimage Vs_10.grd -CVs_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -E720
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -CVs_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.1f0.1+l<span class="s2">&#34;Vs (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRB+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 10km 
+</span><span class="s">EOF</span>
+
+    gmt subplot end 
+gmt end show 
+
+rm gmt* *.cpt *.grd *.dat
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h38zs2gag8j20iu0jctan.jpg" alt="image-20220615160800735"></p>
+<h3 id="myanmar-yiming-model">Myanmar Yiming Model</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh 
+</span><span class="cp"></span>
+<span class="c1"># Date:2022-06-10  </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Function : 绘制 12km 深度 Yiming Bai 在 Myanmar 的 Vs 反演结果；</span>
+
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;../Figs/&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain 
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.0p 
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 0.5p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;Yiming_Vs_12&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="nv">$output_path$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png 
+    gmt subplot begin 2x4 -Fs6c -B -BWeSn  
+    <span class="nv">J_tomo</span><span class="o">=</span><span class="s2">&#34;-JM2i&#34;</span>
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R92.5/105.5/19.0/29.0&#34;</span> <span class="c1"># 比实际 tomo 区域大； </span>
+    gmt subplot <span class="nb">set</span> <span class="m">0</span> 
+    <span class="nv">input_file</span><span class="o">=</span><span class="s2">&#34;../Step3_Myanmar_Yiming_mod/Named_Depth/12.0&#34;</span>
+    <span class="nv">RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$input_file</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba4f1 -BWSen 
+    cat <span class="nv">$input_file</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$4}&#39;</span> &gt; Vs_10.dat 
+
+    gmt xyz2grd Vs_10.dat <span class="nv">$R_tomo</span> -I0.25/0.25 -GVs_10.grd 
+    gmt grdsample Vs_10.grd -GVs_10.grd  -I0.2/0.2 
+    gmt grd2cpt Vs_10.grd  -Cseis -Z -H -D &gt; Vs_10.cpt 
+    gmt grdimage Vs_10.grd -CVs_10.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -E720
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -CVs_10.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1+l<span class="s2">&#34;Vs (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRB+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 12km 
+</span><span class="s">EOF</span>
+
+    gmt subplot end 
+gmt end show 
+
+rm gmt* *.cpt *.grd *.dat
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h38zt3y0kvj20iu0jcmyc.jpg" alt="image-20220615160903470"></p>
+<h3 id="plot-yn--myanmar-inversion-results-simultaneously">Plot YN &amp; Myanmar Inversion Results simultaneously</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh 
+</span><span class="cp"></span><span class="c1"># Date:2022-06-10  </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Function : 绘制 12km 深度 Yiming Bai 在 Myanmar 以及 Shen 在云南的 Vs 反演结果；</span>
+
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;../Figs/&#34;</span>
+<span class="nv">Myanmar_mod</span><span class="o">=</span><span class="s2">&#34;../Step3_Myanmar_Yiming_mod/Named_Depth/12.0&#34;</span>
+<span class="nv">Shen_mod</span><span class="o">=</span><span class="s2">&#34;../Step2_Sort_StudyRegion_Shen_mod_Depthly/Shen_mod_Depthly/12.0&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain 
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.0p 
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 0.5p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;Myanmar_YN_Vs_12&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="nv">$output_path$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png 
+    gmt subplot begin 2x4 -Fs6c -B -BWeSn  
+    <span class="nv">J_tomo</span><span class="o">=</span><span class="s2">&#34;-JM2i&#34;</span>
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R92.5/105.5/19.25/29.0&#34;</span> <span class="c1"># 比实际 tomo 区域大； </span>
+    gmt subplot <span class="nb">set</span> <span class="m">0</span> 
+
+    <span class="nv">Myanmar_RMAP</span><span class="o">=</span><span class="sb">`</span>cat <span class="nv">$Myanmar_mod</span> <span class="p">|</span> gmt info -C <span class="p">|</span> awk <span class="s1">&#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$Myanmar_RMAP</span> 
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba4f1 -BWSen 
+
+    cat <span class="nv">$Myanmar_mod</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$4}&#39;</span> &gt; Myanmar_12.dat 
+    cat <span class="nv">$Shen_mod</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$4}&#39;</span> &gt; Shen_12.dat 
+    gmt xyz2grd Myanmar_12.dat <span class="nv">$Myanmar_RMAP</span> -I0.25/0.25 -GMyanmar_12.grd 
+    gmt xyz2grd Shen_12.dat <span class="nv">$R_tomo</span> -I0.5/0.5 -GShen_12.grd 
+    gmt grdsample Myanmar_12.grd -GMyanmar_12.grd  -I0.05/0.05 
+    gmt grdsample Shen_12.grd -GShen_12.grd  -I0.05/0.05 
+    gmt makecpt -Cseis -T2.2/3.63/0.01 -H -D -Z &gt; tmp.cpt 
+    gmt grdimage Shen_12.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -E720
+    gmt grdimage Myanmar_12.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -E720
+
+    cat <span class="nv">$Myanmar_mod</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2}&#39;</span> <span class="p">|</span> gmt plot -Sc0.02c -Gdarkgray <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>
+    cat <span class="nv">$Shen_mod</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2}&#39;</span> <span class="p">|</span> gmt plot -Sc0.02c -Gred <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Ctmp.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1+l<span class="s2">&#34;Vs (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRB+w1.0c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 8p,Times-Roman 12km 
+</span><span class="s">EOF</span>
+
+    gmt subplot end 
+gmt end show 
+
+rm gmt* *.cpt *.grd *.dat
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>绘制效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h39005zj89j20iu0j0go6.jpg" alt="image-20220615161550440"></p>
+<p><strong>可以看出在整个研究区域中，只有部分地区是已有前人的速度结构，且不同反演模型的网格大小不同。</strong></p>
+<h2 id="step6_interp_wholeregion_mod">Step6_Interp_WholeRegion_mod</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 先将整个研究区域已有的反演格点以及对应网格节点的反演结果绘制出（Yiming Bai &amp; Shen）的反演结果；
+</span><span class="s1"> 再按照规则网格进行插值，将整个研究区域填满；
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="plot-whole-region-12km-model-inversion-resultyiming--shen">Plot Whole Region 12km model Inversion result(Yiming &amp; Shen)</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 使用柱状图统计，原本 Myanmar 和 YunNan 地区已有的反演结果，看反演 Vs 主要集中在哪个阈值范围；
+</span><span class="s1"> 网格大小不同；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">as</span> <span class="nn">font_manager</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;axes.linewidth&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 图框宽度；</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;figure.dpi&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">720</span>  <span class="c1">#</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.title_fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;20&#39;</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s1">&#39;../Step4_Merge_mod_WholeRegion/Whole_Region_mod_depthly/12.0&#39;</span><span class="p">,</span>
+    <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="c1">#                  header=9,</span>
+    <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="s1">&#39;vs&#39;</span><span class="p">],</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="s2">&#34;float64&#34;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>统计结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h3910h56x2j20u00u075t.jpg" alt="image-20220615165043514"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Scatter plot origin data points &amp; calculate min and max values of x and y axis</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span>
+                                       <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.5</span><span class="p">]</span> 
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">,)</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">extent</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">*</span><span class="n">extent</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude (°)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude (°)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Whole Region 12km Invertion Result&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.87</span><span class="p">)</span> 
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&#34;Vs&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>将研究区域内部分已有的反演结果汇总，并投影：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h3915m52wsj21ce0u0teo.jpg" alt="image-20220615165530206"></p>
+<h3 id="make-whole-region-regular-grid">Make Whole Region Regular Grid</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Yiming Bai 在 Myanmar 地区的反演网格是 0.2x0.2 Shen 在 YunNan 地区反演的网格是 0.5x0.5 现   在将整个反演区域
+</span><span class="s1"> 按照 0.25x0.25 的网格间距进行插值；
+</span><span class="s1"> 蓝色网格表示的是插值后的网格，黑色半透明网格表示原始的反演网格设置；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="c1"># Line 3.</span>
+<span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="n">x_min</span><span class="p">:</span><span class="n">x_max</span><span class="p">:</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">y_min</span><span class="p">:</span><span class="n">y_max</span><span class="p">:</span><span class="mf">0.25</span><span class="p">]</span>
+
+<span class="c1"># Use complex numbers to specify the *number* (not size) of bins:</span>
+<span class="c1"># grid_x, grid_y = np.mgrid[x_min:x_max:100j, y_min:y_max:100j]</span>
+<span class="n">grid_x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&#34;k&#34;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> Creat custom legend 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">font</span> <span class="o">=</span> <span class="n">font_manager</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span>
+    <span class="n">family</span><span class="o">=</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">,</span>
+    <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">my_legend</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Line2D</span><span class="p">(</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Inversion points&#34;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&#34;o&#34;</span><span class="p">,</span>
+        <span class="n">markeredgecolor</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&#34;k&#34;</span><span class="p">,</span>
+        <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">Line2D</span><span class="p">(</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s2">&#34;o&#34;</span><span class="p">,</span>
+        <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># 横线的粗细，lw=0 时没有横线显示；</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Interp Grid points&#34;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">handles</span><span class="o">=</span><span class="n">my_legend</span><span class="p">,</span>
+    <span class="n">prop</span><span class="o">=</span><span class="n">font</span><span class="p">,</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s2">&#34;lower right&#34;</span><span class="p">,</span>
+<span class="p">)</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>规则网格设置如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h3917jg30nj21470u0gz3.jpg" alt="image-20220615165730967"></p>
+<h3 id="interpolation-with-radial-basis-function">Interpolation with radial basis function</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 按照事先划分好的 0.25x0.25 的网格，根据已有的反演网格 values 将整个研究区域进行插值；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">Rbf</span>
+
+<span class="c1"># Make an n-dimensional interpolator. This is essential line number 4.</span>
+<span class="n">rbfi</span> <span class="o">=</span> <span class="n">Rbf</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">)</span>
+
+<span class="c1"># Predict on the regular grid. Line 5.</span>
+<span class="n">di</span> <span class="o">=</span> <span class="n">rbfi</span><span class="p">(</span><span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">)</span>
+
+<span class="n">mi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">di</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">values</span><span class="p">]))</span>
+<span class="n">ma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">di</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="o">.</span><span class="n">values</span><span class="p">]))</span>
+
+<span class="c1"># plt.figure(figsize=(15, 15))</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">di</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                <span class="n">origin</span><span class="o">=</span><span class="s2">&#34;lower&#34;</span><span class="p">,</span>
+                <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span>
+                <span class="n">vmin</span><span class="o">=</span><span class="n">mi</span><span class="p">,</span>
+                <span class="n">vmax</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span>
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span>
+                 <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span>
+                 <span class="n">s</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                 <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span>
+                 <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#ffffff66&#39;</span><span class="p">,</span>
+                 <span class="n">vmin</span><span class="o">=</span><span class="n">mi</span><span class="p">,</span>
+                 <span class="n">vmax</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span>
+                 <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;No Smooth&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>根据已有的部分反演结果，按照 0.25x0.25 的网格间距，将整个区域进行插值：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h391amvubvj21bs0u0jvs.jpg" alt="image-20220615170028907"></p>
+<p><strong>上述展示的是未经平滑处理的插值结果，可以通过调节 <code>smooth</code> 参数进行平滑：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 调整 smooth 参数；</span>
+<span class="n">rbfi</span> <span class="o">=</span> <span class="n">Rbf</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">di</span> <span class="o">=</span> <span class="n">rbfi</span><span class="p">(</span><span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">)</span>
+
+<span class="n">c3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">di</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                <span class="n">origin</span><span class="o">=</span><span class="s2">&#34;lower&#34;</span><span class="p">,</span>
+                <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span>
+                <span class="n">vmin</span><span class="o">=</span><span class="n">mi</span><span class="p">,</span>
+                <span class="n">vmax</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span>
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="n">mi</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#ffffff66&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Smooth 0.2&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c3</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>平滑后效果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h391kpy2qvj21bs0u0n1j.jpg" alt="image-20220615171011518"></p>
+<h3 id="statistics-infos">Statistics Infos</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> We can also make a histogram and kernel density estimation of the errors, 
+</span><span class="s1"> by making predictions at the original input locations:
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 对比 interp 前后的 vs misfit 
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span> 
+<span class="n">vs_after_interp</span> <span class="o">=</span> <span class="n">rbfi</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">vs_after_interp</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;Vs Misfit&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;Count&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="c1"># ax.get_xaxis().get_major_formatter().set_scientific(False)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h391mfwkkbj213q0u0ac7.jpg" alt="image-20220615171150450"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 绘制 误差 密度分布图；
+</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">vs_after_interp</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span>
+                  <span class="n">rug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                  <span class="n">rug_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;color&#34;</span><span class="p">:</span> <span class="s2">&#34;g&#34;</span><span class="p">},</span>
+                  <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span>
+                      <span class="s2">&#34;color&#34;</span><span class="p">:</span> <span class="s2">&#34;k&#34;</span><span class="p">,</span>
+                      <span class="s2">&#34;lw&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> 
+                      <span class="s2">&#34;label&#34;</span><span class="p">:</span> <span class="s2">&#34;KDE&#34;</span>
+                  <span class="p">},</span>
+                  <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span>
+                      <span class="s2">&#34;histtype&#34;</span><span class="p">:</span> <span class="s2">&#34;step&#34;</span><span class="p">,</span>
+                      <span class="s2">&#34;linewidth&#34;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> 
+                      <span class="s2">&#34;alpha&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                      <span class="s2">&#34;color&#34;</span><span class="p">:</span> <span class="s2">&#34;g&#34;</span>
+                  <span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h391nmwcuij218j0u0wgg.jpg" alt="image-20220615171259782"></p>
+<h3 id="save-whole-region-grid-interp-results">Save Whole Region grid Interp Results</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将未 smooth 平滑处理的 Whole Region 插值后的结果与插值网格格点的 lon lat interp_vs 对应
+</span><span class="s1"> 并保存为文件，这里仅以 12km 为例 文件内容包含： lon lat interp_vs
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&#34;../Step5_WholeRegion_Interp_grid/Depth/&#34;</span>
+
+<span class="n">shape</span> <span class="o">=</span> <span class="n">di</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">Whole_Region_Grid</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="c1">#         print(i, j)</span>
+        <span class="n">tmp_lon</span> <span class="o">=</span> <span class="n">grid_x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">tmp_lat</span> <span class="o">=</span> <span class="n">grid_y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">tmp_vs</span> <span class="o">=</span> <span class="n">di</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">tmp_whole</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmp_lon</span><span class="p">,</span> <span class="n">tmp_lat</span><span class="p">,</span> <span class="n">tmp_vs</span><span class="p">]</span>
+        <span class="n">Whole_Region_Grid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_whole</span><span class="p">)</span>
+<span class="c1"># 12km 的 Whole_Region_Grid 写入文件保存</span>
+<span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s1">&#39;12_WholeRegion_Grid.txt&#39;</span><span class="p">,</span>
+           <span class="n">Whole_Region_Grid</span><span class="p">,</span>
+           <span class="n">fmt</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">%.2f</span><span class="s2">&#34;</span><span class="p">,</span>
+           <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># 保存为2位小数的浮点数，用 \t 分隔</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="verify--check">Verify &amp; Check</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="s1">&#39;&#39;&#39;
+</span><span class="s1"> 将 12km Whole_Region 的 grid_x grid_y 以及 di 整合成文件，现在读取，并绘图，验证是否保存格式正确；
+</span><span class="s1">&#39;&#39;&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="kn">as</span> <span class="nn">font_manager</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;axes.linewidth&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 图框宽度；</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&#34;figure.dpi&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">720</span>  <span class="c1">#</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Times New Roman&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.title_fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;20&#39;</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s1">&#39;../Step5_WholeRegion_Interp_grid/Depth/12_WholeRegion_Grid.txt&#39;</span><span class="p">,</span>
+    <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="c1">#                  header=9,</span>
+    <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="s1">&#39;vs&#39;</span><span class="p">],</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="s2">&#34;float64&#34;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+
+
+<span class="c1"># Scatter plot origin data points &amp; calculate min and max values of x and y axis</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span>
+                                       <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.5</span><span class="p">]</span> 
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>   
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">*</span><span class="n">extent</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">*</span><span class="n">extent</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Longitude (°)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude (°)&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Whole Region 12km Result&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span><span class="n">shrink</span><span class="o">=</span><span class="mf">0.87</span><span class="p">)</span> 
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&#34;Vs&#34;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>读取保存的 <code>Whole_Region</code> 插值结果，重新绘制整个研究区域的散点图，检查保存数据格式是否正确：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h391s5v45uj21a70u0ao6.jpg" alt="image-20220615171718684"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># plt.figure(figsize=(15, 15)) </span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">di</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&#34;lower&#34;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">mi</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span>
+                 <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#ffffff66&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">mi</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;No Smooth&#34;</span><span class="p">)</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.87</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h391tm0asfj21a10u0qbt.jpg" alt="image-20220615171842861"></p>
+<h3 id="plot-whole-region-interp-result">Plot Whole Region Interp Result</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/zsh 
+</span><span class="cp"></span><span class="c1"># Date:2022-06-15 </span>
+<span class="c1"># Author:Yining Tian </span>
+<span class="c1"># Function : 绘制 12km 深度 Yiming Bai 在 Myanmar 以及 Shen 在云南的 Vs 反演结果；</span>
+
+<span class="nv">output_path</span><span class="o">=</span><span class="s2">&#34;../Figs/&#34;</span>
+<span class="nv">Myanmar_mod</span><span class="o">=</span><span class="s2">&#34;../Step3_Myanmar_Yiming_mod/Named_Depth/12.0&#34;</span>
+<span class="nv">Shen_mod</span><span class="o">=</span><span class="s2">&#34;../Step2_Sort_StudyRegion_Shen_mod_Depthly/Shen_mod_Depthly/12.0&#34;</span>
+<span class="nv">Whole_Region_mod</span><span class="o">=</span><span class="s2">&#34;../Step5_WholeRegion_Interp_grid/Depth/12_WholeRegion_Grid.txt&#34;</span>
+
+<span class="c1"># GMT Settings </span>
+gmt <span class="nb">set</span> MAP_FRAME_TYPE Plain 
+gmt <span class="nb">set</span> MAP_FRAME_PEN 1.0p 
+gmt <span class="nb">set</span> FONT Times-Roman <span class="c1"># 同时设置所有 FONT 类参数，</span>
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman <span class="c1"># 设置一级标注的字体；</span>
+gmt <span class="nb">set</span> FONT_TITLE 15p,Times-Roman <span class="c1"># 图上方标题的字体；  </span>
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 1.5p/1p <span class="c1"># 一级刻度的主刻度和次刻度的长度 [5p/2.5p]</span>
+gmt <span class="nb">set</span> MAP_TICK_PEN_PRIMARY 0.5p,black <span class="c1"># 一级刻度的画笔属性；</span>
+gmt <span class="nb">set</span> MAP_TITLE_OFFSET 0p <span class="c1"># 图标题的底部与轴标注（或轴标签）的顶部之间的距离 [14p]</span>
+gmt <span class="nb">set</span> MAP_GRID_PEN_PRIMARY thicker,black <span class="c1"># 一级网格的线条属性；</span>
+gmt <span class="nb">set</span> COLOR_NAN 255/255/255 <span class="c1"># 数值 Z 为空的时候，所用的颜色值；</span>
+
+<span class="nv">fig_name</span><span class="o">=</span><span class="s2">&#34;WholeRegion_Interp_Vs_12&#34;</span>
+<span class="nv">fig</span><span class="o">=</span><span class="nv">$output_path$fig_name</span> 
+
+gmt begin <span class="nv">$fig</span> png 
+    gmt subplot begin 2x4 -Fs6c -B -BWeSn  
+    <span class="nv">J_tomo</span><span class="o">=</span><span class="s2">&#34;-JM2i&#34;</span>
+    <span class="nv">R_tomo</span><span class="o">=</span><span class="s2">&#34;-R91.5/106.5/19.25/29.5&#34;</span> <span class="c1"># 比实际 tomo 区域大； </span>
+    gmt subplot <span class="nb">set</span> <span class="m">0</span> 
+
+    <span class="c1"># Myanmar_RMAP=`cat $Myanmar_mod | gmt info -C | awk &#39;{print &#34;-R&#34;$1&#34;/&#34;$2&#34;/&#34;$3&#34;/&#34;$4}&#39;`</span>
+    <span class="c1"># echo $Myanmar_RMAP </span>
+    gmt basemap <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -Ba4f1 -BWSen 
+
+    <span class="c1"># cat $Myanmar_mod | awk &#39;{print $1,$2,$4}&#39; &gt; Myanmar_12.dat </span>
+    <span class="c1"># cat $Shen_mod | awk &#39;{print $1,$2,$4}&#39; &gt; Shen_12.dat </span>
+    cat <span class="nv">$Whole_Region_mod</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2,$3}&#39;</span> &gt; WholeRegion_Interp_12.dat 
+    gmt xyz2grd WholeRegion_Interp_12.dat <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -I0.25/0.25 -GWholeRegion_Interp.grd 
+    gmt grdsample WholeRegion_Interp.grd -GWholeRegion_Interp.grd  -I0.05/0.05
+    gmt makecpt -Cseis -T2.2/3.63/0.01 -H -D -Z &gt; tmp.cpt 
+    gmt grdimage WholeRegion_Interp.grd -Ctmp.cpt <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -E720
+
+    cat <span class="nv">$Myanmar_mod</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2}&#39;</span> <span class="p">|</span> gmt plot -Sc0.02c -Gdarkgray <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>
+    cat <span class="nv">$Shen_mod</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1,$2}&#39;</span> <span class="p">|</span> gmt plot -Sc0.02c -Gred <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>
+
+    gmt coast -EFR,IT+gP300/8 -Di -N1/0.015c,-  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> 
+    gmt <span class="nb">set</span> FONT_LABEL +8p,Times-Roman,black  
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 6p,Times-Roman,black <span class="c1"># 边框经纬度注释字体；</span>
+    gmt colorbar -Ctmp.cpt  <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span> -DJBC+w4c/0.15c+e+mc  -Bxa0.2f0.1+l<span class="s2">&#34;Vs (km/s)&#34;</span>  -By
+
+gmt legend <span class="nv">$R_tomo</span> <span class="nv">$J_tomo</span>  -DjRB+w0.9c+o0.05c/0.05c -F+gwhite -t20 <span class="s">&lt;&lt; EOF
+</span><span class="s">H 6p,Times-Roman 12km 
+</span><span class="s">EOF</span>
+
+    gmt subplot end 
+gmt end show 
+
+rm gmt* *.cpt *.grd *.dat
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>整个研究区域插值后的结果如下，可作为反演的 3D 初始速度模型：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h391wcw34zj20iu0ht414.jpg" alt="image-20220615172122580"></p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://github.com/agilescientific/xlines/blob/master/notebooks/11_Gridding_map_data.ipynb">https://github.com/agilescientific/xlines/blob/master/notebooks/11_Gridding_map_data.ipynb</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Yining Tian</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-06-15 15:22
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a target="_blank" rel="license noopener" href="https://github.com/nusr/blog/blob/master/LICENSE">MIT</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/alipay.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/">数据格式转换</a>
+          <a href="/tags/python/">python</a>
+          <a href="/tags/GMT/">GMT</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Ubuntu20_Clash/">
+            <span class="next-text nav-default">Ubuntu20_Clash</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="http://www.cnblogs.com/stevexu" class="iconfont icon-cnblogs" title="cnblogs"></a>
+      <a href="mailto:stevexugc@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nusr" class="iconfont icon-github" title="github"></a>
+      <a href="https://juejin.im/user/59aeb829f265da249960595a" class="iconfont icon-juejin" title="juejin"></a>
+      <a href="https://www.v2ex.com/member/stevexu" class="iconfont icon-v2ex" title="v2ex"></a>
+  <a href="https://tianyining.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Steve Xu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-CN".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138883536-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

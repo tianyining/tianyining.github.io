@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生层 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
+<meta name="author" content="Yining Tian" /><meta name="description" content="说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生成 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的" /><meta name="keywords" content="Mac, Github, Vue, React, Front End" />
 
 
 
@@ -41,19 +41,19 @@
 
 
 <meta property="og:title" content="DSurfTomo_InitMOD" />
-<meta property="og:description" content="说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生层 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的" />
+<meta property="og:description" content="说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生成 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://tianyining.github.io/post/DSurfTomo_InitMOD/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-04-15T15:56:56&#43;08:00" />
 <meta property="article:modified_time" content="2022-04-15T15:56:56&#43;08:00" />
 
 <meta itemprop="name" content="DSurfTomo_InitMOD">
-<meta itemprop="description" content="说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生层 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的"><meta itemprop="datePublished" content="2022-04-15T15:56:56&#43;08:00" />
+<meta itemprop="description" content="说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生成 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的"><meta itemprop="datePublished" content="2022-04-15T15:56:56&#43;08:00" />
 <meta itemprop="dateModified" content="2022-04-15T15:56:56&#43;08:00" />
 <meta itemprop="wordCount" content="5465">
 <meta itemprop="keywords" content="数据格式转换,python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DSurfTomo_InitMOD"/>
-<meta name="twitter:description" content="说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生层 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的"/>
+<meta name="twitter:description" content="说明 本篇 blog 用于记录如何根据已知的初始速度模型（一维或三维），生成 DSurfTomo 反演所需的初始速度模型 MOD ，1d_MOD 是根据 Yiming Bai 手动挑选的 CDisp 通过计算生成的"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -148,7 +148,7 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#说明">说明</a></li>
-    <li><a href="#workflow"><code>Workflow</code></a></li>
+    <li><a href="#workflow"><code>Workflow</code> </a></li>
     <li><a href="#init_3d_mod">Init_3D_MOD</a>
       <ul>
         <li><a href="#step1_sort_yimingtpmodel_depth--grid">Step1_Sort_YimingTPModel_Depth &amp; Grid</a></li>
@@ -166,8 +166,8 @@
 </div>
     <div class="post-content">
       <h2 id="说明">说明</h2>
-<p><strong>本篇 <code>blog</code> 用于记录如何根据已知的初始速度模型（一维或三维），生层 <code>DSurfTomo</code> 反演所需的初始速度模型 <code>MOD</code> ，<code>1d_MOD</code> 是根据 <code>Yiming Bai</code> 手动挑选的 <code>CDisp</code> 通过计算生成的一维初始速度模型构建的，<code>3d_MOD</code> 是根据 <code>Yiming Bai</code> 文章联合反演得到的区域速度结构扩充构建的。</strong></p>
-<h2 id="workflow"><code>Workflow</code></h2>
+<p><strong>本篇 <code>blog</code> 用于记录如何根据已知的初始速度模型（一维或三维），生成 <code>DSurfTomo</code> 反演所需的初始速度模型 <code>MOD</code> ，<code>1d_MOD</code> 是根据 <code>Yiming Bai</code> 手动挑选的 <code>CDisp</code> 通过计算生成的一维初始速度模型构建的，<code>3d_MOD</code> 是根据 <code>Yiming Bai</code> 文章联合反演得到的区域速度结构扩充构建的。</strong></p>
+<h2 id="workflow"><code>Workflow</code> </h2>
 <h2 id="init_3d_mod">Init_3D_MOD</h2>
 <p><strong>根据研究区域已有的速度模型，生成 <code>DSurfTomo</code> 反演所需的初始速度模型；</strong></p>
 <p><strong>这里仅以 <code>Yiming Bai</code> 文章得到的反演模型进行展示，以此类推；</strong></p>
@@ -1699,7 +1699,7 @@ rm *.conf *.cpt *.dat *.grd
 </div>
 </div><p><strong>绘制结果如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h1aj2btziuj21ta0u0gx6.jpg" alt="image-20220415172012482"></p>
-<p><strong>由于色标问题和绘图问题，与 <code>Yiming Bai</code> 结果存在一定出入，好似买家秀与卖家秀：</strong>  </p>
+<p><strong>由于色标问题和绘图问题，与 <code>Yiming Bai</code> 结果存在一定出入，好似买家秀与卖家秀：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h1aj4j9kstj20sp0ek41v.jpg" alt="image-20220415172219305"></p>
 
     </div>
