@@ -50,7 +50,7 @@
 <meta itemprop="name" content="DSurfTomo_3DInitMOD_Workflow">
 <meta itemprop="description" content="说明 本篇 blog 用于记录在研究区域内，如何利用已有的初始速度模型（三维），通过插值等方式，生成 Whole Region 的反演初始速度模型。 本篇 blog 仅以 12km 深度切片为例进行"><meta itemprop="datePublished" content="2022-06-15T15:22:33&#43;08:00" />
 <meta itemprop="dateModified" content="2022-06-15T15:22:33&#43;08:00" />
-<meta itemprop="wordCount" content="4163">
+<meta itemprop="wordCount" content="4271">
 <meta itemprop="keywords" content="数据格式转换,python,GMT," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DSurfTomo_3DInitMOD_Workflow"/>
 <meta name="twitter:description" content="说明 本篇 blog 用于记录在研究区域内，如何利用已有的初始速度模型（三维），通过插值等方式，生成 Whole Region 的反演初始速度模型。 本篇 blog 仅以 12km 深度切片为例进行"/>
@@ -137,7 +137,7 @@
             <a href="/categories/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"> 数据格式转换 </a>
             <a href="/categories/GMT/"> GMT </a>
             </div>
-          <span class="more-meta"> 约 4163 字 </span>
+          <span class="more-meta"> 约 4271 字 </span>
           <span class="more-meta"> 预计阅读 9 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -1267,6 +1267,63 @@ rm gmt* *.cpt *.grd *.dat
 </div>
 </div><p><strong>平滑后效果如下：</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h391kpy2qvj21bs0u0n1j.jpg" alt="image-20220615171011518"></p>
+<p><strong>最终选用 <code>5</code> 点高斯参数对插值得到的模型进行平滑；</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 调整 smooth 参数；</span>
+<span class="n">rbfi</span> <span class="o">=</span> <span class="n">Rbf</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">vs</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">&#34;gaussian&#34;</span><span class="p">)</span>
+<span class="n">di</span> <span class="o">=</span> <span class="n">rbfi</span><span class="p">(</span><span class="n">grid_x</span><span class="p">,</span> <span class="n">grid_y</span><span class="p">)</span> 
+
+<span class="n">c3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">di</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                <span class="n">origin</span><span class="o">=</span><span class="s2">&#34;lower&#34;</span><span class="p">,</span>
+                <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span>
+                <span class="n">vmin</span><span class="o">=</span><span class="n">mi</span><span class="o">+</span><span class="mf">0.25</span><span class="p">,</span> 
+                <span class="n">vmax</span><span class="o">=</span><span class="n">ma</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;jet_r&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="n">mi</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&#34;viridis_r&#34;</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;#ffffff66&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Gaussian 5.0&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c3</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="c1"># plt.ylim(21,29)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>以 <code>12km</code> 为例，五点高斯平滑后的结果如下：</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h3w46a7nrcj20c0080jrs.jpg" alt="image-20220705160801962"></p>
 <h3 id="statistics-infos">Statistics Infos</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
